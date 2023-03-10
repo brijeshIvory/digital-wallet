@@ -1,11 +1,6 @@
 .home_container {
-  background-color: #000;
-}
-.home_header {
-  height: 2rem;
-  padding: 20px;
-  background-color: antiquewhite;
+  height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
 }
