@@ -1,0 +1,17 @@
+.navbar {
+}
+.navbar_header {
+  width: 20rem;
+  height: 12rem;
+  padding: 20px;
+  background-color: #121212;
+  color: #fff;
+
+  .MuiDivider-root {
+    background-color: white;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+}
