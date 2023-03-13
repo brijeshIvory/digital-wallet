@@ -1,0 +1,58 @@
+.ourOffer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fac000;
+}
+
+.ourOffer_header {
+    flex: 0.12;
+    color: #fff;
+}
+
+.ourOffer_main {
+    display: flex;
+    border-radius: 20px 20px 0 0;
+    flex: 0.88;
+    background-color: #000;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.ourOffer_title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 1.5rem;
+    display: flex;
+}
+
+h1 {
+    font-size: 18px;
+    font-weight: 400;
+    position: relative;
+}
+
+h1::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    width: 40px;
+    height: 3px;
+    background: #fac000;
+}
+
+.offer_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.offer_list img {
+    width: 320px;
+    height: auto;
+    border-radius: 5%;
+}
