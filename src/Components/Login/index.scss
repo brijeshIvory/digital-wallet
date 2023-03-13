@@ -1,0 +1,19 @@
+.loginbutton {
+  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  min-height: 30px;
+  border-width: 0;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 80px;
+  margin: auto;
+}
+.forgot_password {
+  width: 100%;
+  text-align: end;
+  margin-bottom: 3rem;
+}
+.button_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}

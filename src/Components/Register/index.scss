@@ -1,0 +1,27 @@
+.form_container {
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 2rem;
+  }
+  .MuiInputLabel-root {
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+}
+.acceptance {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  a {
+    font-size: 12px;
+  }
+}

@@ -6,6 +6,23 @@
 }
 .profile_top {
   flex: 0.12;
+  padding: 10px;
+}
+.profile_top_sub {
+  height: 50px;
+
+  .MuiSvgIcon-root {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    color: #fff;
+  }
+}
+.profile_title {
+  padding-top: 0.75rem;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
 }
 .profile_bottom {
   display: flex;
@@ -52,5 +69,27 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
+  color: #fff;
+}
+.reward_refer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.rewards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  flex: 0.5;
+}
+.referred {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  flex: 0.5;
+}
+.rewards_title {
   color: #fff;
 }
