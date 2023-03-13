@@ -2,19 +2,16 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #fac000;
 }
 .Payment_method_top {
-  flex: 0.12;
   color: #fff;
+  background-color: #fac000;
 }
 .Payment_method_bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 1rem 0 1rem;
-  flex: 0.88;
-  background-color: #000;
 }
 
 .profile_data {
@@ -26,10 +23,10 @@
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: #191919;
-  border-radius: 15px;
+  border-radius: 12px;
 }
 .subtitle {
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 500;
   color: #fff;
   margin-top: 1rem;
@@ -48,5 +45,11 @@
 .card_text {
   color: #fff;
   line-height: normal;
-  font-size: 12px;
+  font-size: 8px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1rem;
 }

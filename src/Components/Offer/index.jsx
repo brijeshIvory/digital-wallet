@@ -39,13 +39,11 @@ function OfferPage() {
           >
             <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
           </IconButton>
-          <Typography variant="h6" component="h6" sx={{ flexGrow: 4 }}>
-            Offers
-          </Typography>
+          <h1 className='title'> Offers </h1>
         </Toolbar>
       </div>
       <div className="ourOffer_main">
-        <h1 className="ourOffer_title">Top Offers</h1>
+      <h1 className="ourOffer_title">Top Offers</h1>
         {imageList.map((val, index) => (
           <div className="offer_list" key={val.id}>
             <img src={val.imageSrc} alt="" />

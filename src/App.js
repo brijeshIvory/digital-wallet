@@ -4,9 +4,10 @@ import Header from "./Components/Header";
 import Router from "./Router/Router";
 
 function App() {
+  const isLoggedIn = true;
   return (
     <div className="app">
-    <Header />
+      {!isLoggedIn && <Header /> }
          <Router/>
          <Footer/>
     </div>
