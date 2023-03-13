@@ -48,9 +48,9 @@ const PaymentMethod = () => {
           >
             <ArrowCircleLeftIcon sx={{width:"40px", height:"35px"}} />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 4 }}>
+          <h1 className='title'>
             Payment Method
-          </Typography>
+          </h1>
         </Toolbar>
       </div>
       <div className="Payment_method_bottom">
