@@ -4,17 +4,18 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SellOutlinedIcon from "@mui/icons-material/SellOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
     <div className="footer">
       <div className="footer_icon">
         <HomeOutlinedIcon sx={{ color: "#8e8b8b" }} />
-        <div className="footer_icon_title">Home</div>
+        <Link to={"tabs/home"} className="footer_icon_title">Home</Link>
       </div>
       <div className="footer_icon">
         <SellOutlinedIcon sx={{ color: "#8e8b8b" }} />
-        <div className="footer_icon_title">Offers</div>
+        <Link to={"tabs/offers"} className="footer_icon_title">Offers</Link>
       </div>
       <div className="footer_icon">
         <MenuBookIcon sx={{ color: "#8e8b8b" }} />
