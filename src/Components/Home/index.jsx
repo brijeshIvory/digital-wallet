@@ -6,8 +6,7 @@ import "./index.scss";
 function Home() {
   return (
     <div className="home_container">
-      <Header />
-      <Footer />
+  home
     </div>
   );
 }
