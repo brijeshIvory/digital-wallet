@@ -1,0 +1,55 @@
+.Payment_method {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.Payment_method_top {
+  color: #fff;
+  background-color: #fac000;
+}
+.Payment_method_bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+}
+
+.profile_data {
+  color: #fff;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.image_box {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #191919;
+  border-radius: 12px;
+}
+.subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.crd {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.card_image {
+  display: flex;
+  justify-content: center;
+}
+.card_text {
+  color: #fff;
+  line-height: normal;
+  font-size: 8px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1rem;
+}
