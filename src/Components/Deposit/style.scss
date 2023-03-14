@@ -1,0 +1,98 @@
+.deposit_main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    90deg,
+    rgb(237, 168, 6) 0%,
+    rgb(216, 129, 13) 35%,
+    rgb(237, 168, 6) 100%
+  );
+}
+.deposit_head {
+  flex: 0.15;
+  background: linear-gradient(
+    90deg,
+    rgb(237, 168, 6) 0%,
+    rgb(216, 129, 13) 35%,
+    rgb(237, 168, 6) 100%
+  );
+}
+.deposit_body {
+  flex: 0.85;
+  background-color: #000;
+  border-radius: 15px 15px 0 0;
+}
+.wallet_balance {
+  width: 82%;
+  height: 8rem;
+  // background-color: #252424;
+  border-radius: 15px;
+  margin-left: 9%;
+  // margin-top: -2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  img {
+    width: 60px;
+  }
+}
+.deposit_title {
+  height: 50px;
+  padding: 15px;
+
+  .MuiSvgIcon-root {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    color: #fff;
+  }
+}
+.deposit_subtitle {
+  padding-top: 0.75rem;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+}
+.wallet_balance-data-title {
+  color: #fff;
+}
+.wallet_balance-data {
+  color: #fff;
+}
+.wallet_balance-data-amount {
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+}
+.deposit_details-balance {
+  margin-bottom: 2rem;
+
+  hr {
+    border: none;
+    border-top: 3px dotted rgb(169, 165, 165);
+  }
+}
+.deposit_details {
+  color: #fff;
+  padding: 10%;
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 2rem;
+  }
+  .MuiInputLabel-root {
+    font-size: 20px;
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+}

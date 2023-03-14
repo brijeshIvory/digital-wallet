@@ -13,6 +13,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import Header from '../Header'
+import { Link } from 'react-router-dom'
 function HomeDashboard({ isLoggedin }) {
   const [openJoinNow, setOpenJoinNow] = useState({
     bottom: false,
@@ -66,7 +67,10 @@ function HomeDashboard({ isLoggedin }) {
         <div className="deposit_withdraw">
           <div className="deposit">
             <div className="deposit_title">DEPOSIT</div>
+            <Link to={"deposit"}>
+            
             <KeyboardDoubleArrowUpOutlinedIcon sx={{ color: 'white' }} />
+            </Link>
           </div>
           <div className="deposit_withdraw_login"></div>
           <div className="withdraw">

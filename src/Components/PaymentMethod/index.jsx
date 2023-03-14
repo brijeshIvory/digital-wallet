@@ -1,46 +1,22 @@
-import React from 'react'
-import Toolbar from '@mui/material/Toolbar'
+import React, { useState } from 'react'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import { experimentalStyled as styled } from '@mui/material/styles'
-import { Avatar, IconButton, Typography, Box, Paper, Grid } from '@mui/material'
+import { Avatar, Box, Paper, Grid } from '@mui/material'
+import Banktransfer from '../../assets/img/bank_transfer.png'
+import Paytm from '../../assets/img/paytm.png'
+import GooglePay from '../../assets/img/google_pay.png'
+import phone_pe from '../../assets/img/phone_pe.png'
 import './style.scss'
-import PaymentDetail from '../PaymentDetail'
+import PaymentDetail from './PaymentDetail'
 import { Link } from 'react-router-dom'
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#0e0c0d',
   padding: '0.5rem',
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }))
 
-const data = [
-  {
-    id: 1,
-    text: 'Bank Transfer',
-    imageSrc: 'http://i.pravatar.cc/300?img=1',
-  },
-  {
-    id: 2,
-    text: 'Paytm Wallet',
-    imageSrc: 'http://i.pravatar.cc/300?img=2',
-  },
-  {
-    id: 1,
-    text: 'Google Pay',
-    imageSrc: 'http://i.pravatar.cc/300?img=1',
-  },
-  {
-    id: 1,
-    text: 'Phonepe',
-    imageSrc: 'http://i.pravatar.cc/300?img=1',
-  },
-  {
-    id: 1,
-    text: 'Hawala',
-    imageSrc: 'http://i.pravatar.cc/300?img=1',
-  },
-]
 const PaymentMethod = () => {
+  const [isBackgroundRed, setIsBackgroundRed] = useState('')
   return (
     <div className="Payment_method_main">
       <div className="Payment_method_head">
@@ -48,10 +24,13 @@ const PaymentMethod = () => {
           <Link to={'/'}>
             <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
           </Link>
-          <div className="Payment_method_subtitle">Payment_method</div>
+          <div className="Payment_method_subtitle">Payment Method</div>
         </div>
       </div>
       <div className="Payment_method_body">
+        <div className="payment_method_heading">
+          <h3> Choose your payment method </h3>
+        </div>
         <div className="subtitle">
           Make Payment of 100/- and upload screenshot.
         </div>
@@ -63,20 +42,77 @@ const PaymentMethod = () => {
               spacing={{ xs: 1, md: 2 }}
               columns={{ xs: 6, sm: 8, md: 12 }}
             >
-              {data.map((val, index) => (
-                <Grid item xs={2} sm={4} md={4} key={index}>
-                  <Item>
-                    <div className="card_image">
-                      <Avatar src={val.imageSrc} alt={val.text} />
-                    </div>
-                    <h3 className="card_text">{val.text}</h3>
-                  </Item>
-                </Grid>
-              ))}
+              <Grid item xs={2} sm={4} md={4}>
+                <Item
+                  style={{
+                    backgroundColor:
+                      isBackgroundRed === 'Banktransfer'
+                        ? '#fac000'
+                        : '#0e0c0d',
+                  }}
+                  onClick={() => {
+                    setIsBackgroundRed('Banktransfer')
+                  }}
+                >
+                  <div className="card_image">
+                    <Avatar src={Banktransfer} alt="bank transfer" />
+                  </div>
+                  <h3 className="card_text">Bank Transfer</h3>
+                </Item>
+              </Grid>
+              <Grid item xs={2} sm={4} md={4}>
+                <Item
+                  style={{
+                    backgroundColor:
+                      isBackgroundRed === 'Paytm' ? '#fac000' : '#0e0c0d',
+                  }}
+                  onClick={() => {
+                    setIsBackgroundRed('Paytm')
+                  }}
+                >
+                  <div className="card_image">
+                    <Avatar src={Paytm} alt="Paytm" />
+                  </div>
+                  <h3 className="card_text">Paytm Wallet</h3>
+                </Item>
+              </Grid>
+
+              <Grid item xs={2} sm={4} md={4}>
+                <Item
+                  style={{
+                    backgroundColor:
+                      isBackgroundRed === 'GooglePay' ? '#fac000' : '#0e0c0d',
+                  }}
+                  onClick={() => {
+                    setIsBackgroundRed('GooglePay')
+                  }}
+                >
+                  <div className="card_image">
+                    <Avatar src={GooglePay} alt="GooglePay" />
+                  </div>
+                  <h3 className="card_text">Google Pay</h3>
+                </Item>
+              </Grid>
+              <Grid item xs={2} sm={4} md={4}>
+                <Item
+                  style={{
+                    backgroundColor:
+                      isBackgroundRed === 'phone_pe' ? '#fac000' : '#0e0c0d',
+                  }}
+                  onClick={() => {
+                    setIsBackgroundRed('phone_pe')
+                  }}
+                >
+                  <div className="card_image">
+                    <Avatar src={phone_pe} alt="phone_pe" />
+                  </div>
+                  <h3 className="card_text">Phone Pay</h3>
+                </Item>
+              </Grid>
             </Grid>
           </Box>
         </div>
-        <PaymentDetail />
+        <PaymentDetail isBackgroundRed={isBackgroundRed} />
       </div>
     </div>
   )
