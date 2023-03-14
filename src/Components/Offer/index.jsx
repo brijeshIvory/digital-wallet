@@ -37,7 +37,7 @@ function OfferPage() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
+            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }}/>
           </IconButton>
           <h1 className='title'> Offers </h1>
         </Toolbar>

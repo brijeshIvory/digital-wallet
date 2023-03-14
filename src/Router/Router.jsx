@@ -1,16 +1,40 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from '../Components/Home/index'
+import HomeDashboard from '../Components/HomeDashboard'
 import OfferPage from '../Components/Offer'
 import Profile from '../Components/Profile'
 import WithdrawalDetail from '../Components/WithdrawalDetail/index'
+import PrivateRoute from './PrivateRoute'
 const Router = () => {
+  const isLoggedin = true
   return (
     <Routes>
-      <Route path="tabs/home" exact element={<Home />} />
-      <Route path="tabs/offers" element={<OfferPage />} />
-      <Route path="profile" element={<Profile />} />
-      <Route path='bank-details' element={<WithdrawalDetail/>}></Route>
+      <Route path="/" element={<HomeDashboard isLoggedin={isLoggedin} />} />
+      <Route
+        path="tabs/offers"
+        exact
+        element={
+          <PrivateRoute>
+            <OfferPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="profile"
+        element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="bank-details"
+        element={
+          <PrivateRoute>
+            <WithdrawalDetail />
+          </PrivateRoute>
+        }
+      ></Route>
     </Routes>
   )
 }

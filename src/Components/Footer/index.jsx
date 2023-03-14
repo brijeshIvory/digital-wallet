@@ -11,7 +11,7 @@ function Footer() {
     <div className="footer">
       <div className="footer_icon">
         <HomeOutlinedIcon sx={{ color: "#8e8b8b" }} />
-        <Link to={"tabs/home"} className="footer_icon_title">Home</Link>
+        <Link to={"/"} className="footer_icon_title">Home</Link>
       </div>
       <div className="footer_icon">
         <SellOutlinedIcon sx={{ color: "#8e8b8b" }} />
