@@ -10,7 +10,7 @@ import WalletTransfer from "../Components/WalletTransfer/"
 import Deposit from '../Components/Deposit'
 import PaymentMethod from '../Components/PaymentMethod'
 const Router = () => {
-  const isLoggedin = true
+  const isLoggedin = false;
   return (
     <Routes>
       <Route path="/" element={<HomeDashboard isLoggedin={isLoggedin} />} />
@@ -74,7 +74,7 @@ const Router = () => {
       ></Route>
     
     </Routes>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;

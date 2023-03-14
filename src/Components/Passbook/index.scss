@@ -1,0 +1,118 @@
+.passbook-main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fac000;
+}
+.passbook-head {
+  flex: 0.05;
+  background-color: #fac000;
+}
+
+.passbook-body {
+  flex: 0.95;
+  background-color: #000;
+  border-radius: 15px 15px 0 0;
+  padding: 20px;
+  .MuiTextField-root {
+    width: 100%;
+    color: #fff;
+  }
+  .MuiInputLabel-root {
+    color: #fff;
+    font-size: 20px;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    margin-top: 1.5rem;
+    color: #fff;
+    background-color: #2b2929;
+    border-radius: 10px;
+    height: 2.5rem;
+    padding-left: 1rem;
+    .MuiSelect-icon {
+      color: #6d6464;
+      font-size: 30px;
+    }
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+}
+
+.passbook-title {
+  padding: 10px;
+
+  .MuiSvgIcon-root {
+    position: absolute;
+    width: 1.5em;
+    height: 1.5em;
+    color: #fff;
+  }
+}
+.passbook_subtitle {
+  padding-top: 0.75rem;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+}
+.passbook-body-head {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  button {
+    background-color: #2b2929;
+    color: #fff;
+    border-width: 0;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}
+
+.passbook-body-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  .MuiOutlinedInput-input {
+    background-color: #2b2929;
+    color: #fff;
+    border-radius: 10px;
+    height: 1.5rem;
+    width: 100%;
+  }
+  .MuiInputLabel-root {
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+}
+
+.passbook-body-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  button {
+    background-color: #2b2929;
+    color: #fff;
+    border-width: 0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 48%;
+    height: 3rem;
+    font-size: 15px;
+  }
+}
+
+.transaction-data {
+  color: #fff;
+  text-align: center;
+  margin: 20px 0 20px 0;
+}

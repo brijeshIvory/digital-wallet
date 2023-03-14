@@ -17,31 +17,31 @@ import { Link } from 'react-router-dom'
 function HomeDashboard({ isLoggedin }) {
   const [openJoinNow, setOpenJoinNow] = useState({
     bottom: false,
-  })
+  });
   const [openLogin, setOpenLogin] = useState({
     bottom: false,
-  })
+  });
   const toggleJoinNowDrawer = (anchor, open) => (event) => {
     if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
     ) {
-      return
+      return;
     }
 
-    setOpenJoinNow({ ...openJoinNow, [anchor]: open })
-  }
+    setOpenJoinNow({ ...openJoinNow, [anchor]: open });
+  };
 
   const toggleLoginDrawer = (anchor, open) => (event) => {
     if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
     ) {
-      return
+      return;
     }
 
-    setOpenLogin({ ...openLogin, [anchor]: open })
-  }
+    setOpenLogin({ ...openLogin, [anchor]: open });
+  };
 
   return (
     <div className="loginReg_container">
@@ -54,13 +54,13 @@ function HomeDashboard({ isLoggedin }) {
               className="Joinnow_button"
               src={JoinNow}
               alt="JoinNow"
-              onClick={toggleJoinNowDrawer('bottom', true)}
+              onClick={toggleJoinNowDrawer("bottom", true)}
             />
             <img
               className="login_button"
               src={loginButton}
               alt="loginbutton"
-              onClick={toggleLoginDrawer('bottom', true)}
+              onClick={toggleLoginDrawer("bottom", true)}
             />
           </div>
         )}
@@ -75,21 +75,21 @@ function HomeDashboard({ isLoggedin }) {
           <div className="deposit_withdraw_login"></div>
           <div className="withdraw">
             <div className="withdraw_title">WITHDRAW</div>
-            <KeyboardDoubleArrowDownOutlinedIcon sx={{ color: 'white' }} />
+            <KeyboardDoubleArrowDownOutlinedIcon sx={{ color: "white" }} />
           </div>
         </div>
       </div>
 
       <Drawer
-        anchor={'bottom'}
-        open={openJoinNow['bottom']}
+        anchor={"bottom"}
+        open={openJoinNow["bottom"]}
         className="joinNowFrom"
       >
         <div className="yellow_strip"></div>
         <div className="closing">
           <div
             className="closing_button"
-            onClick={toggleJoinNowDrawer('bottom', false)}
+            onClick={toggleJoinNowDrawer("bottom", false)}
           >
             <HighlightOffSharpIcon />
           </div>
@@ -100,30 +100,13 @@ function HomeDashboard({ isLoggedin }) {
           <Register />
         </div>
       </Drawer>
-      <Drawer
-        anchor={'bottom'}
-        open={openLogin['bottom']}
-        className="joinNowFrom"
-      >
-        <div className="yellow_strip"></div>
-        <div className="closing">
-          <div
-            className="closing_button"
-            onClick={toggleLoginDrawer('bottom', false)}
-          >
-            <HighlightOffSharpIcon />
-          </div>
-        </div>
 
-        <div className="register_form">
-          <div className="register_form_title">Login</div>
-          <Login />
-        </div>
-      </Drawer>
+      <Login open={openLogin["bottom"]} toggleLoginDrawer={toggleLoginDrawer} />
+
       <div className="loginReg_bottom">
         <img src={Poster} alt="poster" />
-        <div className="create_button">
-          <AddCircleIcon sx={{ marginRight: '5px' }} />
+        {/* <div className="create_button">
+          <AddCircleIcon sx={{ marginRight: "5px" }} />
           <div>Create</div>
         </div>
         <div className="myids_data">
@@ -143,18 +126,18 @@ function HomeDashboard({ isLoggedin }) {
           </div>
           <div className="myids_data_buttons">
             <div className="myids_data_button">
-              <ArrowUpwardIcon sx={{ color: 'green' }} />
+              <ArrowUpwardIcon sx={{ color: "green" }} />
               <div>DEPOSIT</div>
             </div>
             <div className="myids_data_button">
-              <ArrowDownwardIcon sx={{ color: 'red' }} />
+              <ArrowDownwardIcon sx={{ color: "red" }} />
               <div>WITHDRAW</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
-  )
+  );
 }
 
-export default HomeDashboard
+export default HomeDashboard;
