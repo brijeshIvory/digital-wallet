@@ -66,6 +66,16 @@ function Register() {
             shrink: true,
           }}
         />
+        <TextField
+          required
+          type="email"
+          id="standard-required"
+          label="Email Id"
+          variant="standard"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
 
         <MuiTelInput
           required
@@ -131,15 +141,7 @@ function Register() {
             ),
           }}
         />
-        <TextField
-          type="text"
-          id="standard-required"
-          label="Referral/Promo Code"
-          variant="standard"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
+
         <div className="acceptance">
           <input type="checkbox" />
           <div>I've read and accept the </div>
