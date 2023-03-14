@@ -4,20 +4,23 @@ import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import { Avatar, IconButton, Button } from '@mui/material'
 import './style.scss'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance'
+import { Link } from 'react-router-dom'
 const WithdrawalDetail = () => {
   return (
     <div className="withdrawal">
       <div className="withdrawal_top">
         <Toolbar style={{ marginTop: '1rem', marginLeft: '1rem' }}>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
-          </IconButton>
+          <Link to={'/'}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
+            </IconButton>
+          </Link>
           <h1 className="title"> Withdrawal Details </h1>
         </Toolbar>
       </div>

@@ -1,10 +1,11 @@
 import React from 'react'
 import Toolbar from '@mui/material/Toolbar'
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import { experimentalStyled as styled } from '@mui/material/styles'
 import { Avatar, IconButton, Typography, Box, Paper, Grid } from '@mui/material'
 import './style.scss'
 import PaymentDetail from '../PaymentDetail'
+import { Link } from 'react-router-dom'
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#0e0c0d',
   padding: '0.5rem',
@@ -33,27 +34,24 @@ const data = [
     text: 'Phonepe',
     imageSrc: 'http://i.pravatar.cc/300?img=1',
   },
+  {
+    id: 1,
+    text: 'Hawala',
+    imageSrc: 'http://i.pravatar.cc/300?img=1',
+  },
 ]
 const PaymentMethod = () => {
   return (
-    <div className="Payment_method">
-      <div className="Payment_method_top">
-        <Toolbar style={{ marginTop: '1rem', marginLeft: '1rem' }}>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <ArrowCircleLeftIcon sx={{width:"40px", height:"35px"}} />
-          </IconButton>
-          <h1 className='title'>
-            Payment Method
-          </h1>
-        </Toolbar>
+    <div className="Payment_method_main">
+      <div className="Payment_method_head">
+        <div className="Payment_method_title">
+          <Link to={'/'}>
+            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
+          </Link>
+          <div className="Payment_method_subtitle">Payment_method</div>
+        </div>
       </div>
-      <div className="Payment_method_bottom">
+      <div className="Payment_method_body">
         <div className="subtitle">
           Make Payment of 100/- and upload screenshot.
         </div>

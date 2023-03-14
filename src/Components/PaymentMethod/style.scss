@@ -1,19 +1,60 @@
-.Payment_method {
+.Payment_method_main {
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
-.Payment_method_top {
-  color: #fff;
   background-color: #fac000;
 }
-.Payment_method_bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 1rem 0 1rem;
+.Payment_method_head {
+  flex: 0.11;
+  background-color: #fac000;
+}
+.Payment_method_body {
+  flex: 0.89;
+  background-color: #000;
+  padding: 1rem;
+  // border-radius: 15px 15px 0 0;
 }
 
+.Payment_method_title {
+  height: 50px;
+  padding: 15px;
+
+  .MuiSvgIcon-root {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    color: #fff;
+  }
+}
+.Payment_method_subtitle {
+  padding-top: 0.75rem;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+}
+
+.Payment_method_details {
+  color: #fff;
+  padding: 10%;
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 2rem;
+  }
+  .MuiInputLabel-root {
+    font-size: 20px;
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+}
 .profile_data {
   color: #fff;
   margin-top: 1rem;

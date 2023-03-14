@@ -66,7 +66,7 @@ const PaymentDetail = () => {
                   />
                 </label>
               )}
-              <p style={{ color: "#fff" ,fontSize:"12px"}}>   Click here
+              <p className="clickfile">   Click here
                 to upload payment screenshot.</p>
             </form>
           </div>

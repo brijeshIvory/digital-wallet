@@ -3,6 +3,7 @@ import "./index.scss";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import CoinIcon from "../../assets/img/coins-icon.png";
 import { MuiTelInput } from "mui-tel-input";
+import { Link } from "react-router-dom";
 
 function WalletTransfer() {
   const [value, setValue] = useState("+91");
@@ -14,7 +15,9 @@ function WalletTransfer() {
     <div className="wallet-transfer-main">
       <div className="wallet-transfer-head">
         <div className="wallet-transfer-title">
+          <Link to={"/"}>
           <ArrowCircleLeftIcon />
+          </Link>
           <div className="wallet-transfer_subtitle">Wallet Transfer</div>
         </div>
       </div>
