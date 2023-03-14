@@ -70,7 +70,7 @@ function Navbar({ open, setOpen }) {
         {/* <img src={Navlogo} alt="navlogo" /> */}
         <div className="navbar_logo">
           <h2>Logo</h2>
-          <ArrowCircleLeftOutlinedIcon onClick={() => setOpen(false)} />
+          <ArrowCircleLeftOutlinedIcon onClick={() => setOpen(false)} sx={{width:"30px",height:"30px" }} />
         </div>
 
         <div className="navbar_monumber">+917867854445</div>
