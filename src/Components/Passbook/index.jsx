@@ -1,40 +1,56 @@
 import React, { useState } from "react";
 import "./index.scss";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TextField } from "@mui/material";
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import MenuItem from "@mui/material/MenuItem";
-// import DatePicker from "react-datepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+// const validationSchema = yup.object().shape({
+//   startDate: yup.string().required("Required !"),
+//   endDate: yup.string().required("Required !"),
+//   transactionType: yup.string().required("Required !"),
+//   status: yup.string().required("Required !"),
+// });
 
 function Passbook() {
+  const [inputValue, setInputValue] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+    transactionType: "1",
+    status: "1",
+  });
+  const [submitedInput, setSubmitedInput] = useState({});
   const [isFilterClicked, setIsFilterClicked] = useState(false);
-  const [valueTransactionType, setValueTransactionType] = useState();
-  const [rangeStart, setRangeStart] = React.useState(new Date());
-  const [rangeEnd, setRangeEnd] = React.useState(new Date());
-  const arr = [1, 2, 3, 4];
+
+  const arr = ["1", "2", " 3", "4"];
+
+  // const selectStartDate = (e) => {
+  //   setInputValue({ ...inputValue, startDate: e.target.value });
+  // };
+
+  // const selectEndDate = (e) => {
+  //   setInputValue({ ...inputValue, endDate: e.target.value });
+  // };
+
+  // const formik = useFormik({
+  //   initialValues: {
+  //     startDate: new Date(),
+  //     endDate: new Date(),
+  //     transactionType: "2",
+  //     status: "2",
+  //   },
+  //   onSubmit: (values, { resetForm }) => {
+  //     console.log(values, "values");
+  //     resetForm({ values: null });
+  //   },
+  //   validationSchema: validationSchema,
+  // });
   const dateAfterYear = new Date();
-  dateAfterYear.setFullYear(rangeStart.getFullYear() + 1);
-
-  const selectStartDate = (d) => {
-    setRangeStart(d);
-  };
-
-  const selectEndDate = (d) => {
-    setRangeEnd(d);
-  };
-
-  // function getdaysdifference(date1, date2) {
-  //   var time_difference = date2?.getTime() - date1?.getTime();
-  //   var days_difference = time_difference / (1000 * 60 * 60 * 24);
-  //   return days_difference;
-  // }
-
-  // console.log(getdaysdifference(rangeStart, dateAfterYear));
-
+  dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
+  console.log(submitedInput, "submitedInput");
   return (
     <div className="passbook-main">
       <div className="passbook-head">
@@ -56,27 +72,32 @@ function Passbook() {
             <div className="passbook-body-date">
               <DatePicker
                 selectsStart
-                selected={rangeStart}
-                // startDate={rangeStart}
-                onChange={selectStartDate}
+                selected={inputValue.startDate}
+                onChange={(e) => {
+                  console.log(e, "e");
+                  setInputValue({ ...inputValue, startDate: e });
+                }}
               />
               <DatePicker
                 selectsEnd
-                selected={rangeEnd}
-                onChange={selectEndDate}
+                selected={inputValue.endDate}
+                onChange={(e) => setInputValue({ ...inputValue, endDate: e })}
                 maxDate={dateAfterYear}
               />
             </div>
 
             <TextField
-              id="standard-select-transactiontype"
+              id="transactionType"
               select
-              label="Transaction Type"
               helperText="Please select your transaction type"
               variant="standard"
-              defaultValue={1}
-              value={valueTransactionType}
-              onSelect={(val) => setValueTransactionType(val)}
+              value={inputValue.transactionType}
+              onChange={(e) =>
+                setInputValue({
+                  ...inputValue,
+                  transactionType: e.target.value,
+                })
+              }
             >
               {arr.map((ele) => (
                 <MenuItem value={ele} key={ele}>
@@ -86,14 +107,14 @@ function Passbook() {
             </TextField>
 
             <TextField
-              id="standard-select-currency"
+              id="status"
               select
-              label="Status"
               helperText="Please select your currency"
               variant="standard"
-              defaultValue={1}
-              value={valueTransactionType}
-              onSelect={(val) => setValueTransactionType(val)}
+              value={inputValue.status}
+              onChange={(e) =>
+                setInputValue({ ...inputValue, status: e.target.value })
+              }
             >
               {arr.map((ele) => (
                 <MenuItem value={ele} key={ele}>
@@ -104,7 +125,9 @@ function Passbook() {
 
             <div className="passbook-body-button">
               <button>Close</button>
-              <button>Apply</button>
+              <button onClick={() => setSubmitedInput(inputValue)}>
+                Apply
+              </button>
             </div>
           </div>
         ) : (
