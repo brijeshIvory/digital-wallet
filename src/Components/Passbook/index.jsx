@@ -1,26 +1,39 @@
 import React, { useState } from "react";
 import "./index.scss";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TextField } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import MenuItem from "@mui/material/MenuItem";
+// import DatePicker from "react-datepicker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Passbook() {
   const [isFilterClicked, setIsFilterClicked] = useState(false);
-  const [valueFromDate, setValueFromDate] = useState(null);
-  const [valueToDate, setValueToDate] = useState(null);
   const [valueTransactionType, setValueTransactionType] = useState();
+  const [rangeStart, setRangeStart] = React.useState(new Date());
+  const [rangeEnd, setRangeEnd] = React.useState(new Date());
   const arr = [1, 2, 3, 4];
+  const dateAfterYear = new Date();
+  dateAfterYear.setFullYear(rangeStart.getFullYear() + 1);
 
-  function getdaysdifference(date1, date2) {
-    var time_difference = date2?.getTime() - date1?.getTime();
-    var days_difference = time_difference / (1000 * 60 * 60 * 24);
-    return days_difference;
-  }
+  const selectStartDate = (d) => {
+    setRangeStart(d);
+  };
 
-  console.log(getdaysdifference(valueFromDate?.$d, valueToDate?.$d));
+  const selectEndDate = (d) => {
+    setRangeEnd(d);
+  };
+
+  // function getdaysdifference(date1, date2) {
+  //   var time_difference = date2?.getTime() - date1?.getTime();
+  //   var days_difference = time_difference / (1000 * 60 * 60 * 24);
+  //   return days_difference;
+  // }
+
+  // console.log(getdaysdifference(rangeStart, dateAfterYear));
 
   return (
     <div className="passbook-main">
@@ -41,26 +54,18 @@ function Passbook() {
         {isFilterClicked ? (
           <div>
             <div className="passbook-body-date">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="From"
-                  value={valueFromDate}
-                  onChange={(newValue) => {
-                    setValueFromDate(newValue);
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="To"
-                  value={valueToDate}
-                  onChange={(newValue) => {
-                    setValueToDate(newValue);
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
+              <DatePicker
+                selectsStart
+                selected={rangeStart}
+                // startDate={rangeStart}
+                onChange={selectStartDate}
+              />
+              <DatePicker
+                selectsEnd
+                selected={rangeEnd}
+                onChange={selectEndDate}
+                maxDate={dateAfterYear}
+              />
             </div>
 
             <TextField
