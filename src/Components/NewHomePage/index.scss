@@ -33,6 +33,7 @@
 .new-home-page-balance-title {
   font-size: 15px;
   font-weight: 700;
+  color: #595858;
 }
 .new-home-page-balance-money {
   font-size: 25px;
@@ -69,7 +70,7 @@
 }
 .latest-transaction {
   flex: 0.4;
-  background-color: #efd06acd;
+  background-color: #f5cb43d3;
   border-radius: 20px 20px 0 0;
   padding: 40px;
 }
@@ -78,4 +79,22 @@
   align-items: center;
   justify-content: space-between;
   font-weight: 700;
+  font-size: 20px;
+}
+.latest-transaction-data {
+  margin-top: 2rem;
+}
+.latest-transaction-single-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.7rem;
+}
+.latest-transaction-party {
+  font-weight: 700;
+  font-size: 18px;
+}
+.latest-transaction-date {
+  font-size: 15px;
+  color: #595858;
 }
