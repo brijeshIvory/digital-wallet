@@ -10,8 +10,18 @@ import GooglePay from '../../assets/img/google_pay.png'
 import phone_pe from '../../assets/img/phone_pe.png'
 import UPI from '../../assets/img/upi.png'
 import BankTransfer from './BankTransfer'
+import PaytmTransfer from './PaytmTransfer'
+import GooglePayTransfer from './GooglePayTransfer'
+import PhonePayTransfer from './PhonePayTransfer'
+import UpiTransfer from './UpiTransfer'
 const WithdrawalDetail = () => {
 const [bankFormOpen,setBankFormOpen] =useState(false)
+const [PaytmFormOpen,setPaytmFormOpen]=useState(false)
+const [GooglePayFormOpen,setGooglePayFormOpen]=useState(false)
+const [PhonePeFormOpen,setPhonePeFormOpen]=useState(false)
+const [UpiFormOpen,setUpiFormOpen]=useState(false)
+
+
   return (
     <>
     <div className="withdrawal">
@@ -51,28 +61,28 @@ const [bankFormOpen,setBankFormOpen] =useState(false)
           <div className="bank-detail">
           <Avatar src={Paytm} alt="Paytm"/>
             <p className="bank-detail-title">Paytm Wallet</p>
-            <Button type="submit" className="bank-detail-sum">
+            <Button type="submit" className="bank-detail-sum" onClick={()=>setPaytmFormOpen(true)}>
               Add New
             </Button>
           </div>
           <div className="bank-detail">
           <Avatar src={GooglePay} alt="GooglePay" />
             <p className="bank-detail-title">Googel Pay</p>
-            <Button type="submit" className="bank-detail-sum">
+            <Button type="submit" className="bank-detail-sum" onClick={()=>setGooglePayFormOpen(true)}>
               Add New
             </Button>
           </div>
           <div className="bank-detail">
           <Avatar src={phone_pe} alt="phone_pe" />
-            <p className="bank-detail-title">Phone Pay</p>
-            <Button type="submit" className="bank-detail-sum">
+            <p className="bank-detail-title">Phone Pe</p>
+            <Button type="submit" className="bank-detail-sum" onClick={()=>setPhonePeFormOpen(true)}>
               Add New
             </Button>
           </div>
           <div className="bank-detail">
             <Avatar alt="UPI" src={UPI} />
             <p className="bank-detail-title">UPI</p>
-            <Button type="submit" className="bank-detail-sum">
+            <Button type="submit" className="bank-detail-sum" onClick={()=>setUpiFormOpen(true)}>
               Add New
             </Button>
           </div>
@@ -80,6 +90,10 @@ const [bankFormOpen,setBankFormOpen] =useState(false)
       </div>
     </div>
     <BankTransfer bankFormOpen={bankFormOpen} setBankFormOpen={setBankFormOpen}/>
+    <PaytmTransfer PaytmFormOpen={PaytmFormOpen} setPaytmFormOpen={setPaytmFormOpen}/>
+    <GooglePayTransfer GooglePayFormOpen={GooglePayFormOpen} setGooglePayFormOpen={setGooglePayFormOpen}/>
+    <PhonePayTransfer PhonePeFormOpen={PhonePeFormOpen} setPhonePeFormOpen={setPhonePeFormOpen}/>
+    <UpiTransfer UpiFormOpen={UpiFormOpen} setUpiFormOpen={setUpiFormOpen}/>
     </>
   )
 }
