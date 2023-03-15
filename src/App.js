@@ -1,15 +1,15 @@
 import "./App.css";
 import Footer from "./Components/Footer";
 import Router from "./Router/Router";
-import CreateID from "./Components/CreateID";
-import Passbook from "./Components/Passbook";
+// import CreateID from "./Components/CreateID";
+// import Passbook from "./Components/Passbook";
 function App() {
   return (
     <div className="app">
-      {/* <Router />
-      <Footer /> */}
+      <Router />
+      <Footer />
       {/* <CreateID /> */}
-      <Passbook />
+      {/* <Passbook /> */}
     </div>
   );
 }
