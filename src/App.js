@@ -4,6 +4,7 @@ import Footer from "./Components/Footer";
 import Router from "./Router/Router";
 import NewHomePage from "./Components/NewHomePage";
 import ReferralPopup from "./Components/ReferralPopup/ReferralPopup.jsx";
+import HomeDashboard from "./Components/HomeDashboard";
 function App() {
   return (
     <div className="app">
@@ -11,7 +12,8 @@ function App() {
       {/* <NewHomePage /> */}
       {/* <Router />
       <Footer /> */}
-      <ReferralPopup />
+      {/* <ReferralPopup /> */}
+      <HomeDashboard />
     </div>
   );
 }
