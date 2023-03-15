@@ -88,6 +88,82 @@
   .bank-detail-sum {
     color: #191919;
     background-color: #e29608;
-    height: 4vh;
+    // height: 4vh;
   }
+  .bank-detail-sum:hover {
+    color: #191919;
+    background-color: #e29608;
+  }
+}
+.withdrawal_form {
+  padding: 0 30px 30px 30px;
+}
+.withdrawal_form_title h3 {
+  color: #fff;
+  padding-bottom: 5px;
+  display: inline;
+  position: relative;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: 400;
+}
+.withdrawal_form_title h3::before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #fac000;
+  left: 0;
+  top: 86%;
+  position: absolute;
+}
+.withdrawal_subtitle {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1.2rem;
+  margin-top: 2rem;
+}
+.withdrawal_form_container {
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 1rem;
+  }
+  .MuiInputLabel-root {
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+  .MuiFormLabel-root.Mui-error {
+    color: #fff;
+  }
+}
+.withdrawal_button_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.withdrawal_button {
+  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  min-height: 30px;
+  border-width: 0;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 80px;
+  margin: auto;
+}
+.error_text {
+  font-size: 12px;
+  color: red;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }

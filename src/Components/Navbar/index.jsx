@@ -12,37 +12,38 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import { Link } from "react-router-dom";
 
 function Navbar({ open, setOpen }) {
   const list1 = [
     {
       name: "Profile",
-      link: "./profile",
+      link: "profile",
       icon: <PersonOutlineIcon />,
     },
     {
       name: "Withdrawal Details",
-      link: "./profile",
+      link: "bank-details",
       icon: <OutputIcon />,
     },
     {
       name: "Wallet to Wallet Transfer",
-      link: "./profile",
+      link: "wallet-to-wallet",
       icon: <MoveDownIcon />,
     },
     {
       name: "CreateID",
-      link: "./profile",
+      link: "tabs/account-information",
       icon: <PersonAddAlt1Icon />,
     },
     {
       name: "Refer & Earn",
-      link: "./profile",
+      link: "refer-and-earn",
       icon: <AttachMoneyIcon />,
     },
     {
       name: "Terms",
-      link: "./profile",
+      link: "terms",
       icon: <ArticleIcon />,
     },
   ];
@@ -50,12 +51,12 @@ function Navbar({ open, setOpen }) {
   const list2 = [
     {
       name: "Notifications",
-      link: "./profile",
+      link: "notification",
       icon: <NotificationsNoneIcon />,
     },
     {
       name: "Help",
-      link: "./profile",
+      link: "concern-list",
       icon: <HelpIcon />,
     },
     {
@@ -81,20 +82,24 @@ function Navbar({ open, setOpen }) {
       <div className="navbar_body">
         <div>
           {list1.map((obj) => (
+                      <Link to={obj.link}>
             <div className="list" key={obj.name}>
               <div>{obj.icon}</div>
               <p>{obj.name}</p>
             </div>
+            </Link>
           ))}
         </div>
 
         <div>
           <Divider />
           {list2.map((obj) => (
-            <div className="list" key={obj.name}>
+          <Link to={obj.link}>
+          <div className="list" key={obj.name}>
               <div>{obj.icon}</div>
               <p>{obj.name}</p>
             </div>
+          </Link>
           ))}
         </div>
       </div>

@@ -5,9 +5,15 @@ import JoinNow from "../../assets/img/joinnow.png";
 import Poster from "../../assets/img/banner-06792F54-BB30-4D3E-8EEB-9565ED4B1C92.jpeg";
 import KeyboardDoubleArrowDownOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowDownOutlined";
 import KeyboardDoubleArrowUpOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowUpOutlined";
+import Drawer from "@mui/material/Drawer";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import Register from "../Register";
 import Login from "../Login";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Header from "../Header";
+import { Link } from "react-router-dom";
 function HomeDashboard({ isLoggedin }) {
   const [openJoinNow, setOpenJoinNow] = useState({
     bottom: false,
@@ -61,7 +67,9 @@ function HomeDashboard({ isLoggedin }) {
         <div className="deposit_withdraw">
           <div className="deposit">
             <div className="deposit_title">DEPOSIT</div>
-            <KeyboardDoubleArrowUpOutlinedIcon sx={{ color: "white" }} />
+            <Link to={"deposit"}>
+              <KeyboardDoubleArrowUpOutlinedIcon sx={{ color: "white" }} />
+            </Link>
           </div>
           <div className="deposit_withdraw_login"></div>
           <div className="withdraw">
