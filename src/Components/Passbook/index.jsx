@@ -72,6 +72,7 @@ function Passbook() {
             <div className="passbook-body-date">
               <DatePicker
                 selectsStart
+                label="from"
                 selected={inputValue.startDate}
                 onChange={(e) => {
                   console.log(e, "e");
@@ -88,6 +89,7 @@ function Passbook() {
 
             <TextField
               id="transactionType"
+              label="Transaction Type"
               select
               helperText="Please select your transaction type"
               variant="standard"
@@ -109,7 +111,8 @@ function Passbook() {
             <TextField
               id="status"
               select
-              helperText="Please select your currency"
+              label="Status"
+              helperText="Please select status"
               variant="standard"
               value={inputValue.status}
               onChange={(e) =>
