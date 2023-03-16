@@ -2,14 +2,15 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #fac000;
+  background-color: #000;
 }
 .Payment_method_head {
-  flex: 0.11;
+  // flex: 0.11;
   background-color: #fac000;
+  padding-bottom: 2rem;
 }
 .Payment_method_body {
-  flex: 0.89;
+  // flex: 0.89;
   background-color: #000;
   padding: 1rem;
   // border-radius: 15px 15px 0 0;
@@ -134,7 +135,7 @@
   font-size: 17px;
   font-weight: 800;
   color: #fff;
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 .person_deatils {
@@ -162,7 +163,7 @@
   background-color: #2b2929;
   border-radius: 13px;
   padding: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .file_label {
   display: flex;
@@ -199,9 +200,85 @@
   text-transform: capitalize;
   color: #fff;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
 }
 .Person_preview_img{
   width: -webkit-fill-available;
   height: auto;
+}
+.upload_button_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.upload_button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  flex: 0.88;
+  background-color: #000;
+  margin-top: 1rem;
+  justify-content: center;
+    display: flex;
+}
+
+.deposit_form_container {
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 1rem;
+  }
+  .MuiInputLabel-root {
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+  .MuiFormLabel-root.Mui-error {
+    color: #fff;
+  }
+}
+.deposit_button_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.deposit_button {
+  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  min-height: 30px;
+  border-width: 0;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 80px;
+  margin: auto;
+}
+
+.deposit_select{
+
+  .MuiFormLabel-root.MuiInputLabel-root{
+   font-size: 16px;
+  }
+}
+.preview_img{
+  width: -webkit-fill-available;
+    height: auto;
+}
+.deposit_file_main{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #2b2929;
+  border-radius: 13px;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }

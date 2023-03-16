@@ -150,3 +150,11 @@
     border: 0.5px solid rgb(176, 170, 170);
   }
 }
+.tableRow{
+  .MuiTableCell-root{
+    font-size: 12px !important;
+text-align: center !important;
+     padding: 0.5rem !important;
+    color: #fff;
+  }
+}

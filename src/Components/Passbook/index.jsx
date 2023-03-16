@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./index.scss";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import { TextField } from "@mui/material";
@@ -6,7 +6,15 @@ import MenuItem from "@mui/material/MenuItem";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
-
+import { GetClientList } from "../../App/Redux/Actions/HavalaListAction";
+import { useDispatch, useSelector } from "react-redux";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 // const validationSchema = yup.object().shape({
 //   startDate: yup.string().required("Required !"),
 //   endDate: yup.string().required("Required !"),
@@ -36,7 +44,9 @@ function Passbook() {
   const [isFilterClicked, setIsFilterClicked] = useState(false);
 
   const arr = ["1", "2", " 3", "4"];
-
+const dispatch=useDispatch()
+const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
+console.log(ClientList,"ClientList")
   // const selectStartDate = (e) => {
   //   setInputValue({ ...inputValue, startDate: e.target.value });
   // };
@@ -60,7 +70,9 @@ function Passbook() {
   // });
   const dateAfterYear = new Date();
   dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
-  console.log(submitedInput, "submitedInput");
+ useEffect(() => {
+  dispatch(GetClientList())
+ }, [])
   return (
     <div className="passbook-main">
       <div className="passbook-head">
@@ -147,10 +159,10 @@ function Passbook() {
           </div>
         ) : (
           <div className="transaction-data">
-            {/* <TableContainer component={Paper}>
-              <Table sx={{ maxWidth: 300 }} aria-label="simple table">
+            <TableContainer component={Paper} sx={{backgroundColor:"#000",border:"1px solid #fff"}}>
+              <Table sx={{ maxWidth: 20 }} aria-label="simple table">
                 <TableHead>
-                  <TableRow>
+                  <TableRow className="tableRow">
                     <TableCell>Date</TableCell>
                     <TableCell>Transaction Type</TableCell>
                     <TableCell>Amount</TableCell>
@@ -163,6 +175,7 @@ function Passbook() {
                     <TableRow
                       key={row.name}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      className="tableRow"
                     >
                       <TableCell component="th" scope="row">
                         {row.name}
@@ -175,36 +188,8 @@ function Passbook() {
                   ))}
                 </TableBody>
               </Table>
-            </TableContainer> */}
-            <table className="transaction-data-table">
-              <tr>
-                <th className="transaction-data-table-date">Date</th>
-                <th className="transaction-data-table-transaction-type">
-                  Transaction Type
-                </th>
-                <th className="transaction-data-table-amount">Amount</th>
-                <th className="transaction-data-table-deposit">Deposit</th>
-                <th className="transaction-data-table-withdraw">Withdraw</th>
-              </tr>
-              <tr>
-                <td className="transaction-data-table-date">02/23/2022</td>
-                <td className="transaction-data-table-transaction-type">
-                  Gpay
-                </td>
-                <td className="transaction-data-table-amount">230</td>
-                <td className="transaction-data-table-deposit">yes</td>
-                <td className="transaction-data-table-withdraw">-</td>
-              </tr>
-              <tr>
-                <td className="transaction-data-table-date">05/28/2022</td>
-                <td className="transaction-data-table-transaction-type">
-                  paytm
-                </td>
-                <td className="transaction-data-table-amount">90</td>
-                <td className="transaction-data-table-deposit">-</td>
-                <td className="transaction-data-table-withdraw">yes</td>
-              </tr>
-            </table>
+            </TableContainer>
+        
           </div>
         )}
       </div>

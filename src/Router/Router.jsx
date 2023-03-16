@@ -11,7 +11,7 @@ import PaymentMethod from "../Components/PaymentMethod";
 import NewHomePage from "../Components/NewHomePage";
 import Passbook from "../Components/Passbook";
 const Router = () => {
-  const isLoggedin = false;
+  const isLoggedin = true;
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />
