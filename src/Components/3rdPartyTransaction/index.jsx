@@ -9,7 +9,9 @@ function ThirdPartyTransaction() {
       <div className="close-icon-div">
         <HighlightOffIcon onClick={() => {}} />
       </div>
-      <div className="close-icon-div-text">Enter Details for transaction</div>
+      <div className="close-icon-div-text">
+        Enter details below for transaction...
+      </div>
       <input type="text" placeholder="Enter Id" />
       <input type="number" placeholder="Enter Amount" />
 
