@@ -1,11 +1,16 @@
 import React from "react";
 import "./index.scss";
+import loginButton from "../../assets/img/loginButton.png";
+import JoinNow from "../../assets/img/joinnow.png";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { RiLuggageDepositLine } from "react-icons/ri";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
+import Header from "../Header/index";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function NewHomePage() {
+function NewHomePage({ isLoggedin }) {
   const data = [
     {
       to: "Party1",
@@ -28,10 +33,55 @@ function NewHomePage() {
       Date: "28/01/2023",
     },
   ];
+  const [openJoinNow, setOpenJoinNow] = useState({
+    bottom: false,
+  });
+  const [openLogin, setOpenLogin] = useState({
+    bottom: false,
+  });
+  const toggleJoinNowDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setOpenJoinNow({ ...openJoinNow, [anchor]: open });
+  };
+
+  const toggleLoginDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setOpenLogin({ ...openLogin, [anchor]: open });
+  };
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
-        <div className="new-home-page-header">
+        {isLoggedin ? (
+          <Header />
+        ) : (
+          <div className="loginReg_button">
+            <img
+              className="Joinnow_button"
+              src={JoinNow}
+              alt="JoinNow"
+              onClick={toggleJoinNowDrawer("bottom", true)}
+            />
+            <img
+              className="login_button"
+              src={loginButton}
+              alt="loginbutton"
+              onClick={toggleLoginDrawer("bottom", true)}
+            />
+          </div>
+        )}
+        {/* <div className="new-home-page-header">
           <div>
             <div>Hello,</div>
             <div style={{ marginTop: "0.5rem", fontWeight: 700 }}>
@@ -41,7 +91,7 @@ function NewHomePage() {
           <div className="new-home-page-header-avatar">
             <RxAvatar />
           </div>
-        </div>
+        </div> */}
         <div className="new-home-page-balance">
           <div className="new-home-page-balance-title">Total Balance</div>
           <div className="new-home-page-balance-money">50000</div>
@@ -54,9 +104,11 @@ function NewHomePage() {
             <div className="new-home-page-button-title">WITHDRAW</div>
           </div>
           <div className="new-home-page-button-main">
-            <div className="new-home-page-button">
-              <RiLuggageDepositLine />
-            </div>
+            <Link to={"deposit"}>
+              <div className="new-home-page-button">
+                <RiLuggageDepositLine />
+              </div>
+            </Link>
             <div className="new-home-page-button-title">DEPOSIT</div>
           </div>
           <div className="new-home-page-button-main">

@@ -127,4 +127,26 @@
   color: #fff;
   text-align: center;
   margin: 20px 0 20px 0;
+  width: 100%;
+  // .MuiTableContainer-root {
+  //   background-color: #f6c831;
+  // }
+  // .MuiTableRow-root {
+  //   .MuiTableCell-root {
+  //     width: 5px;
+  //   }
+  // }
+}
+.transaction-data-table {
+  border-collapse: collapse;
+  max-width: 100%;
+  th,
+  td {
+    padding: 4px;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 0.5px solid rgb(176, 170, 170);
+  }
 }
