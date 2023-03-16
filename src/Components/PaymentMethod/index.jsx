@@ -12,6 +12,7 @@ import PaymentDetail from './PaymentDetail'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import {GetHawalaList} from '../../App/Redux/Actions/HavalaListAction'
+import { GetDepositDetail } from '../../App/Redux/Actions/DepositeAction'
 const Item = styled(Paper)(({ theme }) => ({
   padding: '0.5rem',
   textAlign: 'center',
@@ -21,10 +22,6 @@ const Item = styled(Paper)(({ theme }) => ({
 const PaymentMethod = () => {
   const [isBackground, setIsBackground] = useState('')
   const dispatch =useDispatch()
-
-  useEffect(() => {
-    dispatch(GetHawalaList())
-  },[])
   return (
     <>
       <div className="Payment_method_head">

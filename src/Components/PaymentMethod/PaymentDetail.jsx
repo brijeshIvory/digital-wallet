@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './style.scss'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { useFormik } from 'formik'
@@ -7,13 +7,23 @@ import { HawalaTransferValidationSchema } from '../../utills/ValidationSchema'
 import MenuItem from '@mui/material/MenuItem'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useSelector } from 'react-redux'
+import { GetHawalaList } from '../../App/Redux/Actions/HavalaListAction'
+import { useDispatch } from 'react-redux';
+import { GetDepositDetail } from '../../App/Redux/Actions/DepositeAction'
 const PaymentDetail = ({ isBackground }) => {
+  const dispatch =useDispatch()
   const [FrontSidefile, setFrontSidefile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
   const hawalaList = useSelector(
-    (state) => state?.HawalaReducer?.hawalalist_data,
+    (state) => state?.hawala?.hawalalist_data,
   )
-
+  const depositDetail = useSelector(
+    (state) => state?.deposit?.Deposit_detail
+  )
+  useEffect(() => { 
+    dispatch(GetDepositDetail())
+    dispatch(GetHawalaList())
+  },[])
   const onFileUploadChange = async (e) => {
     const fileInput = e.target
     if (!fileInput.files) {
@@ -61,19 +71,19 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Bank Name </div>
-                <div className="bank_name_value">IDFC FIRST BANK </div>
+                <div className="bank_name_value">{depositDetail?.bank_name} </div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">Account Holder Name </div>
-                <div className="account_holder_value">UMIYA TRADERS </div>
+                <div className="account_holder_value">{depositDetail?.account_holder_name} </div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">Account Number</div>
-                <div className="person_data">52004200012</div>
+                <div className="person_data">{depositDetail?.account_number}</div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">IFSC</div>
-                <div className="person_data">IDFB0040312</div>
+                <div className="person_data">{depositDetail?.ifsc_code}</div>
               </div>
             </>
           )}
@@ -81,11 +91,11 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Person Name</div>
-                <div className="person_data">Keyur patel</div>
+                <div className="person_data">{depositDetail?.paytm_name}</div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">Paytm Number</div>
-                <div className="person_data">+9054215586</div>
+                <div className="person_data">{depositDetail?.paytm_link}</div>
               </div>
             </>
           )}
@@ -93,11 +103,11 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Google Pay Name</div>
-                <div className="person_data">Umiya Traders</div>
+                <div className="person_data">{depositDetail?.gpay_name}</div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">Google Pay Number</div>
-                <div className="person_data">+9157046576</div>
+                <div className="person_data">{depositDetail?.gpay_link}</div>
               </div>
             </>
           )}
@@ -105,11 +115,11 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Phone Pay Name</div>
-                <div className="person_data">Umiya Traders</div>
+                <div className="person_data">{depositDetail?.phonepay_name}</div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">Phone Pay Number</div>
-                <div className="person_data">+9157046576</div>
+                <div className="person_data">{depositDetail?.phonepay_link}</div>
               </div>
             </>
           )}
