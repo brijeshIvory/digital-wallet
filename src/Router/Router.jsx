@@ -7,7 +7,7 @@ import WithdrawalDetail from "../Components/WithdrawalDetail/index";
 import PrivateRoute from "./PrivateRoute";
 import WalletTransfer from "../Components/WalletTransfer/";
 import Deposit from "../Components/Deposit";
-import PaymentMethod from "../Components/PaymentMethod";
+import DepositPaymentMethhod from "../Components/Deposit/DepositPaymentMethhod";
 import NewHomePage from "../Components/NewHomePage";
 import Passbook from "../Components/Passbook";
 const Router = () => {
@@ -69,7 +69,7 @@ const Router = () => {
         path="choose-payment-method"
         element={
           <PrivateRoute>
-            <PaymentMethod />
+            <DepositPaymentMethhod />
           </PrivateRoute>
         }
       ></Route>

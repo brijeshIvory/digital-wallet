@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-const PaymentMethod = () => {
+const DepositPaymentMethhod = () => {
   const [isBackground, setIsBackground] = useState('')
   const dispatch =useDispatch()
   return (
@@ -139,4 +139,4 @@ const PaymentMethod = () => {
   )
 }
 
-export default PaymentMethod
+export default DepositPaymentMethhod
