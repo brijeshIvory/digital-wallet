@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import HomeDashboard from "../Components/HomeDashboard";
 import OfferPage from "../Components/Offer";
 import ReferAndEarn from "../Components/PrivacyAndTearm/ReferAndEarn";
 import Profile from "../Components/Profile";
@@ -74,15 +73,15 @@ const Router = () => {
           </PrivateRoute>
         }
       ></Route>
-      <Route
-        path="passbook"
-        exact
+         <Route
+        path="tabs/reports"
         element={
           <PrivateRoute>
             <Passbook />
           </PrivateRoute>
         }
-      />
+      ></Route>
+   
     </Routes>
   );
 };

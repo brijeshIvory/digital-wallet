@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 const PaymentMethod = () => {
-  const [isBackgroundRed, setIsBackgroundRed] = useState('')
+  const [isBackground, setIsBackground] = useState('')
   return (
     <div className="Payment_method_main">
       <div className="Payment_method_head">
@@ -46,12 +46,12 @@ const PaymentMethod = () => {
                 <Item
                   style={{
                     backgroundColor:
-                      isBackgroundRed === 'Banktransfer'
+                      isBackground === 'Banktransfer'
                         ? '#fac000'
                         : '#0e0c0d',
                   }}
                   onClick={() => {
-                    setIsBackgroundRed('Banktransfer')
+                    setIsBackground('Banktransfer')
                   }}
                 >
                   <div className="card_image">
@@ -64,10 +64,10 @@ const PaymentMethod = () => {
                 <Item
                   style={{
                     backgroundColor:
-                      isBackgroundRed === 'Paytm' ? '#fac000' : '#0e0c0d',
+                      isBackground === 'Paytm' ? '#fac000' : '#0e0c0d',
                   }}
                   onClick={() => {
-                    setIsBackgroundRed('Paytm')
+                    setIsBackground('Paytm')
                   }}
                 >
                   <div className="card_image">
@@ -81,10 +81,10 @@ const PaymentMethod = () => {
                 <Item
                   style={{
                     backgroundColor:
-                      isBackgroundRed === 'GooglePay' ? '#fac000' : '#0e0c0d',
+                      isBackground === 'GooglePay' ? '#fac000' : '#0e0c0d',
                   }}
                   onClick={() => {
-                    setIsBackgroundRed('GooglePay')
+                    setIsBackground('GooglePay')
                   }}
                 >
                   <div className="card_image">
@@ -97,10 +97,10 @@ const PaymentMethod = () => {
                 <Item
                   style={{
                     backgroundColor:
-                      isBackgroundRed === 'phone_pe' ? '#fac000' : '#0e0c0d',
+                      isBackground === 'phone_pe' ? '#fac000' : '#0e0c0d',
                   }}
                   onClick={() => {
-                    setIsBackgroundRed('phone_pe')
+                    setIsBackground('phone_pe')
                   }}
                 >
                   <div className="card_image">
@@ -112,7 +112,7 @@ const PaymentMethod = () => {
             </Grid>
           </Box>
         </div>
-        <PaymentDetail isBackgroundRed={isBackgroundRed} />
+        <PaymentDetail isBackground={isBackground} />
       </div>
     </div>
   )

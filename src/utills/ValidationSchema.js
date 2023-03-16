@@ -24,3 +24,8 @@ export const UpiTransferValidationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
     upiId: Yup.string().required('UPI ID is required'),
 });
+export const HawalaTransferValidationSchema = Yup.object({
+    hawala_value: Yup.string().required('Hawala Selection is required.'),
+    amount: Yup.string().required('Amount is required'),
+    screenshot: Yup.string().required('ScreenShot is required'),
+});

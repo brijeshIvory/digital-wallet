@@ -14,13 +14,15 @@ import PaytmTransfer from './PaytmTransfer'
 import GooglePayTransfer from './GooglePayTransfer'
 import PhonePayTransfer from './PhonePayTransfer'
 import UpiTransfer from './UpiTransfer'
+import Hawala from '../../assets/img/hawala.png'
+import HawalaTransfer from './HawalaTransfer'
 const WithdrawalDetail = () => {
 const [bankFormOpen,setBankFormOpen] =useState(false)
 const [PaytmFormOpen,setPaytmFormOpen]=useState(false)
 const [GooglePayFormOpen,setGooglePayFormOpen]=useState(false)
 const [PhonePeFormOpen,setPhonePeFormOpen]=useState(false)
 const [UpiFormOpen,setUpiFormOpen]=useState(false)
-
+const [HawalaiFormOpen,setHawalaiFormOpen]=useState(false)
 
   return (
     <>
@@ -86,6 +88,13 @@ const [UpiFormOpen,setUpiFormOpen]=useState(false)
               Add New
             </Button>
           </div>
+          <div className="bank-detail">
+            <Avatar alt="Hawala" src={Hawala} />
+            <p className="bank-detail-title">Hawala</p>
+            <Button type="submit" className="bank-detail-sum" onClick={()=>setHawalaiFormOpen(true)}>
+              Add New
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -93,7 +102,7 @@ const [UpiFormOpen,setUpiFormOpen]=useState(false)
     <PaytmTransfer PaytmFormOpen={PaytmFormOpen} setPaytmFormOpen={setPaytmFormOpen}/>
     <GooglePayTransfer GooglePayFormOpen={GooglePayFormOpen} setGooglePayFormOpen={setGooglePayFormOpen}/>
     <PhonePayTransfer PhonePeFormOpen={PhonePeFormOpen} setPhonePeFormOpen={setPhonePeFormOpen}/>
-    <UpiTransfer UpiFormOpen={UpiFormOpen} setUpiFormOpen={setUpiFormOpen}/>
+    <HawalaTransfer HawalaiFormOpen={HawalaiFormOpen} setHawalaiFormOpen={setHawalaiFormOpen}/>
     </>
   )
 }

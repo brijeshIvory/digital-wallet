@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './style.scss'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
-const PaymentDetail = ({ isBackgroundRed }) => {
+const PaymentDetail = ({ isBackground }) => {
   const [FrontSidefile, setFrontSidefile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
 
@@ -28,16 +28,16 @@ const PaymentDetail = ({ isBackgroundRed }) => {
 
   return (
     <>
-      {isBackgroundRed === 'Banktransfer' ||
-      isBackgroundRed === 'Paytm' ||
-      isBackgroundRed === 'GooglePay' ||
-      isBackgroundRed === 'phone_pe' ? (
+      {isBackground === 'Banktransfer' ||
+      isBackground === 'Paytm' ||
+      isBackground === 'GooglePay' ||
+      isBackground === 'phone_pe' ? (
         <div className="Payment_detail">
           <div className="Payment_detail_title">
             Make your payment on the details below
           </div>
 
-          {isBackgroundRed === 'Banktransfer' && (
+          {isBackground === 'Banktransfer' && (
             <>
               <div className="person_deatils">
                 <div className="person_name">Bank Name </div>
@@ -57,7 +57,7 @@ const PaymentDetail = ({ isBackgroundRed }) => {
               </div>
             </>
           )}
-          {isBackgroundRed === 'Paytm' && (
+          {isBackground === 'Paytm' && (
             <>
               <div className="person_deatils">
                 <div className="person_name">Person Name</div>
@@ -69,7 +69,7 @@ const PaymentDetail = ({ isBackgroundRed }) => {
               </div>
             </>
           )}
-      {isBackgroundRed === 'GooglePay' && (
+      {isBackground === 'GooglePay' && (
             <>
               <div className="person_deatils">
                 <div className="person_name">Google Pay Name</div>
@@ -81,7 +81,7 @@ const PaymentDetail = ({ isBackgroundRed }) => {
               </div>
             </>
           )}
-             {isBackgroundRed === 'phone_pe' && (
+             {isBackground === 'phone_pe' && (
             <>
               <div className="person_deatils">
                 <div className="person_name">Phone Pay Name</div>
@@ -104,6 +104,7 @@ const PaymentDetail = ({ isBackgroundRed }) => {
                     width={441}
                     height={250}
                     layout="responsive"
+                    className='Person_preview_img'
                   />
                 ) : (
                   <label className="file_label">
