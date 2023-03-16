@@ -5,6 +5,7 @@ import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 
 // const validationSchema = yup.object().shape({
 //   startDate: yup.string().required("Required !"),
@@ -64,7 +65,9 @@ function Passbook() {
     <div className="passbook-main">
       <div className="passbook-head">
         <div className="passbook-title">
+          <Link to={"/"}>
           <ArrowCircleLeftIcon />
+          </Link>
           <div className="passbook_subtitle">Passbook</div>
         </div>
       </div>

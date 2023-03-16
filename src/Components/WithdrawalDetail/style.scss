@@ -20,7 +20,7 @@
   display: flex;
   padding: 1rem;
   justify-content: center;
-  background-color: #191919;
+  background-color: #2b2929;
   border-radius: 15px;
   width: -webkit-fill-available;
 }
@@ -60,7 +60,7 @@
   padding: 20px;
   margin-bottom: 1rem;
   justify-content: space-between;
-  background-color: #191919;
+  background-color: #2b2929;
   border-radius: 10px;
 
   .bank-detail-title {
@@ -86,12 +86,12 @@
   }
 
   .bank-detail-sum {
-    color: #191919;
+    color: #2b2929;
     background-color: #e29608;
     // height: 4vh;
   }
   .bank-detail-sum:hover {
-    color: #191919;
+    color: #2b2929;
     background-color: #e29608;
   }
 }
@@ -166,4 +166,24 @@
   color: red;
   font-weight: 500;
   margin-bottom: 1rem;
+}
+.withdrawal_select{
+
+  .MuiFormLabel-root.MuiInputLabel-root{
+   font-size: 16px;
+  }
+}
+.preview_img{
+  width: -webkit-fill-available;
+    height: auto;
+}
+.withdrawal_file_main{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #2b2929;
+  border-radius: 13px;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }

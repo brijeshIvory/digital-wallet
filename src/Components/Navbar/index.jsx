@@ -32,8 +32,8 @@ function Navbar({ open, setOpen }) {
       icon: <MoveDownIcon />,
     },
     {
-      name: "CreateID",
-      link: "tabs/account-information",
+      name: "PassBook",
+      link: "tabs/reports",
       icon: <PersonAddAlt1Icon />,
     },
     {
