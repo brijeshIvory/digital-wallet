@@ -5,14 +5,18 @@ import JoinNow from "../../assets/img/joinnow.png";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { RiLuggageDepositLine } from "react-icons/ri";
 import { AiOutlineTransaction } from "react-icons/ai";
-import { RxAvatar } from "react-icons/rx";
 import Header from "../Header/index";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Register from "../Register";
 import Login from "../Login";
+import { getCountriesData } from "../../App/Redux/Actions/CountryAction";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function NewHomePage({ isLoggedin }) {
+  const dispatch = useDispatch();
+
   const data = [
     {
       to: "Party1",
@@ -62,6 +66,10 @@ function NewHomePage({ isLoggedin }) {
 
     setOpenLogin({ ...openLogin, [anchor]: open });
   };
+
+  useEffect(() => {
+    dispatch(getCountriesData());
+  }, []);
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
