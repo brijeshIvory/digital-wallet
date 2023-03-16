@@ -7,6 +7,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 // const validationSchema = yup.object().shape({
 //   startDate: yup.string().required("Required !"),
@@ -14,6 +21,17 @@ import * as yup from "yup";
 //   transactionType: yup.string().required("Required !"),
 //   status: yup.string().required("Required !"),
 // });
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+];
 
 function Passbook() {
   const [inputValue, setInputValue] = useState({
@@ -134,7 +152,66 @@ function Passbook() {
             </div>
           </div>
         ) : (
-          <div className="transaction-data">No Data Available</div>
+          <div className="transaction-data">
+            {/* <TableContainer component={Paper}>
+              <Table sx={{ maxWidth: 300 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Transaction Type</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell>Deposit</TableCell>
+                    <TableCell>Withdraw</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow
+                      key={row.name}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.calories}</TableCell>
+                      <TableCell align="right">{row.fat}</TableCell>
+                      <TableCell align="right">{row.carbs}</TableCell>
+                      <TableCell align="right">{row.protein}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer> */}
+            <table className="transaction-data-table">
+              <tr>
+                <th className="transaction-data-table-date">Date</th>
+                <th className="transaction-data-table-transaction-type">
+                  Transaction Type
+                </th>
+                <th className="transaction-data-table-amount">Amount</th>
+                <th className="transaction-data-table-deposit">Deposit</th>
+                <th className="transaction-data-table-withdraw">Withdraw</th>
+              </tr>
+              <tr>
+                <td className="transaction-data-table-date">02/23/2022</td>
+                <td className="transaction-data-table-transaction-type">
+                  Gpay
+                </td>
+                <td className="transaction-data-table-amount">230</td>
+                <td className="transaction-data-table-deposit">yes</td>
+                <td className="transaction-data-table-withdraw">-</td>
+              </tr>
+              <tr>
+                <td className="transaction-data-table-date">05/28/2022</td>
+                <td className="transaction-data-table-transaction-type">
+                  paytm
+                </td>
+                <td className="transaction-data-table-amount">90</td>
+                <td className="transaction-data-table-deposit">-</td>
+                <td className="transaction-data-table-withdraw">yes</td>
+              </tr>
+            </table>
+          </div>
         )}
       </div>
     </div>
