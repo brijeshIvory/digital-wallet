@@ -71,7 +71,10 @@ function Navbar({ open, setOpen }) {
         {/* <img src={Navlogo} alt="navlogo" /> */}
         <div className="navbar_logo">
           <h2>Logo</h2>
-          <ArrowCircleLeftOutlinedIcon onClick={() => setOpen(false)} sx={{width:"30px",height:"30px" }} />
+          <ArrowCircleLeftOutlinedIcon
+            onClick={() => setOpen(false)}
+            sx={{ width: "30px", height: "30px" }}
+          />
         </div>
 
         <div className="navbar_monumber">+917867854445</div>
@@ -82,11 +85,11 @@ function Navbar({ open, setOpen }) {
       <div className="navbar_body">
         <div>
           {list1.map((obj) => (
-                      <Link to={obj.link}>
-            <div className="list" key={obj.name}>
-              <div>{obj.icon}</div>
-              <p>{obj.name}</p>
-            </div>
+            <Link to={obj.link} key={obj.name}>
+              <div className="list">
+                <div>{obj.icon}</div>
+                <p>{obj.name}</p>
+              </div>
             </Link>
           ))}
         </div>
@@ -94,12 +97,12 @@ function Navbar({ open, setOpen }) {
         <div>
           <Divider />
           {list2.map((obj) => (
-          <Link to={obj.link}>
-          <div className="list" key={obj.name}>
-              <div>{obj.icon}</div>
-              <p>{obj.name}</p>
-            </div>
-          </Link>
+            <Link to={obj.link} key={obj.name}>
+              <div className="list">
+                <div>{obj.icon}</div>
+                <p>{obj.name}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

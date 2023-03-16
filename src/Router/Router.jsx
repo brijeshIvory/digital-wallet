@@ -11,7 +11,7 @@ import PaymentMethod from "../Components/PaymentMethod";
 import NewHomePage from "../Components/NewHomePage";
 import Passbook from "../Components/Passbook";
 const Router = () => {
-  const isLoggedin = true;
+  const isLoggedin = false;
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />
@@ -73,7 +73,7 @@ const Router = () => {
           </PrivateRoute>
         }
       ></Route>
-         <Route
+      <Route
         path="tabs/reports"
         element={
           <PrivateRoute>
@@ -81,7 +81,6 @@ const Router = () => {
           </PrivateRoute>
         }
       ></Route>
-   
     </Routes>
   );
 };
