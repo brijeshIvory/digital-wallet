@@ -9,6 +9,8 @@ import { RxAvatar } from "react-icons/rx";
 import Header from "../Header/index";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Register from "../Register";
+import Login from "../Login";
 
 function NewHomePage({ isLoggedin }) {
   const data = [
@@ -92,6 +94,14 @@ function NewHomePage({ isLoggedin }) {
             <RxAvatar />
           </div>
         </div> */}
+        <Register
+          open={openJoinNow["bottom"]}
+          toggleJoinNowDrawer={toggleJoinNowDrawer}
+        />
+        <Login
+          open={openLogin["bottom"]}
+          toggleLoginDrawer={toggleLoginDrawer}
+        />
         <div className="new-home-page-balance">
           <div className="new-home-page-balance-title">Total Balance</div>
           <div className="new-home-page-balance-money">50000</div>
@@ -126,8 +136,8 @@ function NewHomePage({ isLoggedin }) {
           <div style={{ color: "#595858" }}>See All</div>
         </div>
         <div className="latest-transaction-data">
-          {data.map((ele) => (
-            <div className="latest-transaction-single-data">
+          {data.map((ele, idx) => (
+            <div className="latest-transaction-single-data" key={idx}>
               <div>
                 <div className="latest-transaction-date">{ele.Date}</div>
                 <div className="latest-transaction-party">{ele.to}</div>
