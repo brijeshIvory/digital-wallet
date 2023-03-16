@@ -5,13 +5,16 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import { Link } from "react-router-dom";
 
 function Profile() {
   return (
     <div className="profile">
       <div className="profile_top">
         <div className="profile_top_sub">
+          <Link to={"/"}>
           <ArrowCircleLeftIcon />
+          </Link>
           <div className="profile_title">Profile</div>
         </div>
       </div>

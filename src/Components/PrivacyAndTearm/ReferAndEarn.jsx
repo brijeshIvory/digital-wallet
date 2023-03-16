@@ -18,9 +18,9 @@ function ReferAndEarn() {
     <div className="refer-and-earn_body">
     <div className="refer_and_earn_bottom">
         <div className="refer_and_earn_user_detail">
-          <div class="refer_and_earn_user_info">
-            <p class="refer_and_earn_user_name">Refer Code:</p>
-            <p class="refer_and_earn_user_code">76VZJC</p>
+          <div className="refer_and_earn_user_info">
+            <p className="refer_and_earn_user_name">Refer Code:</p>
+            <p className="refer_and_earn_user_code">76VZJC</p>
           </div>
         </div>
      <Button sx={{backgroundColor:"#fff",color:"#5ab5ee"}} fullWidth>Copy To Share</Button>

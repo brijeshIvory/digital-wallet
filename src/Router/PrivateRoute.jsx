@@ -4,7 +4,7 @@ import React from "react";
 import Login from "../Components/Login";
 
 function PrivateRoute({ children }) {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   return isAuthenticated ? (
     <Dashboard children={children} />
   ) : (

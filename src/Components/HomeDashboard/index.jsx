@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import './index.scss'
-import loginButton from '../../assets/img/loginButton.png'
-import JoinNow from '../../assets/img/joinnow.png'
-import Poster from '../../assets/img/banner-06792F54-BB30-4D3E-8EEB-9565ED4B1C92.jpeg'
-import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined'
-import KeyboardDoubleArrowUpOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowUpOutlined'
-import Drawer from '@mui/material/Drawer'
-import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
-import Register from '../Register'
-import Login from '../Login'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import Header from '../Header'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import "./index.scss";
+import loginButton from "../../assets/img/loginButton.png";
+import JoinNow from "../../assets/img/joinnow.png";
+import Poster from "../../assets/img/banner-06792F54-BB30-4D3E-8EEB-9565ED4B1C92.jpeg";
+import KeyboardDoubleArrowDownOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowDownOutlined";
+import KeyboardDoubleArrowUpOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowUpOutlined";
+import Drawer from "@mui/material/Drawer";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+import Register from "../Register";
+import Login from "../Login";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import Header from "../Header";
+import { Link } from "react-router-dom";
 function HomeDashboard({ isLoggedin }) {
   const [openJoinNow, setOpenJoinNow] = useState({
     bottom: false,
@@ -68,8 +68,7 @@ function HomeDashboard({ isLoggedin }) {
           <div className="deposit">
             <div className="deposit_title">DEPOSIT</div>
             <Link to={"deposit"}>
-            
-            <KeyboardDoubleArrowUpOutlinedIcon sx={{ color: 'white' }} />
+              <KeyboardDoubleArrowUpOutlinedIcon sx={{ color: "white" }} />
             </Link>
           </div>
           <div className="deposit_withdraw_login"></div>
@@ -80,27 +79,10 @@ function HomeDashboard({ isLoggedin }) {
         </div>
       </div>
 
-      <Drawer
-        anchor={"bottom"}
+      <Register
         open={openJoinNow["bottom"]}
-        className="joinNowFrom"
-      >
-        <div className="yellow_strip"></div>
-        <div className="closing">
-          <div
-            className="closing_button"
-            onClick={toggleJoinNowDrawer("bottom", false)}
-          >
-            <HighlightOffSharpIcon />
-          </div>
-        </div>
-
-        <div className="register_form">
-          <div className="register_form_title">REGISTER</div>
-          <Register />
-        </div>
-      </Drawer>
-
+        toggleJoinNowDrawer={toggleJoinNowDrawer}
+      />
       <Login open={openLogin["bottom"]} toggleLoginDrawer={toggleLoginDrawer} />
 
       <div className="loginReg_bottom">
