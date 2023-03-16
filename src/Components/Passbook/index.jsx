@@ -46,7 +46,7 @@ function Passbook() {
   const arr = ["1", "2", " 3", "4"];
 const dispatch=useDispatch()
 const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
-console.log(ClientList,"ClientList")
+
   // const selectStartDate = (e) => {
   //   setInputValue({ ...inputValue, startDate: e.target.value });
   // };

@@ -67,7 +67,7 @@
   text-align: center;
 }
 .deposit_details-balance {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   hr {
     border: none;
@@ -96,6 +96,20 @@
     border-bottom: none;
   }
 }
+
+.deposit-amount-input {
+  width: 100%;
+  height: 3.5rem;
+  border-width: 0;
+  outline: none;
+  border-radius: 8px;
+  background-color: #252424;
+  padding: 1rem;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+// pyament method
 .Payment_method_main {
   height: 100vh;
   display: flex;
@@ -216,8 +230,6 @@
 }
 
 // Payment Deatils
-
-
 
 .Payment_detail {
   display: flex;

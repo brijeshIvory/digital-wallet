@@ -38,3 +38,10 @@ export const HawalaTransferValidationSchema = Yup.object({
     amount: Yup.string().required('Amount is required'),
     screenshot: Yup.string().required('ScreenShot is required'),
 });
+export const DepositeAmountValidationSchema = Yup.object({
+    amount: Yup.number()
+    .required("Coins is Required")
+    .max(10000000, "To big")
+    .min(10, "To small")
+    .min(0, "Not negative number")
+});

@@ -1,17 +1,17 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import OfferPage from "../Components/Offer";
-import ReferAndEarn from "../Components/PrivacyAndTearm/ReferAndEarn";
-import Profile from "../Components/Profile";
-import WithdrawalDetail from "../Components/WithdrawalDetail/index";
-import PrivateRoute from "./PrivateRoute";
-import WalletTransfer from "../Components/WalletTransfer/";
-import Deposit from "../Components/Deposit";
-import DepositPaymentMethhod from "../Components/Deposit/DepositPaymentMethhod";
-import NewHomePage from "../Components/NewHomePage";
-import Passbook from "../Components/Passbook";
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import OfferPage from '../Components/Offer'
+import ReferAndEarn from '../Components/PrivacyAndTearm/ReferAndEarn'
+import Profile from '../Components/Profile'
+import WithdrawalDetail from '../Components/WithdrawalDetail/index'
+import PrivateRoute from './PrivateRoute'
+import WalletTransfer from '../Components/WalletTransfer/'
+import Deposit from '../Components/Deposit'
+import DepositPaymentMethhod from '../Components/Deposit/DepositPaymentMethhod'
+import NewHomePage from '../Components/NewHomePage'
+import Passbook from '../Components/Passbook'
 const Router = () => {
-  const isLoggedin = true;
+  const isLoggedin = true
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />
@@ -66,7 +66,7 @@ const Router = () => {
         }
       ></Route>
       <Route
-        path="choose-payment-method"
+        path="choose-payment-method/:coins"
         element={
           <PrivateRoute>
             <DepositPaymentMethhod />
@@ -82,7 +82,7 @@ const Router = () => {
         }
       ></Route>
     </Routes>
-  );
-};
+  )
+}
 
-export default Router;
+export default Router

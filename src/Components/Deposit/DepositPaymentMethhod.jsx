@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import { experimentalStyled as styled } from '@mui/material/styles'
 import { Avatar, Box, Paper, Grid } from '@mui/material'
@@ -11,7 +11,7 @@ import './style.scss'
 import PaymentDetail from './PaymentDetail'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import {GetHawalaList} from '../../App/Redux/Actions/HavalaListAction'
+import { GetHawalaList } from '../../App/Redux/Actions/HavalaListAction'
 import { GetDepositDetail } from '../../App/Redux/Actions/DepositeAction'
 const Item = styled(Paper)(({ theme }) => ({
   padding: '0.5rem',
@@ -21,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const DepositPaymentMethhod = () => {
   const [isBackground, setIsBackground] = useState('')
-  const dispatch =useDispatch()
+  const amount = window.location.pathname.split('/')[2]
   return (
     <>
       <div className="Payment_method_head">
@@ -38,7 +38,7 @@ const DepositPaymentMethhod = () => {
             <h3> Choose your payment method </h3>
           </div>
           <div className="subtitle">
-            Make Payment of 100/- and upload screenshot.
+            Make Payment of {amount}/- and upload screenshot.
           </div>
 
           <div className="image_box">
