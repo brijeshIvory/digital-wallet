@@ -81,7 +81,8 @@ const Router = () => {
             <Passbook />
           </PrivateRoute>
         }
-      />
+      ></Route>
+   
     </Routes>
   );
 };

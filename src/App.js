@@ -4,6 +4,10 @@ function App() {
   return (
     <div className="app">
       <Router />
+      <Footer />
+      {/* <CreateID /> */}
+      {/* <Passbook /> */}
+      {/* <ThirdPartyTransaction /> */}
     </div>
   );
 }
