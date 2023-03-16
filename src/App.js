@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="app">
       <Router />
-      <Footer />
+      {/* <Footer /> */}
       {/* <CreateID /> */}
       {/* <Passbook /> */}
       {/* <ThirdPartyTransaction /> */}
