@@ -1,4 +1,4 @@
-import { GetCountryApi } from "../../api/countryApi";
+import { GetCountryApi } from "../../api/WalletApi";
 import { call, all, takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../Actions/actionsType";
 function* getCountries() {
