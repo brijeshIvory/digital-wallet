@@ -26,3 +26,13 @@ export const GET_CLIENT_LIST_FAIL = "GET_CLIENT_LIST_FAIL";
 export const DEPOSIT_DETAIL = "DEPOSIT_DETAIL";
 export const GET_DEPOSIT_DETAIL_SUCCESS = "GET_DEPOSIT_DETAIL_SUCCESS";
 export const GET_DEPOSIT_DETAIL_FAIL = "GET_CLIENT_LIST_FAIL";
+
+// empty user state after submit of otp
+
+export const EMPTY_USER = "EMPTY_USER";
+
+//send otp after success login
+
+export const SEND_OTP = "SEND_OTP";
+export const SEND_OTP_SUCCESS = "SEND_OTP_SUCCESS";
+export const SEND_OTP_FAIL = "SEND_OTP_FAIL";

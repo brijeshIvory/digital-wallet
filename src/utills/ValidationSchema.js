@@ -49,23 +49,14 @@ export const RegistationValidationSchema = yup.object({
       "Invalid email address"
     )
     .required("Required !"),
-  country: yup.string().required("Required !"),
+  country_code: yup.string().required("Required !"),
 
   phone: yup.string().required("Required !"),
   password: yup.string().required("Required !"),
-  // .min(8, "Must be 8 characters or more")
-  // .matches(/[a-z]+/, "One lowercase character")
-  // .matches(/[A-Z]+/, "One uppercase character")
-  // .matches(/[@$!%*#?&]+/, "One special character(@$!%*#?&)")
-  // .matches(/\d+/, "One number"),
 
-  confirmPassword: yup.string().required("Required !"),
-  //   when("password", {
-  //     is: (val) => (val && val.length > 0 ? true : false),
-  //     then: yup
-  //       .string()
-  //       .oneOf([yup.ref("password")], "password need to be the same"),
-  //   }),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 export const DepositeAmountValidationSchema = yup.object({
   amount: yup

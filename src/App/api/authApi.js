@@ -1,5 +1,7 @@
 import axios from "axios";
-const base_url = process.env.REACT_BASE_URL;
+// const base_url = process.env.REACT_BASE_URL;
+const base_url = "https://paindustry.in/booky/api";
+console.log(base_url, "baseurl");
 
 export function* UserRegistrationApi(registratedData) {
   const registration = yield axios
@@ -27,4 +29,20 @@ export function* UserLoginApi(loggedData) {
     });
 
   return login;
+}
+
+export function* SendOtpApi(payload) {
+  const otp = yield axios
+    .post(`${base_url}/otpsend`, payload)
+    .then(function (response) {
+      console.log(response, "otp sent");
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error, "error in sending otp");
+
+      return error.response;
+    });
+
+  return otp;
 }

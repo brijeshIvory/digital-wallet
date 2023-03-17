@@ -1,11 +1,8 @@
 import * as actionType from "../Actions/actionsType";
 const initialState = {
-  users: {
-    data: null,
-    error: null,
-    status: "idle",
-    isLoading: false,
-  },
+  data: null,
+  error: null,
+  isLoading: false,
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -13,32 +10,34 @@ const AuthReducer = (state = initialState, action) => {
     case actionType.USER_REGISTRATION:
       return {
         ...state,
-        users: {
-          error: null,
-          data: [],
-          status: "loading",
-          isLoading: true,
-        },
+
+        error: null,
+        data: [],
+        isLoading: true,
       };
     case actionType.USER_REGISTRATION_SUCCESS:
       return {
         ...state,
-        users: {
-          error: null,
-          data: action?.regData,
-          status: "success",
-          isLoading: false,
-        },
+
+        error: null,
+        data: action?.regData,
+        isLoading: false,
       };
     case actionType.USER_REGISTRATION_FAIL:
       return {
         ...state,
-        users: {
-          error: action?.regErrData,
-          data: [],
-          status: "fail",
-          isLoading: false,
-        },
+
+        error: action?.regErrData,
+        data: [],
+        isLoading: false,
+      };
+    case actionType.EMPTY_USER:
+      return {
+        ...state,
+
+        error: null,
+        data: null,
+        isLoading: false,
       };
     default:
       return state;

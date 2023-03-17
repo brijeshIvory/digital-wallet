@@ -25,3 +25,59 @@
     font-size: 12px;
   }
 }
+
+.mobile-number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.country-input {
+  flex: 0.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 2rem;
+    overflow: scroll;
+  }
+  .MuiInputLabel-root {
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+  .MuiSelect-icon {
+    color: #fff;
+  }
+}
+.number-input {
+  flex: 0.8;
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+  }
+  .MuiInputLabel-root {
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
+}
+.mobile-number-label {
+  font-size: 12px;
+}
