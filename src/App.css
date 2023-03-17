@@ -22,3 +22,9 @@
     text-decoration: none;
     transition: all 0.3s;
   }
+  .error_text {
+    font-size: 12px;
+    color: red;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }

@@ -1,5 +1,14 @@
 import * as yup from "yup";
-
+export const loginValidationSchema = yup.object({
+  phone: yup
+    .string()
+    .matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
+      message: "Invalid Indian number",
+      excludeEmptyString: false,
+    })
+    .required("A phone number is required"),
+  password: yup.string().required("Password is required"),
+});
 export const BankTransferValidationSchema = yup.object({
   bankname: yup.string().required("Bank Name is required"),
   accountnumber: yup.string().required("Account Number is required"),
@@ -57,4 +66,12 @@ export const RegistationValidationSchema = yup.object({
   //       .string()
   //       .oneOf([yup.ref("password")], "password need to be the same"),
   //   }),
+});
+export const DepositeAmountValidationSchema = yup.object({
+  amount: yup
+    .number()
+    .required("Coins is Required")
+    .max(10000000, "To big")
+    .min(10, "To small")
+    .min(0, "Not negative number"),
 });
