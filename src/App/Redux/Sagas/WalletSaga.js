@@ -1,6 +1,24 @@
-import { GetHawalaListApi ,GetClientListApi} from '../../api/WalletApi'
+import { GetHawalaListApi ,GetClientListApi, GetCountryApi} from '../../api/WalletApi'
 import { call, all, takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../Actions/actionsType";
+
+function* getCountries() {
+    const countries = yield call(GetCountryApi);
+  
+    if (countries?.status === 200) {
+      yield put({
+        type: actionType.GET_COUNTRY_SUCCESS,
+        countries,
+      });
+    } else {
+      yield put({
+        type: actionType.GET_COUNTRY_FAIL,
+        countriesErrData: countries,
+      });
+    }
+  }
+  
+
 function* GetHawalaListsaga() {
   const hawalaList = yield call(GetHawalaListApi);
 
@@ -34,9 +52,10 @@ function* GetClientListsaga() {
   }
 }
 
-function* HawalaSaga() {
+function* WalletSaga() {
+    yield all([takeEvery(actionType.GET_COUNTRY, getCountries)]);
   yield all([takeEvery(actionType.HAWALA_LIST, GetHawalaListsaga)]);
   yield all([takeEvery(actionType.CLIENT_LIST, GetClientListsaga)]);
 
 }
-export default HawalaSaga;
+export default WalletSaga;

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import './style.scss'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { useSelector } from 'react-redux'
-import { GetHawalaList } from '../../App/Redux/Actions/HavalaListAction'
-import { useDispatch } from 'react-redux'
 import {
+  GetHawalaList,
   GetDepositDetail,
   RequestDeposite,
-} from '../../App/Redux/Actions/DepositeAction'
+} from '../../App/Redux/Actions/WalletActions'
+import { useDispatch } from 'react-redux'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import ContentCopySharpIcon from '@mui/icons-material/ContentCopySharp'
 import { toast } from 'react-toastify'

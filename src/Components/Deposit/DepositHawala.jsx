@@ -7,11 +7,8 @@ import { HawalaTransferValidationSchema } from '../../utills/ValidationSchema'
 import MenuItem from '@mui/material/MenuItem'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useSelector } from 'react-redux'
-import { GetHawalaList } from '../../App/Redux/Actions/HavalaListAction'
+import { GetHawalaList,RequestDeposite } from '../../App/Redux/Actions/WalletActions'
 import { useDispatch } from 'react-redux'
-import {
-  RequestDeposite,
-} from '../../App/Redux/Actions/DepositeAction'
 import { toast } from 'react-toastify'
 import { InputLabel } from '@mui/material'
 

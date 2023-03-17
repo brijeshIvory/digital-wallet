@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Register from "../Register";
 import Login from "../Login";
-import { getCountriesData } from "../../App/Redux/Actions/CountryAction";
+import { getCountriesData } from "../../App/Redux/Actions/WalletActions";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
