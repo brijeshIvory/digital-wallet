@@ -12,7 +12,6 @@ import './style.scss'
 import PaymentDetail from './PaymentDetail'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import ReferalCodeDialog from '../ReferralPopup/ReferralPopup'
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: '0.5rem',

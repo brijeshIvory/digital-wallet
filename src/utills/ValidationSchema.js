@@ -74,3 +74,12 @@ export const DepositeAmountValidationSchema = yup.object({
     .min(10, "To small")
     .min(0, "Not negative number"),
 });
+export const withdraweAmountValidationSchema = yup.object({
+  withdraw_amount: yup
+    .number()
+    .required("Coins is Required")
+    .max(10000000, "To big")
+    .min(10, "To small")
+    .min(0, "Not negative number"),
+});
+

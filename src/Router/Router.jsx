@@ -5,7 +5,7 @@ import ReferAndEarn from '../Components/PrivacyAndTearm/ReferAndEarn'
 import Profile from '../Components/Profile'
 import WithdrawalDetail from '../Components/WithdrawalDetail/index'
 import PrivateRoute from './PrivateRoute'
-import WalletTransfer from '../Components/WalletTransfer/'
+import Withdrawal from '../Components/Withdrawal/index'
 import Deposit from '../Components/Deposit'
 import DepositPayment from '../Components/Deposit/DepositPayment'
 import NewHomePage from '../Components/NewHomePage'
@@ -33,7 +33,7 @@ const Router = () => {
         }
       />
       <Route
-        path="bank-details"
+        path="bank-details/:coins"
         element={
           <PrivateRoute>
             <WithdrawalDetail />
@@ -41,10 +41,10 @@ const Router = () => {
         }
       ></Route>
       <Route
-        path="wallet-to-wallet"
+        path="withdrawal"
         element={
           <PrivateRoute>
-            <WalletTransfer />
+            <Withdrawal />
           </PrivateRoute>
         }
       ></Route>

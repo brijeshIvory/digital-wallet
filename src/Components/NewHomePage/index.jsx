@@ -120,7 +120,7 @@ const userdetailpaylod={
         </div>
         <div className="new-home-page-buttons">
           <div className="new-home-page-button-main">
-              <Link to={"wallet-to-wallet"}>
+              <Link to={"withdrawal"}>
             <div className="new-home-page-button">
               <BiMoneyWithdraw />
             </div>

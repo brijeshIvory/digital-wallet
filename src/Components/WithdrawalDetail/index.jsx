@@ -25,25 +25,16 @@ const [UpiFormOpen,setUpiFormOpen]=useState(false)
 const [HawalaiFormOpen,setHawalaiFormOpen]=useState(false)
 
   return (
-    <>
-    <div className="withdrawal">
-      <div className="withdrawal_top">
-        <Toolbar style={{ marginTop: '1rem', marginLeft: '1rem' }}>
+    <div className="withdrawal_main">
+      <div className="withdrawal_head">
+        <div className="withdrawal_title">
           <Link to={'/'}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
-            </IconButton>
+            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
           </Link>
-          <h1 className="title"> Withdrawal Details </h1>
-        </Toolbar>
+          <div className="withdrawal_subtitle">Payment Method</div>
+        </div>
       </div>
-      <div className="withdrawal_bottom">
+        <div className="withdrawal_bottom">
         <div className="withdrawal_user_detail">
           <div className="withdrawal_user_info">
             <p className="withdrawal_user_name">Kartik</p>
@@ -97,13 +88,12 @@ const [HawalaiFormOpen,setHawalaiFormOpen]=useState(false)
           </div>
         </div>
       </div>
-    </div>
     <BankTransfer bankFormOpen={bankFormOpen} setBankFormOpen={setBankFormOpen}/>
     <PaytmTransfer PaytmFormOpen={PaytmFormOpen} setPaytmFormOpen={setPaytmFormOpen}/>
     <GooglePayTransfer GooglePayFormOpen={GooglePayFormOpen} setGooglePayFormOpen={setGooglePayFormOpen}/>
     <PhonePayTransfer PhonePeFormOpen={PhonePeFormOpen} setPhonePeFormOpen={setPhonePeFormOpen}/>
     <HawalaTransfer HawalaiFormOpen={HawalaiFormOpen} setHawalaiFormOpen={setHawalaiFormOpen}/>
-    </>
+    </div>
   )
 }
 
