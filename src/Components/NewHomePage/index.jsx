@@ -11,13 +11,13 @@ import { useState } from "react";
 import Register from "../Register";
 import Login from "../Login";
 import { getCountriesData } from "../../App/Redux/Actions/WalletActions";
-import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function NewHomePage({ isLoggedin }) {
   const dispatch = useDispatch();
-
+  const WalletBalance= useSelector((state) => state?.wallet?.wallet_bal?.balance)
+ 
   const data = [
     {
       to: "Party1",
@@ -67,11 +67,7 @@ function NewHomePage({ isLoggedin }) {
 
     setOpenLogin({ ...openLogin, [anchor]: open });
   };
-  const userdetailpaylod = {
-    id: 3,
-  };
   useEffect(() => {
-    dispatch(GetUserDetails(userdetailpaylod));
     dispatch(getCountriesData());
   }, []);
 
@@ -117,7 +113,7 @@ function NewHomePage({ isLoggedin }) {
         />
         <div className="new-home-page-balance">
           <div className="new-home-page-balance-title">Total Balance</div>
-          <div className="new-home-page-balance-money">50000</div>
+          <div className="new-home-page-balance-money">{WalletBalance? WalletBalance : 0}</div>
         </div>
         <div className="new-home-page-buttons">
           <div className="new-home-page-button-main">

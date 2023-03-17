@@ -1,11 +1,15 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './style.scss'
 import TextField from '@mui/material/TextField'
 import Drawer from '@mui/material/Drawer'
 import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
 import { useFormik } from 'formik'
 import { BankTransferValidationSchema } from '../../utills/ValidationSchema'
+import { useSelector } from 'react-redux'
 function BankTransfer({ bankFormOpen, setBankFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
+
   const formik = useFormik({
     initialValues: {
       bankname: '',
@@ -15,6 +19,12 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
     },
     validationSchema: BankTransferValidationSchema,
     onSubmit: (values) => {
+      const PayloadData = {
+        notes: `${'BankTransfer'},${values.bankname},${values.accountnumber},${values.ifsccode},${values.accountholdername}`,
+        amount: amount,
+        // image: previewUrl,
+        user_id: userId
+      }
       console.log(JSON.stringify(values, null, 2))
     },
   })

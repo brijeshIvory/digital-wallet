@@ -13,8 +13,10 @@ import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navbar({ open, setOpen }) {
+  const WalletBalance= useSelector((state) => state?.wallet?.wallet_bal?.balance)
   const list1 = [
     {
       name: "Profile",
@@ -70,7 +72,7 @@ function Navbar({ open, setOpen }) {
         <div className="navbar_monumber">+917867854445</div>
         <Divider />
         <div className="walletBalancetitle">Wallet Balance</div>
-        <div className="walletBalance">0</div>
+        <div className="walletBalance">{WalletBalance? WalletBalance : 0}</div>
       </div>
       <div className="navbar_body">
         <div>

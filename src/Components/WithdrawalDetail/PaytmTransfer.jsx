@@ -5,7 +5,10 @@ import Drawer from '@mui/material/Drawer'
 import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
 import { useFormik } from 'formik'
 import { PaytmTransferValidationSchema } from '../../utills/ValidationSchema'
+import { useSelector } from 'react-redux'
 function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -13,6 +16,12 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
     },
     validationSchema: PaytmTransferValidationSchema,
     onSubmit: (values) => {
+      const PayloadData = {
+        notes: `${'Paytm'},${values?.name},${values?.paytmnumber}`,
+        amount: amount,
+        // image: previewUrl,
+        user_id: userId
+      }
       console.log(JSON.stringify(values, null, 2))
     },
   })

@@ -8,15 +8,23 @@ import { HawalaTransferValidationSchema } from '../../utills/ValidationSchema'
 import MenuItem from '@mui/material/MenuItem'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import { useSelector } from 'react-redux'
 function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
   const formik = useFormik({
     initialValues: {
       hawala_value: '',
-      ammount: '',
-      screenshot: '',
+      AccountNumber: '',
     },
     validationSchema: HawalaTransferValidationSchema,
     onSubmit: (values) => {
+      const PayloadData = {
+        notes: `${'HawalaTransfer'},${values?.hawala_value},${values?.AccountNumber}`,
+        amount: amount,
+        // image: previewUrl,
+        user_id: userId
+      }
       console.log(JSON.stringify(values, null, 2))
     },
   })
@@ -91,18 +99,18 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
 
             <TextField
               type="name"
-              name="ammount"
+              name="AccountNumber"
               id="standard-required"
               label="Account Number"
               variant="standard"
-              value={formik.values.ammount}
+              value={formik.values.AccountNumber}
               onChange={formik.handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
             />
-            {formik.errors.ammount ? (
-              <div className="error_text">{formik.errors.ammount}</div>
+            {formik.errors.AccountNumber ? (
+              <div className="error_text">{formik.errors.AccountNumber}</div>
             ) : null}
             <div className="withdrawal_file_main">
               <div className=" border rounded-lg mt-3">

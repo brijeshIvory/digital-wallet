@@ -4,7 +4,7 @@ function Dashboard({children}) {
 
   return (
       <Container
-        fluid
+        // fluid
         sx={{paddingLeft:0, paddingRight:0}}
       >
         {children}

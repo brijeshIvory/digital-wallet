@@ -5,7 +5,10 @@ import Drawer from '@mui/material/Drawer'
 import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
 import { useFormik } from 'formik'
 import { PhonePayTransferValidationSchema } from '../../utills/ValidationSchema'
+import { useSelector } from 'react-redux'
 function PhonePayTransfer({ PhonePeFormOpen, setPhonePeFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -13,6 +16,12 @@ function PhonePayTransfer({ PhonePeFormOpen, setPhonePeFormOpen }) {
     },
     validationSchema: PhonePayTransferValidationSchema,
     onSubmit: (values) => {
+      const PayloadData = {
+        notes: `${'PhonePe'},${values?.name},${values?.phonepenumber}`,
+        amount: amount,
+        // image: previewUrl,
+        user_id: userId
+      }
       console.log(JSON.stringify(values, null, 2))
     },
   })

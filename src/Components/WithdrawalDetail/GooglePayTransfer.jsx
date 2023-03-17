@@ -5,7 +5,10 @@ import Drawer from '@mui/material/Drawer'
 import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
 import { useFormik } from 'formik'
 import { GooglePayTransferValidationSchema } from '../../utills/ValidationSchema'
+import { useSelector } from 'react-redux'
 function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -13,6 +16,12 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
     },
     validationSchema: GooglePayTransferValidationSchema,
     onSubmit: (values) => {
+       const PayloadData = {
+        notes: `${'GooglePay'},${values?.name},${values?.googlepaynumber}`,
+        amount: amount,
+        // image: previewUrl,
+        user_id: userId
+      }
       console.log(JSON.stringify(values, null, 2))
     },
   })
