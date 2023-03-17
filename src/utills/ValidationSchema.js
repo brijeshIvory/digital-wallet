@@ -35,8 +35,7 @@ export const UpiTransferValidationSchema = yup.object({
 });
 export const HawalaTransferValidationSchema = yup.object({
   hawala_value: yup.string().required("Hawala Selection is required."),
-  amount: yup.string().required("Amount is required"),
-  screenshot: yup.string().required("ScreenShot is required"),
+  AccountNumber: yup.string().required("Account Number is required")
 });
 
 export const RegistationValidationSchema = yup.object({

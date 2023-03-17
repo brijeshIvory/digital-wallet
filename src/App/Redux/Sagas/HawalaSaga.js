@@ -28,7 +28,7 @@ function* GetClientListsaga() {
     });
   } else {
     yield put({
-      type: actionType.GET_HAWALA_LIST_FAIL,
+      type: actionType.GET_CLIENT_LIST_FAIL,
       ErrData: data,
     });
   }

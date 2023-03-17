@@ -1,4 +1,4 @@
-import { GetDepositDetailApi } from '../../api/DepositApi'
+import { GetDepositDetailApi, RequestDepositApi } from '../../api/DepositApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
 function* GetDepositDetailSaga() {
@@ -18,7 +18,25 @@ function* GetDepositDetailSaga() {
   }
 }
 
+
+function* RequestDepositeSaga(payload) {
+  const { depositData } = payload;
+  const depositDetail = yield call(RequestDepositApi,depositData)
+  if (depositDetail?.status === 201) {
+    yield put({
+      type: actionType.REQUEST_DEPOSIT_SUCCESS,
+      depositDetail,
+    });
+  } else {
+    yield put({
+      type: actionType.REQUEST_DEPOSIT_FAIL,
+      ErrData: depositDetail,
+    });
+  }
+}
+
 function* DepositSaga() {
   yield all([takeEvery(actionType.DEPOSIT_DETAIL, GetDepositDetailSaga)])
+  yield all([takeEvery(actionType.REQUEST_DEPOSIT, RequestDepositeSaga)])
 }
 export default DepositSaga
