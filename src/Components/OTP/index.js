@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { emptyUser } from "../../App/Redux/Actions/AuthActions";
 import { useState } from "react";
 import { useEffect } from "react";
-import { sendOtp } from "../../App/Redux/Actions/AuthActions";
+import { sendOtp, verifyOtp } from "../../App/Redux/Actions/AuthActions";
 import OtpInput from "react18-input-otp";
 import "./index.scss";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -14,10 +14,15 @@ function Otp() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.data);
+  const otpVarificationStatus = useSelector(
+    (state) => state?.user?.otpVerification?.data?.ok
+  );
+
   const handleChange = (enteredOtp) => {
     setOtp(enteredOtp);
   };
   useEffect(() => {
+    otpVarificationStatus && setOpen(false);
     if (user) {
       setOpen(true);
 
@@ -28,9 +33,8 @@ function Otp() {
     } else {
       setOpen(false);
     }
-  }, [user]);
+  }, [user, otpVarificationStatus]);
 
-  console.log(user, "user");
   return (
     <Dialog open={open} className="otp-input">
       <div className="close-icon-div">
@@ -49,8 +53,14 @@ function Otp() {
       />
       <button
         onClick={() => {
+          dispatch(
+            verifyOtp({
+              id: user[0]?.id,
+              otp: Number(otp),
+            })
+          );
+
           dispatch(emptyUser());
-          console.log(otp, "otp");
         }}
       >
         Confirm OTP

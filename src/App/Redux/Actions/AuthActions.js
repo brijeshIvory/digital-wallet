@@ -9,7 +9,7 @@ export const loginClick = (payload) => {
 export const GetUserDetails = (payload) => {
   return {
     type: actionType.GET_USER_DETAILS,
-    userdetailData:payload
+    userdetailData: payload,
   };
 };
 export const registrationClick = (payload) => {
@@ -34,9 +34,7 @@ export const sendOtp = (payload) => {
 
 export const verifyOtp = (payload) => {
   return {
-    type: actionType.SEND_OTP,
+    type: actionType.VERIFY_OTP,
     otpData: payload,
   };
 };
-    
-

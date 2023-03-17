@@ -244,10 +244,10 @@ function Register({ open, toggleJoinNowDrawer }) {
               <div className="error_text">{formik.errors.confirmPassword}</div>
             ) : null}
 
-            <div className="acceptance">
+            {/* <div className="acceptance">
               <input type="checkbox" />
               <div>I've read and accept the </div>
-            </div>
+            </div> */}
             <div className="button_div">
               <button
                 className="loginbutton"

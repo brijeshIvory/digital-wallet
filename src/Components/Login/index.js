@@ -1,55 +1,75 @@
-import React, { useState } from 'react'
-import './index.scss'
-import TextField from '@mui/material/TextField'
-import { InputAdornment } from '@mui/material'
-import { IconButton } from '@mui/material'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import Drawer from '@mui/material/Drawer'
-import { MuiTelInput } from 'mui-tel-input'
-import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
-import ForgotPassword from '../Forgot password'
-
-import { useFormik } from 'formik'
-import { useDispatch } from 'react-redux'
-import { loginValidationSchema } from '../../utills/ValidationSchema'
+import React, { useState } from "react";
+import "./index.scss";
+import TextField from "@mui/material/TextField";
+import { InputAdornment, Select } from "@mui/material";
+import { IconButton } from "@mui/material";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import Drawer from "@mui/material/Drawer";
+import { MuiTelInput } from "mui-tel-input";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+import ForgotPassword from "../Forgot password";
+import MenuItem from "@mui/material/MenuItem";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { loginValidationSchema } from "../../utills/ValidationSchema";
+import { loginClick } from "../../App/Redux/Actions/AuthActions";
+import { useEffect } from "react";
 function Login({ open, toggleLoginDrawer }) {
-  const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [selectCountry, setSelectCountry] = useState({
+    country: 101,
+    country_code: 91,
+  });
+
+  const [indication, setIndication] = useState(false);
+  const [openForgotPassPopup, setOpenForgotPassPopup] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
+
+  const countries = useSelector((state) => state?.country?.countries?.data);
+  const token = useSelector(
+    (state) => state?.user?.loginData?.data?.data[0]?.token
+  );
 
   const formik = useFormik({
     initialValues: {
-      phone: '',
-      password: '',
+      phone: "",
+      password: "",
+      country_code: 91,
     },
     onSubmit: (values) => {
-      setLoading(true)
-      const username = values.email
-      const password = values.password
-
-      // doSignInWithEmailAndPassword(username, password)
-      //   .then(async (userCredential) => doSiginIn(userCredential.user))
-      //   .catch((error) => showErrorToast(error.code))
-      //   .finally(() => setLoading(false));
+      console.log(values, "login value");
+      dispatch(
+        loginClick({
+          phone: values.phone,
+          password: values.password,
+        })
+      );
     },
     validationSchema: loginValidationSchema,
-  })
-  const [value, setValue] = useState('+91')
-  const [openForgotPassPopup, setOpenForgotPassPopup] = useState(false)
-  const handleChange = (newValue) => {
-    setValue(newValue)
-  }
-  const [showPassword, setShowPassword] = useState(false)
-  const handleClickShowPassword = () => setShowPassword(!showPassword)
-  const handleMouseDownPassword = () => setShowPassword(!showPassword)
+  });
 
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      setShowPassword(!showPassword);
+      return;
+    }
+    setPasswordType("password");
+    setShowPassword(!showPassword);
+  };
+  useEffect(() => {
+    token !== undefined && localStorage.setItem("token", token);
+  }, [token]);
   return (
-    <Drawer anchor={'bottom'} open={open} className="joinNowFrom">
+    <Drawer anchor={"bottom"} open={open} className="joinNowFrom">
       <div className="yellow_strip"></div>
       <div className="closing">
         <div
           className="closing_button"
-          onClick={toggleLoginDrawer('bottom', false)}
+          onClick={toggleLoginDrawer("bottom", false)}
         >
           <HighlightOffSharpIcon />
         </div>
@@ -60,28 +80,64 @@ function Login({ open, toggleLoginDrawer }) {
 
         <div className="form_container">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
-            <MuiTelInput
-              required
-              type="text"
-              id="standard-required"
-              label="Phone Number"
-              variant="standard"
-              name="phone"
-              value={value}
-              onChange={handleChange}
-            />
-            {/* <TextField
-              required
-              type="email"
-              id="standard-required"
-              label="Email Id"
-              variant="standard"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            /> */}
+            <div className="mobile-number-label">Phone Number</div>
+            <div className="mobile-number">
+              <div className="country-input">
+                <Select
+                  id="country-input"
+                  select
+                  label="Select Country"
+                  variant="standard"
+                  name="country_code"
+                  renderValue={() => selectCountry.country_code}
+                  value={formik.values.country_code}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                >
+                  {countries?.map((ele, index) => (
+                    <MenuItem
+                      value={ele.phonecode}
+                      key={index}
+                      onClick={() => {
+                        formik.values.country = ele.id;
+                        setSelectCountry({
+                          country: ele.id,
+                          country_code: ele.phonecode,
+                        });
+                      }}
+                    >
+                      {ele.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+
+                {indication && formik.errors.country ? (
+                  <div className="error_text">{formik.errors.country}</div>
+                ) : null}
+              </div>
+              <div className="number-input">
+                <TextField
+                  type="number"
+                  id="number-input"
+                  variant="standard"
+                  name="phone"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {indication && formik.errors.phone ? (
+                  <div className="error_text">{formik.errors.phone}</div>
+                ) : null}
+              </div>
+            </div>
+
             <TextField
-              type="password"
+              type={passwordType}
+              name="password"
+              id="standard-required"
               label="Password"
               variant="standard"
               InputLabelProps={{
@@ -92,35 +148,37 @@ function Login({ open, toggleLoginDrawer }) {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
+                      onClick={togglePassword}
                     >
                       {showPassword ? (
-                        <VisibilityIcon sx={{ color: 'white' }} />
+                        <VisibilityIcon sx={{ color: "white" }} />
                       ) : (
-                        <VisibilityOffIcon sx={{ color: 'white' }} />
+                        <VisibilityOffIcon sx={{ color: "white" }} />
                       )}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
-              id="password"
-              name="password"
               value={formik.values.password}
-              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
-            {formik.errors.password ? (
+            {indication && formik.errors.password ? (
               <div className="error_text">{formik.errors.password}</div>
             ) : null}
+
             <div className="forgot_password">
               <p onClick={() => setOpenForgotPassPopup(true)}>
-                {' '}
+                {" "}
                 ForgotPassword?
               </p>
             </div>
             <div className="button_div">
-              <button className="loginbutton" disabled={!formik.isValid}>
+              <button
+                className="loginbutton"
+                type="submit"
+                onClick={() => setIndication(true)}
+              >
                 LOGIN
               </button>
             </div>
@@ -132,7 +190,7 @@ function Login({ open, toggleLoginDrawer }) {
         setOpenForgotPassPopup={setOpenForgotPassPopup}
       />
     </Drawer>
-  )
+  );
 }
 
-export default Login
+export default Login;

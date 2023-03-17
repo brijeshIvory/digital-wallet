@@ -1,13 +1,8 @@
 import * as yup from "yup";
 export const loginValidationSchema = yup.object({
-  phone: yup
-    .string()
-    .matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
-      message: "Invalid Indian number",
-      excludeEmptyString: false,
-    })
-    .required("A phone number is required"),
-  password: yup.string().required("Password is required"),
+  phone: yup.string().required("Required !"),
+  password: yup.string().required("Required !"),
+  country_code: yup.string().required("Required !"),
 });
 export const BankTransferValidationSchema = yup.object({
   bankname: yup.string().required("Bank Name is required"),
@@ -35,7 +30,7 @@ export const UpiTransferValidationSchema = yup.object({
 });
 export const HawalaTransferValidationSchema = yup.object({
   hawala_value: yup.string().required("Hawala Selection is required."),
-  AccountNumber: yup.string().required("Account Number is required")
+  AccountNumber: yup.string().required("Account Number is required"),
 });
 
 export const RegistationValidationSchema = yup.object({

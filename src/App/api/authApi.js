@@ -22,9 +22,13 @@ export function* UserLoginApi(loggedData) {
   const login = yield axios
     .post(`${base_url}/login`, loggedData)
     .then(function (response) {
+      console.log(response, "Login responce");
+
       return response;
     })
     .catch(function (error) {
+      console.log(error.response, "Login error responce");
+
       return error.response;
     });
 
@@ -51,11 +55,11 @@ export function* VerifyOtpApi(payload) {
   const otpdata = yield axios
     .post(`${base_url}/confirmotp`, payload)
     .then(function (response) {
-      console.log(response, "otp sent");
+      console.log(response, "otp Verified");
       return response;
     })
     .catch(function (error) {
-      console.log(error, "error in sending otp");
+      console.log(error, "error in otp varification");
 
       return error.response;
     });

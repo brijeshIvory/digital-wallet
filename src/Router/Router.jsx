@@ -10,8 +10,14 @@ import Deposit from "../Components/Deposit";
 import DepositPayment from "../Components/Deposit/DepositPayment";
 import NewHomePage from "../Components/NewHomePage";
 import Passbook from "../Components/Passbook";
+import { useEffect } from "react";
 const Router = () => {
-  const isLoggedin = false;
+  const token = localStorage.getItem("token");
+
+  const isLoggedin = token === null ? false : true;
+  useEffect(() => {
+    console.log(isLoggedin, token, "Router");
+  }, [isLoggedin, token]);
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />

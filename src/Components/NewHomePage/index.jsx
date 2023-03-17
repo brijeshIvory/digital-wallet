@@ -11,7 +11,7 @@ import { useState } from "react";
 import Register from "../Register";
 import Login from "../Login";
 import { getCountriesData } from "../../App/Redux/Actions/CountryAction";
-import {GetUserDetails} from '../../App/Redux/Actions/AuthActions'
+import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -67,13 +67,14 @@ function NewHomePage({ isLoggedin }) {
 
     setOpenLogin({ ...openLogin, [anchor]: open });
   };
-const userdetailpaylod={
-  "id":3
-}
+  const userdetailpaylod = {
+    id: 3,
+  };
   useEffect(() => {
-    dispatch(GetUserDetails(userdetailpaylod))
+    dispatch(GetUserDetails(userdetailpaylod));
     dispatch(getCountriesData());
   }, []);
+
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
