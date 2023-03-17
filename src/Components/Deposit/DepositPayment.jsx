@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import { experimentalStyled as styled } from '@mui/material/styles'
 import { Avatar, Box, Paper, Grid } from '@mui/material'
@@ -7,21 +7,26 @@ import Paytm from '../../assets/img/paytm.png'
 import GooglePay from '../../assets/img/google_pay.png'
 import phone_pe from '../../assets/img/phone_pe.png'
 import Hawala from '../../assets/img/hawala.png'
+import UPI from '../../assets/img/upi.png'
 import './style.scss'
 import PaymentDetail from './PaymentDetail'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { GetHawalaList } from '../../App/Redux/Actions/HavalaListAction'
-import { GetDepositDetail } from '../../App/Redux/Actions/DepositeAction'
+import { useSelector } from 'react-redux'
+import ReferalCodeDialog from '../ReferralPopup/ReferralPopup'
+
 const Item = styled(Paper)(({ theme }) => ({
   padding: '0.5rem',
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }))
 
-const DepositPaymentMethhod = () => {
+const DepositPayment = () => {
   const [isBackground, setIsBackground] = useState('')
   const amount = window.location.pathname.split('/')[2]
+  const [paymentInfo, setPaymentInfo] = useState("")
+
+  const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail)
+
   return (
     <>
       <div className="Payment_method_head">
@@ -56,6 +61,9 @@ const DepositPaymentMethhod = () => {
                     }}
                     onClick={() => {
                       setIsBackground('Banktransfer')
+                      setPaymentInfo(
+                        `${'Banktransfer'},${depositDetail?.bank_name},${depositDetail?.account_holder_name},${depositDetail?.account_number},${depositDetail?.ifsc_code}`,
+                      )
                     }}
                   >
                     <div className="card_image">
@@ -72,6 +80,7 @@ const DepositPaymentMethhod = () => {
                     }}
                     onClick={() => {
                       setIsBackground('Paytm')
+                      setPaymentInfo(`${'Paytm'}, ${depositDetail?.paytm_name},${depositDetail?.paytm_link}`)
                     }}
                   >
                     <div className="card_image">
@@ -89,6 +98,7 @@ const DepositPaymentMethhod = () => {
                     }}
                     onClick={() => {
                       setIsBackground('GooglePay')
+                      setPaymentInfo(`${'GooglePay'},${depositDetail?.gpay_name},${depositDetail?.gpay_link}`)
                     }}
                   >
                     <div className="card_image">
@@ -105,12 +115,30 @@ const DepositPaymentMethhod = () => {
                     }}
                     onClick={() => {
                       setIsBackground('phone_pe')
+                      setPaymentInfo(`${'phone_pe'},${depositDetail?.phonepay_name},${depositDetail?.phonepay_link}`)
                     }}
                   >
                     <div className="card_image">
                       <Avatar src={phone_pe} alt="phone_pe" />
                     </div>
                     <h3 className="card_text">Phone Pay</h3>
+                  </Item>
+                </Grid>
+                <Grid item xs={2} sm={4} md={4}>
+                  <Item
+                    style={{
+                      backgroundColor:
+                        isBackground === 'UPI' ? '#fac000' : '#0e0c0d',
+                    }}
+                    onClick={() => {
+                      setIsBackground('UPI')
+                      setPaymentInfo(`${'UPI'},${depositDetail?.bhim_name},${depositDetail?.bhim_link}`)
+                    }}
+                  >
+                    <div className="card_image">
+                      <Avatar src={UPI} alt="UPI" />
+                    </div>
+                    <h3 className="card_text">Hawala</h3>
                   </Item>
                 </Grid>
                 <Grid item xs={2} sm={4} md={4}>
@@ -132,11 +160,15 @@ const DepositPaymentMethhod = () => {
               </Grid>
             </Box>
           </div>
-          <PaymentDetail isBackground={isBackground} />
+          <PaymentDetail
+            isBackground={isBackground}
+            paymentInfo={paymentInfo}
+          />
+         
         </div>
       </div>
     </>
   )
 }
 
-export default DepositPaymentMethhod
+export default DepositPayment
