@@ -24,3 +24,10 @@ export const sendOtp = (payload) => {
     otp: payload,
   };
 };
+
+export const verifyOtp = (payload) => {
+  return {
+    type: actionType.SEND_OTP,
+    otpData: payload,
+  };
+};

@@ -46,3 +46,19 @@ export function* SendOtpApi(payload) {
 
   return otp;
 }
+
+export function* VerifyOtpApi(payload) {
+  const otpdata = yield axios
+    .post(`${base_url}/confirmotp`, payload)
+    .then(function (response) {
+      console.log(response, "otp sent");
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error, "error in sending otp");
+
+      return error.response;
+    });
+
+  return otpdata;
+}

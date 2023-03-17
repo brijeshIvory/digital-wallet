@@ -22,9 +22,13 @@ function* sendOtp(payload) {
   const { otp } = payload;
   const otpData = yield call(SendOtpApi, otp);
 }
-
+function* verifyOtp(payload) {
+  const { otpData } = payload;
+  const otpResp = yield call(SendOtpApi, otpData);
+}
 function* AuthSaga() {
   yield all([takeEvery(actionType.USER_REGISTRATION, userRegistration)]);
   yield all([takeEvery(actionType.SEND_OTP, sendOtp)]);
+  yield all([takeEvery(actionType.VERIFY_OTP, verifyOtp)]);
 }
 export default AuthSaga;

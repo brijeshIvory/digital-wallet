@@ -25,7 +25,6 @@ function Register({ open, toggleJoinNowDrawer }) {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const countries = useSelector((state) => state?.country?.countries?.data);
-  const user = useSelector((state) => state?.user?.data?.data?.data);
 
   const [selectCountry, setSelectCountry] = useState({
     country: 101,
@@ -77,7 +76,6 @@ function Register({ open, toggleJoinNowDrawer }) {
     setConfirmPasswordType("password");
     setShowConfirmPassword(!showConfirmPassword);
   };
-  console.log(user, "user");
 
   return (
     <Drawer anchor={"bottom"} open={open} className="joinNowFrom">

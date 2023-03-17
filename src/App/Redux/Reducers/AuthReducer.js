@@ -10,25 +10,22 @@ const AuthReducer = (state = initialState, action) => {
     case actionType.USER_REGISTRATION:
       return {
         ...state,
-
-        error: null,
-        data: [],
         isLoading: true,
+        error: null,
       };
     case actionType.USER_REGISTRATION_SUCCESS:
       return {
         ...state,
 
-        error: null,
-        data: action?.regData,
+        data: action?.regData?.data?.data,
         isLoading: false,
+        error: null,
       };
     case actionType.USER_REGISTRATION_FAIL:
       return {
         ...state,
 
         error: action?.regErrData,
-        data: [],
         isLoading: false,
       };
     case actionType.EMPTY_USER:
