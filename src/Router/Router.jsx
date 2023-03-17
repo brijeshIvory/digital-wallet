@@ -1,17 +1,23 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import OfferPage from '../Components/Offer'
-import ReferAndEarn from '../Components/PrivacyAndTearm/ReferAndEarn'
-import Profile from '../Components/Profile'
-import WithdrawalDetail from '../Components/WithdrawalDetail/index'
-import PrivateRoute from './PrivateRoute'
-import Withdrawal from '../Components/Withdrawal/index'
-import Deposit from '../Components/Deposit'
-import DepositPayment from '../Components/Deposit/DepositPayment'
-import NewHomePage from '../Components/NewHomePage'
-import Passbook from '../Components/Passbook'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import OfferPage from "../Components/Offer";
+import ReferAndEarn from "../Components/PrivacyAndTearm/ReferAndEarn";
+import Profile from "../Components/Profile";
+import WithdrawalDetail from "../Components/WithdrawalDetail/index";
+import PrivateRoute from "./PrivateRoute";
+import Withdrawal from "../Components/Withdrawal";
+import Deposit from "../Components/Deposit";
+import DepositPayment from "../Components/Deposit/DepositPayment";
+import NewHomePage from "../Components/NewHomePage";
+import Passbook from "../Components/Passbook";
+import { useEffect } from "react";
 const Router = () => {
-  const isLoggedin = true
+  const token = localStorage.getItem("token");
+
+  const isLoggedin = token === null ? false : true;
+  useEffect(() => {
+    console.log(isLoggedin, token, "Router");
+  }, [isLoggedin, token]);
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />
@@ -82,7 +88,7 @@ const Router = () => {
         }
       ></Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;

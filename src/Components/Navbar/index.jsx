@@ -46,20 +46,9 @@ function Navbar({ open, setOpen }) {
       link: "concern-list",
       icon: <HelpIcon />,
     },
-    // {
-    //   name: "Refer & Earn",
-    //   link: "refer-and-earn",
-    //   icon: <AttachMoneyIcon />,
-    // },
-    // {
-    //   name: "Terms",
-    //   link: "terms",
-    //   icon: <ArticleIcon />,
-    // },
   ];
 
   const list2 = [
-
     {
       name: "Logout",
       link: "./profile",
@@ -97,14 +86,14 @@ function Navbar({ open, setOpen }) {
 
         <div>
           <Divider />
-          {list2.map((obj) => (
-            <Link to={obj.link} key={obj.name}>
-              <div className="list">
-                <div>{obj.icon}</div>
-                <p>{obj.name}</p>
-              </div>
-            </Link>
-          ))}
+          {/* {list2.map((obj) => ( */}
+          <Link>
+            <div className="list" onClick={() => localStorage.clear()}>
+              <LogoutIcon />
+              <p>Logout</p>
+            </div>
+          </Link>
+          {/* ))} */}
         </div>
       </div>
     </Drawer>

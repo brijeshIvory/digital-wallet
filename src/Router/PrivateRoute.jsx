@@ -2,9 +2,14 @@ import { Navigate } from "react-router-dom";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import React from "react";
 import Login from "../Components/Login";
+import { useEffect } from "react";
 
 function PrivateRoute({ children }) {
-  const isAuthenticated = true;
+  const token = localStorage.getItem("token");
+  const isAuthenticated = token !== "undefined" ? true : false;
+  useEffect(() => {
+    console.log(isAuthenticated, token, "privateRoute");
+  }, [isAuthenticated, token]);
   return isAuthenticated ? (
     <Dashboard children={children} />
   ) : (
