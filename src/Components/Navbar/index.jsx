@@ -36,11 +36,11 @@ function Navbar({ open, setOpen }) {
       link: "tabs/reports",
       icon: <PersonAddAlt1Icon />,
     },
-    {
-      name: "Notifications",
-      link: "notification",
-      icon: <NotificationsNoneIcon />,
-    },
+    // {
+    //   name: "Notifications",
+    //   link: "notification",
+    //   icon: <NotificationsNoneIcon />,
+    // },
     {
       name: "Are You Interested to be partner?",
       link: "concern-list",

@@ -2,11 +2,11 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #fac000;
+  background:  linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);;
 }
 .wallet-transfer-head {
   flex: 0.15;
-  background-color: #fac000;
+  background:  linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);;
 }
 .wallet-transfer-body {
   flex: 0.85;
@@ -101,8 +101,8 @@
   width: 76%;
   margin-left: 12%;
   height: 3rem;
-  font-size: 18 px;
+  font-size: 18px;
   border-radius: 5px;
   border-width: 0;
-  background-color: #fac000;
+  background:  linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);;
 }

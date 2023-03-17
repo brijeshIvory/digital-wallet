@@ -28,15 +28,16 @@ function Deposit() {
           </Link>
           <div className="deposit_subtitle">Deposit</div>
         </div>
-        <div className="wallet_balance">
+      </div>
+
+      <div className="deposit_body">
+        <div className="wallet-balance">
           <img src={CoinIcon} alt="coinicon" />
-          <div className="wallet_balance-data">
-            <div className="wallet_balance-data-title">Wallet Balance</div>
-            <div className="wallet_balance-data-amount">0</div>
+          <div className="wallet-balance-data">
+            <div className="wallet-balance-data-title">WALLET BALANCE</div>
+            <div className="wallet-balance-data-amount">0</div>
           </div>
         </div>
-      </div>
-      <div className="deposit_body">
         <div className="deposit_details">
           <div className="deposit_details-balance">
             Deposit Coins
@@ -62,7 +63,7 @@ function Deposit() {
             </div>
 
             <button
-              className="transfer-button"
+              className="deposit-transfer-button"
               type="submit"
               disabled={!formik.isValid}
               onClick={() => {
