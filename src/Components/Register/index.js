@@ -20,9 +20,7 @@ function Register({ open, toggleJoinNowDrawer }) {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [indication, setIndication] = useState(false);
 
-  const countries = useSelector(
-    (state) => state?.CountryReducer?.countries?.data
-  );
+  const countries = useSelector((state) => state?.country?.countries?.data);
   const [selectCountry, setSelectCountry] = useState();
 
   const formik = useFormik({
