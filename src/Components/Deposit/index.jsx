@@ -2,10 +2,22 @@ import React, { useState } from 'react'
 import './style.scss'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import CoinIcon from '../../assets/img/coins-icon.png'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { DepositeAmountValidationSchema } from '../../utills/ValidationSchema'
 function Deposit() {
   const [coinValues, setCoinValues] = useState(null)
+  const navigate = useNavigate()
+
+  const formik = useFormik({
+    initialValues: {
+      amount: '',
+    },
+    validationSchema: DepositeAmountValidationSchema,
+    onSubmit: (values) => {
+      setCoinValues(JSON.stringify(values.amount, null, 2))
+    },
+  })
 
   return (
     <div className="deposit_main">
@@ -30,16 +42,38 @@ function Deposit() {
             Deposit Coins
             <hr />
           </div>
-          <input
-            className="amount-input"
-            type="number"
-            placeholder="Coins"
-            value={coinValues}
-            onChange={(e) => setCoinValues(e.target.value)}
-          />
-          <Link to={'/choose-payment-method'}>
-            <button className="transfer-button">Deposit Conis</button>
-          </Link>
+          <form onSubmit={formik.handleSubmit} autoComplete="off">
+            <input
+              className="deposit-amount-input"
+              type="number"
+              name="amount"
+              id="standard-required"
+              label="Coins"
+              variant="standard"
+              value={formik.values.amount}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.amount ? (
+              <div className="error_text">{formik.errors.amount}</div>
+            ) : null}
+            <div style={{ marginBottom: '1rem', fontSize: '14px' }}>
+              {' '}
+              *Minimum deposit amount is 10 coins{' '}
+            </div>
+
+            <button
+              className="transfer-button"
+              type="submit"
+              disabled={!formik.isValid}
+              onClick={() => {
+                if (coinValues !== null) {
+                  navigate(`/choose-payment-method/${coinValues}`)
+                }
+              }}
+            >
+              Deposit Conis
+            </button>
+          </form>
         </div>
       </div>
     </div>
