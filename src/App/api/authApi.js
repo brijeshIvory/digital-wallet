@@ -18,7 +18,7 @@ export function* UserRegistrationApi(registratedData) {
 }
 export function* UserLoginApi(loggedData) {
   const login = yield axios
-    .post("http://localhost:8080/login", loggedData)
+    .post(`${base_url}/login`, loggedData)
     .then(function (response) {
       return response;
     })
