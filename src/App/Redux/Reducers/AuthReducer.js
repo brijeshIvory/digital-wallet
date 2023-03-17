@@ -1,9 +1,10 @@
-import * as actionType from "../Actions/actionsType";
+import * as actionType from '../Actions/actionsType'
 const initialState = {
   data: null,
   error: null,
   isLoading: false,
-};
+  userDetail: null,
+}
 
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -36,8 +37,27 @@ const AuthReducer = (state = initialState, action) => {
         data: null,
         isLoading: false,
       };
+      case actionType.GET_USER_DETAILS:
+    return {
+      ...state,
+      isLoading: true,
+      error: null,
+    
+    }
+case actionType.GET_USER_DETAILS_SUCCESS:
+    return {
+      ...state,
+      userDetail: action.data,
+      isLoading: false,
+    }
+  case actionType.GET_USER_DETAILS_FAIL:
+    return {
+      ...state,
+      isLoading: false,
+      error: action.error,
+    }
     default:
-      return state;
+      return state
   }
-};
-export default AuthReducer;
+}
+export default AuthReducer

@@ -1,29 +1,31 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.scss'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
-import { useFormik } from 'formik'
-import TextField from '@mui/material/TextField'
-import { HawalaTransferValidationSchema } from '../../utills/ValidationSchema'
-import MenuItem from '@mui/material/MenuItem'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useSelector } from 'react-redux'
 import { GetHawalaList } from '../../App/Redux/Actions/HavalaListAction'
-import { useDispatch } from 'react-redux';
-import { GetDepositDetail } from '../../App/Redux/Actions/DepositeAction'
-const PaymentDetail = ({ isBackground }) => {
-  const dispatch =useDispatch()
+import { useDispatch } from 'react-redux'
+import {
+  GetDepositDetail,
+  RequestDeposite,
+} from '../../App/Redux/Actions/DepositeAction'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import ContentCopySharpIcon from '@mui/icons-material/ContentCopySharp'
+import { toast } from 'react-toastify'
+import DepositHawala from './DepositHawala'
+import ReferalCodeDialog from '../ReferralPopup/ReferralPopup'
+const PaymentDetail = ({ isBackground, paymentInfo }) => {
+  const dispatch = useDispatch()
   const [FrontSidefile, setFrontSidefile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
-  const hawalaList = useSelector(
-    (state) => state?.hawala?.hawalalist_data,
-  )
-  const depositDetail = useSelector(
-    (state) => state?.deposit?.Deposit_detail
-  )
-  useEffect(() => { 
+  const [openPopUp, setOpenPopUp] = useState(true)
+  const [ReferralCode, setReferralCode] = useState('')
+  const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail)
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
+  useEffect(() => {
     dispatch(GetDepositDetail())
     dispatch(GetHawalaList())
-  },[])
+  }, [])
   const onFileUploadChange = async (e) => {
     const fileInput = e.target
     if (!fileInput.files) {
@@ -44,24 +46,32 @@ const PaymentDetail = ({ isBackground }) => {
     e.currentTarget.type = 'text'
     e.currentTarget.type = 'file'
   }
-  const formik = useFormik({
-    initialValues: {
-      hawala_value: '',
-      ammount: '',
-      screenshot: '',
-    },
-    validationSchema: HawalaTransferValidationSchema,
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2))
-    },
-  })
+
+  const onClick = React.useCallback(({ target: { innerText } }) => {
+    console.log(`Clicked on "${innerText}"!`)
+  }, [])
+  const onCopy = React.useCallback(() => {
+    toast('Coiped to Clipboard!')
+  }, [])
+  const SubmitDepositReq = () => {
+    const PayloadData = {
+      notes: paymentInfo,
+      amount: amount,
+      image: previewUrl,
+      user_id: userId,
+      refer_code: ReferralCode,
+    }
+    dispatch(RequestDeposite(PayloadData))
+    console.log(PayloadData, 'PayloadData')
+  }
+
   return (
     <>
       {isBackground === 'Banktransfer' ||
       isBackground === 'Paytm' ||
       isBackground === 'GooglePay' ||
       isBackground === 'phone_pe' ||
-      isBackground === 'Hawala' ? (
+      isBackground === 'UPI' ? (
         <div className="Payment_detail">
           <div className="Payment_detail_title">
             Make your payment on the details below
@@ -71,19 +81,83 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Bank Name </div>
-                <div className="bank_name_value">{depositDetail?.bank_name} </div>
+                <div className="person_data">
+                  {depositDetail?.bank_name}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.bank_name}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">Account Holder Name </div>
-                <div className="account_holder_value">{depositDetail?.account_holder_name} </div>
+                <div className="person_data">
+                  {depositDetail?.account_holder_name}{' '}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.account_holder_name}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">Account Number</div>
-                <div className="person_data">{depositDetail?.account_number}</div>
+                <div className="person_data">
+                  {depositDetail?.account_number}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.account_number}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
               <div className="person_deatils">
                 <div className="person_name">IFSC</div>
-                <div className="person_data">{depositDetail?.ifsc_code}</div>
+                <div className="person_data">
+                  {depositDetail?.ifsc_code}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.ifsc_code}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
             </>
           )}
@@ -91,11 +165,43 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Person Name</div>
-                <div className="person_data">{depositDetail?.paytm_name}</div>
+                <div className="person_data">
+                  {depositDetail?.paytm_name}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.paytm_name}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
               <div className="person_deatils">
-                <div className="person_name">Paytm Number</div>
-                <div className="person_data">{depositDetail?.paytm_link}</div>
+                <div className="person_name">Paytm Id</div>
+                <div className="person_data">
+                  {depositDetail?.paytm_link}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.paytm_link}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
             </>
           )}
@@ -103,11 +209,43 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Google Pay Name</div>
-                <div className="person_data">{depositDetail?.gpay_name}</div>
+                <div className="person_data">
+                  {depositDetail?.gpay_name}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.gpay_name}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
               <div className="person_deatils">
-                <div className="person_name">Google Pay Number</div>
-                <div className="person_data">{depositDetail?.gpay_link}</div>
+                <div className="person_name">Google Pay Id</div>
+                <div className="person_data">
+                  {depositDetail?.gpay_link}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.gpay_link}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
             </>
           )}
@@ -115,64 +253,90 @@ const PaymentDetail = ({ isBackground }) => {
             <>
               <div className="person_deatils">
                 <div className="person_name">Phone Pay Name</div>
-                <div className="person_data">{depositDetail?.phonepay_name}</div>
+                <div className="person_data">
+                  {depositDetail?.phonepay_name}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.phonepay_name}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
               <div className="person_deatils">
-                <div className="person_name">Phone Pay Number</div>
-                <div className="person_data">{depositDetail?.phonepay_link}</div>
+                <div className="person_name">Phone Pay Id</div>
+                <div className="person_data">
+                  {depositDetail?.phonepay_link}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.phonepay_link}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
               </div>
             </>
           )}
 
-          {isBackground === 'Hawala' && (
-            <div className="deposit_form_container">
-              <form onSubmit={formik.handleSubmit} autoComplete="off">
-                <TextField
-                  className="deposit_select"
-                  select
-                  variant="standard"
-                  labelId="hawala_value"
-                  id="hawala_value"
-                  name="hawala_value"
-                  value={formik.values.hawala_value}
-                  onChange={formik.handleChange}
-                  label="Select Hawala"
-                  onBlur={() => {
-                    formik.handleBlur({ target: { name: 'hawala_value' } })
-                  }}
-                  SelectProps={{
-                    IconComponent: () => <KeyboardArrowDownIcon />,
-                  }}
-                >
-                  {hawalaList !== null &&
-                    hawalaList.map((item, index) => (
-                      <MenuItem value={item.name} key={index}>
-                        {item.name}
-                      </MenuItem>
-                    ))}
-                </TextField>
-
-                {formik.errors.hawala_value ? (
-                  <div className="error_text">{formik.errors.hawala_value}</div>
-                ) : null}
-
-                <TextField
-                  type="name"
-                  name="ammount"
-                  id="standard-required"
-                  label="Account Number"
-                  variant="standard"
-                  value={formik.values.ammount}
-                  onChange={formik.handleChange}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                {formik.errors.ammount ? (
-                  <div className="error_text">{formik.errors.ammount}</div>
-                ) : null}
-              </form>
-            </div>
+          {isBackground === 'UPI' && (
+            <>
+              <div className="person_deatils">
+                <div className="person_name">UPI Name</div>
+                <div className="person_data">
+                  {depositDetail?.phonepay_name}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.bhim_name}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
+              </div>
+              <div className="person_deatils">
+                <div className="person_name">UPI Id</div>
+                <div className="person_data">
+                  {depositDetail?.bhim_link}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.phonepay_link}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
+              </div>
+            </>
           )}
           <div className="file_main">
             <div className=" border rounded-lg mt-3">
@@ -193,6 +357,7 @@ const PaymentDetail = ({ isBackground }) => {
                         type="submit"
                         // disabled={!formik.isValid}
                         className="deposit_button"
+                        onClick={() => SubmitDepositReq()}
                       >
                         Submit
                       </button>
@@ -222,6 +387,13 @@ const PaymentDetail = ({ isBackground }) => {
           </div>
         </div>
       ) : null}
+      {isBackground === 'Hawala' && <DepositHawala />}
+      <ReferalCodeDialog
+        openPopUp={openPopUp}
+        setOpenPopUp={setOpenPopUp}
+        ReferralCode={ReferralCode}
+        setReferralCode={setReferralCode}
+      />
     </>
   )
 }

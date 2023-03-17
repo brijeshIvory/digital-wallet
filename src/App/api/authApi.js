@@ -62,3 +62,15 @@ export function* VerifyOtpApi(payload) {
 
   return otpdata;
 }
+export function* GetUserDetailApi(userdetailData) {
+  const UserDetail = yield axios
+    .post(`${base_url}/userdeatils`, userdetailData)
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      return error.response;
+    });
+
+  return UserDetail;
+}

@@ -26,39 +26,40 @@ function Navbar({ open, setOpen }) {
       link: "bank-details",
       icon: <OutputIcon />,
     },
-    {
-      name: "Wallet to Wallet Transfer",
-      link: "wallet-to-wallet",
-      icon: <MoveDownIcon />,
-    },
+    // {
+    //   name: "Wallet to Wallet Transfer",
+    //   link: "wallet-to-wallet",
+    //   icon: <MoveDownIcon />,
+    // },
     {
       name: "PassBook",
       link: "tabs/reports",
       icon: <PersonAddAlt1Icon />,
     },
     {
-      name: "Refer & Earn",
-      link: "refer-and-earn",
-      icon: <AttachMoneyIcon />,
-    },
-    {
-      name: "Terms",
-      link: "terms",
-      icon: <ArticleIcon />,
-    },
-  ];
-
-  const list2 = [
-    {
       name: "Notifications",
       link: "notification",
       icon: <NotificationsNoneIcon />,
     },
     {
-      name: "Help",
+      name: "Are You Interested to be partner?",
       link: "concern-list",
       icon: <HelpIcon />,
     },
+    // {
+    //   name: "Refer & Earn",
+    //   link: "refer-and-earn",
+    //   icon: <AttachMoneyIcon />,
+    // },
+    // {
+    //   name: "Terms",
+    //   link: "terms",
+    //   icon: <ArticleIcon />,
+    // },
+  ];
+
+  const list2 = [
+
     {
       name: "Logout",
       link: "./profile",

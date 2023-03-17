@@ -19,20 +19,28 @@
     margin-bottom: 2rem;
   }
 
-  button {
+  .code_button_div {
+    // width: 100%;
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  .code_button{
     background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
     min-height: 30px;
     border-width: 0;
     border-radius: 5px;
     outline: none;
-    padding: 10px 80px;
-    margin: auto;
+    padding: 0 1rem;
+    // margin: auto;
   }
+  
 }
 .close-icon-div {
   display: flex;
   justify-content: end;
 }
 .close-icon-div-text {
-  margin: 1rem 0 2rem 0;
+  margin: 1rem 0 1rem 0;
 }

@@ -5,6 +5,13 @@ export const loginClick = (payload) => {
     loggedData: payload,
   };
 };
+
+export const GetUserDetails = (payload) => {
+  return {
+    type: actionType.GET_USER_DETAILS,
+    userdetailData:payload
+  };
+};
 export const registrationClick = (payload) => {
   return {
     type: actionType.USER_REGISTRATION,
@@ -31,3 +38,5 @@ export const verifyOtp = (payload) => {
     otpData: payload,
   };
 };
+    
+

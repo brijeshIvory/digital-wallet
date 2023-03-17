@@ -11,37 +11,37 @@ const HawalaReducer = (state = initialState, action) => {
     case actionType.HAWALA_LIST:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
         error: '',
       }
     case actionType.GET_HAWALA_LIST_SUCCESS:
       return {
         ...state,
         hawalalist_data: action.data,
-        loading: false,
+        isLoading: false,
       }
     case actionType.GET_HAWALA_LIST_FAIL:
       return {
         ...state,
-        loading: false,
+        isLoading: false,
         error: action.error,
       }
     case actionType.CLIENT_LIST:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
         error: '',
       }
     case actionType.GET_CLIENT_LIST_SUCCESS:
       return {
         ...state,
         client_list: action.data,
-        loading: false,
+        isLoading: false,
       }
     case actionType.GET_CLIENT_LIST_FAIL:
       return {
         ...state,
-        loading: false,
+        isLoading: false,
         error: action.error,
       }
 
