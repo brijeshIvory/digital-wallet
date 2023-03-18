@@ -74,3 +74,21 @@ export const DepositeAmountValidationSchema = yup.object({
     .min(10, "To small")
     .min(0, "Not negative number"),
 });
+
+export const ForgotPasswordValidationSchema = yup.object({
+
+  email: yup
+    .string()
+    .email("Invalid Email")
+    .matches(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Invalid email address"
+    )
+    .required("Required !"),
+
+  password: yup.string().required("Required !"),
+
+
+  confirm_password: yup.string().required("Required !"),
+
+});

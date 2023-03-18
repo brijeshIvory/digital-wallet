@@ -38,3 +38,18 @@ export function* GetUserDetailApi(userdetailData) {
 
   return UserDetail
 }
+
+export function* ForgetPasswordApi(ForgetPasswordDetails) {
+  const forgetpassword = yield axios
+    .post(`${base_url}/forgetpassword`, ForgetPasswordDetails)
+    .then(function (response) {
+      console.log(response, 'forgetpassword responce')
+      return response
+    })
+    .catch(function (error) {
+      console.log(error, 'forgetpassword error responce')
+
+      return error.response
+    })
+  return forgetpassword
+}

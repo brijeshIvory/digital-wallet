@@ -1,4 +1,4 @@
-import { GetUserDetailApi, UserRegistrationApi } from '../../api/authApi'
+import { GetUserDetailApi, UserRegistrationApi, ForgetPasswordApi } from '../../api/authApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
 function* userRegistration(payload) {
@@ -17,7 +17,7 @@ function* userRegistration(payload) {
   }
 }
 
-function* GetUserDetailsSaga(payload) {
+function* GetUserDetails(payload) {
   const { userdetailData } = payload
   const userDetails = yield call(GetUserDetailApi, userdetailData)
   const data = userDetails?.data.data
@@ -33,8 +33,17 @@ function* GetUserDetailsSaga(payload) {
     })
   }
 }
+
+function* forgetPassword(payload){
+  const {ForgetPasswordDetails} = payload
+  const ForgotPassDetail = yield call(ForgetPasswordApi, ForgetPasswordDetails)
+
+}
+
 function* AuthSaga() {
   yield all([takeEvery(actionType.USER_REGISTRATION, userRegistration)])
-  yield all([takeEvery(actionType.GET_USER_DETAILS, GetUserDetailsSaga)])
+  yield all([takeEvery(actionType.GET_USER_DETAILS, GetUserDetails)])
+  yield all([takeEvery(actionType.FORGET_PASSWORD, forgetPassword)])
+
 }
 export default AuthSaga

@@ -11,7 +11,7 @@ import DepositPayment from '../Components/Deposit/DepositPayment'
 import NewHomePage from '../Components/NewHomePage'
 import Passbook from '../Components/Passbook'
 const Router = () => {
-  const isLoggedin = true
+  const isLoggedin = false
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />

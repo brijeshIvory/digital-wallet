@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { GetClientList } from "../../App/Redux/Actions/HavalaListAction";
+import {getTransactions} from "../../App/Redux/Actions/TransactionAction";
 import { useDispatch, useSelector } from "react-redux";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,17 +22,17 @@ import Paper from '@mui/material/Paper';
 //   transactionType: yup.string().required("Required !"),
 //   status: yup.string().required("Required !"),
 // });
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+// const rows = [
+//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+//   createData("Eclair", 262, 16.0, 24, 6.0),
+//   createData("Cupcake", 305, 3.7, 67, 4.3),
+//   createData("Gingerbread", 356, 16.0, 49, 3.9),
+// ];
 
 function Passbook() {
   const [inputValue, setInputValue] = useState({
@@ -46,6 +47,9 @@ function Passbook() {
   const arr = ["1", "2", " 3", "4"];
 const dispatch=useDispatch()
 const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
+const TransactionList = useSelector((state) => state?.transactionData?.transactions?.data);
+const userId = useSelector((state) => state?.user?.userDetail?.id)
+
 
   // const selectStartDate = (e) => {
   //   setInputValue({ ...inputValue, startDate: e.target.value });
@@ -72,7 +76,16 @@ const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
   dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
  useEffect(() => {
   dispatch(GetClientList())
+  dispatch(getTransactions({
+    start_date: null,
+    end_date:null,
+    user_id:3,
+    skip:1,
+    take:10
+  }))
  }, [])
+
+ console.log(TransactionList, "TransactionList")
   return (
     <div className="passbook-main">
       <div className="passbook-head">
@@ -86,7 +99,7 @@ const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
       <div className="passbook-body">
         <div className="passbook-body-head">
           <div>Transactions</div>
-          <button onClick={() => setIsFilterClicked(!isFilterClicked)}>
+          <button onClick={() => setIsFilterClicked(true)}>
             Filter
           </button>
         </div>
@@ -111,7 +124,7 @@ const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
               />
             </div>
 
-            <TextField
+            {/* <TextField
               id="transactionType"
               label="Transaction Type"
               select
@@ -130,8 +143,8 @@ const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
                   {ele}
                 </MenuItem>
               ))}
-            </TextField>
-
+            </TextField> */}
+{/* 
             <TextField
               id="status"
               select
@@ -148,10 +161,10 @@ const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
                   {ele}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
 
             <div className="passbook-body-button">
-              <button>Close</button>
+              <button onClick={()=>setIsFilterClicked(false)}>Close</button>
               <button onClick={() => setSubmitedInput(inputValue)}>
                 Apply
               </button>
@@ -164,26 +177,29 @@ const ClientList = useSelector((state) => state?.HawalaReducer?.client_list)
                 <TableHead>
                   <TableRow className="tableRow">
                     <TableCell>Date</TableCell>
-                    <TableCell>Transaction Type</TableCell>
                     <TableCell>Amount</TableCell>
                     <TableCell>Deposit</TableCell>
                     <TableCell>Withdraw</TableCell>
+                    <TableCell>Remarks</TableCell>
+
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {TransactionList && TransactionList?.map((transaction, idx) => (
                     <TableRow
-                      key={row.name}
+                      key={idx}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                       className="tableRow"
                     >
                       <TableCell component="th" scope="row">
-                        {row.name}
+                        {transaction.Date}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      {/* <TableCell align="right">{transaction.Note}</TableCell> */}
+                      <TableCell align="right">{transaction.Balance}</TableCell>
+                      <TableCell align="right">{transaction.Deposit}</TableCell>
+                      <TableCell align="right">{transaction.Withdraw}</TableCell>
+                      <TableCell align="right">{transaction.Remarks}</TableCell>
+
                     </TableRow>
                   ))}
                 </TableBody>
