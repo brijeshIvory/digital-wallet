@@ -23,11 +23,11 @@ function Navbar({ open, setOpen }) {
       link: "profile",
       icon: <PersonOutlineIcon />,
     },
-    {
-      name: "Withdrawal Details",
-      link: "bank-details",
-      icon: <OutputIcon />,
-    },
+    // {
+    //   name: "Withdrawal Details",
+    //   link: "bank-details",
+    //   icon: <OutputIcon />,
+    // },
     // {
     //   name: "Wallet to Wallet Transfer",
     //   link: "wallet-to-wallet",

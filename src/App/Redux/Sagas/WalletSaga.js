@@ -4,6 +4,7 @@ import {
   GetCountryApi,
   GetWallwtBalanceApi,
   WithDrawRequestApi,
+  ThridPartyTransactionApi,
 } from '../../api/WalletApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
@@ -90,6 +91,22 @@ function* WithDrawRequestSaga(payload) {
   }
 }
 
+function* ThirdPartyTransactionSaga(payload) {
+  const { TransData } = payload
+  const TransDataRes = yield call(ThridPartyTransactionApi, TransData)
+  const data = TransDataRes?.data.data
+  if (TransDataRes.data.ok === true) {
+    yield put({
+      type: actionType.THIRD_PARTY_TRANSACTION_SUCCESS,
+      data,
+    })
+  } else {
+    yield put({
+      type: actionType.THIRD_PARTY_TRANSACTION_FAIL,
+      ErrData: TransDataRes,
+    })
+  }
+}
 
 function* WalletSaga() {
   yield all([takeEvery(actionType.GET_COUNTRY, getCountries)])
@@ -97,6 +114,6 @@ function* WalletSaga() {
   yield all([takeEvery(actionType.CLIENT_LIST, GetClientListsaga)])
   yield all([takeEvery(actionType.GET_WALLET_BALANCE, GetWalletBalanceSaga)])
   yield all([takeEvery(actionType.WITHDRAW_REQUEST, WithDrawRequestSaga)])
-  
+  yield all([takeEvery(actionType.THIRD_PARTY_TRANSACTION, ThirdPartyTransactionSaga)])
 }
 export default WalletSaga

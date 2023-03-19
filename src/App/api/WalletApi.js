@@ -94,3 +94,16 @@ export function* WithDrawRequestApi(withDrawData) {
     })
   return withDrawDataRes
 }
+
+// Third PARTY Transaction
+export function* ThridPartyTransactionApi(TransData) {
+  const TransDataRes = yield axios
+    .post(`${base_url}/thirdpatyrequest`, TransData)
+    .then(function (response) {
+      return response
+    })
+    .catch(function (error) {
+      return error.response
+    })
+  return TransDataRes
+}

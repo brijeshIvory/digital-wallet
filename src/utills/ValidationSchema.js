@@ -87,3 +87,16 @@ export const ForgotPasswordValidationSchema = yup.object({
   confirm_password: yup.string().required("Required !"),
 
 });
+
+export const ThridPartyValidation = yup.object({
+  id: yup
+  .string()
+  .required("Id is Required"),
+
+  amount: yup
+    .number()
+    .required("Amount is Required")
+    .max(10000000, "To big")
+    .min(10, "To small")
+    .min(0, "Not negative number"),
+});

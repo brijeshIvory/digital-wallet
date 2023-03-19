@@ -146,7 +146,10 @@ function NewHomePage({ isLoggedin }) {
       <div className="latest-transaction">
         <div className="latest-transaction-title">
           <div>Latest Transactions</div>
-          <div style={{ color: "#595858" }}>See All</div>
+         
+          <Link to={"tabs/reports"}>
+          <div style={{ color: "#595858",fontSize:"19px" }}>See All</div>
+          </Link>
         </div>
         <div className="latest-transaction-data">
           {data.map((ele, idx) => (

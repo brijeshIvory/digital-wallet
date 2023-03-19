@@ -49,3 +49,11 @@ export const WithDrawRequest = (withDrawData) => {
     withDrawData,
   }
 }
+
+//  WITHDRAW REQUEST
+export const ThirdPartyTransactionAction = (TransData) => {
+  return {
+    type: actionType.THIRD_PARTY_TRANSACTION,
+    TransData,
+  }
+}
