@@ -137,7 +137,7 @@ const DepositPayment = () => {
                     <div className="card_image">
                       <Avatar src={UPI} alt="UPI" />
                     </div>
-                    <h3 className="card_text">Hawala</h3>
+                    <h3 className="card_text">UPI</h3>
                   </Item>
                 </Grid>
                 <Grid item xs={2} sm={4} md={4}>

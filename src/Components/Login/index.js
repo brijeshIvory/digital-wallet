@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginValidationSchema } from "../../utills/ValidationSchema";
 import { loginClick } from "../../App/Redux/Actions/AuthActions";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 function Login({ open, toggleLoginDrawer }) {
   const dispatch = useDispatch();
   const [selectCountry, setSelectCountry] = useState({
@@ -23,16 +24,15 @@ function Login({ open, toggleLoginDrawer }) {
   });
 
   const [indication, setIndication] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [openForgotPassPopup, setOpenForgotPassPopup] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
-
   const countries = useSelector((state) => state?.country?.countries?.data);
   const token = useSelector(
     (state) => state?.user?.loginData?.data?.data[0]?.token
   );
-
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       phone: "",
@@ -47,6 +47,7 @@ function Login({ open, toggleLoginDrawer }) {
           password: values.password,
         })
       );
+      navigate("/")
     },
     validationSchema: loginValidationSchema,
   });

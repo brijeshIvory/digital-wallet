@@ -62,7 +62,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
       refer_code: ReferralCode,
     }
     dispatch(RequestDeposite(PayloadData))
-    console.log(PayloadData, 'PayloadData')
+    setPreviewUrl(null)
   }
 
   return (
@@ -265,7 +265,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                       style={{
                         width: '15px',
                         height: '15px',
-                        marginLeft: '0.5rem',
+                        // marginLeft: '0.2rem',
                       }}
                     />
                   </CopyToClipboard>
@@ -345,7 +345,6 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                   <>
                     <img
                       alt="file uploader preview"
-                      objectFit="cover"
                       src={previewUrl}
                       width={441}
                       height={250}

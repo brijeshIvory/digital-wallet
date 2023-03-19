@@ -75,7 +75,6 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
               className="withdrawal_select"
               select
               variant="standard"
-              labelId="hawala_value"
               id="hawala_value"
               name="hawala_value"
               value={formik.values.hawala_value}
@@ -118,7 +117,6 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
                   {previewUrl ? (
                     <img
                       alt="file uploader preview"
-                      objectFit="cover"
                       src={previewUrl}
                       width={441}
                       height={250}
