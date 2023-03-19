@@ -11,6 +11,7 @@ import DepositPayment from "../Components/Deposit/DepositPayment";
 import NewHomePage from "../Components/NewHomePage";
 import Passbook from "../Components/Passbook";
 import { useEffect } from "react";
+import ThirdPartyTransaction from './../Components/3rdPartyTransaction/index';
 const Router = () => {
   const token = localStorage.getItem("token");
 
@@ -84,6 +85,14 @@ const Router = () => {
         element={
           <PrivateRoute>
             <Passbook />
+          </PrivateRoute>
+        }
+      ></Route>
+        <Route
+        path="third-party"
+        element={
+          <PrivateRoute>
+            <ThirdPartyTransaction />
           </PrivateRoute>
         }
       ></Route>

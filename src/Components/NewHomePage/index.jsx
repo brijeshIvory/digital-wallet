@@ -133,9 +133,11 @@ function NewHomePage({ isLoggedin }) {
             <div className="new-home-page-button-title">DEPOSIT</div>
           </div>
           <div className="new-home-page-button-main">
+            <Link to={'third-party'}>
             <div className="new-home-page-button">
               <AiOutlineTransaction />
             </div>
+            </Link>
             <div className="new-home-page-button-title">THIRD PARTY</div>
           </div>
         </div>
