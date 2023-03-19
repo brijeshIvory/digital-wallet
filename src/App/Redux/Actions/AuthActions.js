@@ -38,3 +38,9 @@ export const verifyOtp = (payload) => {
     otpData: payload,
   };
 };
+export const Forgetpassword = (payload) => {
+  return {
+    type: actionType.FORGET_PASSWORD,
+    ForgetPasswordDetails : payload
+  }
+}

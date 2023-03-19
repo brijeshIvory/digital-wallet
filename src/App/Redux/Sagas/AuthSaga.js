@@ -4,6 +4,7 @@ import {
   GetUserDetailApi,
   VerifyOtpApi,
   UserLoginApi,
+  ForgetPasswordApi
 } from "../../api/authApi";
 import { call, all, takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../Actions/actionsType";
@@ -75,11 +76,21 @@ function* GetUserDetailsSaga(payload) {
     });
   }
 }
+
+function* forgetPassword(payload){
+  const {ForgetPasswordDetails} = payload
+  const ForgotPassDetail = yield call(ForgetPasswordApi, ForgetPasswordDetails)
+
+}
+
 function* AuthSaga() {
   yield all([takeEvery(actionType.USER_REGISTRATION, userRegistration)]);
   yield all([takeEvery(actionType.SEND_OTP, sendOtp)]);
   yield all([takeEvery(actionType.VERIFY_OTP, verifyOtp)]);
   yield all([takeEvery(actionType.GET_USER_DETAILS, GetUserDetailsSaga)]);
   yield all([takeEvery(actionType.USER_LOGIN, userLogin)]);
+  yield all([takeEvery(actionType.USER_REGISTRATION, userRegistration)])
+  yield all([takeEvery(actionType.FORGET_PASSWORD, forgetPassword)])
+
 }
 export default AuthSaga;
