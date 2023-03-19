@@ -81,3 +81,16 @@ export function* GetWallwtBalanceApi(walletData) {
     })
   return walletBal
 }
+
+// withdraw request
+export function* WithDrawRequestApi(withDrawData) {
+  const withDrawDataRes = yield axios
+    .post(`${base_url}/widrequest`, withDrawData)
+    .then(function (response) {
+      return response
+    })
+    .catch(function (error) {
+      return error.response
+    })
+  return withDrawDataRes
+}

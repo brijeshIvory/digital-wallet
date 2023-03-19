@@ -135,7 +135,7 @@ const WithdrawalDetail = () => {
         HawalaiFormOpen={HawalaiFormOpen}
         setHawalaiFormOpen={setHawalaiFormOpen}
       />
-      <UpiTransfer UpiFormOpe={UpiFormOpen} setUpiFormOpen={setUpiFormOpen} />
+      <UpiTransfer UpiFormOpen={UpiFormOpen} setUpiFormOpen={setUpiFormOpen} />
     </>
   )
 }

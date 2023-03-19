@@ -24,7 +24,6 @@ function Login({ open, toggleLoginDrawer }) {
   });
 
   const [indication, setIndication] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [openForgotPassPopup, setOpenForgotPassPopup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordType, setPasswordType] = useState("password");

@@ -41,3 +41,11 @@ export const GetWalletBalance = (walletData) => {
     walletData,
   }
 }
+
+//  WITHDRAW REQUEST
+export const WithDrawRequest = (withDrawData) => {
+  return {
+    type: actionType.WITHDRAW_REQUEST,
+    withDrawData,
+  }
+}

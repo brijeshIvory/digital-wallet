@@ -1,6 +1,7 @@
 import * as actionType from '../Actions/actionsType'
 const initialState = {
   wallet_bal: null,
+  withDraw_req: null,
   isLoading: false,
   error: null,
 }
@@ -26,6 +27,25 @@ const WalletReducer = (state = initialState, action) => {
         error: action.error,
       }
 
+
+    case actionType.WITHDRAW_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: '',
+      }
+    case actionType.WITHDRAW_REQUEST_SUCCESS:
+      return {
+        ...state,
+        withDraw_req: action.data,
+        isLoading: false,
+      }
+    case actionType.WITHDRAW_REQUEST_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
+      }
     default:
       return state
   }

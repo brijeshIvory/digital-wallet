@@ -15,10 +15,7 @@ import ThirdPartyTransaction from './../Components/3rdPartyTransaction/index';
 const Router = () => {
   const token = localStorage.getItem("token");
 
-  const isLoggedin = token === null ? false : true;
-  useEffect(() => {
-    console.log(isLoggedin, token, "Router");
-  }, [isLoggedin, token]);
+  const isLoggedin = true
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />

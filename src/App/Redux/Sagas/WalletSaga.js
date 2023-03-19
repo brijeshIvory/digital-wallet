@@ -3,6 +3,7 @@ import {
   GetClientListApi,
   GetCountryApi,
   GetWallwtBalanceApi,
+  WithDrawRequestApi,
 } from '../../api/WalletApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
@@ -72,11 +73,30 @@ function* GetWalletBalanceSaga(payload) {
     })
   }
 }
+function* WithDrawRequestSaga(payload) {
+  const { withDrawData } = payload
+  const withDrawDataRes = yield call(WithDrawRequestApi, withDrawData)
+  const data = withDrawDataRes?.data.data
+  if (withDrawDataRes.data.ok === true) {
+    yield put({
+      type: actionType.WITHDRAW_REQUEST_SUCCESS,
+      data,
+    })
+  } else {
+    yield put({
+      type: actionType.WITHDRAW_REQUEST_FAIL,
+      ErrData: withDrawDataRes,
+    })
+  }
+}
+
 
 function* WalletSaga() {
   yield all([takeEvery(actionType.GET_COUNTRY, getCountries)])
   yield all([takeEvery(actionType.HAWALA_LIST, GetHawalaListsaga)])
   yield all([takeEvery(actionType.CLIENT_LIST, GetClientListsaga)])
   yield all([takeEvery(actionType.GET_WALLET_BALANCE, GetWalletBalanceSaga)])
+  yield all([takeEvery(actionType.WITHDRAW_REQUEST, WithDrawRequestSaga)])
+  
 }
 export default WalletSaga
