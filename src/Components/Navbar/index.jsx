@@ -1,59 +1,59 @@
-import Drawer from '@mui/material/Drawer'
-import './index.scss'
+import Drawer from "@mui/material/Drawer";
+import "./index.scss";
 // import Navlogo from "../../assets/img/Navlogo.jpg";
-import Divider from '@mui/material/Divider'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1'
-import HelpIcon from '@mui/icons-material/Help'
-import LogoutIcon from '@mui/icons-material/Logout'
-import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
-import { LoginStatus } from '../../App/Redux/Actions/AuthActions'
-import { useEffect } from 'react'
-import { Button } from '@mui/material'
+import Divider from "@mui/material/Divider";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import HelpIcon from "@mui/icons-material/Help";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { LoginStatus } from "../../App/Redux/Actions/AuthActions";
+import { useEffect } from "react";
+import { Button } from "@mui/material";
 function Navbar({ open, setOpen }) {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const WalletBalance = useSelector(
-    (state) => state?.wallet?.wallet_bal?.balance,
-  )
+    (state) => state?.wallet?.wallet_bal?.balance
+  );
   const token = useSelector(
-    (state) => state?.user?.loginData?.data?.data[0]?.token,
-  )
+    (state) => state?.user?.loginData?.data?.data[0]?.token
+  );
   useEffect(() => {
     if (token !== undefined) {
-      dispatch(LoginStatus(true))
+      dispatch(LoginStatus(true));
     } else {
-      dispatch(LoginStatus(false))
+      dispatch(LoginStatus(false));
     }
-  }, [token, open])
+  }, [token, open]);
   const list1 = [
     {
-      name: 'Profile',
-      link: 'profile',
+      name: "Profile",
+      link: "profile",
       icon: <PersonOutlineIcon />,
     },
     {
-      name: 'PassBook',
-      link: 'tabs/reports',
+      name: "PassBook",
+      link: "tabs/reports",
       icon: <PersonAddAlt1Icon />,
     },
     {
-      name: 'Are You Interested to be partner?',
-      link: 'concern-list',
+      name: "Are You Interested to be partner?",
+      link: "concern-list",
       icon: <HelpIcon />,
     },
-  ]
+  ];
 
   const list2 = [
     {
-      name: 'Logout',
-      link: './profile',
+      name: "Logout",
+      link: "./profile",
       icon: <LogoutIcon />,
     },
-  ]
+  ];
   return (
     <Drawer open={open} className="navbar">
       <div className="navbar_header">
@@ -62,7 +62,7 @@ function Navbar({ open, setOpen }) {
           <h2>Logo</h2>
           <ArrowCircleLeftOutlinedIcon
             onClick={() => setOpen(false)}
-            sx={{ width: '30px', height: '30px' }}
+            sx={{ width: "30px", height: "30px" }}
           />
         </div>
 
@@ -83,15 +83,15 @@ function Navbar({ open, setOpen }) {
           ))}
         </div>
 
-        <div>
+        <div className="navbar_logout">
           <Divider />
           <Button
-          sx={{color:"#000"}}
+            sx={{ color: "#aca6a6" }}
             className="list"
             onClick={() => {
-              localStorage.clear()
-              navigate('/')
-              setOpen(false)
+              localStorage.clear();
+              navigate("/");
+              setOpen(false);
             }}
           >
             <LogoutIcon />
@@ -100,7 +100,7 @@ function Navbar({ open, setOpen }) {
         </div>
       </div>
     </Drawer>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
