@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LoginStatus } from '../../App/Redux/Actions/AuthActions'
 import { useEffect } from 'react'
+import { Button } from '@mui/material'
 function Navbar({ open, setOpen }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -27,7 +28,7 @@ function Navbar({ open, setOpen }) {
     } else {
       dispatch(LoginStatus(false))
     }
-  }, [open, token])
+  }, [token, open])
   const list1 = [
     {
       name: 'Profile',
@@ -84,19 +85,18 @@ function Navbar({ open, setOpen }) {
 
         <div>
           <Divider />
-          <Link>
-            <div
-              className="list"
-              onClick={() => {
-                localStorage.clear()
-                navigate('/')
-                setOpen(false)
-              }}
-            >
-              <LogoutIcon />
-              <p>Logout</p>
-            </div>
-          </Link>
+          <Button
+          sx={{color:"#000"}}
+            className="list"
+            onClick={() => {
+              localStorage.clear()
+              navigate('/')
+              setOpen(false)
+            }}
+          >
+            <LogoutIcon />
+            Logout
+          </Button>
         </div>
       </div>
     </Drawer>

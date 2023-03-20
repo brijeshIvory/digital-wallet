@@ -52,3 +52,9 @@ export const LoginStatus = (loginStatus) => {
     loginStatus
   }
 }
+export const ChangePassword = (changepassDetails) => {
+  return {
+    type: actionType.CHANGE_PASSWORD,
+    changepassDetails
+  }
+}

@@ -76,3 +76,15 @@ export function* ForgetPasswordApi(ForgetPasswordDetails) {
     })
   return forgetpassword
 }
+
+export function* ChangePasswordApi(changepassDetails) {
+  const changePassword = yield axios
+    .post(`${base_url}/changepassword`, changepassDetails)
+    .then(function (response) {
+      return response
+    })
+    .catch(function (error) {
+      return error.response
+    })
+  return changePassword
+}

@@ -5,6 +5,7 @@ import {
   VerifyOtpApi,
   UserLoginApi,
   ForgetPasswordApi,
+  ChangePasswordApi,
 } from '../../api/authApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
@@ -81,8 +82,18 @@ function* GetUserDetailsSaga(payload) {
 }
 
 function* forgetPassword(payload) {
-  const { ForgetPasswordDetails } = payload
-  const ForgotPassDetail = yield call(ForgetPasswordApi, ForgetPasswordDetails)
+  const { changepassDetails } = payload
+  const ForgotPassDetail = yield call(ForgetPasswordApi, changepassDetails)
+}
+function* chnagePasswordSaga(payload) {
+  const { changepassDetails } = payload
+  const changepassRes = yield call(ChangePasswordApi, changepassDetails)
+  if (changepassRes.data.ok == true) {
+    yield put({
+      type: actionType.CHANGE_PASSWORD_SUCCESS
+    })
+    toast('Your password Change Succesfully!')
+  }
 }
 
 function* AuthSaga() {
@@ -93,5 +104,6 @@ function* AuthSaga() {
   yield all([takeEvery(actionType.USER_LOGIN, userLogin)])
   yield all([takeEvery(actionType.USER_REGISTRATION, userRegistration)])
   yield all([takeEvery(actionType.FORGET_PASSWORD, forgetPassword)])
+  yield all([takeEvery(actionType.CHANGE_PASSWORD, chnagePasswordSaga)])
 }
 export default AuthSaga

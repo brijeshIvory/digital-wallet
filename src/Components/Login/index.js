@@ -7,7 +7,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Drawer from "@mui/material/Drawer";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
-import ForgotPassword from "../Forgot password";
+import ForgotPassword from "../Forgotpassword";
 import MenuItem from "@mui/material/MenuItem";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
