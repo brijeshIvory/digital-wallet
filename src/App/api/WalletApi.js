@@ -56,12 +56,9 @@ export function* GetClientListApi() {
   const clientList = yield axios
     .post(`${base_url}/clilentlist`)
     .then(function (response) {
-      console.log(response, 'Client List data responce')
       return response
     })
     .catch(function (error) {
-      console.log(error, 'Cliet List data responce')
-
       return error.response
     })
 

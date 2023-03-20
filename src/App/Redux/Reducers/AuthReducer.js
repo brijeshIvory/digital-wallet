@@ -6,6 +6,7 @@ const initialState = {
   userDetail: null,
   otpVerification: null,
   loginData: null,
+  isLogin:false
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -96,6 +97,12 @@ const AuthReducer = (state = initialState, action) => {
         error: action?.loginErrData,
         isLoading: false,
       };
+      case actionType.USER_LOGIN_STATUS:
+        return {
+          ...state,
+        isLogin:action.loginStatus
+        };
+      
     default:
       return state;
   }
