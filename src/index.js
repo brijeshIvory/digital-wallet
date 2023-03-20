@@ -35,7 +35,7 @@ root.render(
             fontStyle: "normal",
             fontStretch: "normal",
             fontWeight: "500",
-            fontSize : "16px",
+            fontSize : "12px",
             margin: "0px 0px 1rem 5rem",
           }}
         />

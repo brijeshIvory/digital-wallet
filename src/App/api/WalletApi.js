@@ -104,3 +104,14 @@ export function* ThridPartyTransactionApi(TransData) {
     })
   return TransDataRes
 }
+export function* DealerUserApi(userId) {
+  const dealerUser = yield axios
+    .post(`${base_url}/asdealor`, userId)
+    .then(function (response) {
+      return response
+    })
+    .catch(function (error) {
+      return error.response
+    })
+  return dealerUser
+}

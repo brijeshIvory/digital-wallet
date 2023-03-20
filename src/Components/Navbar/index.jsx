@@ -11,11 +11,15 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LoginStatus } from '../../App/Redux/Actions/AuthActions'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
+import BeingPartner from '../Register/BeingPartner'
 function Navbar({ open, setOpen }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const userData = useSelector((state) => state.user?.userDetail)
+
+  const [openPopUp, setOpenPopUp] = useState(false)
   const WalletBalance = useSelector(
     (state) => state?.wallet?.wallet_bal?.balance,
   )
@@ -40,11 +44,7 @@ function Navbar({ open, setOpen }) {
       link: 'tabs/reports',
       icon: <PersonAddAlt1Icon />,
     },
-    {
-      name: 'Are You Interested to be partner?',
-      link: 'concern-list',
-      icon: <HelpIcon />,
-    },
+
   ]
 
   const list2 = [
@@ -55,51 +55,62 @@ function Navbar({ open, setOpen }) {
     },
   ]
   return (
-    <Drawer open={open} className="navbar">
-      <div className="navbar_header">
-        {/* <img src={Navlogo} alt="navlogo" /> */}
-        <div className="navbar_logo">
-          <h2>Logo</h2>
-          <ArrowCircleLeftOutlinedIcon
-            onClick={() => setOpen(false)}
-            sx={{ width: '30px', height: '30px' }}
-          />
-        </div>
+    <>
+      <Drawer open={open} className="navbar">
+        <div className="navbar_header">
+          {/* <img src={Navlogo} alt="navlogo" /> */}
+          <div className="navbar_logo">
+            <h2>Logo</h2>
+            <ArrowCircleLeftOutlinedIcon
+              onClick={() => setOpen(false)}
+              sx={{ width: '30px', height: '30px' }}
+            />
+          </div>
 
-        <div className="navbar_monumber">+917867854445</div>
-        <Divider />
-        <div className="walletBalancetitle">Wallet Balance</div>
-        <div className="walletBalance">{WalletBalance ? WalletBalance : 0}</div>
-      </div>
-      <div className="navbar_body">
-        <div>
-          {list1.map((obj) => (
-            <Link to={obj.link} key={obj.name}>
+          <div className="navbar_monumber">+{userData?.phone}</div>
+          {/* <Divider /> */}
+          {/* <div className="walletBalancetitle">Wallet Balance</div>
+          <div className="walletBalance">{WalletBalance ? WalletBalance : 0}</div> */}
+        </div>
+        <div className="navbar_body">
+          <div>
+            {list1.map((obj) => (
+              <Link to={obj.link} key={obj.name}>
+                <div className="list">
+                  <div>{obj.icon}</div>
+                  <p>{obj.name}</p>
+                </div>
+              </Link>
+            ))}
+            <Link onClick={() => setOpenPopUp(true)}>
               <div className="list">
-                <div>{obj.icon}</div>
-                <p>{obj.name}</p>
+                <div><HelpIcon /></div>
+                <p>Are You Interested to be dealer?</p>
               </div>
             </Link>
-          ))}
+          </div>
+          <div>
+          </div>
+          <div>
+            <Divider />
+            <Button
+              sx={{ color: "#000" }}
+              className="list"
+              onClick={() => {
+                localStorage.clear()
+                navigate('/')
+                setOpen(false)
+              }}
+            >
+              <LogoutIcon />
+              Logout
+            </Button>
+          </div>
         </div>
-
-        <div>
-          <Divider />
-          <Button
-          sx={{color:"#000"}}
-            className="list"
-            onClick={() => {
-              localStorage.clear()
-              navigate('/')
-              setOpen(false)
-            }}
-          >
-            <LogoutIcon />
-            Logout
-          </Button>
-        </div>
-      </div>
-    </Drawer>
+      </Drawer>
+      <BeingPartner openPopUp={openPopUp} setOpenPopUp={setOpenPopUp}
+      />
+    </>
   )
 }
 

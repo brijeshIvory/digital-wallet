@@ -47,21 +47,28 @@ function* userLogin(payload) {
 function* sendOtp(payload) {
   const { otp } = payload
   const otpData = yield call(SendOtpApi, otp)
+  if(otpData.data.ok === true){
+    toast("Otp Send Successfully")
+  }else{
+    toast(otpData.data.message)
+  }
 }
 
 function* verifyOtp(payload) {
   const { otpData } = payload
   const otpResp = yield call(VerifyOtpApi, otpData)
-  if (otpResp?.status === 200) {
+  if (otpResp?.data.ok === true) {
     yield put({
       type: actionType.VERIFY_OTP_SUCCESS,
       otpResp,
     })
+    toast("Successfully Register !")
   } else {
     yield put({
       type: actionType.VERIFY_OTP_FAIL,
       otpRespErr: otpResp,
     })
+    toast(otpResp.data.message)
   }
 }
 function* GetUserDetailsSaga(payload) {
