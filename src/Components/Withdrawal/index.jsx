@@ -13,22 +13,22 @@ function Withdrawal() {
   )
   const formik = useFormik({
     initialValues: {
-      withdraw_amount: '',
+      withdraw_amount: "",
     },
     validationSchema: withdraweAmountValidationSchema,
     onSubmit: (values) => {
       if (values.withdraw_amount) {
-        navigate(`/bank-details/${values.withdraw_amount}`)
+        navigate(`/bank-details/${values.withdraw_amount}`);
       }
     },
-  })
+  });
 
   return (
     <div className="withdraw_main">
       <div className="withdraw_head">
         <div className="withdraw_title">
-          <Link to={'/'}>
-            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
+          <Link to={"/"}>
+            <ArrowCircleLeftIcon sx={{ width: "40px", height: "35px" }} />
           </Link>
           <div className="withdraw_subtitle">Withdraw</div>
         </div>
@@ -57,13 +57,14 @@ function Withdrawal() {
               variant="standard"
               value={formik.values.withdraw_amount}
               onChange={formik.handleChange}
+              placeholder="Enter here"
             />
             {formik.errors.withdraw_amount ? (
               <div className="error_text">{formik.errors.withdraw_amount}</div>
             ) : null}
-            <div style={{ marginBottom: '1rem', fontSize: '14px' }}>
-              {' '}
-              *Minimum withdraw amount is 10 coins{' '}
+            <div style={{ marginBottom: "1rem", fontSize: "14px" }}>
+              {" "}
+              *Minimum withdraw amount is 10 coins{" "}
             </div>
 
             <button
@@ -77,7 +78,7 @@ function Withdrawal() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Withdrawal
+export default Withdrawal;

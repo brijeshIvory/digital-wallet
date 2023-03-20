@@ -41,20 +41,19 @@ export const verifyOtp = (payload) => {
 export const Forgetpassword = (payload) => {
   return {
     type: actionType.FORGET_PASSWORD,
-    ForgetPasswordDetails : payload
-  }
-}
-
+    ForgetPasswordDetails: payload,
+  };
+};
 
 export const LoginStatus = (loginStatus) => {
   return {
     type: actionType.USER_LOGIN_STATUS,
-    loginStatus
-  }
-}
+    loginStatus,
+  };
+};
 export const ChangePassword = (changepassDetails) => {
   return {
     type: actionType.CHANGE_PASSWORD,
-    changepassDetails
-  }
-}
+    changepassDetails,
+  };
+};

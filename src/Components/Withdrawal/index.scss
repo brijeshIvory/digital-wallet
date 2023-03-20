@@ -2,31 +2,22 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    rgb(237, 168, 6) 0%,
-    rgb(216, 129, 13) 35%,
-    rgb(237, 168, 6) 100%
-  );
+  background-color: #01b0ff;
 }
 .withdraw_head {
-  flex: 0.15;
-  background: linear-gradient(
-    90deg,
-    rgb(237, 168, 6) 0%,
-    rgb(216, 129, 13) 35%,
-    rgb(237, 168, 6) 100%
-  );
+  flex: 0.1;
+  background-color: #01b0ff;
+  margin-bottom: 2rem;
 }
 .withdraw_body {
-  flex: 0.85;
-  background-color: #000;
+  flex: 0.9;
+  background-color: #1b1d27;
   border-radius: 15px 15px 0 0;
 }
 .wallet-balance {
   width: 82%;
   height: 8rem;
-  background-color: #252424;
+  background-color: #2f354b;
   border-radius: 15px;
   margin-left: 9%;
   margin-top: -2rem;
@@ -57,7 +48,7 @@
 }
 
 .wallet-balance-data-title {
-  color: #fac000;
+  color: #01b0ff;
 }
 .wallet-balance-data {
   margin-left: 1rem;
@@ -134,13 +125,12 @@
   border-width: 0;
   outline: none;
   border-radius: 8px;
-  background-color: #252424;
+  background-color: #2f354b;
   padding: 1rem;
   color: #fff;
   font-size: 20px;
   margin-bottom: 1rem;
 }
-
 
 .withdraw_form_container {
   .MuiTextField-root {
@@ -171,7 +161,7 @@
   margin-top: 1rem;
 }
 .withdraw_button {
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background-color: #01b0ff;
   min-height: 30px;
   border-width: 0;
   border-radius: 5px;
@@ -180,17 +170,16 @@
   margin: auto;
 }
 
-.withdraw_select{
-
-  .MuiFormLabel-root.MuiInputLabel-root{
-   font-size: 16px;
+.withdraw_select {
+  .MuiFormLabel-root.MuiInputLabel-root {
+    font-size: 16px;
   }
 }
-.preview_img{
+.preview_img {
   width: -webkit-fill-available;
-    height: auto;
+  height: auto;
 }
-.withdraw_file_main{
+.withdraw_file_main {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -200,12 +189,12 @@
   margin-bottom: 2rem;
   margin-top: 1rem;
 }
-.withdraw-transfer-button{
+.withdraw-transfer-button {
   width: 76%;
   margin-left: 12%;
   height: 3rem;
   font-size: 18px;
   border-radius: 5px;
   border-width: 0;
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background: #01b0ff;
 }
