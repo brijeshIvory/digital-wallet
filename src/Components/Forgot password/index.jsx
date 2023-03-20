@@ -19,7 +19,6 @@ function ForgotPassword({ setOpenForgotPassPopup, openForgotPassPopup }) {
       confirm_password: "",
     },
     onSubmit: (values, { resetForm }) => {
-      console.log(values, "values");
       dispatch(Forgetpassword(values));
       resetForm({ values: null });
     },

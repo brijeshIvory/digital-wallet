@@ -13,13 +13,7 @@ import Passbook from "../Components/Passbook";
 import { useEffect } from "react";
 import ThirdPartyTransaction from "./../Components/3rdPartyTransaction/index";
 const Router = () => {
-  const token = localStorage.getItem("token");
 
-  const isLoggedin = token === null ? false : true;
-  useEffect(() => {
-    console.log(isLoggedin, token, "Router");
-  }, [isLoggedin, token]);
-  // const isLoggedin = false
   return (
     <Routes>
       <Route path="/" element={<NewHomePage />} />

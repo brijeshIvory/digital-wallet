@@ -1,8 +1,8 @@
 import * as yup from "yup";
 export const loginValidationSchema = yup.object({
-  phone: yup.string().required("Required !"),
-  password: yup.string().required("Required !"),
-  country_code: yup.string().required("Required !"),
+  phone: yup.string().required("Phone no is required !"),
+  password: yup.string().required("plaese Enter A password !"),
+  country_code: yup.string().required("please select Country code !"),
 });
 export const BankTransferValidationSchema = yup.object({
   bankname: yup.string().required("Bank Name is required"),
@@ -34,7 +34,7 @@ export const HawalaTransferValidationSchema = yup.object({
 });
 
 export const RegistationValidationSchema = yup.object({
-  name: yup.string().required("Required !"),
+  name: yup.string().required("Name is required !"),
   email: yup
     .string()
     .email("Invalid Email")
@@ -42,11 +42,11 @@ export const RegistationValidationSchema = yup.object({
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       "Invalid email address"
     )
-    .required("Required !"),
-  country_code: yup.string().required("Required !"),
+    .required("Email is Required !"),
+  country_code: yup.string().required("please select Country code"),
 
-  phone: yup.string().required("Required !"),
-  password: yup.string().required("Required !"),
+  phone: yup.string().required("Phone No is required !"),
+  password: yup.string().required("please Enter password !"),
 
   confirmPassword: yup
     .string()
@@ -79,12 +79,12 @@ export const ForgotPasswordValidationSchema = yup.object({
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       "Invalid email address"
     )
-    .required("Required !"),
+    .required("Email is required !"),
 
-  password: yup.string().required("Required !"),
+  password: yup.string().required("password is required !"),
 
 
-  confirm_password: yup.string().required("Required !"),
+  confirm_password: yup.string().required("please add confrim password"),
 
 });
 

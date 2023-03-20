@@ -44,3 +44,11 @@ export const Forgetpassword = (payload) => {
     ForgetPasswordDetails : payload
   }
 }
+
+
+export const LoginStatus = (loginStatus) => {
+  return {
+    type: actionType.USER_LOGIN_STATUS,
+    loginStatus
+  }
+}

@@ -12,16 +12,16 @@ import MenuItem from "@mui/material/MenuItem";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginValidationSchema } from "../../utills/ValidationSchema";
-import { loginClick } from "../../App/Redux/Actions/AuthActions";
+import { loginClick, LoginStatus } from "../../App/Redux/Actions/AuthActions";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-function Login({ open, toggleLoginDrawer, setOpenLogin }) {
+import { toast } from "react-toastify";
+function Login({ open, setOpenLogin }) {
   const dispatch = useDispatch();
   const [selectCountry, setSelectCountry] = useState({
     country: 101,
     country_code: 91,
   });
-
   const [indication, setIndication] = useState(false);
   const [openForgotPassPopup, setOpenForgotPassPopup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -39,16 +39,15 @@ function Login({ open, toggleLoginDrawer, setOpenLogin }) {
       country_code: 91,
     },
     onSubmit: (values) => {
-      console.log(values, "login value");
       dispatch(
         loginClick({
           phone: values.phone,
           password: values.password,
         })
       );
-      console.log(open, "open");
-      setOpenLogin("bottom", false);
       navigate("/");
+      setOpenLogin("bottom", false);
+      setIndication(false)
     },
     validationSchema: loginValidationSchema,
   });
@@ -63,7 +62,11 @@ function Login({ open, toggleLoginDrawer, setOpenLogin }) {
     setShowPassword(!showPassword);
   };
   useEffect(() => {
-    token !== undefined && localStorage.setItem("token", token);
+    if( token !== undefined){
+      dispatch(LoginStatus(true))
+    }else{
+      dispatch(LoginStatus(false))
+    }
   }, [token]);
   return (
     <Drawer anchor={"bottom"} open={open} className="joinNowFrom">
@@ -71,7 +74,10 @@ function Login({ open, toggleLoginDrawer, setOpenLogin }) {
       <div className="closing">
         <div
           className="closing_button"
-          onClick={toggleLoginDrawer("bottom", false)}
+          onClick={()=>{
+            setOpenLogin("bottom", false);
+            setIndication(false)
+          }}
         >
           <HighlightOffSharpIcon />
         </div>
