@@ -14,10 +14,14 @@ import { getCountriesData } from "../../App/Redux/Actions/WalletActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-function NewHomePage({ isLoggedin }) {
+function NewHomePage() {
   const dispatch = useDispatch();
-  const WalletBalance= useSelector((state) => state?.wallet?.wallet_bal?.balance)
- 
+  const WalletBalance = useSelector(
+    (state) => state?.wallet?.wallet_bal?.balance
+  );
+  const token = localStorage.getItem("token");
+  const isLoggedin = token !== "undefined" ? true : false;
+
   const data = [
     {
       to: "Party1",
@@ -40,9 +44,7 @@ function NewHomePage({ isLoggedin }) {
       Date: "28/01/2023",
     },
   ];
-  const [openJoinNow, setOpenJoinNow] = useState({
-    bottom: false,
-  });
+  const [openJoinNow, setOpenJoinNow] = useState({ bottom: false });
   const [openLogin, setOpenLogin] = useState({
     bottom: false,
   });
@@ -70,7 +72,7 @@ function NewHomePage({ isLoggedin }) {
   useEffect(() => {
     dispatch(getCountriesData());
   }, []);
-
+  console.log(isLoggedin, "isLoggedin");
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -110,18 +112,21 @@ function NewHomePage({ isLoggedin }) {
         <Login
           open={openLogin["bottom"]}
           toggleLoginDrawer={toggleLoginDrawer}
+          setOpenLogin={setOpenLogin}
         />
         <div className="new-home-page-balance">
           <div className="new-home-page-balance-title">Total Balance</div>
-          <div className="new-home-page-balance-money">{WalletBalance? WalletBalance : 0}</div>
+          <div className="new-home-page-balance-money">
+            {WalletBalance ? WalletBalance : 0}
+          </div>
         </div>
         <div className="new-home-page-buttons">
           <div className="new-home-page-button-main">
-              <Link to={"withdrawal"}>
-            <div className="new-home-page-button">
-              <BiMoneyWithdraw />
-            </div>
-              </Link>
+            <Link to={"withdrawal"}>
+              <div className="new-home-page-button">
+                <BiMoneyWithdraw />
+              </div>
+            </Link>
             <div className="new-home-page-button-title">WITHDRAW</div>
           </div>
           <div className="new-home-page-button-main">
@@ -133,10 +138,10 @@ function NewHomePage({ isLoggedin }) {
             <div className="new-home-page-button-title">DEPOSIT</div>
           </div>
           <div className="new-home-page-button-main">
-            <Link to={'third-party'}>
-            <div className="new-home-page-button">
-              <AiOutlineTransaction />
-            </div>
+            <Link to={"third-party"}>
+              <div className="new-home-page-button">
+                <AiOutlineTransaction />
+              </div>
             </Link>
             <div className="new-home-page-button-title">THIRD PARTY</div>
           </div>
@@ -146,9 +151,9 @@ function NewHomePage({ isLoggedin }) {
       <div className="latest-transaction">
         <div className="latest-transaction-title">
           <div>Latest Transactions</div>
-         
+
           <Link to={"tabs/reports"}>
-          <div style={{ color: "#595858",fontSize:"19px" }}>See All</div>
+            <div style={{ color: "#595858", fontSize: "19px" }}>See All</div>
           </Link>
         </div>
         <div className="latest-transaction-data">

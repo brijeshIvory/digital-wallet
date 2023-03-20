@@ -7,9 +7,8 @@ import { useEffect } from "react";
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
   const isAuthenticated = token !== "undefined" ? true : false;
-  useEffect(() => {
-    console.log(isAuthenticated, token, "privateRoute");
-  }, [isAuthenticated, token]);
+  // console.log(isAuthenticated, token, "privateRoute");
+
   // const isAuthenticated = false;
   return isAuthenticated ? (
     <Dashboard children={children} />

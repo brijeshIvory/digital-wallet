@@ -6,7 +6,6 @@ import { IconButton } from "@mui/material";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Drawer from "@mui/material/Drawer";
-import { MuiTelInput } from "mui-tel-input";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import ForgotPassword from "../Forgot password";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,7 +15,7 @@ import { loginValidationSchema } from "../../utills/ValidationSchema";
 import { loginClick } from "../../App/Redux/Actions/AuthActions";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-function Login({ open, toggleLoginDrawer }) {
+function Login({ open, toggleLoginDrawer, setOpenLogin }) {
   const dispatch = useDispatch();
   const [selectCountry, setSelectCountry] = useState({
     country: 101,
@@ -31,7 +30,8 @@ function Login({ open, toggleLoginDrawer }) {
   const token = useSelector(
     (state) => state?.user?.loginData?.data?.data[0]?.token
   );
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       phone: "",
@@ -46,7 +46,9 @@ function Login({ open, toggleLoginDrawer }) {
           password: values.password,
         })
       );
-      navigate("/")
+      console.log(open, "open");
+      setOpenLogin("bottom", false);
+      navigate("/");
     },
     validationSchema: loginValidationSchema,
   });

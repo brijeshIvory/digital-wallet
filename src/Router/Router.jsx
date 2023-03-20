@@ -11,7 +11,7 @@ import DepositPayment from "../Components/Deposit/DepositPayment";
 import NewHomePage from "../Components/NewHomePage";
 import Passbook from "../Components/Passbook";
 import { useEffect } from "react";
-import ThirdPartyTransaction from './../Components/3rdPartyTransaction/index';
+import ThirdPartyTransaction from "./../Components/3rdPartyTransaction/index";
 const Router = () => {
   const token = localStorage.getItem("token");
 
@@ -22,7 +22,7 @@ const Router = () => {
   // const isLoggedin = false
   return (
     <Routes>
-      <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />
+      <Route path="/" element={<NewHomePage />} />
       <Route
         path="tabs/offers"
         exact
@@ -89,7 +89,7 @@ const Router = () => {
           </PrivateRoute>
         }
       ></Route>
-        <Route
+      <Route
         path="third-party"
         element={
           <PrivateRoute>
