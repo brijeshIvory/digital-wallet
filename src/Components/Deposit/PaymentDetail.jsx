@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import './style.scss'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { useSelector } from 'react-redux'
-import { GetHawalaList } from '../../App/Redux/Actions/HavalaListAction'
-import { useDispatch } from 'react-redux'
 import {
+  GetHawalaList,
   GetDepositDetail,
   RequestDeposite,
-} from '../../App/Redux/Actions/DepositeAction'
+} from '../../App/Redux/Actions/WalletActions'
+import { useDispatch } from 'react-redux'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import ContentCopySharpIcon from '@mui/icons-material/ContentCopySharp'
 import { toast } from 'react-toastify'
@@ -62,7 +62,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
       refer_code: ReferralCode,
     }
     dispatch(RequestDeposite(PayloadData))
-    console.log(PayloadData, 'PayloadData')
+    setPreviewUrl(null)
   }
 
   return (
@@ -265,7 +265,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                       style={{
                         width: '15px',
                         height: '15px',
-                        marginLeft: '0.5rem',
+                        // marginLeft: '0.2rem',
                       }}
                     />
                   </CopyToClipboard>
@@ -345,7 +345,6 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                   <>
                     <img
                       alt="file uploader preview"
-                      objectFit="cover"
                       src={previewUrl}
                       width={441}
                       height={250}

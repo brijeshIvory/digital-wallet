@@ -1,13 +1,8 @@
 import * as yup from "yup";
 export const loginValidationSchema = yup.object({
-  phone: yup
-    .string()
-    .matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
-      message: "Invalid Indian number",
-      excludeEmptyString: false,
-    })
-    .required("A phone number is required"),
-  password: yup.string().required("Password is required"),
+  phone: yup.string().required("Required !"),
+  password: yup.string().required("Required !"),
+  country_code: yup.string().required("Required !"),
 });
 export const BankTransferValidationSchema = yup.object({
   bankname: yup.string().required("Bank Name is required"),
@@ -35,7 +30,7 @@ export const UpiTransferValidationSchema = yup.object({
 });
 export const HawalaTransferValidationSchema = yup.object({
   hawala_value: yup.string().required("Hawala Selection is required."),
-  AccountNumber: yup.string().required("Account Number is required")
+  AccountNumber: yup.string().required("Account Number is required"),
 });
 
 export const RegistationValidationSchema = yup.object({
@@ -48,23 +43,14 @@ export const RegistationValidationSchema = yup.object({
       "Invalid email address"
     )
     .required("Required !"),
-  country: yup.string().required("Required !"),
+  country_code: yup.string().required("Required !"),
 
   phone: yup.string().required("Required !"),
   password: yup.string().required("Required !"),
-  // .min(8, "Must be 8 characters or more")
-  // .matches(/[a-z]+/, "One lowercase character")
-  // .matches(/[A-Z]+/, "One uppercase character")
-  // .matches(/[@$!%*#?&]+/, "One special character(@$!%*#?&)")
-  // .matches(/\d+/, "One number"),
 
-  confirmPassword: yup.string().required("Required !"),
-  //   when("password", {
-  //     is: (val) => (val && val.length > 0 ? true : false),
-  //     then: yup
-  //       .string()
-  //       .oneOf([yup.ref("password")], "password need to be the same"),
-  //   }),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 export const DepositeAmountValidationSchema = yup.object({
   amount: yup
@@ -74,6 +60,15 @@ export const DepositeAmountValidationSchema = yup.object({
     .min(10, "To small")
     .min(0, "Not negative number"),
 });
+export const withdraweAmountValidationSchema = yup.object({
+  withdraw_amount: yup
+    .number()
+    .required("Coins is Required")
+    .max(10000000, "To big")
+    .min(10, "To small")
+    .min(0, "Not negative number"),
+});
+
 
 export const ForgotPasswordValidationSchema = yup.object({
 
@@ -91,4 +86,17 @@ export const ForgotPasswordValidationSchema = yup.object({
 
   confirm_password: yup.string().required("Required !"),
 
+});
+
+export const ThridPartyValidation = yup.object({
+  id: yup
+  .string()
+  .required("Id is Required"),
+
+  amount: yup
+    .number()
+    .required("Amount is Required")
+    .max(10000000, "To big")
+    .min(10, "To small")
+    .min(0, "Not negative number"),
 });

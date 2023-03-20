@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.scss'
 import TextField from '@mui/material/TextField'
 import Drawer from '@mui/material/Drawer'
 import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
 import { useFormik } from 'formik'
 import { BankTransferValidationSchema } from '../../utills/ValidationSchema'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { WithDrawRequest } from '../../App/Redux/Actions/WalletActions'
 function BankTransfer({ bankFormOpen, setBankFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
+  const [indication, setIndication] = useState(false)
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       bankname: '',
@@ -15,14 +22,29 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
     },
     validationSchema: BankTransferValidationSchema,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2))
+      const PayloadData = {
+        notes: `${'BankTransfer'},${values.bankname},${values.accountnumber},${
+          values.ifsccode
+        },${values.accountholdername}`,
+        amount: amount,
+        user_id: userId,
+      }
+      dispatch(WithDrawRequest(PayloadData))
+      setBankFormOpen(false)
+      setIndication(false)
     },
   })
   return (
     <Drawer anchor={'bottom'} open={bankFormOpen} className="joinNowFrom">
       <div className="yellow_strip"></div>
       <div className="closing">
-        <div className="closing_button" onClick={() => setBankFormOpen(false)}>
+        <div
+          className="closing_button"
+          onClick={() => {
+            setBankFormOpen(false)
+            setIndication(false)
+          }}
+        >
           <HighlightOffSharpIcon />
         </div>
       </div>
@@ -48,7 +70,7 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
                 shrink: true,
               }}
             />
-            {formik.errors.bankname ? (
+            {indication && formik.errors.bankname ? (
               <div className="error_text">{formik.errors.bankname}</div>
             ) : null}
 
@@ -64,7 +86,7 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
                 shrink: true,
               }}
             />
-            {formik.errors.accountnumber ? (
+            {indication && formik.errors.accountnumber ? (
               <div className="error_text">{formik.errors.accountnumber}</div>
             ) : null}
             <TextField
@@ -79,7 +101,7 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
                 shrink: true,
               }}
             />
-            {formik.errors.ifsccode ? (
+            {indication && formik.errors.ifsccode ? (
               <div className="error_text">{formik.errors.ifsccode}</div>
             ) : null}
             <TextField
@@ -94,7 +116,7 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
                 shrink: true,
               }}
             />
-            {formik.errors.accountholdername ? (
+            {indication && formik.errors.accountholdername ? (
               <div className="error_text">
                 {formik.errors.accountholdername}
               </div>
@@ -104,6 +126,7 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
                 type="submit"
                 disabled={!formik.isValid}
                 className="withdrawal_button"
+                onClick={() => setIndication(true)}
               >
                 Submit
               </button>

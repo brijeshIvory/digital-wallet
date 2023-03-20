@@ -12,7 +12,6 @@ import './style.scss'
 import PaymentDetail from './PaymentDetail'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import ReferalCodeDialog from '../ReferralPopup/ReferralPopup'
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: '0.5rem',
@@ -138,7 +137,7 @@ const DepositPayment = () => {
                     <div className="card_image">
                       <Avatar src={UPI} alt="UPI" />
                     </div>
-                    <h3 className="card_text">Hawala</h3>
+                    <h3 className="card_text">UPI</h3>
                   </Item>
                 </Grid>
                 <Grid item xs={2} sm={4} md={4}>

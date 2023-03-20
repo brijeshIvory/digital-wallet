@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.scss'
 import TextField from '@mui/material/TextField'
 import Drawer from '@mui/material/Drawer'
 import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
 import { useFormik } from 'formik'
 import { UpiTransferValidationSchema } from '../../utills/ValidationSchema'
+import { useDispatch, useSelector } from 'react-redux'
+import { WithDrawRequest } from '../../App/Redux/Actions/WalletActions'
 function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
+  const [indication, setIndication] = useState(false)
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -13,14 +19,23 @@ function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
     },
     validationSchema: UpiTransferValidationSchema,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2))
+      const PayloadData = {
+        notes: `${'UPI'},${values.name},${values.upiId}`,
+        amount: amount,
+        user_id: userId,
+      }
+      dispatch(WithDrawRequest(PayloadData))
+      setUpiFormOpen(false)
+      setIndication(false)
     },
   })
   return (
     <Drawer anchor={'bottom'} open={UpiFormOpen} className="joinNowFrom">
       <div className="yellow_strip"></div>
       <div className="closing">
-        <div className="closing_button" onClick={() => setUpiFormOpen(false)}>
+        <div className="closing_button" onClick={() => {setUpiFormOpen(false)
+         setIndication(false)
+        }}>
           <HighlightOffSharpIcon />
         </div>
       </div>
@@ -46,7 +61,7 @@ function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
                 shrink: true,
               }}
             />
-            {formik.errors.name ? (
+            {indication && formik.errors.name ? (
               <div className="error_text">{formik.errors.name}</div>
             ) : null}
 
@@ -62,7 +77,7 @@ function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
                 shrink: true,
               }}
             />
-            {formik.errors.upiId ? (
+            {indication && formik.errors.upiId ? (
               <div className="error_text">{formik.errors.upiId}</div>
             ) : null}
             <div className="withdrawal_button_div">
@@ -70,6 +85,7 @@ function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
                 type="submit"
                 disabled={!formik.isValid}
                 className="withdrawal_button"
+                onClick={() => setIndication(true)}
               >
                 Submit
               </button>

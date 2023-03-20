@@ -13,19 +13,21 @@ import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navbar({ open, setOpen }) {
+  const WalletBalance= useSelector((state) => state?.wallet?.wallet_bal?.balance)
   const list1 = [
     {
       name: "Profile",
       link: "profile",
       icon: <PersonOutlineIcon />,
     },
-    {
-      name: "Withdrawal Details",
-      link: "bank-details",
-      icon: <OutputIcon />,
-    },
+    // {
+    //   name: "Withdrawal Details",
+    //   link: "bank-details",
+    //   icon: <OutputIcon />,
+    // },
     // {
     //   name: "Wallet to Wallet Transfer",
     //   link: "wallet-to-wallet",
@@ -36,30 +38,19 @@ function Navbar({ open, setOpen }) {
       link: "tabs/reports",
       icon: <PersonAddAlt1Icon />,
     },
-    {
-      name: "Notifications",
-      link: "notification",
-      icon: <NotificationsNoneIcon />,
-    },
+    // {
+    //   name: "Notifications",
+    //   link: "notification",
+    //   icon: <NotificationsNoneIcon />,
+    // },
     {
       name: "Are You Interested to be partner?",
       link: "concern-list",
       icon: <HelpIcon />,
     },
-    // {
-    //   name: "Refer & Earn",
-    //   link: "refer-and-earn",
-    //   icon: <AttachMoneyIcon />,
-    // },
-    // {
-    //   name: "Terms",
-    //   link: "terms",
-    //   icon: <ArticleIcon />,
-    // },
   ];
 
   const list2 = [
-
     {
       name: "Logout",
       link: "./profile",
@@ -81,7 +72,7 @@ function Navbar({ open, setOpen }) {
         <div className="navbar_monumber">+917867854445</div>
         <Divider />
         <div className="walletBalancetitle">Wallet Balance</div>
-        <div className="walletBalance">0</div>
+        <div className="walletBalance">{WalletBalance? WalletBalance : 0}</div>
       </div>
       <div className="navbar_body">
         <div>
@@ -97,14 +88,14 @@ function Navbar({ open, setOpen }) {
 
         <div>
           <Divider />
-          {list2.map((obj) => (
-            <Link to={obj.link} key={obj.name}>
-              <div className="list">
-                <div>{obj.icon}</div>
-                <p>{obj.name}</p>
-              </div>
-            </Link>
-          ))}
+          {/* {list2.map((obj) => ( */}
+          <Link>
+            <div className="list" onClick={() => localStorage.clear()}>
+              <LogoutIcon />
+              <p>Logout</p>
+            </div>
+          </Link>
+          {/* ))} */}
         </div>
       </div>
     </Drawer>

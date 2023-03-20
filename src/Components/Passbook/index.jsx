@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
-import { GetClientList } from "../../App/Redux/Actions/HavalaListAction";
+import { GetClientList } from "../../App/Redux/Actions/WalletActions";
 import {getTransactions} from "../../App/Redux/Actions/TransactionAction";
 import { useDispatch, useSelector } from "react-redux";
 import Table from '@mui/material/Table';

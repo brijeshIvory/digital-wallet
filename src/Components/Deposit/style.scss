@@ -23,19 +23,19 @@
   background-color: #000;
   border-radius: 15px 15px 0 0;
 }
-.wallet_balance {
+.wallet-balance {
   width: 82%;
   height: 8rem;
-  // background-color: #252424;
+  background-color: #252424;
   border-radius: 15px;
   margin-left: 9%;
-  // margin-top: -2rem;
+  margin-top: -2rem;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 
   img {
-    width: 60px;
+    width: 50px;
   }
 }
 .deposit_title {
@@ -55,16 +55,47 @@
   color: #fff;
   text-align: center;
 }
-.wallet_balance-data-title {
-  color: #fff;
+
+.wallet-balance-data-title {
+  color: #fac000;
 }
-.wallet_balance-data {
-  color: #fff;
+.wallet-balance-data {
+  margin-left: 1rem;
 }
-.wallet_balance-data-amount {
+.wallet-balance-data-amount {
   font-size: 25px;
   color: #fff;
   text-align: center;
+}
+.wallet-transfer-details-balance {
+  margin-bottom: 3rem;
+
+  hr {
+    border: none;
+    border-top: 3px dotted rgb(169, 165, 165);
+  }
+}
+.wallet-transfer-details {
+  color: #fff;
+  padding: 10%;
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 2rem;
+  }
+  .MuiInputLabel-root {
+    font-size: 20px;
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
 }
 .deposit_details-balance {
   margin-bottom: 1rem;
@@ -118,7 +149,7 @@
 }
 .Payment_method_head {
   // flex: 0.11;
-  background-color: #fac000;
+  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
   padding-bottom: 2rem;
 }
 .Payment_method_body {
@@ -223,7 +254,7 @@
     display: block;
     width: 80px;
     height: 3px;
-    background: #fac000;
+    background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
     left: 0;
     top: 86%;
     position: absolute;
@@ -391,4 +422,13 @@
   padding: 0.5rem;
   margin-bottom: 2rem;
   margin-top: 1rem;
+}
+.deposit-transfer-button{
+  width: 76%;
+  margin-left: 12%;
+  height: 3rem;
+  font-size: 18px;
+  border-radius: 5px;
+  border-width: 0;
+  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
 }

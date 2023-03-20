@@ -1,4 +1,4 @@
-import { GetDepositDetailApi, RequestDepositApi } from '../../api/DepositApi'
+import { GetDepositDetailApi, RequestDepositApi } from '../../api/WalletApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
 function* GetDepositDetailSaga() {

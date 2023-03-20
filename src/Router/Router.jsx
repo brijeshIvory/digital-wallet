@@ -1,17 +1,25 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import OfferPage from '../Components/Offer'
-import ReferAndEarn from '../Components/PrivacyAndTearm/ReferAndEarn'
-import Profile from '../Components/Profile'
-import WithdrawalDetail from '../Components/WithdrawalDetail/index'
-import PrivateRoute from './PrivateRoute'
-import WalletTransfer from '../Components/WalletTransfer/'
-import Deposit from '../Components/Deposit'
-import DepositPayment from '../Components/Deposit/DepositPayment'
-import NewHomePage from '../Components/NewHomePage'
-import Passbook from '../Components/Passbook'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import OfferPage from "../Components/Offer";
+import ReferAndEarn from "../Components/PrivacyAndTearm/ReferAndEarn";
+import Profile from "../Components/Profile";
+import WithdrawalDetail from "../Components/WithdrawalDetail/index";
+import PrivateRoute from "./PrivateRoute";
+import Withdrawal from "../Components/Withdrawal";
+import Deposit from "../Components/Deposit";
+import DepositPayment from "../Components/Deposit/DepositPayment";
+import NewHomePage from "../Components/NewHomePage";
+import Passbook from "../Components/Passbook";
+import { useEffect } from "react";
+import ThirdPartyTransaction from './../Components/3rdPartyTransaction/index';
 const Router = () => {
-  const isLoggedin = false
+  const token = localStorage.getItem("token");
+
+  const isLoggedin = token === null ? false : true;
+  useEffect(() => {
+    console.log(isLoggedin, token, "Router");
+  }, [isLoggedin, token]);
+  // const isLoggedin = false
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />
@@ -33,7 +41,7 @@ const Router = () => {
         }
       />
       <Route
-        path="bank-details"
+        path="bank-details/:coins"
         element={
           <PrivateRoute>
             <WithdrawalDetail />
@@ -41,10 +49,10 @@ const Router = () => {
         }
       ></Route>
       <Route
-        path="wallet-to-wallet"
+        path="withdrawal"
         element={
           <PrivateRoute>
-            <WalletTransfer />
+            <Withdrawal />
           </PrivateRoute>
         }
       ></Route>
@@ -81,8 +89,16 @@ const Router = () => {
           </PrivateRoute>
         }
       ></Route>
+        <Route
+        path="third-party"
+        element={
+          <PrivateRoute>
+            <ThirdPartyTransaction />
+          </PrivateRoute>
+        }
+      ></Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;

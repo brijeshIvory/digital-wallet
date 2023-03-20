@@ -1,23 +1,17 @@
-.withdraw_main {
+.third_party_transaction_main {
   height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #000;
 }
-.withdraw_head {
+.third_party_transaction_head {
   // flex: 0.11;
   background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
   padding-bottom: 2rem;
 }
 
-.withdraw_body {
-  // flex: 0.89;
-  background-color: #000;
-  padding: 1rem;
-  // border-radius: 15px 15px 0 0;
-}
 
-.withdraw_title {
+.third_party_transaction_title {
   height: 50px;
   padding: 15px;
 
@@ -28,20 +22,20 @@
     color: #fff;
   }
 }
-.withdrawal_subtitle {
-  font-size: 12px;
+
+.third_party_transaction_subtitle{
+  padding-top: 0.75rem;
+  font-size: 22px;
   color: #fff;
-  font-weight: 400;
-  line-height: 1.2rem;
-  margin-top: 2rem;
+  text-align: center;
 }
 
-.withdrawal_top {
+.third_party_transaction_top {
   color: #fff;
   background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
   margin-bottom: 1rem;
 }
-.withdrawal_bottom {
+.third_party_transaction_bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +43,7 @@
   flex: 0.88;
   background-color: #000;
 }
-.withdrawal_user_detail {
+.third_party_transaction_user_detail {
   display: flex;
   padding: 1rem;
   justify-content: center;
@@ -57,81 +51,29 @@
   border-radius: 15px;
   width: -webkit-fill-available;
 }
-.withdrawal_user_info {
+.third_party_transaction_user_info {
   margin-left: 16px;
   text-align: center;
 }
-.withdrawal_user_name {
+.third_party_transaction_user_name {
   color: #fff;
   font-size: 16px;
   font-weight: 500;
 }
-.withdrawal_user_mobile {
+.third_party_transaction_user_mobile {
   font-size: 16px;
   color: #fff;
   margin-top: 2px;
 }
 
-.bank-details {
-  margin-top: 33px;
-}
-
-.bank-details-list {
-  margin-top: 14px;
-  border-radius: 10px;
-  width: -webkit-fill-available;
-}
-
-.bank-details-head {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.bank-detail {
-  display: flex;
-  padding: 20px;
-  margin-bottom: 1rem;
-  justify-content: space-between;
-  background-color: #2b2929;
-  border-radius: 10px;
-
-  .bank-detail-title {
-    color: #fff;
-    font-size: 14px;
-    font-weight: 200;
-  }
-
-  .bank-detail-desc {
-    font-size: 14px;
-    color: #fff;
-    margin-top: 2px;
-  }
-
-  .bank-detail-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 50%;
-  }
-
-  .bank-detail-sum {
-    color: #2b2929;
-    background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
-    // height: 4vh;
-  }
-  .bank-detail-sum:hover {
-    color: #2b2929;
-    background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
-  }
-}
-.withdrawal_form {
+.third_party_transaction_form {
   padding: 0 30px 30px 30px;
+  margin-top: 2rem;
 }
-.withdrawal_form_title h3 {
+.third_party_transaction_form_title{
+  margin-bottom: 2rem;
+}
+.third_party_transaction_form_title h3 {
   color: #fff;
   padding-bottom: 5px;
   display: inline;
@@ -140,7 +82,7 @@
   font-size: 20px;
   font-weight: 400;
 }
-.withdrawal_form_title h3::before {
+.third_party_transaction_form_title h3::before {
   content: '';
   display: block;
   width: 60px;
@@ -151,7 +93,7 @@
   position: absolute;
 }
 
-.withdrawal_form_container {
+.third_party_transaction_form_container {
   .MuiTextField-root {
     width: 100%;
     border-bottom: 2px solid #fff;
@@ -173,13 +115,13 @@
     color: #fff;
   }
 }
-.withdrawal_button_div {
+.third_party_transaction_button_div {
   width: 100%;
   display: flex;
   align-items: center;
   margin-top: 1rem;
 }
-.withdrawal_button {
+.third_party_transaction_button {
   background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
   min-height: 30px;
   border-width: 0;
@@ -189,7 +131,7 @@
   margin: auto;
 }
 
-.withdrawal_select{
+.third_party_transaction_select{
 
   .MuiFormLabel-root.MuiInputLabel-root{
    font-size: 16px;
@@ -199,7 +141,7 @@
   width: -webkit-fill-available;
     height: auto;
 }
-.withdrawal_file_main{
+.third_party_transaction_file_main{
   display: flex;
   justify-content: center;
   flex-direction: column;

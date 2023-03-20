@@ -10,14 +10,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Register from "../Register";
 import Login from "../Login";
-import { getCountriesData } from "../../App/Redux/Actions/CountryAction";
-import {GetUserDetails} from '../../App/Redux/Actions/AuthActions'
+import { getCountriesData } from "../../App/Redux/Actions/WalletActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function NewHomePage({ isLoggedin }) {
   const dispatch = useDispatch();
-
+  const WalletBalance= useSelector((state) => state?.wallet?.wallet_bal?.balance)
+ 
   const data = [
     {
       to: "Party1",
@@ -67,13 +67,10 @@ function NewHomePage({ isLoggedin }) {
 
     setOpenLogin({ ...openLogin, [anchor]: open });
   };
-const userdetailpaylod={
-  "id":3
-}
   useEffect(() => {
-    dispatch(GetUserDetails(userdetailpaylod))
     dispatch(getCountriesData());
   }, []);
+
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -116,13 +113,15 @@ const userdetailpaylod={
         />
         <div className="new-home-page-balance">
           <div className="new-home-page-balance-title">Total Balance</div>
-          <div className="new-home-page-balance-money">50000</div>
+          <div className="new-home-page-balance-money">{WalletBalance? WalletBalance : 0}</div>
         </div>
         <div className="new-home-page-buttons">
           <div className="new-home-page-button-main">
+              <Link to={"withdrawal"}>
             <div className="new-home-page-button">
               <BiMoneyWithdraw />
             </div>
+              </Link>
             <div className="new-home-page-button-title">WITHDRAW</div>
           </div>
           <div className="new-home-page-button-main">
@@ -134,9 +133,11 @@ const userdetailpaylod={
             <div className="new-home-page-button-title">DEPOSIT</div>
           </div>
           <div className="new-home-page-button-main">
+            <Link to={'third-party'}>
             <div className="new-home-page-button">
               <AiOutlineTransaction />
             </div>
+            </Link>
             <div className="new-home-page-button-title">THIRD PARTY</div>
           </div>
         </div>
@@ -145,7 +146,10 @@ const userdetailpaylod={
       <div className="latest-transaction">
         <div className="latest-transaction-title">
           <div>Latest Transactions</div>
-          <div style={{ color: "#595858" }}>See All</div>
+         
+          <Link to={"tabs/reports"}>
+          <div style={{ color: "#595858",fontSize:"19px" }}>See All</div>
+          </Link>
         </div>
         <div className="latest-transaction-data">
           {data.map((ele, idx) => (
