@@ -1,0 +1,23 @@
+.transaction-detail-main {
+  background-color: #fac00098;
+  .MuiDialog-paper {
+    padding: 30px;
+    border-radius: 15px;
+    background-color: #000;
+    color: white;
+  }
+}
+.transaction-detail-close-div {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2rem;
+}
+
+.transaction-details-data {
+  .transaction-detail {
+    margin-bottom: 0.5rem;
+  }
+  .other-details {
+    margin-top: 2rem;
+  }
+}
