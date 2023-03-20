@@ -13,7 +13,6 @@ import Passbook from "../Components/Passbook";
 import { useEffect } from "react";
 import ThirdPartyTransaction from "./../Components/3rdPartyTransaction/index";
 const Router = () => {
-
   return (
     <Routes>
       <Route path="/" element={<NewHomePage />} />
