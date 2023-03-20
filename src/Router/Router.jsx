@@ -18,6 +18,7 @@ const Router = () => {
   useEffect(() => {
     console.log(isLoggedin, token, "Router");
   }, [isLoggedin, token]);
+  // const isLoggedin = false
   return (
     <Routes>
       <Route path="/" element={<NewHomePage isLoggedin={isLoggedin} />} />
