@@ -1,36 +1,36 @@
 import React, { useState } from 'react'
-import './style.scss'
+import './index.scss'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import CoinIcon from '../../assets/img/coins-icon.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
-import { DepositeAmountValidationSchema } from '../../utills/ValidationSchema'
-function Deposit() {
+import { withdraweAmountValidationSchema } from '../../utills/ValidationSchema'
+function Withdrawal() {
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
-      amount: '',
+      withdraw_amount: '',
     },
-    validationSchema: DepositeAmountValidationSchema,
+    validationSchema: withdraweAmountValidationSchema,
     onSubmit: (values) => {
-      if(values.amount){
-         navigate(`/choose-payment-method/${values.amount}`)
+      if (values.withdraw_amount) {
+        navigate(`/bank-details/${values.withdraw_amount}`)
       }
     },
   })
 
   return (
-    <div className="deposit_main">
-      <div className="deposit_head">
-        <div className="deposit_title">
+    <div className="withdraw_main">
+      <div className="withdraw_head">
+        <div className="withdraw_title">
           <Link to={'/'}>
             <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
           </Link>
-          <div className="deposit_subtitle">Deposit</div>
+          <div className="withdraw_subtitle">Withdraw</div>
         </div>
       </div>
 
-      <div className="deposit_body">
+      <div className="withdraw_body">
         <div className="wallet-balance">
           <img src={CoinIcon} alt="coinicon" />
           <div className="wallet-balance-data">
@@ -38,36 +38,36 @@ function Deposit() {
             <div className="wallet-balance-data-amount">0</div>
           </div>
         </div>
-        <div className="deposit_details">
-          <div className="deposit_details-balance">
-            Deposit Coins
+        <div className="withdraw_details">
+          <div className="withdraw_details-balance">
+            Withdraw Coins
             <hr />
           </div>
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <input
-              className="deposit-amount-input"
+              className="withdraw-amount-input"
               type="number"
-              name="amount"
+              name="withdraw_amount"
               id="standard-required"
               label="Coins"
               variant="standard"
-              value={formik.values.amount}
+              value={formik.values.withdraw_amount}
               onChange={formik.handleChange}
             />
-            {formik.errors.amount ? (
-              <div className="error_text">{formik.errors.amount}</div>
+            {formik.errors.withdraw_amount ? (
+              <div className="error_text">{formik.errors.withdraw_amount}</div>
             ) : null}
             <div style={{ marginBottom: '1rem', fontSize: '14px' }}>
               {' '}
-              *Minimum deposit amount is 10 coins{' '}
+              *Minimum withdraw amount is 10 coins{' '}
             </div>
 
             <button
-              className="deposit-transfer-button"
+              className="withdraw-transfer-button"
               type="submit"
               disabled={!formik.isValid}
             >
-              Deposit Conis
+              withdraw Conis
             </button>
           </form>
         </div>
@@ -76,4 +76,4 @@ function Deposit() {
   )
 }
 
-export default Deposit
+export default Withdrawal

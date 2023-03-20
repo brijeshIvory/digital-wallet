@@ -1,65 +1,53 @@
-import React, { useState } from "react";
-import Dialog from "@mui/material/Dialog";
-import "./index.scss";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { TextField } from "@mui/material";
-import { useFormik } from "formik";
-import { ForgotPasswordValidationSchema } from "../../utills/ValidationSchema";
-import { useDispatch } from "react-redux";
-import {Forgetpassword} from '../../App/Redux/Actions/AuthActions'
+import React, { useState } from 'react'
+import Dialog from '@mui/material/Dialog'
+import './style.scss'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import { TextField } from '@mui/material'
+import { useFormik } from 'formik'
+import { ChangePasswordValidationSchema } from '../../utills/ValidationSchema'
+import { useDispatch, useSelector } from 'react-redux'
+import { ChangePassword } from '../../App/Redux/Actions/AuthActions'
 
-function ForgotPassword({ setOpenForgotPassPopup, openForgotPassPopup }) {
-  const dispatch = useDispatch();
-  const [indication, setIndication] = useState(false);
+function Confrimpassword({ setOpen, open }) {
+  const dispatch = useDispatch()
+  const [indication, setIndication] = useState(false)
+  const user_id = useSelector((state) => state?.user?.userDetail?.id)
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      confirm_password: "",
+      password: '',
+      confirm_password: '',
     },
     onSubmit: (values, { resetForm }) => {
-      console.log(values, "values");
-      dispatch(Forgetpassword(values));
-      resetForm({ values: null });
+      const payload = {
+        id: user_id,
+        password: values.password,
+        confirm_password: values.confirm_password,
+      }
+      dispatch(ChangePassword(payload))
+      resetForm({ values: null })
+      setOpen(false)
     },
-    validationSchema: ForgotPasswordValidationSchema,
-  });
+    validationSchema: ChangePasswordValidationSchema,
+  })
   return (
-    <Dialog open={openForgotPassPopup} className="forgot-password">
+    <Dialog open={open} className="forgot-password">
       <div className="close-icon-div">
         <HighlightOffIcon
           onClick={() => {
-            setOpenForgotPassPopup(false);
-            formik.resetForm();
+            setOpen(false)
+            formik.resetForm()
           }}
         />
       </div>
       <div className="forgot-password-title">
-        Enter details and generate new password...
+        Enter details & Craete new password..
       </div>
       <form
         className="forgot-password-form"
         onSubmit={formik.handleSubmit}
         autoComplete="off"
       >
-        <TextField
-          type="email"
-          id="standard-required"
-          label="Email Id"
-          variant="standard"
-          name="email"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {indication && formik.errors.email ? (
-          <div className="error_text">{formik.errors.email}</div>
-        ) : null}
-
         <TextField
           type="text"
           label="Password"
@@ -99,7 +87,7 @@ function ForgotPassword({ setOpenForgotPassPopup, openForgotPassPopup }) {
         </div>
       </form>
     </Dialog>
-  );
+  )
 }
 
-export default ForgotPassword;
+export default Confrimpassword

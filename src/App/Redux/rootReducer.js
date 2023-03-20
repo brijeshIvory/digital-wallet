@@ -3,6 +3,7 @@ import AuthReducer from "./Reducers/AuthReducer";
 import DepositReducer from "./Reducers/DepositeReducer";
 import HawalaReducer from "./Reducers/HawalaReducer";
 import CountryReducer from "./Reducers/CountryReducer";
+import WalletReducer from "./Reducers/WalletReducer";
 import TransactionReducer from "./Reducers/TransactionReducer";
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   hawala: HawalaReducer,
   deposit: DepositReducer,
   country: CountryReducer,
+  wallet:WalletReducer,
   transactionData: TransactionReducer
 });
 

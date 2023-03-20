@@ -8,41 +8,53 @@ import { HawalaTransferValidationSchema } from '../../utills/ValidationSchema'
 import MenuItem from '@mui/material/MenuItem'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import { useDispatch, useSelector } from 'react-redux'
+import { WithDrawRequest } from '../../App/Redux/Actions/WalletActions'
 function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
+  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const amount = window.location.pathname.split('/')[2]
+  const [indication, setIndication] = useState(false)
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       hawala_value: '',
-      ammount: '',
-      screenshot: '',
+      AccountNumber: '',
     },
     validationSchema: HawalaTransferValidationSchema,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2))
+      const PayloadData = {
+        notes: `${'HawalaTransfer'},${values?.hawala_value},${values?.AccountNumber}`,
+        amount: amount,
+        user_id: userId
+      }
+      dispatch(WithDrawRequest(PayloadData))
+      setHawalaiFormOpen(false)
+      setIndication(false)
     },
   })
-  const [FrontSidefile, setFrontSidefile] = useState(null)
-  const [previewUrl, setPreviewUrl] = useState(null)
+  // const [FrontSidefile, setFrontSidefile] = useState(null)
+  // const [previewUrl, setPreviewUrl] = useState(null)
 
-  const onFileUploadChange = async (e) => {
-    const fileInput = e.target
-    if (!fileInput.files) {
-      await alert('No file was chosen', 'error')
-      return
-    }
-    if (!fileInput.files || fileInput.files.length === 0) {
-      await alert('Files list is empty', 'error')
-      return
-    }
-    const file = fileInput.files[0]
-    if (!file.type.startsWith('image')) {
-      await alert('Please select a valide image', 'error')
-      return
-    }
-    setFrontSidefile(file)
-    setPreviewUrl(URL.createObjectURL(file))
-    e.currentTarget.type = 'text'
-    e.currentTarget.type = 'file'
-  }
+  // const onFileUploadChange = async (e) => {
+  //   const fileInput = e.target
+  //   if (!fileInput.files) {
+  //     await alert('No file was chosen', 'error')
+  //     return
+  //   }
+  //   if (!fileInput.files || fileInput.files.length === 0) {
+  //     await alert('Files list is empty', 'error')
+  //     return
+  //   }
+  //   const file = fileInput.files[0]
+  //   if (!file.type.startsWith('image')) {
+  //     await alert('Please select a valide image', 'error')
+  //     return
+  //   }
+  //   setFrontSidefile(file)
+  //   setPreviewUrl(URL.createObjectURL(file))
+  //   e.currentTarget.type = 'text'
+  //   e.currentTarget.type = 'file'
+  // }
 
   return (
     <Drawer anchor={'bottom'} open={HawalaiFormOpen} className="joinNowFrom">
@@ -50,7 +62,9 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
       <div className="closing">
         <div
           className="closing_button"
-          onClick={() => setHawalaiFormOpen(false)}
+          onClick={() => {setHawalaiFormOpen(false)
+            setIndication(false)
+          }}
         >
           <HighlightOffSharpIcon />
         </div>
@@ -67,7 +81,6 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
               className="withdrawal_select"
               select
               variant="standard"
-              labelId="hawala_value"
               id="hawala_value"
               name="hawala_value"
               value={formik.values.hawala_value}
@@ -85,32 +98,31 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
               <MenuItem value={30}>Thirty</MenuItem>
             </TextField>
 
-            {formik.errors.hawala_value ? (
+            {indication && formik.errors.hawala_value ? (
               <div className="error_text">{formik.errors.hawala_value}</div>
             ) : null}
 
             <TextField
               type="name"
-              name="ammount"
+              name="AccountNumber"
               id="standard-required"
               label="Account Number"
               variant="standard"
-              value={formik.values.ammount}
+              value={formik.values.AccountNumber}
               onChange={formik.handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
             />
-            {formik.errors.ammount ? (
-              <div className="error_text">{formik.errors.ammount}</div>
+            {indication && formik.errors.AccountNumber ? (
+              <div className="error_text">{formik.errors.AccountNumber}</div>
             ) : null}
-            <div className="withdrawal_file_main">
+            {/* <div className="withdrawal_file_main">
               <div className=" border rounded-lg mt-3">
                 <form onSubmit={(e) => e.preventDefault()}>
                   {previewUrl ? (
                     <img
                       alt="file uploader preview"
-                      objectFit="cover"
                       src={previewUrl}
                       width={441}
                       height={250}
@@ -139,11 +151,12 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
                 
                 </form>
               </div>
-            </div>
+            </div> */}
             <div className="withdrawal_button_div">
               <button
                 type="submit"
-                // disabled={!formik.isValid}
+                disabled={!formik.isValid}
+                onClick={() => setIndication(true)}
                 className="withdrawal_button"
               >
                 Submit

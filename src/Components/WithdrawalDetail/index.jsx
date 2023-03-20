@@ -16,93 +16,126 @@ import PhonePayTransfer from './PhonePayTransfer'
 import UpiTransfer from './UpiTransfer'
 import Hawala from '../../assets/img/hawala.png'
 import HawalaTransfer from './HawalaTransfer'
+import { useSelector } from 'react-redux'
 const WithdrawalDetail = () => {
-const [bankFormOpen,setBankFormOpen] =useState(false)
-const [PaytmFormOpen,setPaytmFormOpen]=useState(false)
-const [GooglePayFormOpen,setGooglePayFormOpen]=useState(false)
-const [PhonePeFormOpen,setPhonePeFormOpen]=useState(false)
-const [UpiFormOpen,setUpiFormOpen]=useState(false)
-const [HawalaiFormOpen,setHawalaiFormOpen]=useState(false)
-
+  const [bankFormOpen, setBankFormOpen] = useState(false)
+  const [PaytmFormOpen, setPaytmFormOpen] = useState(false)
+  const [GooglePayFormOpen, setGooglePayFormOpen] = useState(false)
+  const [PhonePeFormOpen, setPhonePeFormOpen] = useState(false)
+  const [UpiFormOpen, setUpiFormOpen] = useState(false)
+  const [HawalaiFormOpen, setHawalaiFormOpen] = useState(false)
+  const Userdeatil = useSelector((state) => state?.user?.userDetail)
   return (
     <>
-    <div className="withdrawal">
-      <div className="withdrawal_top">
-        <Toolbar style={{ marginTop: '1rem', marginLeft: '1rem' }}>
+      <div className="withdraw_head">
+        <div className="withdraw_title">
           <Link to={'/'}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
-            </IconButton>
+            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
           </Link>
-          <h1 className="title"> Withdrawal Details </h1>
-        </Toolbar>
-      </div>
-      <div className="withdrawal_bottom">
-        <div className="withdrawal_user_detail">
-          <div className="withdrawal_user_info">
-            <p className="withdrawal_user_name">Kartik</p>
-            <p className="withdrawal_user_mobile">+ 9084526396</p>
-          </div>
-        </div>
-        <div className="bank-details-list">
-          <div className="bank-detail">
-            <Avatar alt="Remy Sharp" src="" sx={{ background: '#FAC000' }}>
-              <AccountBalanceIcon/>
-            </Avatar>
-            <p className="bank-detail-title">Bank Details</p>
-            <Button type="submit" className="bank-detail-sum" onClick={()=>setBankFormOpen(true)}>
-              Add New
-            </Button>
-          </div>
-          <div className="bank-detail">
-          <Avatar src={Paytm} alt="Paytm"/>
-            <p className="bank-detail-title">Paytm Wallet</p>
-            <Button type="submit" className="bank-detail-sum" onClick={()=>setPaytmFormOpen(true)}>
-              Add New
-            </Button>
-          </div>
-          <div className="bank-detail">
-          <Avatar src={GooglePay} alt="GooglePay" />
-            <p className="bank-detail-title">Googel Pay</p>
-            <Button type="submit" className="bank-detail-sum" onClick={()=>setGooglePayFormOpen(true)}>
-              Add New
-            </Button>
-          </div>
-          <div className="bank-detail">
-          <Avatar src={phone_pe} alt="phone_pe" />
-            <p className="bank-detail-title">Phone Pe</p>
-            <Button type="submit" className="bank-detail-sum" onClick={()=>setPhonePeFormOpen(true)}>
-              Add New
-            </Button>
-          </div>
-          <div className="bank-detail">
-            <Avatar alt="UPI" src={UPI} />
-            <p className="bank-detail-title">UPI</p>
-            <Button type="submit" className="bank-detail-sum" onClick={()=>setUpiFormOpen(true)}>
-              Add New
-            </Button>
-          </div>
-          <div className="bank-detail">
-            <Avatar alt="Hawala" src={Hawala} />
-            <p className="bank-detail-title">Hawala</p>
-            <Button type="submit" className="bank-detail-sum" onClick={()=>setHawalaiFormOpen(true)}>
-              Add New
-            </Button>
-          </div>
+          <div className="withdraw_subtitle">Withdrawal Details</div>
         </div>
       </div>
-    </div>
-    <BankTransfer bankFormOpen={bankFormOpen} setBankFormOpen={setBankFormOpen}/>
-    <PaytmTransfer PaytmFormOpen={PaytmFormOpen} setPaytmFormOpen={setPaytmFormOpen}/>
-    <GooglePayTransfer GooglePayFormOpen={GooglePayFormOpen} setGooglePayFormOpen={setGooglePayFormOpen}/>
-    <PhonePayTransfer PhonePeFormOpen={PhonePeFormOpen} setPhonePeFormOpen={setPhonePeFormOpen}/>
-    <HawalaTransfer HawalaiFormOpen={HawalaiFormOpen} setHawalaiFormOpen={setHawalaiFormOpen}/>
+      <div className="withdraw_main">
+        <div className="withdraw_body">
+          <div className="withdrawal_user_detail">
+            <div className="withdrawal_user_info">
+              <p className="withdrawal_user_name">{Userdeatil?.name}</p>
+              <p className="withdrawal_user_mobile">+ {Userdeatil?.phone}</p>
+            </div>
+          </div>
+          <div className="bank-details-list">
+            <div className="bank-detail">
+              <Avatar alt="Remy Sharp" src="" sx={{ background: '#FAC000' }}>
+                <AccountBalanceIcon />
+              </Avatar>
+              <p className="bank-detail-title">Bank Details</p>
+              <Button
+                type="submit"
+                className="bank-detail-sum"
+                onClick={() => setBankFormOpen(true)}
+              >
+                Add New
+              </Button>
+            </div>
+            <div className="bank-detail">
+              <Avatar src={Paytm} alt="Paytm" />
+              <p className="bank-detail-title">Paytm Wallet</p>
+              <Button
+                type="submit"
+                className="bank-detail-sum"
+                onClick={() => setPaytmFormOpen(true)}
+              >
+                Add New
+              </Button>
+            </div>
+            <div className="bank-detail">
+              <Avatar src={GooglePay} alt="GooglePay" />
+              <p className="bank-detail-title">Googel Pay</p>
+              <Button
+                type="submit"
+                className="bank-detail-sum"
+                onClick={() => setGooglePayFormOpen(true)}
+              >
+                Add New
+              </Button>
+            </div>
+            <div className="bank-detail">
+              <Avatar src={phone_pe} alt="phone_pe" />
+              <p className="bank-detail-title">Phone Pe</p>
+              <Button
+                type="submit"
+                className="bank-detail-sum"
+                onClick={() => setPhonePeFormOpen(true)}
+              >
+                Add New
+              </Button>
+            </div>
+            <div className="bank-detail">
+              <Avatar alt="UPI" src={UPI} />
+              <p className="bank-detail-title">UPI</p>
+              <Button
+                type="submit"
+                className="bank-detail-sum"
+                onClick={() => setUpiFormOpen(true)}
+              >
+                Add New
+              </Button>
+            </div>
+            <div className="bank-detail">
+              <Avatar alt="Hawala" src={Hawala} />
+              <p className="bank-detail-title">Hawala</p>
+              <Button
+                type="submit"
+                className="bank-detail-sum"
+                onClick={() => setHawalaiFormOpen(true)}
+              >
+                Add New
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <BankTransfer
+        bankFormOpen={bankFormOpen}
+        setBankFormOpen={setBankFormOpen}
+      />
+      <PaytmTransfer
+        PaytmFormOpen={PaytmFormOpen}
+        setPaytmFormOpen={setPaytmFormOpen}
+      />
+      <GooglePayTransfer
+        GooglePayFormOpen={GooglePayFormOpen}
+        setGooglePayFormOpen={setGooglePayFormOpen}
+      />
+      <PhonePayTransfer
+        PhonePeFormOpen={PhonePeFormOpen}
+        setPhonePeFormOpen={setPhonePeFormOpen}
+      />
+      <HawalaTransfer
+        HawalaiFormOpen={HawalaiFormOpen}
+        setHawalaiFormOpen={setHawalaiFormOpen}
+      />
+      <UpiTransfer UpiFormOpen={UpiFormOpen} setUpiFormOpen={setUpiFormOpen} />
     </>
   )
 }
