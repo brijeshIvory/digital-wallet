@@ -15,24 +15,11 @@ import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
 import BeingPartner from '../Register/BeingPartner'
 function Navbar({ open, setOpen }) {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   const userData = useSelector((state) => state.user?.userDetail)
-
   const [openPopUp, setOpenPopUp] = useState(false)
-  const WalletBalance = useSelector(
-    (state) => state?.wallet?.wallet_bal?.balance,
-  )
-  const token = useSelector(
-    (state) => state?.user?.loginData?.data?.data[0]?.token,
-  )
-  useEffect(() => {
-    if (token !== undefined) {
-      dispatch(LoginStatus(true))
-    } else {
-      dispatch(LoginStatus(false))
-    }
-  }, [token, open])
+  const [clear, setClear] = useState(false)
+
   const list1 = [
     {
       name: 'Profile',
@@ -44,7 +31,6 @@ function Navbar({ open, setOpen }) {
       link: 'tabs/reports',
       icon: <PersonAddAlt1Icon />,
     },
-
   ]
 
   const list2 = [
@@ -54,6 +40,13 @@ function Navbar({ open, setOpen }) {
       icon: <LogoutIcon />,
     },
   ]
+
+  useEffect(() => {
+    if (clear === true) {
+      window.location.reload()
+      setOpen(false)
+    }
+  }, [clear])
   return (
     <>
       <Drawer open={open} className="navbar">
@@ -84,22 +77,22 @@ function Navbar({ open, setOpen }) {
             ))}
             <Link onClick={() => setOpenPopUp(true)}>
               <div className="list">
-                <div><HelpIcon /></div>
+                <div>
+                  <HelpIcon />
+                </div>
                 <p>Are You Interested to be dealer?</p>
               </div>
             </Link>
           </div>
-          <div>
-          </div>
+          <div></div>
           <div>
             <Divider />
             <Button
-              sx={{ color: "#000" }}
+              sx={{ color: '#000' }}
               className="list"
               onClick={() => {
                 localStorage.clear()
-                navigate('/')
-                setOpen(false)
+                setClear(true)
               }}
             >
               <LogoutIcon />
@@ -108,8 +101,7 @@ function Navbar({ open, setOpen }) {
           </div>
         </div>
       </Drawer>
-      <BeingPartner openPopUp={openPopUp} setOpenPopUp={setOpenPopUp}
-      />
+      <BeingPartner openPopUp={openPopUp} setOpenPopUp={setOpenPopUp} />
     </>
   )
 }

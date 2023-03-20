@@ -79,34 +79,38 @@ function* GetWalletBalanceSaga(payload) {
 function* WithDrawRequestSaga(payload) {
   const { withDrawData } = payload
   const withDrawDataRes = yield call(WithDrawRequestApi, withDrawData)
-  const data = withDrawDataRes?.data.data
+  const data = withDrawDataRes?.data
   if (withDrawDataRes.data.ok === true) {
     yield put({
       type: actionType.WITHDRAW_REQUEST_SUCCESS,
       data,
     })
+  toast("Request Send !")
   } else {
     yield put({
       type: actionType.WITHDRAW_REQUEST_FAIL,
       ErrData: withDrawDataRes,
     })
+    toast(data?.message)
   }
 }
 
 function* ThirdPartyTransactionSaga(payload) {
   const { TransData } = payload
   const TransDataRes = yield call(ThridPartyTransactionApi, TransData)
-  const data = TransDataRes?.data.data
+  const data = TransDataRes?.data;
   if (TransDataRes.data.ok === true) {
     yield put({
       type: actionType.THIRD_PARTY_TRANSACTION_SUCCESS,
       data,
     })
+    toast("Request Send !")
   } else {
     yield put({
       type: actionType.THIRD_PARTY_TRANSACTION_FAIL,
       ErrData: TransDataRes,
     })
+    toast(data?.message)
   }
 }
 function* DealerSaga(payload) {

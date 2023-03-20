@@ -80,12 +80,6 @@ function NewHomePage() {
   useEffect(() => {
     dispatch(getCountriesData())
   }, [])
-  useEffect(() => {
-    if (userId != undefined) {
-      dispatch(GetUserDetails({ id: userId }))
-      dispatch(GetWalletBalance({ user_id: userId }))
-    }
-  }, [isAuthenticated, userId])
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -122,10 +116,7 @@ function NewHomePage() {
           open={openJoinNow['bottom']}
           setOpenJoinNow={setOpenJoinNow}
         />
-        <Login
-          open={openLogin['bottom']}
-          setOpenLogin={setOpenLogin}
-        />
+        <Login open={openLogin['bottom']} setOpenLogin={setOpenLogin} />
         <div className="new-home-page-balance">
           <div className="new-home-page-balance-title">Total Balance</div>
           <div className="new-home-page-balance-money">

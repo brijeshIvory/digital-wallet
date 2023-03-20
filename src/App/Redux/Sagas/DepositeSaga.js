@@ -1,6 +1,7 @@
 import { GetDepositDetailApi, RequestDepositApi } from '../../api/WalletApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
+import { toast } from 'react-toastify'
 function* GetDepositDetailSaga() {
   const depositDetail = yield call(GetDepositDetailApi)
 
@@ -18,20 +19,21 @@ function* GetDepositDetailSaga() {
   }
 }
 
-
 function* RequestDepositeSaga(payload) {
-  const { depositData } = payload;
-  const depositDetail = yield call(RequestDepositApi,depositData)
-  if (depositDetail?.status === 201) {
+  const { depositData } = payload
+  const depositDetail = yield call(RequestDepositApi, depositData)
+  if (depositDetail.data.ok === true) {
     yield put({
       type: actionType.REQUEST_DEPOSIT_SUCCESS,
       depositDetail,
-    });
+    })
+    toast('Payment done')
   } else {
     yield put({
       type: actionType.REQUEST_DEPOSIT_FAIL,
       ErrData: depositDetail,
-    });
+    })
+    toast(depositDetail?.data.message)
   }
 }
 
