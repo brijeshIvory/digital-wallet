@@ -1,8 +1,66 @@
-.profile {
+.profile_main {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #fac000;
+  background: linear-gradient(
+    90deg,
+    rgb(237, 168, 6) 0%,
+    rgb(216, 129, 13) 35%,
+    rgb(237, 168, 6) 100%
+  );
+}
+.profile_head {
+  flex: 0.11;
+  background: linear-gradient(
+    90deg,
+    rgb(237, 168, 6) 0%,
+    rgb(216, 129, 13) 35%,
+    rgb(237, 168, 6) 100%
+  );
+}
+.profile_title {
+  height: 50px;
+  padding: 15px;
+
+  .MuiSvgIcon-root {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    color: #fff;
+  }
+}
+.profile_subtitle {
+  padding-top: 0.75rem;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+}
+.profile_body{
+  flex: 0.89;
+  background-color: #000;
+  border-radius: 15px 15px 0 0;
+}
+.profile_details {
+  color: #fff;
+  padding: 10%;
+  .MuiTextField-root {
+    width: 100%;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 2rem;
+  }
+  .MuiInputLabel-root {
+    font-size: 20px;
+    color: #fff;
+  }
+  .MuiInputLabel-root.Mui-focused {
+    color: #fff;
+  }
+  .MuiInput-root {
+    color: #fff;
+  }
+  .MuiInput-root:after {
+    border-bottom: none;
+  }
 }
 .profile_top {
   flex: 0.12;
@@ -18,12 +76,7 @@
     color: #fff;
   }
 }
-.profile_title {
-  padding-top: 0.75rem;
-  font-size: 22px;
-  color: #fff;
-  text-align: center;
-}
+
 .profile_bottom {
   display: flex;
   flex-direction: column;
@@ -33,7 +86,7 @@
   background-color: #000;
 }
 .profile_avatar {
-  margin-top: -20px;
+  margin-top: -3.5rem;
 }
 .profile_data {
   color: #fff;
@@ -75,21 +128,25 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .rewards {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  flex: 0.5;
+  // padding: 20px;
+  // flex: 0.5;
 }
 .referred {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  flex: 0.5;
+  // padding: 20px;
+  // flex: 0.5;
 }
 .rewards_title {
   color: #fff;
+}
+.coin{
+  text-align: center;
 }
