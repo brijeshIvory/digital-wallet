@@ -1,5 +1,5 @@
-import Drawer from '@mui/material/Drawer'
-import './index.scss'
+import Drawer from "@mui/material/Drawer";
+import "./index.scss";
 // import Navlogo from "../../assets/img/Navlogo.jpg";
 import Divider from '@mui/material/Divider'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
@@ -22,21 +22,21 @@ function Navbar({ open, setOpen }) {
 
   const list1 = [
     {
-      name: 'Profile',
-      link: 'profile',
+      name: "Profile",
+      link: "profile",
       icon: <PersonOutlineIcon />,
     },
     {
-      name: 'PassBook',
-      link: 'tabs/reports',
+      name: "PassBook",
+      link: "tabs/reports",
       icon: <PersonAddAlt1Icon />,
     },
   ]
 
   const list2 = [
     {
-      name: 'Logout',
-      link: './profile',
+      name: "Logout",
+      link: "./profile",
       icon: <LogoutIcon />,
     },
   ]
@@ -106,4 +106,4 @@ function Navbar({ open, setOpen }) {
   )
 }
 
-export default Navbar
+export default Navbar;
