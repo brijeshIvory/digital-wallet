@@ -21,7 +21,11 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const [openPopUp, setOpenPopUp] = useState(true)
   const [ReferralCode, setReferralCode] = useState('')
   const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail)
-  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const UserToken = localStorage.getItem('UserToken')
+  const userId =
+    UserToken !== 'undefined' && UserToken !== null
+      ? JSON.parse(UserToken).user_id
+      : undefined
   const amount = window.location.pathname.split('/')[2]
   useEffect(() => {
     dispatch(GetDepositDetail())
