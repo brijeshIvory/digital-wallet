@@ -21,7 +21,7 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
       accountholdername: '',
     },
     validationSchema: BankTransferValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values,{ resetForm }) => {
       const PayloadData = {
         notes: `${'BankTransfer'},${values.bankname},${values.accountnumber},${
           values.ifsccode
@@ -31,7 +31,8 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
       }
       dispatch(WithDrawRequest(PayloadData))
       setBankFormOpen(false)
-      setIndication(false)
+      setIndication(false);
+      resetForm({ values: null })
     },
   })
   return (

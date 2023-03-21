@@ -18,7 +18,7 @@ function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
       upiId: '',
     },
     validationSchema: UpiTransferValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values,{resetForm}) => {
       const PayloadData = {
         notes: `${'UPI'},${values.name},${values.upiId}`,
         amount: amount,
@@ -27,6 +27,7 @@ function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
       dispatch(WithDrawRequest(PayloadData))
       setUpiFormOpen(false)
       setIndication(false)
+      resetForm({ values: null })
     },
   })
   return (

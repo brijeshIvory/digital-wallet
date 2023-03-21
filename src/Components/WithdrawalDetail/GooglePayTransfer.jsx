@@ -18,7 +18,7 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
       googlepaynumber: '',
     },
     validationSchema: GooglePayTransferValidationSchema,
-    onSubmit: (values) => {
+    onSubmit:(values,{ resetForm }) => {
        const PayloadData = {
         notes: `${'GooglePay'},${values?.name},${values?.googlepaynumber}`,
         amount: amount,
@@ -26,7 +26,8 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
       }
       dispatch(WithDrawRequest(PayloadData))
       setGooglePayFormOpen(false)
-      setIndication(false)
+      setIndication(false);
+      resetForm({ values: null })
     },
   })
   return (

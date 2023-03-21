@@ -18,7 +18,7 @@ function PhonePayTransfer({ PhonePeFormOpen, setPhonePeFormOpen }) {
       phonepenumber: '',
     },
     validationSchema: PhonePayTransferValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values,{resetForm}) => {
       const PayloadData = {
         notes: `${'PhonePe'},${values?.name},${values?.phonepenumber}`,
         amount: amount,
@@ -28,6 +28,7 @@ function PhonePayTransfer({ PhonePeFormOpen, setPhonePeFormOpen }) {
       dispatch(WithDrawRequest(PayloadData))
       setPhonePeFormOpen(false)
       setIndication(false)
+      resetForm({ values: null })
     },
   })
   return (

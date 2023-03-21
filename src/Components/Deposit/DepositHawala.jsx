@@ -11,7 +11,7 @@ import { GetHawalaList,RequestDeposite } from '../../App/Redux/Actions/WalletAct
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { InputLabel } from '@mui/material'
-
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 const DepositHawala = () => {
   const dispatch = useDispatch()
   const [FrontSidefile, setFrontSidefile] = useState(null)
@@ -118,6 +118,12 @@ const DepositHawala = () => {
           <div className=" border rounded-lg mt-3">
             {previewUrl ? (
               <>
+                 <div className="deposit_close_icon">
+        <HighlightOffIcon onClick={() => {
+          setFrontSidefile(null)
+          setPreviewUrl(null)
+        }} />
+      </div>
                 <img
                   alt="file uploader preview"
              
