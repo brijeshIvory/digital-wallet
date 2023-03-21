@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux'
 import { registrationClick } from '../../App/Redux/Actions/AuthActions'
 import Otp from '../OTP/index'
 
-function Register({ open,setOpenJoinNow }) {
+function Register({ open, setOpenJoinNow }) {
   const dispatch = useDispatch()
 
   const [passwordType, setPasswordType] = useState('password')
@@ -40,18 +40,19 @@ function Register({ open,setOpenJoinNow }) {
       country: 101,
     },
     onSubmit: (values, { resetForm }) => {
-      dispatch(
-        registrationClick({
-          name: values.name,
-          email: values.email,
-          country_code: values.country_code,
-          phone: values.phone,
-          password: values.password,
-          country: values.country,
-        }),
-      )
+      const payload = {
+        name: values.name,
+        email: values.email,
+        country_code: values.country_code,
+        phone: values.phone,
+        password: values.password,
+        country: values.country,
+      }
+      if (payload) {
+        dispatch(registrationClick(payload))
+      }
       resetForm({ values: null })
-      
+
       setIndication(false)
     },
     validationSchema: RegistationValidationSchema,
@@ -262,7 +263,7 @@ function Register({ open,setOpenJoinNow }) {
           </div>
         </form>
       </div>
-      <Otp setOpenJoinNow={setOpenJoinNow}/>
+      <Otp setOpenJoinNow={setOpenJoinNow} />
     </Drawer>
   )
 }

@@ -14,6 +14,8 @@ function Otp({setOpenJoinNow}) {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.data);
+  const userdata = useSelector((state) => state?.user?.data);
+
   const otpVarificationStatus = useSelector(
     (state) => state?.user?.otpVerification?.data?.ok
   );

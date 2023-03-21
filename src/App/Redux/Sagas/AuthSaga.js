@@ -14,7 +14,7 @@ function* userRegistration(payload) {
   const { registratedData } = payload;
   const regData = yield call(UserRegistrationApi, registratedData);
 
-  if (regData?.status === 200) {
+  if (regData?.data.ok === true) {
     yield put({
       type: actionType.USER_REGISTRATION_SUCCESS,
       regData,
@@ -24,6 +24,7 @@ function* userRegistration(payload) {
       type: actionType.USER_REGISTRATION_FAIL,
       regErrData: regData,
     });
+    toast(regData.data.message);
   }
 }
 function* userLogin(payload) {
