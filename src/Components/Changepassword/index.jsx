@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import Dialog from '@mui/material/Dialog'
 import './style.scss'
+import { InputAdornment, Select } from '@mui/material'
+import { IconButton } from '@mui/material'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
@@ -11,6 +15,10 @@ import { ChangePassword } from '../../App/Redux/Actions/AuthActions'
 function Confrimpassword({ setOpen, open }) {
   const dispatch = useDispatch()
   const [indication, setIndication] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [passwordType, setPasswordType] = useState('password');
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [ConfirmPasswordType, setConfirmPasswordType] = useState('password');
   const user_id = useSelector((state) => state?.user?.userDetail?.id)
 
   const formik = useFormik({
@@ -30,6 +38,24 @@ function Confrimpassword({ setOpen, open }) {
     },
     validationSchema: ChangePasswordValidationSchema,
   })
+  const togglePassword = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setShowPassword(!showPassword)
+      return
+    }
+    setPasswordType('password')
+    setShowPassword(!showPassword)
+  }
+  const toggleConfrimPassword = () => {
+    if (ConfirmPasswordType === 'password') {
+      setConfirmPasswordType('text')
+      setShowConfirmPassword(!showConfirmPassword)
+      return
+    }
+    setConfirmPasswordType('password')
+    setShowConfirmPassword(!showConfirmPassword)
+  }
   return (
     <Dialog open={open} className="forgot-password">
       <div className="close-icon-div">
@@ -49,23 +75,39 @@ function Confrimpassword({ setOpen, open }) {
         autoComplete="off"
       >
         <TextField
-          type="text"
+          type={passwordType}
+          name="password"
+          id="standard-required"
           label="Password"
           variant="standard"
           InputLabelProps={{
             shrink: true,
           }}
-          id="password"
-          name="password"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={togglePassword}
+                >
+                  {showPassword ? (
+                    <VisibilityIcon sx={{ color: 'white' }} />
+                  ) : (
+                    <VisibilityOffIcon sx={{ color: 'white' }} />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           value={formik.values.password}
-          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
         {indication && formik.errors.password ? (
           <div className="error_text">{formik.errors.password}</div>
         ) : null}
-        <TextField
-          type="text"
+ <TextField
+          type={ConfirmPasswordType}
           name="confirm_password"
           id="standard-required"
           label="Confirm Password"
@@ -73,12 +115,28 @@ function Confrimpassword({ setOpen, open }) {
           InputLabelProps={{
             shrink: true,
           }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={toggleConfrimPassword}
+                >
+                  {showConfirmPassword ? (
+                    <VisibilityIcon sx={{ color: 'white' }} />
+                  ) : (
+                    <VisibilityOffIcon sx={{ color: 'white' }} />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           value={formik.values.confirm_password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {indication && formik.errors.confirm_password ? (
-          <div className="error_text">{formik.errors.confirm_password}</div>
+        {indication && formik.errors.password ? (
+          <div className="error_text">{formik.errors.password}</div>
         ) : null}
         <div className="forgot-password-form-button-div">
           <button type="submit" onClick={() => setIndication(true)}>

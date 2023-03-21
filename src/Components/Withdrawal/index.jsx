@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import "./index.scss";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import CoinIcon from "../../assets/img/coins-icon.png";
-import { Link, useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import { withdraweAmountValidationSchema } from "../../utills/ValidationSchema";
+import React, { useState } from 'react'
+import './index.scss'
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
+import CoinIcon from '../../assets/img/coins-icon.png'
+import { Link, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { withdraweAmountValidationSchema } from '../../utills/ValidationSchema'
+import { useSelector } from 'react-redux'
 function Withdrawal() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const WalletBalance = useSelector(
+    (state) => state?.wallet?.wallet_bal?.balance,
+  )
   const formik = useFormik({
     initialValues: {
       withdraw_amount: "",
@@ -35,7 +39,7 @@ function Withdrawal() {
           <img src={CoinIcon} alt="coinicon" />
           <div className="wallet-balance-data">
             <div className="wallet-balance-data-title">WALLET BALANCE</div>
-            <div className="wallet-balance-data-amount">0</div>
+            <div className="wallet-balance-data-amount">{WalletBalance}</div>
           </div>
         </div>
         <div className="withdraw_details">

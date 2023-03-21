@@ -5,9 +5,11 @@ import {
   GetWallwtBalanceApi,
   WithDrawRequestApi,
   ThridPartyTransactionApi,
+  DealerUserApi,
 } from '../../api/WalletApi'
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 import * as actionType from '../Actions/actionsType'
+import { toast } from 'react-toastify'
 
 function* getCountries() {
   const countries = yield call(GetCountryApi)
@@ -77,34 +79,45 @@ function* GetWalletBalanceSaga(payload) {
 function* WithDrawRequestSaga(payload) {
   const { withDrawData } = payload
   const withDrawDataRes = yield call(WithDrawRequestApi, withDrawData)
-  const data = withDrawDataRes?.data.data
+  const data = withDrawDataRes?.data
   if (withDrawDataRes.data.ok === true) {
     yield put({
       type: actionType.WITHDRAW_REQUEST_SUCCESS,
       data,
     })
+  toast("Request Send !")
   } else {
     yield put({
       type: actionType.WITHDRAW_REQUEST_FAIL,
       ErrData: withDrawDataRes,
     })
+    toast(data?.message)
   }
 }
 
 function* ThirdPartyTransactionSaga(payload) {
   const { TransData } = payload
   const TransDataRes = yield call(ThridPartyTransactionApi, TransData)
-  const data = TransDataRes?.data.data
+  const data = TransDataRes?.data;
   if (TransDataRes.data.ok === true) {
     yield put({
       type: actionType.THIRD_PARTY_TRANSACTION_SUCCESS,
       data,
     })
+    toast("Request Send !")
   } else {
     yield put({
       type: actionType.THIRD_PARTY_TRANSACTION_FAIL,
       ErrData: TransDataRes,
     })
+    toast(data?.message)
+  }
+}
+function* DealerSaga(payload) {
+  const { userId } = payload
+  const data = yield call(DealerUserApi, userId)
+  if(data.data.ok == true){
+    toast("Send Request SuccesFully!")
   }
 }
 
@@ -114,6 +127,9 @@ function* WalletSaga() {
   yield all([takeEvery(actionType.CLIENT_LIST, GetClientListsaga)])
   yield all([takeEvery(actionType.GET_WALLET_BALANCE, GetWalletBalanceSaga)])
   yield all([takeEvery(actionType.WITHDRAW_REQUEST, WithDrawRequestSaga)])
-  yield all([takeEvery(actionType.THIRD_PARTY_TRANSACTION, ThirdPartyTransactionSaga)])
+  yield all([
+    takeEvery(actionType.THIRD_PARTY_TRANSACTION, ThirdPartyTransactionSaga),
+  ])
+  yield all([takeEvery(actionType.BECOME_DEALER_REQUEST, DealerSaga)])
 }
 export default WalletSaga

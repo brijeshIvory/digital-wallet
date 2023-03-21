@@ -45,8 +45,6 @@ function Login({ open, setOpenLogin }) {
           password: values.password,
         })
       );
-      navigate("/");
-      setOpenLogin("bottom", false);
       setIndication(false)
     },
     validationSchema: loginValidationSchema,
@@ -64,6 +62,8 @@ function Login({ open, setOpenLogin }) {
   useEffect(() => {
     if( token !== undefined){
       dispatch(LoginStatus(true))
+      navigate("/");
+      setOpenLogin("bottom", false);
     }else{
       dispatch(LoginStatus(false))
     }

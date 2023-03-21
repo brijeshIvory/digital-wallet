@@ -9,7 +9,7 @@ import OtpInput from "react18-input-otp";
 import "./index.scss";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-function Otp() {
+function Otp({setOpenJoinNow}) {
   const [otp, setOtp] = useState("");
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -61,6 +61,7 @@ function Otp() {
           );
 
           dispatch(emptyUser());
+          setOpenJoinNow('bottom', false)
         }}
       >
         Confirm OTP

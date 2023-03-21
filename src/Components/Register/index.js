@@ -51,7 +51,7 @@ function Register({ open,setOpenJoinNow }) {
         }),
       )
       resetForm({ values: null })
-      setOpenJoinNow('bottom', false)
+      
       setIndication(false)
     },
     validationSchema: RegistationValidationSchema,
@@ -262,7 +262,7 @@ function Register({ open,setOpenJoinNow }) {
           </div>
         </form>
       </div>
-      <Otp />
+      <Otp setOpenJoinNow={setOpenJoinNow}/>
     </Drawer>
   )
 }

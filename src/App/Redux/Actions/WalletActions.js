@@ -57,3 +57,11 @@ export const ThirdPartyTransactionAction = (TransData) => {
     TransData,
   }
 }
+
+
+export const DealerAction = (userId) => {
+  return {
+    type: actionType.BECOME_DEALER_REQUEST,
+    userId
+  }
+}
