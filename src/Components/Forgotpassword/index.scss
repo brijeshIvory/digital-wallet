@@ -1,13 +1,11 @@
 .forgot-password {
-  background-color: #fac00098;
+  background-color: #01afff7a;
   .MuiDialog-paper {
     padding: 20px;
     border-radius: 15px;
-    background-color: #000;
+    background-color: #1b1d27;
     color: white;
   }
-
-
 }
 .close-icon-div {
   display: flex;
@@ -35,12 +33,12 @@
   .MuiInput-root:after {
     border-bottom: none;
   }
-  .forgot-password-form-button-div{
- display: flex;
- align-items: center;
- justify-content: center;
+  .forgot-password-form-button-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     button {
-      background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+      background: #01b0ff;
       min-height: 30px;
       border-width: 0;
       border-radius: 5px;

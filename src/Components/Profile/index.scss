@@ -1,22 +1,10 @@
 .profile_main {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    rgb(237, 168, 6) 0%,
-    rgb(216, 129, 13) 35%,
-    rgb(237, 168, 6) 100%
-  );
+  background-color: #1b1d27;
 }
 .profile_head {
-  flex: 0.11;
-  background: linear-gradient(
-    90deg,
-    rgb(237, 168, 6) 0%,
-    rgb(216, 129, 13) 35%,
-    rgb(237, 168, 6) 100%
-  );
+  background: #01b0ff;
+  padding-bottom: 2rem;
 }
 .profile_title {
   height: 50px;
@@ -35,9 +23,8 @@
   color: #fff;
   text-align: center;
 }
-.profile_body{
-  flex: 0.89;
-  background-color: #000;
+.profile_body {
+  background-color: #1b1d27;
   border-radius: 15px 15px 0 0;
 }
 .profile_details {
@@ -83,7 +70,7 @@
   align-items: center;
   border-radius: 20px 20px 0 0;
   flex: 0.88;
-  background-color: #000;
+  background-color: #1b1d27;
 }
 .profile_avatar {
   margin-top: -3.5rem;
@@ -102,7 +89,7 @@
 }
 
 .changePassword {
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background: #01b0ff;
 
   min-height: 30px;
   border-width: 0;
@@ -147,6 +134,6 @@
 .rewards_title {
   color: #fff;
 }
-.coin{
+.coin {
   text-align: center;
 }
