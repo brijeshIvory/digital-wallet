@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './style.scss'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { useSelector } from 'react-redux'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import {
   GetHawalaList,
   GetDepositDetail,
@@ -339,10 +340,17 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
             </>
           )}
           <div className="file_main">
+
             <div className=" border rounded-lg mt-3">
               <form onSubmit={(e) => e.preventDefault()}>
                 {previewUrl ? (
                   <>
+                            <div className="deposit_close_icon">
+        <HighlightOffIcon onClick={() => {
+          setFrontSidefile(null)
+          setPreviewUrl(null)
+        }} />
+      </div>
                     <img
                       alt="file uploader preview"
                       src={previewUrl}

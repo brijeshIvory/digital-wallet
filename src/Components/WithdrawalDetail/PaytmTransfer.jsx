@@ -18,7 +18,7 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
       paytmnumber: '',
     },
     validationSchema: PaytmTransferValidationSchema,
-    onSubmit: (values) => {
+    onSubmit:  (values,{ resetForm }) => {
       const PayloadData = {
         notes: `${'Paytm'},${values?.name},${values?.paytmnumber}`,
         amount: amount,
@@ -28,6 +28,7 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
       dispatch(WithDrawRequest(PayloadData))
       setPaytmFormOpen(false)
       setIndication(false)
+      resetForm({ values: null })
     },
   })
   return (

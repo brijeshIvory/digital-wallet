@@ -25,6 +25,7 @@ const WithdrawalDetail = () => {
   const [UpiFormOpen, setUpiFormOpen] = useState(false);
   const [HawalaiFormOpen, setHawalaiFormOpen] = useState(false);
   const Userdeatil = useSelector((state) => state?.user?.userDetail);
+  
   return (
     <div className="withdraw_main_2">
       <div className="withdraw_head_2">

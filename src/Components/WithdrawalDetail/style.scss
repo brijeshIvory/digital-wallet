@@ -5,16 +5,16 @@
   background-color: #1b1d27;
 }
 .withdraw_head_2 {
-  flex: 0.1;
+  // flex: 0.1;
   background-color: #01b0ff;
-  // padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .withdraw_body_2 {
-  flex: 0.9;
+  // flex: 0.9;
   background-color: #1b1d27;
   padding: 1rem;
-  // border-radius: 15px 15px 0 0;
+  border-radius: 15px 15px 0 0;
 }
 
 .withdraw_title_2 {
@@ -190,7 +190,7 @@
 
 .withdrawal_select {
   .MuiFormLabel-root.MuiInputLabel-root {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 .preview_img {
