@@ -1,30 +1,30 @@
-import React, { useState } from 'react'
-import './style.scss'
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
-import CoinIcon from '../../assets/img/coins-icon.png'
-import { Link, useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik'
-import { DepositeAmountValidationSchema } from '../../utills/ValidationSchema'
+import React, { useState } from "react";
+import "./style.scss";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import CoinIcon from "../../assets/img/coins-icon.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { DepositeAmountValidationSchema } from "../../utills/ValidationSchema";
 function Deposit() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      amount: '',
+      amount: "",
     },
     validationSchema: DepositeAmountValidationSchema,
     onSubmit: (values) => {
-      if(values.amount){
-         navigate(`/choose-payment-method/${values.amount}`)
+      if (values.amount) {
+        navigate(`/choose-payment-method/${values.amount}`);
       }
     },
-  })
+  });
 
   return (
     <div className="deposit_main">
       <div className="deposit_head">
         <div className="deposit_title">
-          <Link to={'/'}>
-            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
+          <Link to={"/"}>
+            <ArrowCircleLeftIcon sx={{ width: "40px", height: "35px" }} />
           </Link>
           <div className="deposit_subtitle">Deposit</div>
         </div>
@@ -57,9 +57,9 @@ function Deposit() {
             {formik.errors.amount ? (
               <div className="error_text">{formik.errors.amount}</div>
             ) : null}
-            <div style={{ marginBottom: '1rem', fontSize: '14px' }}>
-              {' '}
-              *Minimum deposit amount is 10 coins{' '}
+            <div style={{ marginBottom: "1rem", fontSize: "14px" }}>
+              {" "}
+              *Minimum deposit amount is 10 coins{" "}
             </div>
 
             <button
@@ -67,13 +67,13 @@ function Deposit() {
               type="submit"
               disabled={!formik.isValid}
             >
-              Deposit Conis
+              Deposit Coins
             </button>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Deposit
+export default Deposit;
