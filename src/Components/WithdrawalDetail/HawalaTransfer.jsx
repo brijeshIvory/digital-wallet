@@ -13,7 +13,11 @@ import {
   WithDrawRequest,
 } from "../../App/Redux/Actions/WalletActions";
 function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
-  const userId = useSelector((state) => state?.user?.userDetail?.id);
+  const UserToken = localStorage.getItem("UserToken");
+  const userId =
+    UserToken !== "undefined" && UserToken !== null
+      ? JSON.parse(UserToken).user_id
+      : undefined;
   const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
   const amount = window.location.pathname.split("/")[2];
   const [indication, setIndication] = useState(false);

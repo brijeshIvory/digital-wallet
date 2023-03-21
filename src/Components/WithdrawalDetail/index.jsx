@@ -16,7 +16,9 @@ import PhonePayTransfer from "./PhonePayTransfer";
 import UpiTransfer from "./UpiTransfer";
 import Hawala from "../../assets/img/hawala.png";
 import HawalaTransfer from "./HawalaTransfer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 const WithdrawalDetail = () => {
   const [bankFormOpen, setBankFormOpen] = useState(false);
   const [PaytmFormOpen, setPaytmFormOpen] = useState(false);
@@ -25,7 +27,17 @@ const WithdrawalDetail = () => {
   const [UpiFormOpen, setUpiFormOpen] = useState(false);
   const [HawalaiFormOpen, setHawalaiFormOpen] = useState(false);
   const Userdeatil = useSelector((state) => state?.user?.userDetail);
-
+  const UserToken = localStorage.getItem("UserToken");
+  const dispatch = useDispatch();
+  const userId =
+    UserToken !== "undefined" && UserToken !== null
+      ? JSON.parse(UserToken).user_id
+      : undefined;
+  useEffect(() => {
+    if (userId != undefined) {
+      dispatch(GetUserDetails({ id: userId }));
+    }
+  }, [userId]);
   return (
     <div className="withdraw_main_2">
       <div className="withdraw_head_2">
