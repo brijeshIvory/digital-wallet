@@ -1,24 +1,24 @@
 import Drawer from "@mui/material/Drawer";
 import "./index.scss";
 // import Navlogo from "../../assets/img/Navlogo.jpg";
-import Divider from '@mui/material/Divider'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1'
-import HelpIcon from '@mui/icons-material/Help'
-import LogoutIcon from '@mui/icons-material/Logout'
-import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
-import { LoginStatus } from '../../App/Redux/Actions/AuthActions'
-import { useEffect, useState } from 'react'
-import { Button } from '@mui/material'
-import BeingPartner from '../Register/BeingPartner'
+import Divider from "@mui/material/Divider";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import HelpIcon from "@mui/icons-material/Help";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { LoginStatus } from "../../App/Redux/Actions/AuthActions";
+import { useEffect, useState } from "react";
+import { Button } from "@mui/material";
+import BeingPartner from "../Register/BeingPartner";
 function Navbar({ open, setOpen }) {
-  const dispatch = useDispatch()
-  const userData = useSelector((state) => state.user?.userDetail)
-  const [openPopUp, setOpenPopUp] = useState(false)
-  const [clear, setClear] = useState(false)
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user?.userDetail);
+  const [openPopUp, setOpenPopUp] = useState(false);
+  const [clear, setClear] = useState(false);
 
   const list1 = [
     {
@@ -31,7 +31,7 @@ function Navbar({ open, setOpen }) {
       link: "tabs/reports",
       icon: <PersonAddAlt1Icon />,
     },
-  ]
+  ];
 
   const list2 = [
     {
@@ -39,14 +39,14 @@ function Navbar({ open, setOpen }) {
       link: "./profile",
       icon: <LogoutIcon />,
     },
-  ]
+  ];
 
   useEffect(() => {
     if (clear === true) {
-      window.location.reload()
-      setOpen(false)
+      window.location.reload();
+      setOpen(false);
     }
-  }, [clear])
+  }, [clear]);
   return (
     <>
       <Drawer open={open} className="navbar">
@@ -56,7 +56,7 @@ function Navbar({ open, setOpen }) {
             <h2>Logo</h2>
             <ArrowCircleLeftOutlinedIcon
               onClick={() => setOpen(false)}
-              sx={{ width: '30px', height: '30px' }}
+              sx={{ width: "30px", height: "30px" }}
             />
           </div>
 
@@ -85,14 +85,14 @@ function Navbar({ open, setOpen }) {
             </Link>
           </div>
           <div></div>
-          <div>
+          <div className="navbar_logout">
             <Divider />
             <Button
-              sx={{ color: '#000' }}
+              sx={{ color: "#aca6a6" }}
               className="list"
               onClick={() => {
-                localStorage.clear()
-                setClear(true)
+                localStorage.clear();
+                setClear(true);
               }}
             >
               <LogoutIcon />
@@ -103,7 +103,7 @@ function Navbar({ open, setOpen }) {
       </Drawer>
       <BeingPartner openPopUp={openPopUp} setOpenPopUp={setOpenPopUp} />
     </>
-  )
+  );
 }
 
 export default Navbar;
