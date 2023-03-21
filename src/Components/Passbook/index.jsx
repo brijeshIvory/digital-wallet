@@ -149,7 +149,7 @@ function Passbook() {
     <div className="passbook-main">
       <div className="passbook-head">
         <div className="passbook-title">
-          <Link to={"/"}>
+          <Link to={"/"} className="passbook_subtitle">
             <ArrowCircleLeftIcon />
           </Link>
           <div className="passbook_subtitle">Passbook</div>
@@ -157,15 +157,15 @@ function Passbook() {
       </div>
       <div className="passbook-body">
         <div className="passbook-body-head">
-          <div>Transactions</div>
+          <div style={{fontSize:"18px"}}>Transactions</div>
 
-          <button onClick={() => setIsFilterClicked(true)}>Filter</button>
+          <button onClick={() => setIsFilterClicked(true)} style={{backgroundColor:"#2f354b"}}>Filter</button>
         </div>
 
         <div className="transaction-data">
           <TableContainer
             component={Paper}
-            sx={{ backgroundColor: "#000", border: "1px solid #fff" }}
+            sx={{ backgroundColor: "#2f354b", border: "1px solid #fff" }}
           >
             <Table sx={{ maxWidth: 20 }} aria-label="simple table">
               <TableHead>

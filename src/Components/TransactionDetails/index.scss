@@ -1,10 +1,11 @@
 .transaction-detail-main {
-  background-color: #fac00098;
+  // background-color: #191718;
   .MuiDialog-paper {
     padding: 30px;
     border-radius: 15px;
-    background-color: #000;
+    background-color: #1b1d27;
     color: white;
+    width: 100%;
   }
 }
 .transaction-detail-close-div {
@@ -14,10 +15,13 @@
 }
 
 .transaction-details-data {
-  .transaction-detail {
-    margin-bottom: 0.5rem;
-  }
-  .other-details {
-    margin-top: 2rem;
-  }
+  display: flex;
+  justify-content: space-between;
+}
+.transaction-detail {
+  margin-bottom: 0.5rem;
+  display: flex;
+}
+.other-details {
+  display: flex;  
 }
