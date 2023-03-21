@@ -25,7 +25,7 @@ const WithdrawalDetail = () => {
   const [UpiFormOpen, setUpiFormOpen] = useState(false);
   const [HawalaiFormOpen, setHawalaiFormOpen] = useState(false);
   const Userdeatil = useSelector((state) => state?.user?.userDetail);
-  
+
   return (
     <div className="withdraw_main_2">
       <div className="withdraw_head_2">
@@ -71,7 +71,7 @@ const WithdrawalDetail = () => {
           </div>
           <div className="bank-detail">
             <Avatar src={GooglePay} alt="GooglePay" />
-            <p className="bank-detail-title">Googel Pay</p>
+            <p className="bank-detail-title">Google Pay</p>
             <Button
               type="submit"
               className="bank-detail-sum"

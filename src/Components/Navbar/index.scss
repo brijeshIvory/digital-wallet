@@ -1,3 +1,9 @@
+.navbar {
+  .MuiDrawer-paper {
+    min-width: 14rem;
+  }
+}
+
 .navbar_logo {
   display: flex;
   justify-content: space-between;
@@ -48,7 +54,12 @@
   }
 }
 .navbar_logout {
+  margin-bottom: 1rem;
   .MuiDivider-root {
     background-color: #aca6a6;
+    margin-bottom: 0.5rem;
+  }
+  .MuiSvgIcon-root {
+    margin-right: 0.5rem;
   }
 }
