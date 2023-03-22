@@ -20,6 +20,8 @@ function Navbar({ open, setOpen }) {
   const [openPopUp, setOpenPopUp] = useState(false);
   const [clear, setClear] = useState(false);
 
+  console.log(userData?.as_dealer, "as_dealer");
+
   const list1 = [
     {
       name: "Profile",
@@ -75,14 +77,16 @@ function Navbar({ open, setOpen }) {
                 </div>
               </Link>
             ))}
-            <Link onClick={() => setOpenPopUp(true)}>
-              <div className="list">
-                <div>
-                  <HelpIcon />
+            {userData?.as_dealer === "0" && (
+              <Link onClick={() => setOpenPopUp(true)}>
+                <div className="list">
+                  <div>
+                    <HelpIcon />
+                  </div>
+                  <p>Are You Interested to be dealer?</p>
                 </div>
-                <p>Are You Interested to be dealer?</p>
-              </div>
-            </Link>
+              </Link>
+            )}
           </div>
           <div></div>
           <div className="navbar_logout">
