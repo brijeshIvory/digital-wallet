@@ -1,37 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import './index.scss'
-import { Avatar } from '@mui/material'
-import LogoutIcon from '@mui/icons-material/Logout'
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
-import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import Confrimpassword from '../Changepassword/index'
-import { GetUserDetails } from '../../App/Redux/Actions/AuthActions'
+import React, { useEffect, useState } from "react";
+import "./index.scss";
+import { Avatar, Divider } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Confrimpassword from "../Changepassword/index";
+import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 
 function Profile() {
-  const userDetail = useSelector((state) => state?.user.userDetail)
-  const [open, setOpen] = useState(false)
-  const dispatch = useDispatch()
-  const UserToken = localStorage.getItem('UserToken')
+  const userDetail = useSelector((state) => state?.user.userDetail);
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const UserToken = localStorage.getItem("UserToken");
   const userId =
-    UserToken !== 'undefined' && UserToken !== null
+    UserToken !== "undefined" && UserToken !== null
       ? JSON.parse(UserToken).user_id
-      : undefined
+      : undefined;
 
-      useEffect(() => {
-        if (userId != undefined) {
-          dispatch(GetUserDetails({ id: userId }))
-        }
-      }, [userId])
+  useEffect(() => {
+    if (userId != undefined) {
+      dispatch(GetUserDetails({ id: userId }));
+    }
+  }, [userId]);
+
   return (
     <>
       <div className="profile_main">
         <div className="profile_head">
           <div className="profile_title">
-            <Link to={'/'}>
-              <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
+            <Link to={"/"}>
+              <ArrowCircleLeftIcon sx={{ width: "40px", height: "35px" }} />
             </Link>
             <div className="profile_subtitle">Profile</div>
           </div>
@@ -45,13 +49,33 @@ function Profile() {
           <div style={{ marginRight: "1rem" }}>Logout</div>
           <LogoutIcon />
         </button> */}
-              <div className="profile_name">{userDetail?.name}</div>
-              <div className="profile_data">+{userDetail?.phone}</div>
+              <div>
+                <div className="profile_subdata">Name : {userDetail?.name}</div>
+                <Divider />
+                <div className="profile_subdata">
+                  Email : {userDetail?.email}
+                </div>
+                <Divider />
+                <div className="profile_subdata">
+                  Phone : {userDetail?.phone}
+                </div>
+                <Divider />
+                <div className="profile_subdata">
+                  Member Since : {userDetail?.created_at.substr(0, 10)}
+                </div>
+                <Divider />
+                <div className="profile_subdata">
+                  Dealer Ship :{" "}
+                  {userDetail?.as_dealer === "0" ? "Not Active" : "Active"}
+                </div>
+                <Divider />
+                <div className="profile_subdata"></div>
+              </div>
+
               <button onClick={() => setOpen(true)} className="changePassword">
                 Change Password
               </button>
 
-              <div className="profile_data">Member Since 10 March 2023</div>
               {/* <div className="reward_refer">
           <div className="rewards">
             <EmojiEventsIcon sx={{ color: "white", width: '40px', height: '35px' }}/>
@@ -74,7 +98,7 @@ function Profile() {
       </div>
       <Confrimpassword open={open} setOpen={setOpen} />
     </>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

@@ -1,7 +1,7 @@
-import React from 'react'
-import Dialog from '@mui/material/Dialog'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import './ReferralPopup.scss'
+import React from "react";
+import Dialog from "@mui/material/Dialog";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import "./ReferralPopup.scss";
 
 function ReferalCodeDialog({
   openPopUp,
@@ -9,7 +9,6 @@ function ReferalCodeDialog({
   ReferralCode,
   setReferralCode,
 }) {
- 
   return (
     <Dialog
       onClose={() => setOpenPopUp(false)}
@@ -28,7 +27,11 @@ function ReferalCodeDialog({
         onChange={(e) => setReferralCode(e.target.value)}
       />
       <div className="code_button_div">
-        <button type="submit" className="code_button" onClick={() => setOpenPopUp(false)} >
+        <button
+          type="submit"
+          className="code_button"
+          onClick={() => setOpenPopUp(false)}
+        >
           Submit
         </button>
         <button
@@ -36,11 +39,11 @@ function ReferalCodeDialog({
           className="code_button"
           onClick={() => setOpenPopUp(false)}
         >
-          Cancle
+          Cancel
         </button>
       </div>
     </Dialog>
-  )
+  );
 }
 
-export default ReferalCodeDialog
+export default ReferalCodeDialog;

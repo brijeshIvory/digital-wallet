@@ -71,23 +71,28 @@
   border-radius: 20px 20px 0 0;
   flex: 0.88;
   background-color: #1b1d27;
+  .MuiDivider-root {
+    background-color: #d7d6d1;
+  }
 }
 .profile_avatar {
   margin-top: -3.5rem;
 }
-.profile_data {
-  color: #fff;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
+// .profile_data {
+//   color: #fff;
+//   margin-top: 1rem;
+//   margin-bottom: 1rem;
+// }
 
-.profile_name {
-  font-weight: 800;
-  color: #fff;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+// .profile_name {
+//   font-weight: 800;
+//   color: #fff;
+//   margin-top: 1rem;
+//   margin-bottom: 1rem;
+// }
+.profile_subdata {
+  padding: 20px;
 }
-
 .changePassword {
   background: #01b0ff;
 

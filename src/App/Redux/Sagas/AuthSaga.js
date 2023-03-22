@@ -47,30 +47,30 @@ function* userLogin(payload) {
   }
 }
 function* sendOtp(payload) {
-  const { otp } = payload
-  const otpData = yield call(SendOtpApi, otp)
-  if(otpData.data.ok === true){
-    toast("Otp Send Successfully")
-  }else{
-    toast(otpData.data.message)
+  const { otp } = payload;
+  const otpData = yield call(SendOtpApi, otp);
+  if (otpData.data.ok === true) {
+    toast("Otp Send Successfully");
+  } else {
+    toast(otpData.data.message);
   }
 }
 
 function* verifyOtp(payload) {
-  const { otpData } = payload
-  const otpResp = yield call(VerifyOtpApi, otpData)
+  const { otpData } = payload;
+  const otpResp = yield call(VerifyOtpApi, otpData);
   if (otpResp?.data.ok === true) {
     yield put({
       type: actionType.VERIFY_OTP_SUCCESS,
       otpResp,
-    })
-    toast("Successfully Register !")
+    });
+    toast("Successfully Register !");
   } else {
     yield put({
       type: actionType.VERIFY_OTP_FAIL,
       otpRespErr: otpResp,
-    })
-    toast(otpResp.data.message)
+    });
+    toast(otpResp.data.message);
   }
 }
 function* GetUserDetailsSaga(payload) {
@@ -107,11 +107,10 @@ function* chnagePasswordSaga(payload) {
 
 function* AuthSaga() {
   yield all([takeEvery(actionType.USER_REGISTRATION, userRegistration)]);
+  yield all([takeEvery(actionType.USER_LOGIN, userLogin)]);
   yield all([takeEvery(actionType.SEND_OTP, sendOtp)]);
   yield all([takeEvery(actionType.VERIFY_OTP, verifyOtp)]);
   yield all([takeEvery(actionType.GET_USER_DETAILS, GetUserDetailsSaga)]);
-  yield all([takeEvery(actionType.USER_LOGIN, userLogin)]);
-  yield all([takeEvery(actionType.USER_REGISTRATION, userRegistration)]);
   yield all([takeEvery(actionType.FORGET_PASSWORD, forgetPassword)]);
   yield all([takeEvery(actionType.CHANGE_PASSWORD, chnagePasswordSaga)]);
 }
