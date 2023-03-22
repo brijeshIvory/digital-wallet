@@ -14,13 +14,14 @@ import { LoginStatus } from "../../App/Redux/Actions/AuthActions";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import BeingPartner from "../Register/BeingPartner";
+import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
+
 function Navbar({ open, setOpen }) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user?.userDetail);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [clear, setClear] = useState(false);
-
-  console.log(userData?.as_dealer, "as_dealer");
+  const UserToken = localStorage.getItem("UserToken");
 
   const list1 = [
     {
@@ -35,13 +36,16 @@ function Navbar({ open, setOpen }) {
     },
   ];
 
-  const list2 = [
-    {
-      name: "Logout",
-      link: "./profile",
-      icon: <LogoutIcon />,
-    },
-  ];
+  const userId =
+    UserToken !== "undefined" && UserToken !== null
+      ? JSON.parse(UserToken).user_id
+      : undefined;
+
+  useEffect(() => {
+    if (userId != undefined) {
+      dispatch(GetUserDetails({ id: userId }));
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (clear === true) {
