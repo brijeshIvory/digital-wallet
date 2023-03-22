@@ -9,12 +9,11 @@ import OtpInput from "react18-input-otp";
 import "./index.scss";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-function Otp({setOpenJoinNow}) {
+function Otp({ setOpenJoinNow }) {
   const [otp, setOtp] = useState("");
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state?.user?.data);
-  const userdata = useSelector((state) => state?.user?.data);
+  const user = useSelector((state) => state?.user?.data?.data?.data);
 
   const otpVarificationStatus = useSelector(
     (state) => state?.user?.otpVerification?.data?.ok
@@ -46,7 +45,6 @@ function Otp({setOpenJoinNow}) {
         Enter the OTP sent to your email id..
       </div>
 
-      {/* <input type="number" placeholder="Enter OTP" /> */}
       <OtpInput
         className="otp-input-field"
         value={otp}
@@ -63,7 +61,7 @@ function Otp({setOpenJoinNow}) {
           );
 
           dispatch(emptyUser());
-          setOpenJoinNow('bottom', false)
+          setOpenJoinNow("bottom", false);
         }}
       >
         Confirm OTP

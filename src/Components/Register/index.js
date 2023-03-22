@@ -1,42 +1,41 @@
-import React, { useState } from 'react'
-import './index.scss'
-import TextField from '@mui/material/TextField'
-import Drawer from '@mui/material/Drawer'
-import { useFormik } from 'formik'
-import { InputAdornment, IconButton, Select } from '@mui/material'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import MenuItem from '@mui/material/MenuItem'
-import { RegistationValidationSchema } from '../../utills/ValidationSchema'
-import { useDispatch } from 'react-redux'
-import { registrationClick } from '../../App/Redux/Actions/AuthActions'
-import Otp from '../OTP/index'
+import React, { useState } from "react";
+import "./index.scss";
+import TextField from "@mui/material/TextField";
+import Drawer from "@mui/material/Drawer";
+import { useFormik } from "formik";
+import { InputAdornment, IconButton, Select } from "@mui/material";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+import { useSelector } from "react-redux";
+import MenuItem from "@mui/material/MenuItem";
+import { RegistationValidationSchema } from "../../utills/ValidationSchema";
+import { useDispatch } from "react-redux";
+import { registrationClick } from "../../App/Redux/Actions/AuthActions";
+import Otp from "../OTP/index";
 
 function Register({ open, setOpenJoinNow }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [passwordType, setPasswordType] = useState('password')
-  const [confirmPasswordType, setConfirmPasswordType] = useState('password')
-  const [indication, setIndication] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const countries = useSelector((state) => state?.country?.countries?.data)
+  const [passwordType, setPasswordType] = useState("password");
+  const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+  const [indication, setIndication] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const countries = useSelector((state) => state?.country?.countries?.data);
   const [selectCountry, setSelectCountry] = useState({
     country: 101,
     country_code: 91,
-  })
+  });
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
+      name: "",
+      email: "",
       country_code: 91,
-      phone: '',
-      password: '',
-      confirmPassword: '',
+      phone: "",
+      password: "",
+      confirmPassword: "",
       country: 101,
     },
     onSubmit: (values, { resetForm }) => {
@@ -47,45 +46,45 @@ function Register({ open, setOpenJoinNow }) {
         phone: values.phone,
         password: values.password,
         country: values.country,
-      }
+      };
       if (payload) {
-        dispatch(registrationClick(payload))
+        dispatch(registrationClick(payload));
       }
-      resetForm({ values: null })
+      resetForm({ values: null });
 
-      setIndication(false)
+      setIndication(false);
     },
     validationSchema: RegistationValidationSchema,
-  })
+  });
 
   const togglePassword = () => {
-    if (passwordType === 'password') {
-      setPasswordType('text')
-      setShowPassword(!showPassword)
-      return
+    if (passwordType === "password") {
+      setPasswordType("text");
+      setShowPassword(!showPassword);
+      return;
     }
-    setPasswordType('password')
-    setShowPassword(!showPassword)
-  }
+    setPasswordType("password");
+    setShowPassword(!showPassword);
+  };
   const toggleConfirmPassword = () => {
-    if (confirmPasswordType === 'password') {
-      setConfirmPasswordType('text')
-      setShowConfirmPassword(!showConfirmPassword)
-      return
+    if (confirmPasswordType === "password") {
+      setConfirmPasswordType("text");
+      setShowConfirmPassword(!showConfirmPassword);
+      return;
     }
-    setConfirmPasswordType('password')
-    setShowConfirmPassword(!showConfirmPassword)
-  }
+    setConfirmPasswordType("password");
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   return (
-    <Drawer anchor={'bottom'} open={open} className="joinNowFrom">
+    <Drawer anchor={"bottom"} open={open} className="joinNowFrom">
       <div className="yellow_strip"></div>
       <div className="closing">
         <div
           className="closing_button"
           onClick={() => {
-            setOpenJoinNow('bottom', false)
-            setIndication(false)
+            setOpenJoinNow("bottom", false);
+            setIndication(false);
           }}
         >
           <HighlightOffSharpIcon />
@@ -147,11 +146,11 @@ function Register({ open, setOpenJoinNow }) {
                     value={ele.phonecode}
                     key={index}
                     onClick={() => {
-                      formik.values.country = ele.id
+                      formik.values.country = ele.id;
                       setSelectCountry({
                         country: ele.id,
                         country_code: ele.phonecode,
-                      })
+                      });
                     }}
                   >
                     {ele.name}
@@ -199,9 +198,9 @@ function Register({ open, setOpenJoinNow }) {
                       onClick={togglePassword}
                     >
                       {showPassword ? (
-                        <VisibilityIcon sx={{ color: 'white' }} />
+                        <VisibilityIcon sx={{ color: "white" }} />
                       ) : (
-                        <VisibilityOffIcon sx={{ color: 'white' }} />
+                        <VisibilityOffIcon sx={{ color: "white" }} />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -231,9 +230,9 @@ function Register({ open, setOpenJoinNow }) {
                       onClick={toggleConfirmPassword}
                     >
                       {showConfirmPassword ? (
-                        <VisibilityIcon sx={{ color: 'white' }} />
+                        <VisibilityIcon sx={{ color: "white" }} />
                       ) : (
-                        <VisibilityOffIcon sx={{ color: 'white' }} />
+                        <VisibilityOffIcon sx={{ color: "white" }} />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -265,7 +264,7 @@ function Register({ open, setOpenJoinNow }) {
       </div>
       <Otp setOpenJoinNow={setOpenJoinNow} />
     </Drawer>
-  )
+  );
 }
 
-export default Register
+export default Register;
