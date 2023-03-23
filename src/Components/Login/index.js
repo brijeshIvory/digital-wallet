@@ -93,7 +93,6 @@ function Login({ open, setOpenLogin }) {
               <div className="country-input">
                 <Select
                   id="country-input"
-                  select
                   label="Select Country"
                   variant="standard"
                   name="country_code"

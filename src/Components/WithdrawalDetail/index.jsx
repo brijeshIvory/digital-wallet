@@ -19,6 +19,7 @@ import HawalaTransfer from "./HawalaTransfer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
+import Others from "./Others";
 const WithdrawalDetail = () => {
   const [bankFormOpen, setBankFormOpen] = useState(false);
   const [PaytmFormOpen, setPaytmFormOpen] = useState(false);
@@ -26,6 +27,8 @@ const WithdrawalDetail = () => {
   const [PhonePeFormOpen, setPhonePeFormOpen] = useState(false);
   const [UpiFormOpen, setUpiFormOpen] = useState(false);
   const [HawalaiFormOpen, setHawalaiFormOpen] = useState(false);
+  const [OthersFormOpen, setOthersFormOpen] = useState(false);
+
   const Userdeatil = useSelector((state) => state?.user?.userDetail);
   const UserToken = localStorage.getItem("UserToken");
   const dispatch = useDispatch();
@@ -125,6 +128,17 @@ const WithdrawalDetail = () => {
               Add New
             </Button>
           </div>
+          <div className="bank-detail">
+            <Avatar alt="Others" src={Hawala} />
+            <p className="bank-detail-title">Others</p>
+            <Button
+              type="submit"
+              className="bank-detail-sum"
+              onClick={() => setOthersFormOpen(true)}
+            >
+              Add New
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -149,6 +163,11 @@ const WithdrawalDetail = () => {
         setHawalaiFormOpen={setHawalaiFormOpen}
       />
       <UpiTransfer UpiFormOpen={UpiFormOpen} setUpiFormOpen={setUpiFormOpen} />
+
+      <Others
+        OthersFormOpen={OthersFormOpen}
+        setOthersFormOpen={setOthersFormOpen}
+      />
     </div>
   );
 };

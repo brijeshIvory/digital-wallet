@@ -66,7 +66,7 @@ function Profile() {
                 </div>
                 <Divider />
                 <div className="profile_subdata">
-                  Member Since : {userDetail?.created_at.substr(0, 10)}
+                  Member Since : {userDetail?.created_at?.substr(0, 10)}
                 </div>
                 <Divider />
                 <div className="profile_subdata">
