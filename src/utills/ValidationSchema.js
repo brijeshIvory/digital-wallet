@@ -48,13 +48,15 @@ export const RegistationValidationSchema = yup.object({
     .required("Email is Required !"),
   country_code: yup.string().required("please select Country code"),
 
-  phone: yup.string().required("Phone No is required !"),
-  password: yup.string().required("please Enter password !"),
-
+  phone: yup.string().required('Phone No is required !'),
+  password: yup.string()
+  .min(6, 'Password must be at least 6 characters')
+  .max(24, 'Password can be maximum 24 characters')
+  .required('Required'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
-});
+    .oneOf([yup.ref('password'), null], 'Passwords not match'),
+})
 export const DepositeAmountValidationSchema = yup.object({
   amount: yup
     .number()
@@ -82,7 +84,7 @@ export const ForgotPasswordValidationSchema = yup.object({
     )
     .required("Email is required !"),
 
-  password: yup.string().required("password is required !"),
+  password: yup.string().min(8, "Password must be 8 character").required("Password is Required"),
 
   confirm_password: yup.string().required("please add confrim password"),
 });
