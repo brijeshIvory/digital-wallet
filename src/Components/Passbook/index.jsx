@@ -100,6 +100,8 @@ function Passbook() {
   const [openTransactionDetail, setOpenTransactionDetail] = useState(false);
 
   const [isFilterClicked, setIsFilterClicked] = useState(false);
+  const [filterMode, setFilterMode] = useState(false);
+  const [dummyfilteredData, setDummyfilteredData] = useState([]);
 
   const ClientList = useSelector((state) => state?.HawalaReducer?.client_list);
   const TransactionList = useSelector(
@@ -110,7 +112,6 @@ function Passbook() {
   const dateAfterYear = new Date();
   dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
   useEffect(() => {
-    dispatch(GetClientList());
     dispatch(
       getTransactions({
         start_date: null,
@@ -128,23 +129,25 @@ function Passbook() {
     const newMinDate = arr.join("-");
     const min = Date.parse(newMinDate);
     const max = Date.parse(maxDate);
-    const filteredData = Data.filter(
+    const filteredData = Data?.filter(
       (obj) =>
         createTimeStamp(obj.Date) >= min && createTimeStamp(obj.Date) <= max
     );
     return filteredData;
   };
 
-  let dummyfilteredData = filterData(
-    formatDate(submitedInput.startDate),
-    formatDate(submitedInput.endDate),
-    dummyData
-  );
+  useEffect(() => {
+    if (submitedInput !== {}) {
+      const temp = filterData(
+        formatDate(submitedInput.startDate),
+        formatDate(submitedInput.endDate),
+        TransactionList
+      );
 
-  if (dummyfilteredData.length === 0) {
-    dummyfilteredData = dummyData;
-  }
-
+      setDummyfilteredData([...temp]);
+    }
+  }, [submitedInput]);
+  console.log(TransactionList, "TransactionList");
   return (
     <div className="passbook-main">
       <div className="passbook-head">
@@ -157,61 +160,130 @@ function Passbook() {
       </div>
       <div className="passbook-body">
         <div className="passbook-body-head">
-          <div style={{fontSize:"18px"}}>Transactions</div>
+          <div style={{ fontSize: "18px" }}>Transactions</div>
 
-          <button onClick={() => setIsFilterClicked(true)} style={{backgroundColor:"#2f354b"}}>Filter</button>
+          <button
+            onClick={() => setIsFilterClicked(true)}
+            style={{ backgroundColor: "#2f354b" }}
+          >
+            Filter
+          </button>
         </div>
 
         <div className="transaction-data">
-          <TableContainer
-            component={Paper}
-            sx={{ backgroundColor: "#2f354b", border: "1px solid #fff" }}
-          >
-            <Table sx={{ maxWidth: 20 }} aria-label="simple table">
-              <TableHead>
-                <TableRow className="tableRow">
-                  <TableCell>Date</TableCell>
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Deposit</TableCell>
-                  <TableCell>Withdraw</TableCell>
-                  <TableCell>-</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {dummyfilteredData &&
-                  dummyfilteredData?.map((transaction, idx) => (
-                    <TableRow
-                      key={idx}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                      className="tableRow"
-                    >
-                      <TableCell component="th" scope="row">
-                        {transaction.Date}
-                      </TableCell>
-                      {/* <TableCell align="right">{transaction.Note}</TableCell> */}
-                      <TableCell align="right">{transaction.Balance}</TableCell>
-                      <TableCell align="right">{transaction.Deposit}</TableCell>
-                      <TableCell align="right">
-                        {transaction.Withdraw}
-                      </TableCell>
-                      <TableCell align="right">
-                        <button
-                          className="detail-button"
-                          onClick={() => {
-                            setCurrentSelectedTransaction(transaction);
-                            setOpenTransactionDetail(true);
+          {dummyfilteredData.length === 0 && filterMode ? (
+            <>
+              <div>{"No data available between these dates"}</div>
+              <button
+                className="cancel-filter-button"
+                onClick={() => setFilterMode(false)}
+              >
+                Cancel
+              </button>
+            </>
+          ) : (
+            <TableContainer
+              component={Paper}
+              sx={{ backgroundColor: "#2f354b", border: "1px solid #fff" }}
+            >
+              <Table sx={{ maxWidth: 20 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow className="tableRow">
+                    <TableCell>Date</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell>Deposit</TableCell>
+                    <TableCell>Withdraw</TableCell>
+                    <TableCell>-</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {dummyfilteredData.length !== 0 ? (
+                    <>
+                      {dummyfilteredData?.map((transaction, idx) => (
+                        <TableRow
+                          key={idx}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
                           }}
+                          className="tableRow"
                         >
-                          Details
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                          <TableCell component="th" scope="row">
+                            {transaction.Date}
+                          </TableCell>
+
+                          <TableCell align="right">
+                            {transaction.Balance}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Deposit}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Withdraw}
+                          </TableCell>
+                          <TableCell align="right">
+                            <button
+                              className="detail-button"
+                              onClick={() => {
+                                setCurrentSelectedTransaction(transaction);
+                                setOpenTransactionDetail(true);
+                              }}
+                            >
+                              Details
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                      <button
+                        className="cancel-filter-button"
+                        onClick={() => {
+                          setFilterMode(false);
+                          setIsFilterClicked(false);
+                          setDummyfilteredData([]);
+                        }}
+                      >
+                        Cancel Filter
+                      </button>
+                    </>
+                  ) : (
+                    TransactionList?.map((transaction, idx) => (
+                      <TableRow
+                        key={idx}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                        className="tableRow"
+                      >
+                        <TableCell component="th" scope="row">
+                          {transaction.Date}
+                        </TableCell>
+
+                        <TableCell align="right">
+                          {transaction.Balance}
+                        </TableCell>
+                        <TableCell align="right">
+                          {transaction.Deposit}
+                        </TableCell>
+                        <TableCell align="right">
+                          {transaction.Withdraw}
+                        </TableCell>
+                        <TableCell align="right">
+                          <button
+                            className="detail-button"
+                            onClick={() => {
+                              setCurrentSelectedTransaction(transaction);
+                              setOpenTransactionDetail(true);
+                            }}
+                          >
+                            Details
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </div>
         {isFilterClicked && (
           <div>
@@ -233,45 +305,6 @@ function Passbook() {
               />
             </div>
 
-            {/* <TextField
-              id="transactionType"
-              label="Transaction Type"
-              select
-              helperText="Please select your transaction type"
-              variant="standard"
-              value={inputValue.transactionType}
-              onChange={(e) =>
-                setInputValue({
-                  ...inputValue,
-                  transactionType: e.target.value,
-                })
-              }
-            >
-              {arr.map((ele) => (
-                <MenuItem value={ele} key={ele}>
-                  {ele}
-                </MenuItem>
-              ))}
-            </TextField> */}
-            {/* 
-            <TextField
-              id="status"
-              select
-              label="Status"
-              helperText="Please select status"
-              variant="standard"
-              value={inputValue.status}
-              onChange={(e) =>
-                setInputValue({ ...inputValue, status: e.target.value })
-              }
-            >
-              {arr.map((ele) => (
-                <MenuItem value={ele} key={ele}>
-                  {ele}
-                </MenuItem>
-              ))}
-            </TextField> */}
-
             <div className="passbook-body-button">
               <button
                 onClick={() => {
@@ -292,6 +325,7 @@ function Passbook() {
                     startDate: new Date(),
                     endDate: new Date(),
                   });
+                  setFilterMode(true);
                 }}
               >
                 Apply
