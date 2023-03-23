@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import Others from "./Others";
 import Other from '../../assets/img/payment.png'
+
 const WithdrawalDetail = () => {
   const [bankFormOpen, setBankFormOpen] = useState(false);
   const [PaytmFormOpen, setPaytmFormOpen] = useState(false);
