@@ -18,6 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import logo from "../../assets/img/insite-vision-logo-svg-vector.svg";
+import { BsWhatsapp } from "react-icons/bs";
+import Whatsapp from "../Whatsapp";
 
 function NewHomePage() {
   const dispatch = useDispatch();
@@ -193,6 +195,7 @@ function NewHomePage() {
           </div>
         </div>
       )}
+      <Whatsapp />
     </div>
   );
 }
