@@ -12,6 +12,7 @@ import NewHomePage from "../Components/NewHomePage";
 import Passbook from "../Components/Passbook";
 import { useEffect } from "react";
 import ThirdPartyTransaction from "./../Components/3rdPartyTransaction/index";
+import Whatsapp from "../Components/Whatsapp";
 const Router = () => {
   return (
     <Routes>
@@ -22,6 +23,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <OfferPage />
+            <Whatsapp />
           </PrivateRoute>
         }
       />
@@ -30,6 +32,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <Profile />
+            <Whatsapp />
           </PrivateRoute>
         }
       />
@@ -38,6 +41,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <WithdrawalDetail />
+            <Whatsapp />
           </PrivateRoute>
         }
       ></Route>
@@ -46,6 +50,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <Withdrawal />
+            <Whatsapp />
           </PrivateRoute>
         }
       ></Route>
@@ -55,6 +60,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <ReferAndEarn />
+            <Whatsapp />
           </PrivateRoute>
         }
       ></Route>
@@ -63,6 +69,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <Deposit />
+            <Whatsapp />
           </PrivateRoute>
         }
       ></Route>
@@ -71,6 +78,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <DepositPayment />
+            <Whatsapp />
           </PrivateRoute>
         }
       ></Route>
@@ -79,6 +87,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <Passbook />
+            <Whatsapp />
           </PrivateRoute>
         }
       ></Route>
@@ -87,6 +96,7 @@ const Router = () => {
         element={
           <PrivateRoute>
             <ThirdPartyTransaction />
+            <Whatsapp />
           </PrivateRoute>
         }
       ></Route>

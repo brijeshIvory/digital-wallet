@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import logo from "../../assets/img/insite-vision-logo-svg-vector.svg";
 import { BsWhatsapp } from "react-icons/bs";
+import Whatsapp from "../Whatsapp";
 
 function NewHomePage() {
   const dispatch = useDispatch();
@@ -194,12 +195,7 @@ function NewHomePage() {
           </div>
         </div>
       )}
-      <article className="contact__option">
-        <BsWhatsapp className="contact__option-icon" />
-        <a href="https://api.whatsapp.com/send?phone=919723328348">
-          Click to contact
-        </a>
-      </article>
+      <Whatsapp />
     </div>
   );
 }
