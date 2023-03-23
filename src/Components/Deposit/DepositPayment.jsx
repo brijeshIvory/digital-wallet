@@ -8,6 +8,7 @@ import GooglePay from "../../assets/img/google_pay.png";
 import phone_pe from "../../assets/img/phone_pe.png";
 import Hawala from "../../assets/img/hawala.png";
 import UPI from "../../assets/img/upi.png";
+import Other from '../../assets/img/payment.png'
 import "./style.scss";
 import PaymentDetail from "./PaymentDetail";
 import { Link } from "react-router-dom";
@@ -174,6 +175,26 @@ const DepositPayment = () => {
                       <Avatar src={Hawala} alt="Hawala" />
                     </div>
                     <h3 className="card_text">Hawala</h3>
+                  </Item>
+                </Grid>
+
+                <Grid item xs={2} sm={4} md={4}>
+                  <Item
+                    style={{
+                      backgroundColor:
+                        isBackground === "Other" ? "#01b0ff" : "#1b1d27",
+                    }}
+                    onClick={() => {
+                      setIsBackground("Other");
+                      setPaymentInfo(
+                        `${"Other"},${depositDetail?.other_name},${depositDetail?.other_link}`
+                      );
+                    }}
+                  >
+                    <div className="card_image">
+                      <Avatar src={Other} alt="Other" style={{backgroundColor:"#fff"}} />
+                    </div>
+                    <h3 className="card_text">Other</h3>
                   </Item>
                 </Grid>
               </Grid>

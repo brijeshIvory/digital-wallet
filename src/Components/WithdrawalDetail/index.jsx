@@ -20,6 +20,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import Others from "./Others";
+import Other from '../../assets/img/payment.png'
+
 const WithdrawalDetail = () => {
   const [bankFormOpen, setBankFormOpen] = useState(false);
   const [PaytmFormOpen, setPaytmFormOpen] = useState(false);
@@ -129,7 +131,7 @@ const WithdrawalDetail = () => {
             </Button>
           </div>
           <div className="bank-detail">
-            <Avatar alt="Others" src={Hawala} />
+            <Avatar alt="Others" src={Other} style={{backgroundColor:"#fff"}}/>
             <p className="bank-detail-title">Others</p>
             <Button
               type="submit"
