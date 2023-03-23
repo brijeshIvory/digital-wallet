@@ -50,14 +50,19 @@ function Profile() {
           <LogoutIcon />
         </button> */}
               <div>
-                <div className="profile_subdata">Name : {userDetail?.name}</div>
-                <Divider />
                 <div className="profile_subdata">
-                  Email : {userDetail?.email}
+                  <PersonIcon sx={{ marginRight: "1rem" }} />
+                  <div>{userDetail?.name}</div>
                 </div>
                 <Divider />
                 <div className="profile_subdata">
-                  Phone : {userDetail?.phone}
+                  <EmailIcon sx={{ marginRight: "1rem" }} />
+                  <div>{userDetail?.email}</div>
+                </div>
+                <Divider />
+                <div className="profile_subdata">
+                  <PhoneIphoneIcon sx={{ marginRight: "1rem" }} />
+                  <div>{userDetail?.phone}</div>
                 </div>
                 <Divider />
                 <div className="profile_subdata">
@@ -65,7 +70,7 @@ function Profile() {
                 </div>
                 <Divider />
                 <div className="profile_subdata">
-                  Dealer Ship :{" "}
+                  Dealership :{" "}
                   {userDetail?.as_dealer === "0" ? "Not Active" : "Active"}
                 </div>
                 <Divider />
