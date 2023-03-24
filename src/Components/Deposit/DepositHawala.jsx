@@ -7,10 +7,12 @@ import { HawalaTransferValidationSchema } from '../../utills/ValidationSchema'
 import MenuItem from '@mui/material/MenuItem'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useSelector } from 'react-redux'
-import { GetHawalaList,RequestDeposite } from '../../App/Redux/Actions/WalletActions'
+import { GetHawalaList, RequestDeposite } from '../../App/Redux/Actions/WalletActions'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { InputLabel } from '@mui/material'
+import { UploadToS3 } from 'react-upload-to-s3';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 const DepositHawala = () => {
   const dispatch = useDispatch()
@@ -50,9 +52,8 @@ const DepositHawala = () => {
     validationSchema: HawalaTransferValidationSchema,
     onSubmit: (values) => {
       const PayloadData = {
-        notes: `${'HawalaTransfer'},${values.hawala_value},${
-          values.AccountNumber
-        }`,
+        notes: `${'HawalaTransfer'},${values.hawala_value},${values.AccountNumber
+          }`,
         amount: amount,
         image: previewUrl,
         user_id: userId,
@@ -118,15 +119,15 @@ const DepositHawala = () => {
           <div className=" border rounded-lg mt-3">
             {previewUrl ? (
               <>
-                 <div className="deposit_close_icon">
-        <HighlightOffIcon onClick={() => {
-          setFrontSidefile(null)
-          setPreviewUrl(null)
-        }} />
-      </div>
+                <div className="deposit_close_icon">
+                  <HighlightOffIcon onClick={() => {
+                    setFrontSidefile(null)
+                    setPreviewUrl(null)
+                  }} />
+                </div>
                 <img
                   alt="file uploader preview"
-             
+
                   src={previewUrl}
                   width={441}
                   height={250}
@@ -163,6 +164,18 @@ const DepositHawala = () => {
               </>
             )}
           </div>
+          <UploadToS3
+            bucket="anjnibooks-image-upload"
+            awsRegion="us-east-1"
+            awsKey="AKIAWWADDZGODHTJOQ7T"
+            awsSecret="hvt9n/go9qgtIgHWgRnNJYzQZ336cN95XDquAsla"
+            // awsMediaConvertEndPoint="your_endpoint"
+            type="image"
+            mediaConvertRole="mediaconvert_role"
+            // theme={theme}
+            showNewUpload={false}
+            onResult={(result) => { console.log('on Result', result); }} />
+
         </div>
       </form>
     </div>
@@ -170,3 +183,4 @@ const DepositHawala = () => {
 }
 
 export default DepositHawala
+
