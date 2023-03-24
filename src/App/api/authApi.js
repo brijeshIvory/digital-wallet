@@ -1,6 +1,5 @@
 import axios from "axios";
-// const base_url = process.env.REACT_BASE_URL;
-const base_url = "https://paindustry.in/booky/api";
+export const base_url = process.env.REACT_APP_API_URL
 
 export function* UserRegistrationApi(registratedData) {
   const registration = yield axios

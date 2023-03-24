@@ -1,5 +1,5 @@
 .loginbutton {
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background: #01b0ff;
   min-height: 30px;
   border-width: 0;
   border-radius: 5px;
@@ -17,11 +17,10 @@
   display: flex;
   align-items: center;
 }
-.mobile-number {
+.login-mobile-number {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 2rem;
 }
 .country-input {
   flex: 0.2;
@@ -69,6 +68,7 @@
     border-bottom: none;
   }
 }
-.mobile-number-label {
+.login-mobile-number-label {
   font-size: 12px;
+  margin-bottom: 0.2rem;
 }

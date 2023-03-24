@@ -2,7 +2,7 @@ import { GetTransactionsApi } from "../../api/transactionApi";
 import { call, all, takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../Actions/actionsType";
 function* getTransactions(payload) {
-  const { transactionPayload } = payload
+  const { transactionPayload } = payload;
 
   const transactions = yield call(GetTransactionsApi, transactionPayload);
 

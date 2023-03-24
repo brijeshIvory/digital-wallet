@@ -1,37 +1,38 @@
-import React, { useState } from 'react'
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
-import { experimentalStyled as styled } from '@mui/material/styles'
-import { Avatar, Box, Paper, Grid } from '@mui/material'
-import Banktransfer from '../../assets/img/bank_transfer.png'
-import Paytm from '../../assets/img/paytm.png'
-import GooglePay from '../../assets/img/google_pay.png'
-import phone_pe from '../../assets/img/phone_pe.png'
-import Hawala from '../../assets/img/hawala.png'
-import UPI from '../../assets/img/upi.png'
-import './style.scss'
-import PaymentDetail from './PaymentDetail'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import { experimentalStyled as styled } from "@mui/material/styles";
+import { Avatar, Box, Paper, Grid } from "@mui/material";
+import Banktransfer from "../../assets/img/bank_transfer.png";
+import Paytm from "../../assets/img/paytm.png";
+import GooglePay from "../../assets/img/google_pay.png";
+import phone_pe from "../../assets/img/phone_pe.png";
+import Hawala from "../../assets/img/hawala.png";
+import UPI from "../../assets/img/upi.png";
+import Other from '../../assets/img/payment.png'
+import "./style.scss";
+import PaymentDetail from "./PaymentDetail";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
-  padding: '0.5rem',
-  textAlign: 'center',
+  padding: "0.5rem",
+  textAlign: "center",
   color: theme.palette.text.secondary,
-}))
+}));
 
 const DepositPayment = () => {
-  const [isBackground, setIsBackground] = useState('')
-  const amount = window.location.pathname.split('/')[2]
-  const [paymentInfo, setPaymentInfo] = useState("")
+  const [isBackground, setIsBackground] = useState("");
+  const amount = window.location.pathname.split("/")[2];
+  const [paymentInfo, setPaymentInfo] = useState("");
 
-  const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail)
+  const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail);
 
   return (
     <>
       <div className="Payment_method_head">
         <div className="Payment_method_title">
-          <Link to={'/'}>
-            <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
+          <Link to={"/"}>
+            <ArrowCircleLeftIcon sx={{ width: "40px", height: "35px" }} />
           </Link>
           <div className="Payment_method_subtitle">Payment Method</div>
         </div>
@@ -46,7 +47,7 @@ const DepositPayment = () => {
           </div>
 
           <div className="image_box">
-            <Box sx={{ flexGrow: 1, padding: '1rem 0 1rem 0' }}>
+            <Box sx={{ flexGrow: 1, padding: "1rem 0 1rem 0" }}>
               <Grid
                 container
                 spacing={{ xs: 1, md: 2 }}
@@ -56,13 +57,17 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === 'Banktransfer' ? '#fac000' : '#0e0c0d',
+                        isBackground === "Banktransfer" ? "#01b0ff" : "#1b1d27",
                     }}
                     onClick={() => {
-                      setIsBackground('Banktransfer')
+                      setIsBackground("Banktransfer");
                       setPaymentInfo(
-                        `${'Banktransfer'},${depositDetail?.bank_name},${depositDetail?.account_holder_name},${depositDetail?.account_number},${depositDetail?.ifsc_code}`,
-                      )
+                        `${"Banktransfer"},${depositDetail?.bank_name},${
+                          depositDetail?.account_holder_name
+                        },${depositDetail?.account_number},${
+                          depositDetail?.ifsc_code
+                        }`
+                      );
                     }}
                   >
                     <div className="card_image">
@@ -75,11 +80,15 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === 'Paytm' ? '#fac000' : '#0e0c0d',
+                        isBackground === "Paytm" ? "#01b0ff" : "#1b1d27",
                     }}
                     onClick={() => {
-                      setIsBackground('Paytm')
-                      setPaymentInfo(`${'Paytm'}, ${depositDetail?.paytm_name},${depositDetail?.paytm_link}`)
+                      setIsBackground("Paytm");
+                      setPaymentInfo(
+                        `${"Paytm"}, ${depositDetail?.paytm_name},${
+                          depositDetail?.paytm_link
+                        }`
+                      );
                     }}
                   >
                     <div className="card_image">
@@ -93,11 +102,15 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === 'GooglePay' ? '#fac000' : '#0e0c0d',
+                        isBackground === "GooglePay" ? "#01b0ff" : "#1b1d27",
                     }}
                     onClick={() => {
-                      setIsBackground('GooglePay')
-                      setPaymentInfo(`${'GooglePay'},${depositDetail?.gpay_name},${depositDetail?.gpay_link}`)
+                      setIsBackground("GooglePay");
+                      setPaymentInfo(
+                        `${"GooglePay"},${depositDetail?.gpay_name},${
+                          depositDetail?.gpay_link
+                        }`
+                      );
                     }}
                   >
                     <div className="card_image">
@@ -110,28 +123,36 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === 'phone_pe' ? '#fac000' : '#0e0c0d',
+                        isBackground === "phone_pe" ? "#01b0ff" : "#1b1d27",
                     }}
                     onClick={() => {
-                      setIsBackground('phone_pe')
-                      setPaymentInfo(`${'phone_pe'},${depositDetail?.phonepay_name},${depositDetail?.phonepay_link}`)
+                      setIsBackground("phone_pe");
+                      setPaymentInfo(
+                        `${"phone_pe"},${depositDetail?.phonepay_name},${
+                          depositDetail?.phonepay_link
+                        }`
+                      );
                     }}
                   >
                     <div className="card_image">
                       <Avatar src={phone_pe} alt="phone_pe" />
                     </div>
-                    <h3 className="card_text">Phone Pay</h3>
+                    <h3 className="card_text">Phone Pe</h3>
                   </Item>
                 </Grid>
                 <Grid item xs={2} sm={4} md={4}>
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === 'UPI' ? '#fac000' : '#0e0c0d',
+                        isBackground === "UPI" ? "#01b0ff" : "#1b1d27",
                     }}
                     onClick={() => {
-                      setIsBackground('UPI')
-                      setPaymentInfo(`${'UPI'},${depositDetail?.bhim_name},${depositDetail?.bhim_link}`)
+                      setIsBackground("UPI");
+                      setPaymentInfo(
+                        `${"UPI"},${depositDetail?.bhim_name},${
+                          depositDetail?.bhim_link
+                        }`
+                      );
                     }}
                   >
                     <div className="card_image">
@@ -144,16 +165,36 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === 'Hawala' ? '#fac000' : '#0e0c0d',
+                        isBackground === "Hawala" ? "#01b0ff" : "#1b1d27",
                     }}
                     onClick={() => {
-                      setIsBackground('Hawala')
+                      setIsBackground("Hawala");
                     }}
                   >
                     <div className="card_image">
                       <Avatar src={Hawala} alt="Hawala" />
                     </div>
                     <h3 className="card_text">Hawala</h3>
+                  </Item>
+                </Grid>
+
+                <Grid item xs={2} sm={4} md={4}>
+                  <Item
+                    style={{
+                      backgroundColor:
+                        isBackground === "Other" ? "#01b0ff" : "#1b1d27",
+                    }}
+                    onClick={() => {
+                      setIsBackground("Other");
+                      setPaymentInfo(
+                        `${"Other"},${depositDetail?.other_name},${depositDetail?.other_link}`
+                      );
+                    }}
+                  >
+                    <div className="card_image">
+                      <Avatar src={Other} alt="Other" style={{backgroundColor:"#fff"}} />
+                    </div>
+                    <h3 className="card_text">Other</h3>
                   </Item>
                 </Grid>
               </Grid>
@@ -163,11 +204,10 @@ const DepositPayment = () => {
             isBackground={isBackground}
             paymentInfo={paymentInfo}
           />
-         
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default DepositPayment
+export default DepositPayment;

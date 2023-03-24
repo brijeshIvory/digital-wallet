@@ -11,10 +11,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.4",
+    "bootstrap": "^5.2.3",
+    "dotenv": "^16.0.3",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "mui-tel-input": "^3.1.1",
-    "node-sass": "^7.0.3",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-copy-to-clipboard": "^5.1.0",
     "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
@@ -25,6 +28,7 @@
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
+    "react-upload-to-s3": "^1.0.16",
     "react18-input-otp": "^1.1.3",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.2",
@@ -33,8 +37,8 @@
     "yup": "^1.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.dev react-scripts start",
+    "build-dev": "env-cmd -f .env.dev react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

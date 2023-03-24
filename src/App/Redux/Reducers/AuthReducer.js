@@ -21,7 +21,7 @@ const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
 
-        data: action?.regData?.data?.data,
+        data: action?.regData,
         isLoading: false,
         error: null,
       };

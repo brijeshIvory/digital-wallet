@@ -1,9 +1,9 @@
 .referral-popup {
-  background-color: #fac00098;
+  background-color: #01afff7a;
   .MuiDialog-paper {
     padding: 20px;
     border-radius: 15px;
-    background-color: #000;
+    background-color: #1b1d27;
     color: white;
   }
   input {
@@ -12,7 +12,7 @@
     border-width: 0;
     outline: none;
     border-radius: 8px;
-    background-color: #252424;
+    background-color: #2f354b;
     padding: 1rem;
     color: #fff;
     font-size: 15px;
@@ -26,8 +26,8 @@
     justify-content: space-between;
     margin-top: 1rem;
   }
-  .code_button{
-    background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  .code_button {
+    background: #01b0ff;
     min-height: 30px;
     border-width: 0;
     border-radius: 5px;
@@ -35,7 +35,6 @@
     padding: 0 1rem;
     // margin: auto;
   }
-  
 }
 .close-icon-div {
   display: flex;

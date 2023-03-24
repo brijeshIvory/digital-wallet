@@ -4,10 +4,10 @@ import TextField from "@mui/material/TextField";
 import Drawer from "@mui/material/Drawer";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import { useFormik } from "formik";
-import { GooglePayTransferValidationSchema } from "../../utills/ValidationSchema";
+import { OthersTransferValidationSchema } from "../../utills/ValidationSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { WithDrawRequest } from "../../App/Redux/Actions/WalletActions";
-function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
+function Others({ OthersFormOpen, setOthersFormOpen }) {
   const userId = useSelector((state) => state?.user?.userDetail?.id);
   const amount = window.location.pathname.split("/")[2];
   const [indication, setIndication] = useState(false);
@@ -15,29 +15,30 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
   const formik = useFormik({
     initialValues: {
       name: "",
-      googlepaynumber: "",
+      number: "",
     },
-    validationSchema: GooglePayTransferValidationSchema,
+    validationSchema: OthersTransferValidationSchema,
     onSubmit: (values, { resetForm }) => {
       const PayloadData = {
-        notes: `${"GooglePay"},${values?.name},${values?.googlepaynumber}`,
+        notes: `${"Others"},${values?.name},${values?.number}`,
         amount: amount,
+        // image: previewUrl,
         user_id: userId,
       };
       dispatch(WithDrawRequest(PayloadData));
-      setGooglePayFormOpen(false);
+      setOthersFormOpen(false);
       setIndication(false);
       resetForm({ values: null });
     },
   });
   return (
-    <Drawer anchor={"bottom"} open={GooglePayFormOpen} className="joinNowFrom">
+    <Drawer anchor={"bottom"} open={OthersFormOpen} className="joinNowFrom">
       <div className="yellow_strip"></div>
       <div className="closing">
         <div
           className="closing_button"
           onClick={() => {
-            setGooglePayFormOpen(false);
+            setOthersFormOpen(false);
             setIndication(false);
           }}
         >
@@ -47,7 +48,7 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
 
       <div className="withdrawal_form">
         <div className="withdrawal_form_title">
-          <h3>Add New Google Pay Number</h3>
+          <h3>Add New Data</h3>
         </div>
         <p className="withdrawal_subtitle"></p>
         <div className="withdrawal_form_container">
@@ -70,18 +71,18 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
 
             <TextField
               type="name"
-              name="googlepaynumber"
+              name="number"
               id="standard-required"
-              label="Google Pay Number"
+              label=" Number"
               variant="standard"
-              value={formik.values.googlepaynumber}
+              value={formik.values.number}
               onChange={formik.handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
             />
-            {indication && formik.errors.googlepaynumber ? (
-              <div className="error_text">{formik.errors.googlepaynumber}</div>
+            {indication && formik.errors.number ? (
+              <div className="error_text">{formik.errors.number}</div>
             ) : null}
             <div className="withdrawal_button_div">
               <button
@@ -100,4 +101,4 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
   );
 }
 
-export default GooglePayTransfer;
+export default Others;

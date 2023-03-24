@@ -1,16 +1,16 @@
 .otp-input {
-  background-color: #fac00098;
+  // background-color: #fac00098;
   .MuiDialog-paper {
     padding: 20px;
     border-radius: 15px;
-    background-color: #000;
+    background-color: #1b1d27;
     color: white;
   }
 
   .otp-input-field {
     input {
-      background-color: #fab300;
-      background-color: #3b3939;
+      background-color: #01b0ff;
+      background-color: #2f354b;
       height: 3rem;
       width: 2rem !important;
       border-width: 0;
@@ -22,7 +22,7 @@
   }
 
   button {
-    background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+    background: #01b0ff;
     min-height: 30px;
     border-width: 0;
     border-radius: 5px;

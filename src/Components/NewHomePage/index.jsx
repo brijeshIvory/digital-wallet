@@ -17,6 +17,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
+import logo from "../../assets/img/insite-vision-logo-svg-vector.svg";
+import { BsWhatsapp } from "react-icons/bs";
+import Whatsapp from "../Whatsapp";
 
 function NewHomePage() {
   const dispatch = useDispatch();
@@ -78,8 +81,8 @@ function NewHomePage() {
     setOpenLogin({ ...openLogin, [anchor]: open });
   };
   useEffect(() => {
-    dispatch(getCountriesData())
-  }, [])
+    dispatch(getCountriesData());
+  }, []);
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -116,12 +119,32 @@ function NewHomePage() {
           open={openJoinNow["bottom"]}
           setOpenJoinNow={setOpenJoinNow}
         />
-        <Login open={openLogin['bottom']} setOpenLogin={setOpenLogin} />
+        <Login open={openLogin["bottom"]} setOpenLogin={setOpenLogin} />
         <div className="new-home-page-balance">
-          <div className="new-home-page-balance-title">Total Balance</div>
-          <div className="new-home-page-balance-money">
-            {WalletBalance ? WalletBalance : 0}
-          </div>
+          {isAuthenticated ? (
+            <>
+              <div className="new-home-page-balance-title">Total Balance</div>
+              <div className="new-home-page-balance-money">
+                {WalletBalance ? WalletBalance : 0}
+              </div>
+            </>
+          ) : (
+            <>
+              {/* <div className="new-home-page-balance-title">Total Balance</div> */}
+              <div className="new-home-page-balance-money">
+                <img
+                  src={logo}
+                  alt="logo"
+                  style={{
+                    width: "150px",
+                    height: "90px",
+                    borderRadius: "20px",
+                    backgroundColor: "#01b0ff",
+                  }}
+                />
+              </div>
+            </>
+          )}
         </div>
         <div className="new-home-page-buttons">
           <div className="new-home-page-button-main">
@@ -150,27 +173,29 @@ function NewHomePage() {
           </div>
         </div>
       </div>
+      {isAuthenticated && (
+        <div className="latest-transaction">
+          <div className="latest-transaction-title">
+            <div>Latest Transactions</div>
 
-      <div className="latest-transaction">
-        <div className="latest-transaction-title">
-          <div>Latest Transactions</div>
-
-          <Link to={"tabs/reports"}>
-            <div style={{ color: "#aca6a6", fontSize: "19px" }}>See All</div>
-          </Link>
-        </div>
-        <div className="latest-transaction-data">
-          {data.map((ele, idx) => (
-            <div className="latest-transaction-single-data" key={idx}>
-              <div>
-                <div className="latest-transaction-date">{ele.Date}</div>
-                <div className="latest-transaction-party">{ele.to}</div>
+            <Link to={"tabs/reports"}>
+              <div style={{ color: "#aca6a6", fontSize: "19px" }}>See All</div>
+            </Link>
+          </div>
+          <div className="latest-transaction-data">
+            {data.map((ele, idx) => (
+              <div className="latest-transaction-single-data" key={idx}>
+                <div>
+                  <div className="latest-transaction-date">{ele.Date}</div>
+                  <div className="latest-transaction-party">{ele.to}</div>
+                </div>
+                <div className="latest-transaction-amount">{ele.amount}</div>
               </div>
-              <div className="latest-transaction-amount">{ele.amount}</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+      <Whatsapp />
     </div>
   );
 }

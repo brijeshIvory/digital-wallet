@@ -45,7 +45,7 @@ function Login({ open, setOpenLogin }) {
           password: values.password,
         })
       );
-      setIndication(false)
+      setIndication(false);
     },
     validationSchema: loginValidationSchema,
   });
@@ -60,12 +60,12 @@ function Login({ open, setOpenLogin }) {
     setShowPassword(!showPassword);
   };
   useEffect(() => {
-    if( token !== undefined){
-      dispatch(LoginStatus(true))
+    if (token !== undefined) {
+      dispatch(LoginStatus(true));
       navigate("/");
       setOpenLogin("bottom", false);
-    }else{
-      dispatch(LoginStatus(false))
+    } else {
+      dispatch(LoginStatus(false));
     }
   }, [token]);
   return (
@@ -74,9 +74,9 @@ function Login({ open, setOpenLogin }) {
       <div className="closing">
         <div
           className="closing_button"
-          onClick={()=>{
+          onClick={() => {
             setOpenLogin("bottom", false);
-            setIndication(false)
+            setIndication(false);
           }}
         >
           <HighlightOffSharpIcon />
@@ -88,12 +88,11 @@ function Login({ open, setOpenLogin }) {
 
         <div className="form_container">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
-            <div className="mobile-number-label">Phone Number</div>
-            <div className="mobile-number">
+            <div className="login-mobile-number-label">Phone Number</div>
+            <div className="login-mobile-number">
               <div className="country-input">
                 <Select
                   id="country-input"
-                  select
                   label="Select Country"
                   variant="standard"
                   name="country_code"

@@ -45,8 +45,8 @@
   display: flex;
   align-items: center;
   padding: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 .new-home-page-button-main {
   flex: 0.34;
@@ -86,9 +86,7 @@
   font-weight: 700;
   font-size: 20px;
 }
-.latest-transaction-data {
-  // margin-top: 3rem;
-}
+
 .latest-transaction-single-data {
   display: flex;
   align-items: center;
@@ -109,7 +107,7 @@
 }
 .loginReg_container {
   height: 100vh;
-  background-color: #fac000;
+  background-color: #01b0ff;
   display: flex;
   flex-direction: column;
 }
@@ -120,7 +118,7 @@
   flex: 0.65;
   background-color: #000;
   border-radius: 20px 20px 0 0;
-  background-color: #fac000;
+  background-color: #01b0ff;
 }
 .Joinnow_button {
   width: 150px;
@@ -129,7 +127,7 @@
   width: 150px;
 }
 .loginReg_button {
-  background: linear-gradient(180deg, #fac000 0%, rgb(221, 132, 23) 100%);
+  background: #01b0ff;
   padding: 15px;
   display: flex;
   align-items: center;
@@ -182,7 +180,7 @@
   font-size: 10px;
 }
 .yellow_strip {
-  background-color: #fac000;
+  background-color: #01b0ff;
   height: 10px;
 }
 .joinNowFrom {
@@ -199,7 +197,7 @@
   height: 45px;
   width: 40px;
   border-radius: 0 0 30px 30px;
-  background-color: #fac000;
+  background-color: #01b0ff;
   margin-left: 85%;
   color: #fff;
   display: flex;
@@ -214,7 +212,7 @@
   margin-bottom: 3rem;
 }
 .loginReg_bottom {
-  background-color: #fac000;
+  background-color: #01b0ff;
 
   padding: 15px;
   img {

@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./index.scss";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import { TextField } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
-import { GetClientList } from "../../App/Redux/Actions/WalletActions";
-import { getTransactions } from "../../App/Redux/Actions/TransactionAction";
+import { getTransactions } from "../../App/Redux/Actions/WalletActions";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,23 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TransactionDetails from "../TransactionDetails";
-// const validationSchema = yup.object().shape({
-//   startDate: yup.string().required("Required !"),
-//   endDate: yup.string().required("Required !"),
-//   transactionType: yup.string().required("Required !"),
-//   status: yup.string().required("Required !"),
-// });
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-// ];
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 const dummyData = [
   {
@@ -100,8 +81,9 @@ function Passbook() {
   const [openTransactionDetail, setOpenTransactionDetail] = useState(false);
 
   const [isFilterClicked, setIsFilterClicked] = useState(false);
+  const [filterMode, setFilterMode] = useState(false);
+  const [dummyfilteredData, setDummyfilteredData] = useState([]);
 
-  const ClientList = useSelector((state) => state?.HawalaReducer?.client_list);
   const TransactionList = useSelector(
     (state) => state?.transactionData?.transactions?.data
   );
@@ -110,7 +92,6 @@ function Passbook() {
   const dateAfterYear = new Date();
   dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
   useEffect(() => {
-    dispatch(GetClientList());
     dispatch(
       getTransactions({
         start_date: null,
@@ -128,28 +109,30 @@ function Passbook() {
     const newMinDate = arr.join("-");
     const min = Date.parse(newMinDate);
     const max = Date.parse(maxDate);
-    const filteredData = Data.filter(
+    const filteredData = Data?.filter(
       (obj) =>
         createTimeStamp(obj.Date) >= min && createTimeStamp(obj.Date) <= max
     );
     return filteredData;
   };
 
-  let dummyfilteredData = filterData(
-    formatDate(submitedInput.startDate),
-    formatDate(submitedInput.endDate),
-    dummyData
-  );
+  useEffect(() => {
+    if (submitedInput !== {}) {
+      const temp = filterData(
+        formatDate(submitedInput.startDate),
+        formatDate(submitedInput.endDate),
+        dummyData
+      );
 
-  if (dummyfilteredData.length === 0) {
-    dummyfilteredData = dummyData;
-  }
+      setDummyfilteredData(temp);
+    }
+  }, [submitedInput]);
 
   return (
     <div className="passbook-main">
       <div className="passbook-head">
         <div className="passbook-title">
-          <Link to={"/"}>
+          <Link to={"/"} className="passbook_subtitle">
             <ArrowCircleLeftIcon />
           </Link>
           <div className="passbook_subtitle">Passbook</div>
@@ -157,61 +140,117 @@ function Passbook() {
       </div>
       <div className="passbook-body">
         <div className="passbook-body-head">
-          <div>Transactions</div>
+          <div style={{ fontSize: "18px" }}>Transactions</div>
 
-          <button onClick={() => setIsFilterClicked(true)}>Filter</button>
+          {filterMode ? (
+            <button
+              onClick={() => {
+                setFilterMode(false);
+                setIsFilterClicked(false);
+                setDummyfilteredData([]);
+              }}
+            >
+              <>Filter </> <CloseOutlinedIcon />
+            </button>
+          ) : (
+            <button onClick={() => setIsFilterClicked(true)}>Filter</button>
+          )}
         </div>
 
         <div className="transaction-data">
-          <TableContainer
-            component={Paper}
-            sx={{ backgroundColor: "#000", border: "1px solid #fff" }}
-          >
-            <Table sx={{ maxWidth: 20 }} aria-label="simple table">
-              <TableHead>
-                <TableRow className="tableRow">
-                  <TableCell>Date</TableCell>
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Deposit</TableCell>
-                  <TableCell>Withdraw</TableCell>
-                  <TableCell>-</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {dummyfilteredData &&
-                  dummyfilteredData?.map((transaction, idx) => (
-                    <TableRow
-                      key={idx}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                      className="tableRow"
-                    >
-                      <TableCell component="th" scope="row">
-                        {transaction.Date}
-                      </TableCell>
-                      {/* <TableCell align="right">{transaction.Note}</TableCell> */}
-                      <TableCell align="right">{transaction.Balance}</TableCell>
-                      <TableCell align="right">{transaction.Deposit}</TableCell>
-                      <TableCell align="right">
-                        {transaction.Withdraw}
-                      </TableCell>
-                      <TableCell align="right">
-                        <button
-                          className="detail-button"
-                          onClick={() => {
-                            setCurrentSelectedTransaction(transaction);
-                            setOpenTransactionDetail(true);
+          {dummyfilteredData?.length === 0 && filterMode ? (
+            <div className="transaction-no-data-available">
+              {"No data available between these dates"}
+            </div>
+          ) : (
+            <TableContainer
+              component={Paper}
+              sx={{ backgroundColor: "#2f354b", border: "1px solid #fff" }}
+            >
+              <Table sx={{ maxWidth: 20 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow className="tableRow">
+                    <TableCell>Date</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell>Deposit</TableCell>
+                    <TableCell>Withdraw</TableCell>
+                    <TableCell>-</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {dummyfilteredData && dummyfilteredData?.length !== 0
+                    ? dummyfilteredData?.map((transaction, idx) => (
+                        <TableRow
+                          key={idx}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
                           }}
+                          className="tableRow"
                         >
-                          Details
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                          <TableCell component="th" scope="row">
+                            {transaction.Date}
+                          </TableCell>
+
+                          <TableCell align="right">
+                            {transaction.Balance}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Deposit}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Withdraw}
+                          </TableCell>
+                          <TableCell align="right">
+                            <button
+                              className="detail-button"
+                              onClick={() => {
+                                setCurrentSelectedTransaction(transaction);
+                                setOpenTransactionDetail(true);
+                              }}
+                            >
+                              Details
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    : dummyData?.map((transaction, idx) => (
+                        <TableRow
+                          key={idx}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                          className="tableRow"
+                        >
+                          <TableCell component="th" scope="row">
+                            {transaction.Date}
+                          </TableCell>
+
+                          <TableCell align="right">
+                            {transaction.Balance}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Deposit}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Withdraw}
+                          </TableCell>
+                          <TableCell align="right">
+                            <button
+                              className="detail-button"
+                              onClick={() => {
+                                setCurrentSelectedTransaction(transaction);
+                                setOpenTransactionDetail(true);
+                              }}
+                            >
+                              Details
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </div>
         {isFilterClicked && (
           <div>
@@ -233,45 +272,6 @@ function Passbook() {
               />
             </div>
 
-            {/* <TextField
-              id="transactionType"
-              label="Transaction Type"
-              select
-              helperText="Please select your transaction type"
-              variant="standard"
-              value={inputValue.transactionType}
-              onChange={(e) =>
-                setInputValue({
-                  ...inputValue,
-                  transactionType: e.target.value,
-                })
-              }
-            >
-              {arr.map((ele) => (
-                <MenuItem value={ele} key={ele}>
-                  {ele}
-                </MenuItem>
-              ))}
-            </TextField> */}
-            {/* 
-            <TextField
-              id="status"
-              select
-              label="Status"
-              helperText="Please select status"
-              variant="standard"
-              value={inputValue.status}
-              onChange={(e) =>
-                setInputValue({ ...inputValue, status: e.target.value })
-              }
-            >
-              {arr.map((ele) => (
-                <MenuItem value={ele} key={ele}>
-                  {ele}
-                </MenuItem>
-              ))}
-            </TextField> */}
-
             <div className="passbook-body-button">
               <button
                 onClick={() => {
@@ -292,6 +292,7 @@ function Passbook() {
                     startDate: new Date(),
                     endDate: new Date(),
                   });
+                  setFilterMode(true);
                 }}
               >
                 Apply

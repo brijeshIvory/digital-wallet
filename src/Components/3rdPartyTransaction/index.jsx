@@ -18,7 +18,7 @@ const ThirdPartyTransaction = () => {
       amount: '',
     },
     validationSchema: ThridPartyValidation,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const PayloadData = {
         notes: `${'ThirdParty'},${values?.id}`,
         amount: values?.amount,
@@ -26,24 +26,22 @@ const ThirdPartyTransaction = () => {
       }
       dispatch(ThirdPartyTransactionAction(PayloadData))
       setIndication(false)
+      resetForm({ values: null })
     },
   })
   return (
-    <div className="third_party_transaction">
+    <div className="third_party_transaction_main">
       <div className="third_party_transaction_head">
         <div className="third_party_transaction_title">
           <Link to={'/'}>
             <ArrowCircleLeftIcon sx={{ width: '40px', height: '35px' }} />
           </Link>
           <div className="third_party_transaction_subtitle">
-            Third Party Transaction
+            Third Party
           </div>
         </div>
       </div>
       <div className="third_party_transaction_form">
-        <div className="third_party_transaction_form_title">
-          {/* <h3>ANumberdd New Phone Pe </h3> */}
-        </div>
 
         <div className="third_party_transaction_form_container">
           <form onSubmit={formik.handleSubmit} autoComplete="off">

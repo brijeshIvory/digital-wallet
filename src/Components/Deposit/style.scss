@@ -2,25 +2,16 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-    90deg,
-    rgb(237, 168, 6) 0%,
-    rgb(216, 129, 13) 35%,
-    rgb(237, 168, 6) 100%
-  );
+  background-color: #01b0ff;
 }
 .deposit_head {
-  flex: 0.15;
-  background: linear-gradient(
-    90deg,
-    rgb(237, 168, 6) 0%,
-    rgb(216, 129, 13) 35%,
-    rgb(237, 168, 6) 100%
-  );
+  flex: 0.1;
+  background-color: #01b0ff;
+  margin-bottom: 2rem;
 }
 .deposit_body {
-  flex: 0.85;
-  background-color: #000;
+  flex: 0.9;
+  background-color: #1b1d27;
   border-radius: 15px 15px 0 0;
 }
 .wallet-balance {
@@ -134,7 +125,7 @@
   border-width: 0;
   outline: none;
   border-radius: 8px;
-  background-color: #252424;
+  background-color: #2f354b;
   padding: 1rem;
   color: #fff;
   font-size: 20px;
@@ -145,16 +136,16 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #000;
+  background-color: #1b1d27;
 }
 .Payment_method_head {
   // flex: 0.11;
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background: #01b0ff;
   padding-bottom: 2rem;
 }
 .Payment_method_body {
   // flex: 0.89;
-  background-color: #000;
+  background-color: #1b1d27;
   padding: 1rem;
   // border-radius: 15px 15px 0 0;
 }
@@ -207,7 +198,7 @@
 .image_box {
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #2b2929;
+  background-color: #2f354b;
   border-radius: 12px;
 }
 .subtitle {
@@ -253,7 +244,7 @@
   display: block;
   width: 80px;
   height: 3px;
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background: #01b0ff;
   left: 0;
   top: 86%;
   position: absolute;
@@ -267,7 +258,7 @@
   margin-top: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #2b2929;
+  background-color: #2f354b;
   border-radius: 15px;
   margin-bottom: 1rem;
 }
@@ -300,7 +291,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #2b2929;
+  background-color: #1b1d27;
   border-radius: 13px;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -393,7 +384,7 @@
   margin-top: 1rem;
 }
 .deposit_button {
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background: #01b0ff;
   min-height: 30px;
   border-width: 0;
   border-radius: 5px;
@@ -428,5 +419,11 @@
   font-size: 18px;
   border-radius: 5px;
   border-width: 0;
-  background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
+  background: #01b0ff;
+}
+.deposit_close_icon {
+  display: flex;
+  justify-content: end;
+  color: #fff;
+  margin-bottom: 0.5rem;
 }

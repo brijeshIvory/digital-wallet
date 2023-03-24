@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './style.scss'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { useSelector } from 'react-redux'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import {
   GetHawalaList,
   GetDepositDetail,
@@ -20,7 +21,11 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const [openPopUp, setOpenPopUp] = useState(true)
   const [ReferralCode, setReferralCode] = useState('')
   const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail)
-  const userId = useSelector((state) => state?.user?.userDetail?.id)
+  const UserToken = localStorage.getItem('UserToken')
+  const userId =
+    UserToken !== 'undefined' && UserToken !== null
+      ? JSON.parse(UserToken).user_id
+      : undefined
   const amount = window.location.pathname.split('/')[2]
   useEffect(() => {
     dispatch(GetDepositDetail())
@@ -71,7 +76,8 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
       isBackground === 'Paytm' ||
       isBackground === 'GooglePay' ||
       isBackground === 'phone_pe' ||
-      isBackground === 'UPI' ? (
+      isBackground === 'UPI' ||
+      isBackground === 'Other' ? (
         <div className="Payment_detail">
           <div className="Payment_detail_title">
             Make your payment on the details below
@@ -299,7 +305,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
               <div className="person_deatils">
                 <div className="person_name">UPI Name</div>
                 <div className="person_data">
-                  {depositDetail?.phonepay_name}
+                  {depositDetail?.bhim_name}
                   <CopyToClipboard
                     onCopy={onCopy}
                     options={{ message: 'Whoa!' }}
@@ -323,7 +329,52 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                   <CopyToClipboard
                     onCopy={onCopy}
                     options={{ message: 'Whoa!' }}
-                    text={depositDetail?.phonepay_link}
+                    text={depositDetail?.bhim_link}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
+              </div>
+            </>
+          )}
+
+          {isBackground === 'Other' && (
+            <>
+              <div className="person_deatils">
+                <div className="person_name">Name</div>
+                <div className="person_data">
+                  {depositDetail?.other_name}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.other_name}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: '15px',
+                        height: '15px',
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
+              </div>
+              <div className="person_deatils">
+                <div className="person_name">Id</div>
+                <div className="person_data">
+                  {depositDetail?.other_link}
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: 'Whoa!' }}
+                    text={depositDetail?.other_link}
                   >
                     <ContentCopySharpIcon
                       onClick={onClick}
@@ -343,6 +394,14 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
               <form onSubmit={(e) => e.preventDefault()}>
                 {previewUrl ? (
                   <>
+                    <div className="deposit_close_icon">
+                      <HighlightOffIcon
+                        onClick={() => {
+                          setFrontSidefile(null)
+                          setPreviewUrl(null)
+                        }}
+                      />
+                    </div>
                     <img
                       alt="file uploader preview"
                       src={previewUrl}

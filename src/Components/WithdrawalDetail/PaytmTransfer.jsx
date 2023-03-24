@@ -1,42 +1,47 @@
-import React, { useState } from 'react'
-import './style.scss'
-import TextField from '@mui/material/TextField'
-import Drawer from '@mui/material/Drawer'
-import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
-import { useFormik } from 'formik'
-import { PaytmTransferValidationSchema } from '../../utills/ValidationSchema'
-import { useDispatch, useSelector } from 'react-redux'
-import { WithDrawRequest } from '../../App/Redux/Actions/WalletActions'
+import React, { useState } from "react";
+import "./style.scss";
+import TextField from "@mui/material/TextField";
+import Drawer from "@mui/material/Drawer";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+import { useFormik } from "formik";
+import { PaytmTransferValidationSchema } from "../../utills/ValidationSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { WithDrawRequest } from "../../App/Redux/Actions/WalletActions";
 function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
-  const userId = useSelector((state) => state?.user?.userDetail?.id)
-  const amount = window.location.pathname.split('/')[2]
-  const [indication, setIndication] = useState(false)
-  const dispatch = useDispatch()
+  const userId = useSelector((state) => state?.user?.userDetail?.id);
+  const amount = window.location.pathname.split("/")[2];
+  const [indication, setIndication] = useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      name: '',
-      paytmnumber: '',
+      name: "",
+      paytmnumber: "",
     },
     validationSchema: PaytmTransferValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const PayloadData = {
-        notes: `${'Paytm'},${values?.name},${values?.paytmnumber}`,
+        notes: `${"Paytm"},${values?.name},${values?.paytmnumber}`,
         amount: amount,
         // image: previewUrl,
-        user_id: userId
-      }
-      dispatch(WithDrawRequest(PayloadData))
-      setPaytmFormOpen(false)
-      setIndication(false)
+        user_id: userId,
+      };
+      dispatch(WithDrawRequest(PayloadData));
+      setPaytmFormOpen(false);
+      setIndication(false);
+      resetForm({ values: null });
     },
-  })
+  });
   return (
-    <Drawer anchor={'bottom'} open={PaytmFormOpen} className="joinNowFrom">
+    <Drawer anchor={"bottom"} open={PaytmFormOpen} className="joinNowFrom">
       <div className="yellow_strip"></div>
       <div className="closing">
-        <div className="closing_button" onClick={() => {setPaytmFormOpen(false)
-          setIndication(false)
-        }}>
+        <div
+          className="closing_button"
+          onClick={() => {
+            setPaytmFormOpen(false);
+            setIndication(false);
+          }}
+        >
           <HighlightOffSharpIcon />
         </div>
       </div>
@@ -45,16 +50,14 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
         <div className="withdrawal_form_title">
           <h3>Add New Paytm Wallet Number</h3>
         </div>
-        <p className="withdrawal_subtitle">
-          
-        </p>
+        <p className="withdrawal_subtitle"></p>
         <div className="withdrawal_form_container">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <TextField
               type="name"
               name="name"
               id="standard-required"
-              label="Bank Name"
+              label="Name"
               variant="standard"
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -62,7 +65,7 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
                 shrink: true,
               }}
             />
-            {indication &&formik.errors.name ? (
+            {indication && formik.errors.name ? (
               <div className="error_text">{formik.errors.name}</div>
             ) : null}
 
@@ -70,7 +73,7 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
               type="name"
               name="paytmnumber"
               id="standard-required"
-              label="Account Number"
+              label="Paytm Number"
               variant="standard"
               value={formik.values.paytmnumber}
               onChange={formik.handleChange}
@@ -78,7 +81,7 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
                 shrink: true,
               }}
             />
-            {indication &&formik.errors.paytmnumber ? (
+            {indication && formik.errors.paytmnumber ? (
               <div className="error_text">{formik.errors.paytmnumber}</div>
             ) : null}
             <div className="withdrawal_button_div">
@@ -95,7 +98,7 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
         </div>
       </div>
     </Drawer>
-  )
+  );
 }
 
-export default PaytmTransfer
+export default PaytmTransfer;
