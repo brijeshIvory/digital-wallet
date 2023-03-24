@@ -74,6 +74,14 @@
     border-width: 0;
     padding: 10px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .MuiSvgIcon-root {
+      color: red;
+      font-size: 17px;
+    }
   }
 }
 
@@ -129,14 +137,10 @@
   text-align: center;
   margin: 20px 0 20px 0;
   width: 100%;
-  // .MuiTableContainer-root {
-  //   background-color: #f6c831;
-  // }
-  // .MuiTableRow-root {
-  //   .MuiTableCell-root {
-  //     width: 5px;
-  //   }
-  // }
+  .transaction-no-data-available {
+    padding: 14px;
+    font-size: 20px;
+  }
   .MuiTable-root {
     max-width: 100%;
   }
@@ -173,7 +177,7 @@
   cursor: pointer;
 }
 
-.cancel-filter-button {
+.cancel-button {
   background: #01b0ff;
   min-height: 20px;
   border-width: 0;
@@ -182,4 +186,9 @@
   padding: 0 0.5rem;
   cursor: pointer;
   width: 5rem;
+}
+.cancel-filter-button {
+  background: #01b0ff;
+  border-width: 0;
+  padding: 2px 1rem 2px 1rem;
 }

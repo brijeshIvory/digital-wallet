@@ -14,6 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TransactionDetails from "../TransactionDetails";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 const dummyData = [
   {
@@ -120,7 +121,7 @@ function Passbook() {
       const temp = filterData(
         formatDate(submitedInput.startDate),
         formatDate(submitedInput.endDate),
-        TransactionList
+        dummyData
       );
 
       setDummyfilteredData(temp);
@@ -141,25 +142,26 @@ function Passbook() {
         <div className="passbook-body-head">
           <div style={{ fontSize: "18px" }}>Transactions</div>
 
-          <button
-            onClick={() => setIsFilterClicked(true)}
-            style={{ backgroundColor: "#2f354b" }}
-          >
-            Filter
-          </button>
+          {filterMode ? (
+            <button
+              onClick={() => {
+                setFilterMode(false);
+                setIsFilterClicked(false);
+                setDummyfilteredData([]);
+              }}
+            >
+              <>Filter </> <CloseOutlinedIcon />
+            </button>
+          ) : (
+            <button onClick={() => setIsFilterClicked(true)}>Filter</button>
+          )}
         </div>
 
         <div className="transaction-data">
           {dummyfilteredData?.length === 0 && filterMode ? (
-            <>
-              <div>{"No data available between these dates"}</div>
-              <button
-                className="cancel-filter-button"
-                onClick={() => setFilterMode(false)}
-              >
-                Cancel
-              </button>
-            </>
+            <div className="transaction-no-data-available">
+              {"No data available between these dates"}
+            </div>
           ) : (
             <TableContainer
               component={Paper}
@@ -176,9 +178,42 @@ function Passbook() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {dummyfilteredData && dummyfilteredData?.length !== 0 ? (
-                    <>
-                      {dummyfilteredData?.map((transaction, idx) => (
+                  {dummyfilteredData && dummyfilteredData?.length !== 0
+                    ? dummyfilteredData?.map((transaction, idx) => (
+                        <TableRow
+                          key={idx}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                          className="tableRow"
+                        >
+                          <TableCell component="th" scope="row">
+                            {transaction.Date}
+                          </TableCell>
+
+                          <TableCell align="right">
+                            {transaction.Balance}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Deposit}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Withdraw}
+                          </TableCell>
+                          <TableCell align="right">
+                            <button
+                              className="detail-button"
+                              onClick={() => {
+                                setCurrentSelectedTransaction(transaction);
+                                setOpenTransactionDetail(true);
+                              }}
+                            >
+                              Details
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    : dummyData?.map((transaction, idx) => (
                         <TableRow
                           key={idx}
                           sx={{
@@ -212,53 +247,6 @@ function Passbook() {
                           </TableCell>
                         </TableRow>
                       ))}
-                      <button
-                        className="cancel-filter-button"
-                        onClick={() => {
-                          setFilterMode(false);
-                          setIsFilterClicked(false);
-                          setDummyfilteredData([]);
-                        }}
-                      >
-                        Cancel Filter
-                      </button>
-                    </>
-                  ) : (
-                    TransactionList?.map((transaction, idx) => (
-                      <TableRow
-                        key={idx}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                        className="tableRow"
-                      >
-                        <TableCell component="th" scope="row">
-                          {transaction.Date}
-                        </TableCell>
-
-                        <TableCell align="right">
-                          {transaction.Balance}
-                        </TableCell>
-                        <TableCell align="right">
-                          {transaction.Deposit}
-                        </TableCell>
-                        <TableCell align="right">
-                          {transaction.Withdraw}
-                        </TableCell>
-                        <TableCell align="right">
-                          <button
-                            className="detail-button"
-                            onClick={() => {
-                              setCurrentSelectedTransaction(transaction);
-                              setOpenTransactionDetail(true);
-                            }}
-                          >
-                            Details
-                          </button>
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  )}
                 </TableBody>
               </Table>
             </TableContainer>
