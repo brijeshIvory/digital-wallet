@@ -19,7 +19,7 @@ const DepositHawala = () => {
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [imageToBeSent, setImageToBeSent] = useState({});
+  const [imageToBeSent, setImageToBeSent] = useState();
   const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
   const userId = useSelector((state) => state?.user?.userDetail?.id);
   const amount = window.location.pathname.split("/")[2];
