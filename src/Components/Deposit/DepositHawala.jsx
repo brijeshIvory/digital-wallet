@@ -17,36 +17,43 @@ import { InputLabel } from "@mui/material";
 import { UploadToS3 } from "react-upload-to-s3";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+
 const DepositHawala = () => {
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [imageToBeSent, setImageToBeSent] = useState({});
   const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
   const userId = useSelector((state) => state?.user?.userDetail?.id);
   const amount = window.location.pathname.split("/")[2];
+
   useEffect(() => {
     dispatch(GetHawalaList());
   }, []);
-  const onFileUploadChange = async (e) => {
-    const fileInput = e.target;
+
+  function handleImageUpload(event) {
+    const fileInput = event.target;
     if (!fileInput.files) {
-      await toast("No file was chosen", "error");
+      toast("No file was chosen", "error");
       return;
     }
     if (!fileInput.files || fileInput.files.length === 0) {
-      await toast("Files list is empty", "error");
+      toast("Files list is empty", "error");
       return;
     }
     const file = fileInput.files[0];
     if (!file.type.startsWith("image")) {
-      await toast("Please select a valide image", "error");
+      toast("Please select a valide image", "error");
       return;
     }
     setFrontSidefile(file);
+
     setPreviewUrl(URL.createObjectURL(file));
-    e.currentTarget.type = "text";
-    e.currentTarget.type = "file";
-  };
+    event.currentTarget.type = "text";
+    event.currentTarget.type = "file";
+
+    setImageToBeSent(file);
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -54,37 +61,34 @@ const DepositHawala = () => {
       AccountNumber: "",
     },
     validationSchema: HawalaTransferValidationSchema,
-    onSubmit: (values) => {
-      const PayloadData = {
-        notes: `${"HawalaTransfer"},${values.hawala_value},${
-          values.AccountNumber
-        }`,
-        amount: amount,
-        image: previewUrl,
-        user_id: userId,
-        refer_code: "",
-      };
-      dispatch(RequestDeposite(PayloadData));
+    onSubmit: (values, { resetForm }) => {
+      // const PayloadData = {
+      //   notes: `${"HawalaTransfer"},${values.hawala_value},${
+      //     values.AccountNumber
+      //   }`,
+      //   amount: amount,
+      //   image: previewUrl,
+      //   user_id: userId,
+      //   refer_code: "",
+      // };
+      // console.log(payloadToBeSent, "payloadToBeSent1");
+      // handleImageUpload(event);
+      const formData = new FormData();
+      formData.append(
+        "notes",
+        `${"HawalaTransfer"},${values.hawala_value},${values.AccountNumber}`
+      );
+      formData.append("amount", amount);
+      formData.append("user_id", userId);
+      formData.append("refer_code", "");
+      formData.append("image", imageToBeSent);
+      dispatch(RequestDeposite(formData));
+
+      formik.resetForm();
+      setPreviewUrl(null);
     },
   });
 
-  function handleImageUpload(event) {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-
-    fetch("/api/upload-image", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle response from backend
-      })
-      .catch((error) => {
-        // Handle error
-      });
-  }
   return (
     <div className="Payment_detail">
       <form onSubmit={formik.handleSubmit} autoComplete="off">
@@ -177,7 +181,6 @@ const DepositHawala = () => {
                     className="file_input"
                     name="file"
                     type="file"
-                    // onChange={onFileUploadChange}
                     onChange={handleImageUpload}
                   />
                 </label>
