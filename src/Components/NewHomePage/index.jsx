@@ -174,8 +174,24 @@ function NewHomePage() {
         </div>
       </div>
       {isAuthenticated && (
-        <div className="latest-transaction">
-          <div className="latest-transaction-title">
+        <div className="new-home-page-buttom">
+          <div className="new-home-page-whatsapp-buttons">
+            <a href="https://api.whatsapp.com/send?phone=12244546410">
+              <div className="new-home-page-button-main">
+                <div className="new-home-page-whatsapp">WITHDRAW</div>
+
+                {/* <div className="new-home-page-button-title">HELP</div> */}
+              </div>
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=12244546410">
+              <div className="new-home-page-button-main">
+                <div className="new-home-page-whatsapp">DEPOSIT</div>
+
+                {/* <div className="new-home-page-button-title">HELP</div> */}
+              </div>
+            </a>
+          </div>
+          {/* <div className="latest-transaction-title">
             <div>Latest Transactions</div>
 
             <Link to={"tabs/reports"}>
@@ -192,7 +208,7 @@ function NewHomePage() {
                 <div className="latest-transaction-amount">{ele.amount}</div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       )}
       <Whatsapp />

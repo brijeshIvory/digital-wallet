@@ -1,12 +1,12 @@
-.profile_main {
+.contactus_main {
   height: 100vh;
   background-color: #1b1d27;
 }
-.profile_head {
+.contactus_head {
   background: #01b0ff;
   padding-bottom: 2rem;
 }
-.profile_title {
+.contactus_title {
   height: 50px;
   padding: 15px;
 
@@ -17,69 +17,29 @@
     color: #fff;
   }
 }
-.profile_subtitle {
+.contactus_subtitle {
   padding-top: 0.75rem;
   font-size: 22px;
   color: #fff;
   text-align: center;
 }
-.profile_body {
+.contactus_text {
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+}
+.contactus_body {
   background-color: #1b1d27;
   border-radius: 15px 15px 0 0;
 }
-.profile_details {
+.contactus_details {
   color: #fff;
-  padding: 10%;
-  .MuiTextField-root {
-    width: 100%;
-    border-bottom: 2px solid #fff;
-    margin-bottom: 2rem;
-  }
-  .MuiInputLabel-root {
-    font-size: 20px;
-    color: #fff;
-  }
-  .MuiInputLabel-root.Mui-focused {
-    color: #fff;
-  }
-  .MuiInput-root {
-    color: #fff;
-  }
-  .MuiInput-root:after {
-    border-bottom: none;
-  }
-}
-.profile_top {
-  flex: 0.12;
-  padding: 10px;
-}
-.profile_top_sub {
-  height: 50px;
-
-  .MuiSvgIcon-root {
-    position: absolute;
-    width: 2em;
-    height: 2em;
-    color: #fff;
-  }
+  padding: 2rem;
+  font-size: 22px;
+  text-align: center;
 }
 
-.profile_bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px 20px 0 0;
-  flex: 0.88;
-  background-color: #1b1d27;
-  .MuiDivider-root {
-    background-color: #d7d6d1;
-  }
-}
-.profile_avatar {
-  margin-top: -3.5rem;
-}
-
-.profile_subdata {
+.contactus_subdata {
   padding: 20px;
   display: flex;
   align-items: center;

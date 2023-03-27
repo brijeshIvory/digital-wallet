@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import BeingPartner from "../Register/BeingPartner";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import GppGoodIcon from "@mui/icons-material/GppGood";
 
 function Navbar({ open, setOpen }) {
   const dispatch = useDispatch();
@@ -85,12 +87,20 @@ function Navbar({ open, setOpen }) {
               <Link onClick={() => setOpenPopUp(true)}>
                 <div className="list">
                   <div>
-                    <HelpIcon />
+                    <GppGoodIcon />
                   </div>
                   <p>Are You Interested to be dealer?</p>
                 </div>
               </Link>
             )}
+            <Link to="/contactUs">
+              <div className="list">
+                <div>
+                  <ContactSupportIcon />
+                </div>
+                <p>Contact Us</p>
+              </div>
+            </Link>
           </div>
           <div></div>
           <div className="navbar_logout">
