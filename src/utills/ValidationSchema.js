@@ -35,10 +35,10 @@ export const UpiTransferValidationSchema = yup.object({
 });
 export const HawalaTransferValidationSchema = yup.object({
   hawala_value: yup.string().required("Hawala Selection is required."),
+  AccountNumber: yup.string().required("AccountNumber is required."),
 
-  fullName: yup.string().required("Full name is required."),
-  phoneNumber: yup.string().required("Phone number is required."),
-  city: yup.string().required("City name is required."),
+  // fullName: yup.string().required("Full name is required."),
+  // city: yup.string().required("City name is required."),
 });
 
 export const RegistationValidationSchema = yup.object({

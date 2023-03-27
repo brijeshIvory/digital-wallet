@@ -1,66 +1,78 @@
-import React, { useState, useEffect } from 'react'
-import './style.scss'
-import ControlPointIcon from '@mui/icons-material/ControlPoint'
-import { useFormik } from 'formik'
-import TextField from '@mui/material/TextField'
-import { HawalaTransferValidationSchema } from '../../utills/ValidationSchema'
-import MenuItem from '@mui/material/MenuItem'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import { useSelector } from 'react-redux'
-import { GetHawalaList,RequestDeposite } from '../../App/Redux/Actions/WalletActions'
-import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
-import { InputLabel } from '@mui/material'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import React, { useState, useEffect } from "react";
+import "./style.scss";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import { useFormik } from "formik";
+import TextField from "@mui/material/TextField";
+import { HawalaTransferValidationSchema } from "../../utills/ValidationSchema";
+import MenuItem from "@mui/material/MenuItem";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useSelector } from "react-redux";
+import {
+  GetHawalaList,
+  RequestDeposite,
+} from "../../App/Redux/Actions/WalletActions";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { InputLabel } from "@mui/material";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 const DepositHawala = () => {
-  const dispatch = useDispatch()
-  const [FrontSidefile, setFrontSidefile] = useState(null)
-  const [previewUrl, setPreviewUrl] = useState(null)
-  const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data)
-  const userId = useSelector((state) => state?.user?.userDetail?.id)
-  const amount = window.location.pathname.split('/')[2]
+  const dispatch = useDispatch();
+  const [FrontSidefile, setFrontSidefile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [imageToBeSent, setImageToBeSent] = useState({});
+  const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
+  const userId = useSelector((state) => state?.user?.userDetail?.id);
+  const amount = window.location.pathname.split("/")[2];
   useEffect(() => {
-    dispatch(GetHawalaList())
-  }, [])
-  const onFileUploadChange = async (e) => {
-    const fileInput = e.target
+    dispatch(GetHawalaList());
+  }, []);
+
+  function handleImageUpload(event) {
+    const fileInput = event.target;
     if (!fileInput.files) {
-      await toast('No file was chosen', 'error')
-      return
+      toast("No file was chosen", "error");
+      return;
     }
     if (!fileInput.files || fileInput.files.length === 0) {
-      await toast('Files list is empty', 'error')
-      return
+      toast("Files list is empty", "error");
+      return;
     }
-    const file = fileInput.files[0]
-    if (!file.type.startsWith('image')) {
-      await toast('Please select a valide image', 'error')
-      return
+    const file = fileInput.files[0];
+    if (!file.type.startsWith("image")) {
+      toast("Please select a valide image", "error");
+      return;
     }
-    setFrontSidefile(file)
-    setPreviewUrl(URL.createObjectURL(file))
-    e.currentTarget.type = 'text'
-    e.currentTarget.type = 'file'
+    setFrontSidefile(file);
+
+    setPreviewUrl(URL.createObjectURL(file));
+    event.currentTarget.type = "text";
+    event.currentTarget.type = "file";
+
+    setImageToBeSent(file);
   }
+
   const formik = useFormik({
     initialValues: {
-      hawala_value: '',
-      AccountNumber: '',
+      hawala_value: "",
+      AccountNumber: "",
     },
     validationSchema: HawalaTransferValidationSchema,
     onSubmit: (values) => {
-      const PayloadData = {
-        notes: `${'HawalaTransfer'},${values.hawala_value},${
-          values.AccountNumber
-        }`,
-        amount: amount,
-        image: previewUrl,
-        user_id: userId,
-        refer_code: '',
-      }
-      dispatch(RequestDeposite(PayloadData))
+      const formData = new FormData();
+      formData.append(
+        "notes",
+        `${"HawalaTransfer"},${values.hawala_value},${values.AccountNumber}`
+      );
+      formData.append("amount", amount);
+      formData.append("user_id", userId);
+      formData.append("refer_code", "");
+      formData.append("image", imageToBeSent);
+      dispatch(RequestDeposite(formData));
+
+      formik.resetForm();
+      setPreviewUrl(null);
     },
-  })
+  });
 
   return (
     <div className="Payment_detail">
@@ -69,7 +81,7 @@ const DepositHawala = () => {
           Make your payment on the details below hhh
         </div>
         <div className="deposit_form_container">
-          <InputLabel style={{ fontSize: '12px' }}>Select Hawala</InputLabel>
+          <InputLabel style={{ fontSize: "12px" }}>Select Hawala</InputLabel>
           <TextField
             className="deposit_select"
             select
@@ -79,7 +91,7 @@ const DepositHawala = () => {
             value={formik.values.hawala_value}
             onChange={formik.handleChange}
             onBlur={() => {
-              formik.handleBlur({ target: { name: 'hawala_value' } })
+              formik.handleBlur({ target: { name: "hawala_value" } });
             }}
             SelectProps={{
               IconComponent: () => <KeyboardArrowDownIcon />,
@@ -118,15 +130,16 @@ const DepositHawala = () => {
           <div className=" border rounded-lg mt-3">
             {previewUrl ? (
               <>
-                 <div className="deposit_close_icon">
-        <HighlightOffIcon onClick={() => {
-          setFrontSidefile(null)
-          setPreviewUrl(null)
-        }} />
-      </div>
+                <div className="deposit_close_icon">
+                  <HighlightOffIcon
+                    onClick={() => {
+                      setFrontSidefile(null);
+                      setPreviewUrl(null);
+                    }}
+                  />
+                </div>
                 <img
                   alt="file uploader preview"
-             
                   src={previewUrl}
                   width={441}
                   height={250}
@@ -153,11 +166,11 @@ const DepositHawala = () => {
                     className="file_input"
                     name="file"
                     type="file"
-                    onChange={onFileUploadChange}
+                    onChange={handleImageUpload}
                   />
                 </label>
                 <p className="clickfile">
-                  {' '}
+                  {" "}
                   Click here to upload payment screenshot.
                 </p>
               </>
@@ -166,7 +179,7 @@ const DepositHawala = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default DepositHawala
+export default DepositHawala;
