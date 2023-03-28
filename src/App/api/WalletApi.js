@@ -40,21 +40,8 @@ export function* RequestDepositApi(formData) {
       return error.response;
     });
   return ReqDeposit;
-
-  // const ReqDeposit = yield fetch(`${base_url}/depositrequest`, {
-  //   method: "POST",
-  //   body: formData,
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log(data, "upload done");
-  //     return data;
-  //   })
-  //   .catch((error) => {
-  //     console.log(error, "upload error");
-  //     return error;
-  //   });
 }
+
 // GET HAWALA LIST
 export function* GetHawalaListApi() {
   const hawalaList = yield axios

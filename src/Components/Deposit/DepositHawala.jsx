@@ -14,19 +14,15 @@ import {
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { InputLabel } from "@mui/material";
-import { UploadToS3 } from "react-upload-to-s3";
-import "bootstrap/dist/css/bootstrap.min.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-
 const DepositHawala = () => {
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [imageToBeSent, setImageToBeSent] = useState({});
+  const [imageToBeSent, setImageToBeSent] = useState();
   const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
   const userId = useSelector((state) => state?.user?.userDetail?.id);
   const amount = window.location.pathname.split("/")[2];
-
   useEffect(() => {
     dispatch(GetHawalaList());
   }, []);
@@ -61,18 +57,7 @@ const DepositHawala = () => {
       AccountNumber: "",
     },
     validationSchema: HawalaTransferValidationSchema,
-    onSubmit: (values, { resetForm }) => {
-      // const PayloadData = {
-      //   notes: `${"HawalaTransfer"},${values.hawala_value},${
-      //     values.AccountNumber
-      //   }`,
-      //   amount: amount,
-      //   image: previewUrl,
-      //   user_id: userId,
-      //   refer_code: "",
-      // };
-      // console.log(payloadToBeSent, "payloadToBeSent1");
-      // handleImageUpload(event);
+    onSubmit: (values) => {
       const formData = new FormData();
       formData.append(
         "notes",
