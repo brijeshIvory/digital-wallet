@@ -17,12 +17,6 @@ function Header() {
         />
       </div>
       <Navbar open={open} setOpen={setOpen} />
-      <div className="home_headerRight">
-        <AccountBalanceIcon
-          sx={{ marginRight: "0.5rem", width: "25px", height: "25px" }}
-        />
-        <NotificationsIcon sx={{ width: "25px", height: "25px" }} />
-      </div>
     </div>
   );
 }

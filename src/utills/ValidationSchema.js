@@ -33,9 +33,11 @@ export const UpiTransferValidationSchema = yup.object({
   name: yup.string().required("Name is required"),
   upiId: yup.string().required("UPI ID is required"),
 });
-export const HawalaTransferValidationSchema = yup.object({
-  hawala_value: yup.string().required("Hawala Selection is required."),
-  AccountNumber: yup.string().required("AccountNumber is required."),
+export const CashDepositTransferValidationSchema = yup.object({
+  CashDeposit_value: yup
+    .string()
+    .required("CashDeposit Selection is required."),
+  // AccountNumber: yup.string().required("AccountNumber is required."),
 
   // fullName: yup.string().required("Full name is required."),
   // city: yup.string().required("City name is required."),

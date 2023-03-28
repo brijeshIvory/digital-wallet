@@ -26,10 +26,10 @@ export const EmptyStateRequestDeposite = () => {
     type: actionType.REQUEST_DEPOSIT_EMPTY_STATE,
   };
 };
-// GET HAWALA LIST
-export const GetHawalaList = () => {
+// GET CashDeposit LIST
+export const GetCashDepositList = () => {
   return {
-    type: actionType.HAWALA_LIST,
+    type: actionType.CASH_DEPOSIT_LIST,
   };
 };
 

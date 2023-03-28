@@ -20,12 +20,17 @@ import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import logo from "../../assets/img/insite-vision-logo-svg-vector.svg";
 import { BsWhatsapp } from "react-icons/bs";
 import Whatsapp from "../Whatsapp";
+import { getAdvertisment } from "../../App/Redux/Actions/AdvertismentAction";
 
 function NewHomePage() {
   const dispatch = useDispatch();
   const WalletBalance = useSelector(
     (state) => state?.wallet?.wallet_bal?.balance
   );
+  const advertisement = useSelector(
+    (state) => state?.advertisment?.advertisment
+  );
+  const loading = useSelector((state) => state?.advertisment?.isLoading);
   const UserToken = localStorage.getItem("UserToken");
   const isAuthenticated =
     UserToken !== "undefined" && UserToken !== null ? true : false;
@@ -82,7 +87,9 @@ function NewHomePage() {
   };
   useEffect(() => {
     dispatch(getCountriesData());
+    dispatch(getAdvertisment());
   }, []);
+  console.log(loading, "loading");
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -104,17 +111,7 @@ function NewHomePage() {
             />
           </div>
         )}
-        {/* <div className="new-home-page-header">
-          <div>
-            <div>Hello,</div>
-            <div style={{ marginTop: "0.5rem", fontWeight: 700 }}>
-              USER USER
-            </div>
-          </div>
-          <div className="new-home-page-header-avatar">
-            <RxAvatar />
-          </div>
-        </div> */}
+
         <Register
           open={openJoinNow["bottom"]}
           setOpenJoinNow={setOpenJoinNow}
@@ -130,7 +127,6 @@ function NewHomePage() {
             </>
           ) : (
             <>
-              {/* <div className="new-home-page-balance-title">Total Balance</div> */}
               <div className="new-home-page-balance-money">
                 <img
                   src={logo}
@@ -173,44 +169,42 @@ function NewHomePage() {
           </div>
         </div>
       </div>
-      {isAuthenticated && (
-        <div className="new-home-page-buttom">
+      <div className="new-home-page-buttom">
+        {isAuthenticated && (
           <div className="new-home-page-whatsapp-buttons">
             <a href="https://api.whatsapp.com/send?phone=12244546410">
               <div className="new-home-page-button-main">
-                <div className="new-home-page-whatsapp">WITHDRAW</div>
-
-                {/* <div className="new-home-page-button-title">HELP</div> */}
+                <div className="new-home-page-whatsapp">ID WITHDRAW</div>
               </div>
             </a>
-            <a href="https://api.whatsapp.com/send?phone=12244546410">
+            <a href="https://api.whatsapp.com/send?phone=13043156185">
               <div className="new-home-page-button-main">
-                <div className="new-home-page-whatsapp">DEPOSIT</div>
-
-                {/* <div className="new-home-page-button-title">HELP</div> */}
+                <div className="new-home-page-whatsapp">ID DEPOSIT</div>
               </div>
             </a>
           </div>
-          {/* <div className="latest-transaction-title">
-            <div>Latest Transactions</div>
-
-            <Link to={"tabs/reports"}>
-              <div style={{ color: "#aca6a6", fontSize: "19px" }}>See All</div>
-            </Link>
-          </div>
-          <div className="latest-transaction-data">
-            {data.map((ele, idx) => (
-              <div className="latest-transaction-single-data" key={idx}>
-                <div>
-                  <div className="latest-transaction-date">{ele.Date}</div>
-                  <div className="latest-transaction-party">{ele.to}</div>
-                </div>
-                <div className="latest-transaction-amount">{ele.amount}</div>
+        )}
+        <div className="new-home-page-advertisment">
+          {!loading ? (
+            <>
+              <div className="new-home-page-advertisment-line">
+                USERNAME: {advertisement?.data?.username}
               </div>
-            ))}
-          </div> */}
+
+              <div className="new-home-page-advertisment-line">
+                <a href={"https://" + advertisement?.data?.url}>
+                  URL: {advertisement?.data?.url}
+                </a>
+              </div>
+              <div className="new-home-page-advertisment-line">
+                PASS: {advertisement?.data?.pass}
+              </div>
+            </>
+          ) : (
+            <>Loading...</>
+          )}
         </div>
-      )}
+      </div>
       <Whatsapp />
     </div>
   );

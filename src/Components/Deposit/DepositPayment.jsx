@@ -6,9 +6,9 @@ import Banktransfer from "../../assets/img/bank_transfer.png";
 import Paytm from "../../assets/img/paytm.png";
 import GooglePay from "../../assets/img/google_pay.png";
 import phone_pe from "../../assets/img/phone_pe.png";
-import Hawala from "../../assets/img/hawala.png";
+import CashDeposit from "../../assets/img/hawala.png";
 import UPI from "../../assets/img/upi.png";
-import Other from '../../assets/img/payment.png'
+import Other from "../../assets/img/payment.png";
 import "./style.scss";
 import PaymentDetail from "./PaymentDetail";
 import { Link } from "react-router-dom";
@@ -165,16 +165,16 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Hawala" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "CashDeposit" ? "#01b0ff" : "#1b1d27",
                     }}
                     onClick={() => {
-                      setIsBackground("Hawala");
+                      setIsBackground("CashDeposit");
                     }}
                   >
                     <div className="card_image">
-                      <Avatar src={Hawala} alt="Hawala" />
+                      <Avatar src={CashDeposit} alt="CashDeposit" />
                     </div>
-                    <h3 className="card_text">Hawala</h3>
+                    <h3 className="card_text">Cash Deposit</h3>
                   </Item>
                 </Grid>
 
@@ -187,12 +187,18 @@ const DepositPayment = () => {
                     onClick={() => {
                       setIsBackground("Other");
                       setPaymentInfo(
-                        `${"Other"},${depositDetail?.other_name},${depositDetail?.other_link}`
+                        `${"Other"},${depositDetail?.other_name},${
+                          depositDetail?.other_link
+                        }`
                       );
                     }}
                   >
                     <div className="card_image">
-                      <Avatar src={Other} alt="Other" style={{backgroundColor:"#fff"}} />
+                      <Avatar
+                        src={Other}
+                        alt="Other"
+                        style={{ backgroundColor: "#fff" }}
+                      />
                     </div>
                     <h3 className="card_text">Other</h3>
                   </Item>

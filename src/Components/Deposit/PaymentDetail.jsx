@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
-  GetHawalaList,
+  GetCashDepositList,
   GetDepositDetail,
   RequestDeposite,
   EmptyStateRequestDeposite,
@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopySharpIcon from "@mui/icons-material/ContentCopySharp";
 import { toast } from "react-toastify";
-import DepositHawala from "./DepositHawala";
+import DepositCashDeposit from "./CashDeposit";
 import ReferalCodeDialog from "../ReferralPopup/ReferralPopup";
 import { useNavigate } from "react-router";
 const PaymentDetail = ({ isBackground, paymentInfo }) => {
@@ -41,7 +41,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const amount = window.location.pathname.split("/")[2];
   useEffect(() => {
     dispatch(GetDepositDetail());
-    dispatch(GetHawalaList());
+    dispatch(GetCashDepositList());
   }, []);
 
   // const onFileUploadChange = async (e) => {
@@ -505,7 +505,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
           </div>
         </div>
       ) : null}
-      {isBackground === "Hawala" && <DepositHawala />}
+      {isBackground === "CashDeposit" && <DepositCashDeposit />}
       <ReferalCodeDialog
         openPopUp={openPopUp}
         setOpenPopUp={setOpenPopUp}

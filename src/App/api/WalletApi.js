@@ -42,10 +42,10 @@ export function* RequestDepositApi(formData) {
   return ReqDeposit;
 }
 
-// GET HAWALA LIST
-export function* GetHawalaListApi() {
-  const hawalaList = yield axios
-    .post(`${base_url}/hawalalist`)
+// GET CashDeposit LIST
+export function* GetCashDepositListApi() {
+  const CashDepositList = yield axios
+    .post(`${base_url}/CashDepositlist`)
     .then(function (response) {
       return response;
     })
@@ -53,7 +53,7 @@ export function* GetHawalaListApi() {
       return error.response;
     });
 
-  return hawalaList;
+  return CashDepositList;
 }
 // GET CLIENT DETAILS
 export function* GetClientListApi() {

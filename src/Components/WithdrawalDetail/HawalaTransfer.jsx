@@ -4,59 +4,68 @@ import TextField from "@mui/material/TextField";
 import Drawer from "@mui/material/Drawer";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import { useFormik } from "formik";
-import { HawalaTransferValidationSchema } from "../../utills/ValidationSchema";
+import { CashDepositTransferValidationSchema } from "../../utills/ValidationSchema";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  GetHawalaList,
+  GetCashDepositList,
   WithDrawRequest,
 } from "../../App/Redux/Actions/WalletActions";
-function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
+function CashDepositTransfer({
+  CashDepositiFormOpen,
+  setCashDepositiFormOpen,
+}) {
   const UserToken = localStorage.getItem("UserToken");
   const userId =
     UserToken !== "undefined" && UserToken !== null
       ? JSON.parse(UserToken).user_id
       : undefined;
-  const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
+  const CashDepositList = useSelector(
+    (state) => state?.CashDeposit?.CashDepositlist_data
+  );
   const amount = window.location.pathname.split("/")[2];
   const [indication, setIndication] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      hawala_value: "",
+      CashDeposit_value: "",
       // AccountNumber: "",
       fullName: "",
       phoneNumber: null,
       city: "",
     },
-    validationSchema: HawalaTransferValidationSchema,
+    validationSchema: CashDepositTransferValidationSchema,
     onSubmit: (values, { resetForm }) => {
       // console.log(values, "values");
       const PayloadData = {
-        notes: `${"HawalaTransfer"},${values?.hawala_value},${
+        notes: `${"CashDepositTransfer"},${values?.CashDeposit_value},${
           values?.fullName
         },${values?.phoneNumber},${values?.city}`,
         amount: amount,
         user_id: userId,
       };
       dispatch(WithDrawRequest(PayloadData));
-      setHawalaiFormOpen(false);
+      setCashDepositiFormOpen(false);
       setIndication(false);
       resetForm({ values: null });
     },
   });
   useEffect(() => {
-    dispatch(GetHawalaList());
+    dispatch(GetCashDepositList());
   }, []);
   return (
-    <Drawer anchor={"bottom"} open={HawalaiFormOpen} className="joinNowFrom">
+    <Drawer
+      anchor={"bottom"}
+      open={CashDepositiFormOpen}
+      className="joinNowFrom"
+    >
       <div className="yellow_strip"></div>
       <div className="closing">
         <div
           className="closing_button"
           onClick={() => {
-            setHawalaiFormOpen(false);
+            setCashDepositiFormOpen(false);
             setIndication(false);
           }}
         >
@@ -66,7 +75,7 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
 
       <div className="withdrawal_form">
         <div className="withdrawal_form_title">
-          <h3>Add New Hawala</h3>
+          <h3>Add New CashDeposit</h3>
         </div>
         <p className="withdrawal_subtitle"></p>
         <div className="withdrawal_form_container">
@@ -75,28 +84,30 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
               className="withdrawal_select"
               select
               variant="standard"
-              id="hawala_value"
-              name="hawala_value"
-              value={formik.values.hawala_value}
+              id="CashDeposit_value"
+              name="CashDeposit_value"
+              value={formik.values.CashDeposit_value}
               onChange={formik.handleChange}
-              label="Select Hawala"
+              label="Select CashDeposit"
               onBlur={() => {
-                formik.handleBlur({ target: { name: "hawala_value" } });
+                formik.handleBlur({ target: { name: "CashDeposit_value" } });
               }}
               SelectProps={{
                 IconComponent: () => <KeyboardArrowDownIcon />,
               }}
             >
-              {hawalaList !== null &&
-                hawalaList.map((item, index) => (
+              {CashDepositList !== null &&
+                CashDepositList.map((item, index) => (
                   <MenuItem value={item.name} key={index}>
                     {item.name}
                   </MenuItem>
                 ))}
             </TextField>
 
-            {indication && formik.errors.hawala_value ? (
-              <div className="error_text">{formik.errors.hawala_value}</div>
+            {indication && formik.errors.CashDeposit_value ? (
+              <div className="error_text">
+                {formik.errors.CashDeposit_value}
+              </div>
             ) : null}
 
             {/* <TextField
@@ -179,4 +190,4 @@ function HawalaTransfer({ HawalaiFormOpen, setHawalaiFormOpen }) {
     </Drawer>
   );
 }
-export default HawalaTransfer;
+export default CashDepositTransfer;
