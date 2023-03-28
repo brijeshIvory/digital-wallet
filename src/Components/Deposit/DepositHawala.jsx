@@ -6,22 +6,33 @@ import TextField from "@mui/material/TextField";
 import { HawalaTransferValidationSchema } from "../../utills/ValidationSchema";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import { useSelector } from "react-redux";
 import {
   GetHawalaList,
   RequestDeposite,
+  EmptyStateRequestDeposite,
 } from "../../App/Redux/Actions/WalletActions";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { InputLabel } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { useNavigate } from "react-router";
 const DepositHawala = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageToBeSent, setImageToBeSent] = useState();
   const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
   const userId = useSelector((state) => state?.user?.userDetail?.id);
+  const loading = useSelector((state) => state?.deposit?.reqLoading);
+  const depositRequest = useSelector(
+    (state) => state?.deposit?.requestDeposite
+  );
+
   const amount = window.location.pathname.split("/")[2];
   useEffect(() => {
     dispatch(GetHawalaList());
@@ -74,11 +85,18 @@ const DepositHawala = () => {
     },
   });
 
+  useEffect(() => {
+    if (depositRequest?.ok) {
+      navigate("/");
+      dispatch(EmptyStateRequestDeposite());
+    }
+  }, [depositRequest]);
+
   return (
     <div className="Payment_detail">
       <form onSubmit={formik.handleSubmit} autoComplete="off">
         <div className="Payment_detail_title">
-          Make your payment on the details below hhh
+          Make your payment on the details below
         </div>
         <div className="deposit_form_container">
           <InputLabel style={{ fontSize: "12px" }}>Select Hawala</InputLabel>
@@ -172,6 +190,9 @@ const DepositHawala = () => {
                 <p className="clickfile">
                   {" "}
                   Click here to upload payment screenshot.
+                  <div className="loader">
+                    {loading && <CircularProgress sx={{ color: "#01b0ff" }} />}
+                  </div>
                 </p>
               </>
             )}

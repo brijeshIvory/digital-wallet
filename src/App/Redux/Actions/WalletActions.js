@@ -21,6 +21,11 @@ export const RequestDeposite = (depositData) => {
   };
 };
 
+export const EmptyStateRequestDeposite = () => {
+  return {
+    type: actionType.REQUEST_DEPOSIT_EMPTY_STATE,
+  };
+};
 // GET HAWALA LIST
 export const GetHawalaList = () => {
   return {
