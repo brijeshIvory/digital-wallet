@@ -13,6 +13,7 @@ import Passbook from "../Components/Passbook";
 import { useEffect } from "react";
 import ThirdPartyTransaction from "./../Components/3rdPartyTransaction/index";
 import Whatsapp from "../Components/Whatsapp";
+import ContactUS from "../Components/ContactUs";
 const Router = () => {
   return (
     <Routes>
@@ -32,6 +33,15 @@ const Router = () => {
         element={
           <PrivateRoute>
             <Profile />
+            <Whatsapp />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="contactUs"
+        element={
+          <PrivateRoute>
+            <ContactUS />
             <Whatsapp />
           </PrivateRoute>
         }
