@@ -4,10 +4,11 @@ const initialState = {
   requestDeposite: null,
   isLoading: false,
   error: null,
+  reqLoading: false,
 };
 
 const DepositReducer = (state = initialState, action) => {
-  console.log(action, "action.data");
+  // console.log(action?.reqDepositDetail?.data, "action.data");
   switch (action.type) {
     case actionType.DEPOSIT_DETAIL:
       return {
@@ -31,20 +32,31 @@ const DepositReducer = (state = initialState, action) => {
     case actionType.REQUEST_DEPOSIT:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         error: "",
+        reqLoading: true,
       };
     case actionType.REQUEST_DEPOSIT_SUCCESS:
       return {
         ...state,
-        requestDeposite: action.depositDetail.data,
+        requestDeposite: action.reqDepositDetail.data,
         isLoading: false,
+        reqLoading: false,
       };
     case actionType.REQUEST_DEPOSIT_FAIL:
       return {
         ...state,
         isLoading: false,
+        reqLoading: false,
         error: action.error,
+      };
+    case actionType.REQUEST_DEPOSIT_EMPTY_STATE:
+      return {
+        ...state,
+        isLoading: false,
+        reqLoading: false,
+        requestDeposite: null,
+        error: null,
       };
 
     default:
