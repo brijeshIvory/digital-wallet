@@ -3,10 +3,12 @@ import "./style.scss";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useSelector } from "react-redux";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   GetHawalaList,
   GetDepositDetail,
   RequestDeposite,
+  EmptyStateRequestDeposite,
 } from "../../App/Redux/Actions/WalletActions";
 import { useDispatch } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -14,7 +16,9 @@ import ContentCopySharpIcon from "@mui/icons-material/ContentCopySharp";
 import { toast } from "react-toastify";
 import DepositHawala from "./DepositHawala";
 import ReferalCodeDialog from "../ReferralPopup/ReferralPopup";
+import { useNavigate } from "react-router";
 const PaymentDetail = ({ isBackground, paymentInfo }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -23,6 +27,12 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const [openPopUp, setOpenPopUp] = useState(true);
   const [ReferralCode, setReferralCode] = useState("");
   const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail);
+  const loading = useSelector((state) => state?.deposit?.reqLoading);
+
+  const depositRequest = useSelector(
+    (state) => state?.deposit?.requestDeposite
+  );
+
   const UserToken = localStorage.getItem("UserToken");
   const userId =
     UserToken !== "undefined" && UserToken !== null
@@ -106,6 +116,14 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
     setPreviewUrl(null);
   };
 
+  console.log(depositRequest?.ok, "depositRequest", loading, "loading");
+
+  useEffect(() => {
+    if (depositRequest?.ok) {
+      navigate("/");
+      dispatch(EmptyStateRequestDeposite());
+    }
+  }, [depositRequest]);
   return (
     <>
       {isBackground === "Banktransfer" ||
@@ -474,6 +492,11 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                     <p className="clickfile">
                       {" "}
                       Click here to upload payment screenshot.
+                      <div className="loader">
+                        {loading && (
+                          <CircularProgress sx={{ color: "#01b0ff" }} />
+                        )}
+                      </div>
                     </p>
                   </>
                 )}
