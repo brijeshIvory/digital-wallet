@@ -19,7 +19,8 @@ import { toast } from "react-toastify";
 import { InputLabel } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useNavigate } from "react-router";
-const DepositCashDeposit = () => {
+import { Grid } from "@mui/material";
+const DepositCashDeposit = ({ ReferralCode }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -67,7 +68,6 @@ const DepositCashDeposit = () => {
   const formik = useFormik({
     initialValues: {
       CashDeposit_value: "",
-      // AccountNumber: "",
     },
     validationSchema: CashDepositTransferValidationSchema,
     onSubmit: (values) => {
@@ -78,7 +78,7 @@ const DepositCashDeposit = () => {
       );
       formData.append("amount", amount);
       formData.append("user_id", userId);
-      formData.append("refer_code", "");
+      formData.append("refer_code", ReferralCode);
       formData.append("image", imageToBeSent);
       dispatch(RequestDeposite(formData));
 
@@ -122,7 +122,20 @@ const DepositCashDeposit = () => {
             {CashDepositList !== null &&
               CashDepositList.map((item, index) => (
                 <MenuItem value={item.name} key={index}>
-                  {item.name}
+                  <Grid container sx={{ fontSize: "15px" }}>
+                    <Grid item xs={12}>
+                      Name: {item.name}
+                    </Grid>
+                    <Grid item xs={12}>
+                      Area: {item.area}
+                    </Grid>
+                    <Grid item xs={12}>
+                      Book Name: {item.book_name}
+                    </Grid>
+                    <Grid item xs={12}>
+                      Mobile: {item.mobile}
+                    </Grid>
+                  </Grid>
                 </MenuItem>
               ))}
           </TextField>
@@ -130,22 +143,6 @@ const DepositCashDeposit = () => {
           {formik.errors.CashDeposit_value ? (
             <div className="error_text">{formik.errors.CashDeposit_value}</div>
           ) : null}
-
-          {/* <TextField
-            type="name"
-            name="AccountNumber"
-            id="standard-required"
-            label="Account Number"
-            variant="standard"
-            value={formik.values.AccountNumber}
-            onChange={formik.handleChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          {formik.errors.AccountNumber ? (
-            <div className="error_text">{formik.errors.AccountNumber}</div>
-          ) : null} */}
         </div>
 
         <div className="file_main">

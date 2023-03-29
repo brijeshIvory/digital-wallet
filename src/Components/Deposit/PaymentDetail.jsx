@@ -26,7 +26,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const [imageToBeSent, setImageToBeSent] = useState();
 
   const [openPopUp, setOpenPopUp] = useState(true);
-  const [ReferralCode, setReferralCode] = useState("");
+  const [ReferralCode, setReferralCode] = useState();
   const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail);
   const loading = useSelector((state) => state?.deposit?.reqLoading);
 
@@ -103,6 +103,8 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
       dispatch(EmptyStateRequestDeposite());
     }
   }, [depositRequest]);
+
+  console.log(ReferralCode, "ReferralCode");
   return (
     <>
       {isBackground === "Banktransfer" ||
@@ -424,7 +426,11 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
           )}
           <div className="file_main">
             <div className=" border rounded-lg mt-3">
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 {previewUrl ? (
                   <>
                     <div className="deposit_close_icon">
@@ -446,7 +452,6 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                     <div className="upload_button_div">
                       <button
                         type="submit"
-                        // disabled={!formik.isValid}
                         className="deposit_button"
                         onClick={() => SubmitDepositReq()}
                       >
@@ -484,11 +489,12 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
           </div>
         </div>
       ) : null}
-      {isBackground === "CashDeposit" && <DepositCashDeposit />}
+      {isBackground === "CashDeposit" && (
+        <DepositCashDeposit ReferralCode={ReferralCode} />
+      )}
       <ReferalCodeDialog
         openPopUp={openPopUp}
         setOpenPopUp={setOpenPopUp}
-        ReferralCode={ReferralCode}
         setReferralCode={setReferralCode}
       />
     </>

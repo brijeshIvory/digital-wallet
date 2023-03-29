@@ -110,22 +110,6 @@ function CashDepositTransfer({
               </div>
             ) : null}
 
-            {/* <TextField
-              type="name"
-              name="AccountNumber"
-              id="standard-required"
-              label="Account Number"
-              variant="standard"
-              value={formik.values.AccountNumber}
-              onChange={formik.handleChange}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            {indication && formik.errors.AccountNumber ? (
-              <div className="error_text">{formik.errors.AccountNumber}</div>
-            ) : null} */}
-
             <TextField
               type="name"
               name="fullName"
