@@ -303,7 +303,7 @@
 }
 .new-home-page-advertisment {
   margin: 10px 20px;
-  padding: 2.5rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -316,4 +316,10 @@
 
 .new-home-page-advertisment-line {
   margin: 10px;
+}
+
+.new-home-page-advertisment-content {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
 }

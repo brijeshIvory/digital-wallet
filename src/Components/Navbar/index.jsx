@@ -17,6 +17,11 @@ import BeingPartner from "../Register/BeingPartner";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import GppGoodIcon from "@mui/icons-material/GppGood";
+import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import ContentCopySharpIcon from "@mui/icons-material/ContentCopySharp";
+import { useCallback } from "react";
+import { toast } from "react-toastify";
 
 function Navbar({ open, setOpen }) {
   const dispatch = useDispatch();
@@ -55,6 +60,14 @@ function Navbar({ open, setOpen }) {
       setOpen(false);
     }
   }, [clear]);
+
+  const onClick = useCallback(({ target: { innerText } }) => {
+    console.log(`Clicked on "${innerText}"!`);
+  }, []);
+  const onCopy = useCallback(() => {
+    toast("Coiped to Clipboard!");
+  }, []);
+
   return (
     <>
       <Drawer open={open} className="navbar">
@@ -83,7 +96,7 @@ function Navbar({ open, setOpen }) {
                 </div>
               </Link>
             ))}
-            {userData?.as_dealer === "0" && (
+            {userData?.as_dealer === "0" ? (
               <Link onClick={() => setOpenPopUp(true)}>
                 <div className="list">
                   <div>
@@ -92,13 +105,39 @@ function Navbar({ open, setOpen }) {
                   <p>Are You Interested to be dealer?</p>
                 </div>
               </Link>
+            ) : (
+              <div>
+                <div className="list">
+                  <div>
+                    <DiscountOutlinedIcon />
+                  </div>
+                  <p>Referral Code</p>
+                </div>
+                <div className="refercode">
+                  <div>{userData?.refer_code}</div>
+                  <CopyToClipboard
+                    onCopy={onCopy}
+                    options={{ message: "Whoa!" }}
+                    text={userData?.refer_code}
+                  >
+                    <ContentCopySharpIcon
+                      onClick={onClick}
+                      style={{
+                        width: "20px",
+                        height: "23px",
+                        marginLeft: "0.5rem",
+                      }}
+                    />
+                  </CopyToClipboard>
+                </div>
+              </div>
             )}
             <Link to="/contactUs">
               <div className="list">
                 <div>
                   <ContactSupportIcon />
                 </div>
-                <p>Contact Us</p>
+                <p>Term & Conditions</p>
               </div>
             </Link>
           </div>

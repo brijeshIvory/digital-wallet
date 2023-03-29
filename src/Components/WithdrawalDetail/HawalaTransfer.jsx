@@ -37,7 +37,6 @@ function CashDepositTransfer({
     },
     validationSchema: CashDepositTransferValidationSchema,
     onSubmit: (values, { resetForm }) => {
-      // console.log(values, "values");
       const PayloadData = {
         notes: `${"CashDepositTransfer"},${values?.CashDeposit_value},${
           values?.fullName
@@ -54,6 +53,7 @@ function CashDepositTransfer({
   useEffect(() => {
     dispatch(GetCashDepositList());
   }, []);
+
   return (
     <Drawer
       anchor={"bottom"}

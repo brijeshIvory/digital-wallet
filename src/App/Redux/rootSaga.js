@@ -4,6 +4,8 @@ import WalletSaga from "./Sagas/WalletSaga";
 import DepositSaga from "./Sagas/DepositeSaga";
 import TransactionSaga from "./Sagas/TransactionsSaga";
 import AdvertismentSaga from "./Sagas/AdvertismentSaga";
+import ContactSaga from "./Sagas/ContactSaga";
+
 function* rootSaga() {
   yield all([
     AuthSaga(),
@@ -11,6 +13,7 @@ function* rootSaga() {
     DepositSaga(),
     TransactionSaga(),
     AdvertismentSaga(),
+    ContactSaga(),
   ]);
 }
 export default rootSaga;

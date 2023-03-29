@@ -31,12 +31,9 @@ export function* RequestDepositApi(formData) {
   const ReqDeposit = yield axios
     .post(`${base_url}/depositrequest`, formData)
     .then(function (response) {
-      console.log(response, "upload done");
       return response;
     })
     .catch(function (error) {
-      console.log(error, "upload error");
-
       return error.response;
     });
   return ReqDeposit;
@@ -45,7 +42,7 @@ export function* RequestDepositApi(formData) {
 // GET CashDeposit LIST
 export function* GetCashDepositListApi() {
   const CashDepositList = yield axios
-    .post(`${base_url}/CashDepositlist`)
+    .post(`${base_url}/hawalalist`)
     .then(function (response) {
       return response;
     })

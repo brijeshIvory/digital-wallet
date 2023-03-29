@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const DepositReducer = (state = initialState, action) => {
-  // console.log(action?.reqDepositDetail?.data, "action.data");
   switch (action.type) {
     case actionType.DEPOSIT_DETAIL:
       return {

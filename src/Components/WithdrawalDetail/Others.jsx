@@ -70,7 +70,7 @@ function Others({ OthersFormOpen, setOthersFormOpen }) {
             ) : null}
 
             <TextField
-              type="name"
+              type="number"
               name="number"
               id="standard-required"
               label=" Number"

@@ -16,6 +16,7 @@ import ContentCopySharpIcon from "@mui/icons-material/ContentCopySharp";
 import { toast } from "react-toastify";
 import DepositCashDeposit from "./CashDeposit";
 import ReferalCodeDialog from "../ReferralPopup/ReferralPopup";
+
 import { useNavigate } from "react-router";
 const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const depositRequest = useSelector(
     (state) => state?.deposit?.requestDeposite
   );
-
+  const cashDeposit = useSelector((state) => state?.cash?.requestDeposite);
   const UserToken = localStorage.getItem("UserToken");
   const userId =
     UserToken !== "undefined" && UserToken !== null
@@ -44,26 +45,6 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
     dispatch(GetCashDepositList());
   }, []);
 
-  // const onFileUploadChange = async (e) => {
-  //   const fileInput = e.target;
-  //   if (!fileInput.files) {
-  //     await alert("No file was chosen", "error");
-  //     return;
-  //   }
-  //   if (!fileInput.files || fileInput.files.length === 0) {
-  //     await alert("Files list is empty", "error");
-  //     return;
-  //   }
-  //   const file = fileInput.files[0];
-  //   if (!file.type.startsWith("image")) {
-  //     await alert("Please select a valide image", "error");
-  //     return;
-  //   }
-  //   setFrontSidefile(file);
-  //   setPreviewUrl(URL.createObjectURL(file));
-  //   e.currentTarget.type = "text";
-  //   e.currentTarget.type = "file";
-  // };
   function handleImageUpload(event) {
     const fileInput = event.target;
     if (!fileInput.files) {
@@ -115,8 +96,6 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
     dispatch(RequestDeposite(formData));
     setPreviewUrl(null);
   };
-
-  console.log(depositRequest?.ok, "depositRequest", loading, "loading");
 
   useEffect(() => {
     if (depositRequest?.ok) {

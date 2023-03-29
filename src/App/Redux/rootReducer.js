@@ -6,6 +6,7 @@ import CountryReducer from "./Reducers/CountryReducer";
 import WalletReducer from "./Reducers/WalletReducer";
 import TransactionReducer from "./Reducers/TransactionReducer";
 import AdvertismentReducer from "./Reducers/AdvertismentReducer";
+import ContactReducer from "./Reducers/ContactReducer";
 
 const rootReducer = combineReducers({
   user: AuthReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   wallet: WalletReducer,
   transactionData: TransactionReducer,
   advertisment: AdvertismentReducer,
+  contactDetails: ContactReducer,
 });
 
 export default rootReducer;

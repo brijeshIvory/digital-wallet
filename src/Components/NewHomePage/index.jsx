@@ -21,6 +21,7 @@ import logo from "../../assets/img/insite-vision-logo-svg-vector.svg";
 import { BsWhatsapp } from "react-icons/bs";
 import Whatsapp from "../Whatsapp";
 import { getAdvertisment } from "../../App/Redux/Actions/AdvertismentAction";
+import { getContactDetails } from "../../App/Redux/Actions/ContactActions";
 
 function NewHomePage() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function NewHomePage() {
   const advertisement = useSelector(
     (state) => state?.advertisment?.advertisment
   );
+  const details = useSelector((state) => state?.contactDetails?.details?.data);
   const loading = useSelector((state) => state?.advertisment?.isLoading);
   const UserToken = localStorage.getItem("UserToken");
   const isAuthenticated =
@@ -88,8 +90,9 @@ function NewHomePage() {
   useEffect(() => {
     dispatch(getCountriesData());
     dispatch(getAdvertisment());
+    dispatch(getContactDetails());
   }, []);
-  console.log(loading, "loading");
+
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -172,12 +175,20 @@ function NewHomePage() {
       <div className="new-home-page-buttom">
         {isAuthenticated && (
           <div className="new-home-page-whatsapp-buttons">
-            <a href="https://api.whatsapp.com/send?phone=12244546410">
+            <a
+              href={`https://api.whatsapp.com/send?phone=${
+                details !== undefined && details["Withdrawal Number"]
+              }`}
+            >
               <div className="new-home-page-button-main">
                 <div className="new-home-page-whatsapp">ID WITHDRAW</div>
               </div>
             </a>
-            <a href="https://api.whatsapp.com/send?phone=13043156185">
+            <a
+              href={`https://api.whatsapp.com/send?phone=${
+                details !== undefined && details["Deposit Number"]
+              }`}
+            >
               <div className="new-home-page-button-main">
                 <div className="new-home-page-whatsapp">ID DEPOSIT</div>
               </div>
@@ -186,26 +197,32 @@ function NewHomePage() {
         )}
         <div className="new-home-page-advertisment">
           {!loading ? (
-            <>
-              <div className="new-home-page-advertisment-line">
-                USERNAME: {advertisement?.data?.username}
+            <div className="new-home-page-advertisment-content">
+              <div className="new-home-page-advertisment-title-main">
+                <div className="new-home-page-advertisment-line">USERNAME:</div>
+                <div className="new-home-page-advertisment-line">LINK:</div>
+                <div className="new-home-page-advertisment-line">PASSWORD:</div>
               </div>
-
-              <div className="new-home-page-advertisment-line">
-                <a href={"https://" + advertisement?.data?.url}>
-                  URL: {advertisement?.data?.url}
-                </a>
+              <div>
+                <div className="new-home-page-advertisment-line">
+                  {advertisement?.data?.username}
+                </div>
+                <div className="new-home-page-advertisment-line">
+                  <a href={"https://" + advertisement?.data?.url}>
+                    {advertisement?.data?.url}
+                  </a>
+                </div>
+                <div className="new-home-page-advertisment-line">
+                  {advertisement?.data?.pass}
+                </div>
               </div>
-              <div className="new-home-page-advertisment-line">
-                PASS: {advertisement?.data?.pass}
-              </div>
-            </>
+            </div>
           ) : (
             <>Loading...</>
           )}
         </div>
       </div>
-      <Whatsapp />
+      <Whatsapp details={details} />
     </div>
   );
 }

@@ -26,7 +26,7 @@ export const PhonePayTransferValidationSchema = yup.object({
 
 export const OthersTransferValidationSchema = yup.object({
   name: yup.string().required("Name is required"),
-  phonepenumber: yup.string().required("Phone Pe Number is required"),
+  number: yup.string().required("Phone Pe Number is required"),
 });
 
 export const UpiTransferValidationSchema = yup.object({

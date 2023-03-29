@@ -16,7 +16,7 @@ import Paper from "@mui/material/Paper";
 import TransactionDetails from "../TransactionDetails";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
-const dummyData = [
+const Data = [
   {
     Balance: "60",
     Date: "2023-03-18",
@@ -82,7 +82,7 @@ function Passbook() {
 
   const [isFilterClicked, setIsFilterClicked] = useState(false);
   const [filterMode, setFilterMode] = useState(false);
-  const [dummyfilteredData, setDummyfilteredData] = useState([]);
+  const [filteredData, setfilteredData] = useState([]);
 
   const TransactionList = useSelector(
     (state) => state?.transactionData?.transactions?.data
@@ -121,10 +121,10 @@ function Passbook() {
       const temp = filterData(
         formatDate(submitedInput.startDate),
         formatDate(submitedInput.endDate),
-        dummyData
+        TransactionList
       );
 
-      setDummyfilteredData(temp);
+      setfilteredData(temp);
     }
   }, [submitedInput]);
 
@@ -147,7 +147,7 @@ function Passbook() {
               onClick={() => {
                 setFilterMode(false);
                 setIsFilterClicked(false);
-                setDummyfilteredData([]);
+                setfilteredData([]);
               }}
             >
               <>Filter </> <CloseOutlinedIcon />
@@ -158,7 +158,7 @@ function Passbook() {
         </div>
 
         <div className="transaction-data">
-          {dummyfilteredData?.length === 0 && filterMode ? (
+          {filteredData?.length === 0 && filterMode ? (
             <div className="transaction-no-data-available">
               {"No data available between these dates"}
             </div>
@@ -171,15 +171,15 @@ function Passbook() {
                 <TableHead>
                   <TableRow className="tableRow">
                     <TableCell>Date</TableCell>
-                    <TableCell>Amount</TableCell>
                     <TableCell>Deposit</TableCell>
                     <TableCell>Withdraw</TableCell>
+                    <TableCell>Balance</TableCell>
                     <TableCell>-</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {dummyfilteredData && dummyfilteredData?.length !== 0
-                    ? dummyfilteredData?.map((transaction, idx) => (
+                  {filteredData && filteredData?.length !== 0
+                    ? filteredData?.map((transaction, idx) => (
                         <TableRow
                           key={idx}
                           sx={{
@@ -192,13 +192,13 @@ function Passbook() {
                           </TableCell>
 
                           <TableCell align="right">
-                            {transaction.Balance}
-                          </TableCell>
-                          <TableCell align="right">
                             {transaction.Deposit}
                           </TableCell>
                           <TableCell align="right">
                             {transaction.Withdraw}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Balance}
                           </TableCell>
                           <TableCell align="right">
                             <button
@@ -213,7 +213,7 @@ function Passbook() {
                           </TableCell>
                         </TableRow>
                       ))
-                    : dummyData?.map((transaction, idx) => (
+                    : TransactionList?.map((transaction, idx) => (
                         <TableRow
                           key={idx}
                           sx={{
@@ -224,15 +224,15 @@ function Passbook() {
                           <TableCell component="th" scope="row">
                             {transaction.Date}
                           </TableCell>
-
-                          <TableCell align="right">
-                            {transaction.Balance}
-                          </TableCell>
                           <TableCell align="right">
                             {transaction.Deposit}
                           </TableCell>
+
                           <TableCell align="right">
                             {transaction.Withdraw}
+                          </TableCell>
+                          <TableCell align="right">
+                            {transaction.Balance}
                           </TableCell>
                           <TableCell align="right">
                             <button
@@ -260,7 +260,6 @@ function Passbook() {
                 label="from"
                 selected={inputValue.startDate}
                 onChange={(e) => {
-                  console.log(e, "e");
                   setInputValue({ ...inputValue, startDate: e });
                 }}
               />
