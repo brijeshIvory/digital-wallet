@@ -28,7 +28,7 @@ function ContactUS() {
 
       <div className="contactus_body">
         <div className="contactus_details">
-          <a href="mailto:test@test.com">
+          <a href={`mailto:${details?.email}`}>
             <EmailOutlinedIcon />
             <div>{details?.email}</div>
           </a>

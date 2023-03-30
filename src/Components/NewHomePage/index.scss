@@ -53,6 +53,9 @@
   font-size: 25px;
   font-weight: 500;
   color: #01b0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .new-home-page-buttons {
   display: flex;
@@ -296,12 +299,6 @@
   }
 }
 
-.new-home-page-whatsapp-buttons {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
-}
 .new-home-page-buttom-title {
   padding: 2rem;
   text-align: center;
@@ -333,13 +330,21 @@
   display: flex;
   align-items: center;
   padding: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
 }
 
+.new-home-page-whatsapp-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+  flex-direction: row;
+}
+
 .button-83 {
-  width: 8.7rem;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -354,7 +359,7 @@
   column-gap: 1rem;
   cursor: pointer;
   display: flex;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 24px;
   margin: 0;
@@ -365,6 +370,8 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  display: flex;
+  flex: 1;
 }
 
 .button-83:active {

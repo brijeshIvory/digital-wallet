@@ -7,17 +7,22 @@
 .navbar_logo {
   display: flex;
   justify-content: space-between;
+
+  img {
+    margin-left: 1rem;
+    width: 100px;
+    border-radius: 50%;
+  }
 }
 .navbar_header {
   max-width: 20rem;
   max-height: 13rem;
   padding: 20px;
-  // background-color: #3d4562;
-  background-image: linear-gradient(to top, rgb(24, 113, 172), #5dbdee);
-
+  background-color: #110011;
   color: #fff;
 
   .MuiDivider-root {
+    margin-top: 2rem;
     background-color: #fffdfa;
   }
 }

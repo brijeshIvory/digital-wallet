@@ -17,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
-import logo from "../../assets/img/insite-vision-logo-svg-vector.svg";
+import logo from "../../assets/img/newlogo.png";
 import { BsWhatsapp } from "react-icons/bs";
 import Whatsapp from "../Whatsapp";
 import { getAdvertisment } from "../../App/Redux/Actions/AdvertismentAction";
@@ -27,9 +27,11 @@ import depositIcon from "../../assets/img/deposit (1).png";
 import thirdparty from "../../assets/img/third-party.png";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import NorthWestIcon from "@mui/icons-material/NorthWest";
+import { toast } from "react-toastify";
 
 function NewHomePage() {
   const dispatch = useDispatch();
+  const [notation, setNotation] = useState(false);
   const WalletBalance = useSelector(
     (state) => state?.wallet?.wallet_bal?.balance
   );
@@ -96,11 +98,17 @@ function NewHomePage() {
     dispatch(getCountriesData());
     dispatch(getAdvertisment());
     dispatch(getContactDetails());
+    // setTimeout(() => {
+    //   setNotation(true);
+    // }, 3000);
   }, []);
 
   const handleRefresh = () => {
     dispatch(GetWalletBalance({ user_id: userId }));
+    toast("Balance updated...");
   };
+
+  // console.log(notation, "notation");
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -137,26 +145,26 @@ function NewHomePage() {
               </div>
 
               <RefreshIcon onClick={handleRefresh} className="refreshIcon" />
-              {/* <div className="notationIcon">
-                <NorthWestIcon />
-                <div>Click here</div>
-              </div> */}
+              {/* {notation && (
+                <div className="notationIcon">
+                  <NorthWestIcon />
+                  <div>Click here</div>
+                </div>
+              )} */}
             </>
           ) : (
-            <>
-              <div className="new-home-page-balance-money">
-                <img
-                  src={logo}
-                  alt="logo"
-                  style={{
-                    width: "150px",
-                    height: "90px",
-                    borderRadius: "20px",
-                    backgroundColor: "#01b0ff",
-                  }}
-                />
-              </div>
-            </>
+            <div className="new-home-page-balance-money">
+              <img
+                src={logo}
+                alt="logo"
+                style={{
+                  width: "100px",
+
+                  borderRadius: "20px",
+                  backgroundColor: "#01b0ff",
+                }}
+              />
+            </div>
           )}
         </div>
         <div className="new-home-page-buttons">
@@ -192,24 +200,24 @@ function NewHomePage() {
       <div className="new-home-page-bottom">
         {isAuthenticated && (
           <div className="new-home-page-whatsapp-buttons">
-            <a
-              href={`https://api.whatsapp.com/send?phone=${
-                details !== undefined && details["Withdrawal Number"]
-              }`}
-            >
-              <div className="new-home-page-button-main">
+            <div style={{ flex: 1 }}>
+              <a
+                href={`https://api.whatsapp.com/send?phone=${
+                  details !== undefined && details["Withdrawal Number"]
+                }`}
+              >
                 <div className="button-83">ID WITHDRAW</div>
-              </div>
-            </a>
-            <a
-              href={`https://api.whatsapp.com/send?phone=${
-                details !== undefined && details["Deposit Number"]
-              }`}
-            >
-              <div className="new-home-page-button-main">
+              </a>
+            </div>
+            <div style={{ flex: 1 }}>
+              <a
+                href={`https://api.whatsapp.com/send?phone=${
+                  details !== undefined && details["Deposit Number"]
+                }`}
+              >
                 <div className="button-83">ID DEPOSIT</div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
         )}
         <div className="new-home-page-advertisment">

@@ -23,6 +23,7 @@ import ContentCopySharpIcon from "@mui/icons-material/ContentCopySharp";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import Logo from "../../assets/img/newlogo.png";
 
 function Navbar({ open, setOpen }) {
   const dispatch = useDispatch();
@@ -75,15 +76,14 @@ function Navbar({ open, setOpen }) {
         <div className="navbar_header">
           {/* <img src={Navlogo} alt="navlogo" /> */}
           <div className="navbar_logo">
-            <h2>Logo</h2>
+            <img src={Logo} alt="logo" />
             <ArrowCircleLeftOutlinedIcon
               onClick={() => setOpen(false)}
               sx={{ width: "30px", height: "30px" }}
             />
           </div>
 
-          <div className="navbar_monumber">+{userData?.phone}</div>
-          {/* <Divider /> */}
+          <Divider />
           {/* <div className="walletBalancetitle">Wallet Balance</div>
           <div className="walletBalance">{WalletBalance ? WalletBalance : 0}</div> */}
         </div>

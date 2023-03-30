@@ -37,6 +37,11 @@
     font-weight: 700;
     // margin: auto;
   }
+
+  .code_button:disabled {
+    background-image: linear-gradient(to bottom, rgb(212, 238, 244), #9ed2ec);
+    color: #4a8edb;
+  }
 }
 .close-icon-div {
   display: flex;
