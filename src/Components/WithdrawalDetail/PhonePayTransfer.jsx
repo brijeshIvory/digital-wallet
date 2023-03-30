@@ -24,6 +24,7 @@ function PhonePayTransfer({ PhonePeFormOpen, setPhonePeFormOpen }) {
         amount: amount,
         // image: previewUrl,
         user_id: userId,
+        type_id: 4,
       };
       dispatch(WithDrawRequest(PayloadData));
       setPhonePeFormOpen(false);

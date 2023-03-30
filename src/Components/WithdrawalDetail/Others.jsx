@@ -24,6 +24,7 @@ function Others({ OthersFormOpen, setOthersFormOpen }) {
         amount: amount,
         // image: previewUrl,
         user_id: userId,
+        type_id: 7,
       };
       dispatch(WithDrawRequest(PayloadData));
       setOthersFormOpen(false);

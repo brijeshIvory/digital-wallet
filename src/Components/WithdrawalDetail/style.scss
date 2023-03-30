@@ -2,7 +2,7 @@
   height: 120vh;
   display: flex;
   flex-direction: column;
-  background-color: #1b1d27;
+  background-color: #110011;
 }
 .withdraw_head_2 {
   // flex: 0.1;
@@ -12,7 +12,7 @@
 
 .withdraw_body_2 {
   // flex: 0.9;
-  background-color: #1b1d27;
+  background-color: #110011;
   padding: 1rem;
   border-radius: 15px 15px 0 0;
 }
@@ -45,7 +45,7 @@
 
 .withdrawal_top {
   color: #fff;
-  background: linear-gradient(180deg, #01b0ff 0%, #1b1d27 100%);
+  background: linear-gradient(180deg, #01b0ff 0%, #110011 100%);
   margin-bottom: 1rem;
 }
 
@@ -53,7 +53,7 @@
   display: flex;
   padding: 1rem;
   justify-content: center;
-  background-color: #2f354b;
+  background-color: #3d4562;
   border-radius: 15px;
   width: -webkit-fill-available;
 }
@@ -93,7 +93,7 @@
   padding: 20px;
   margin-bottom: 1rem;
   justify-content: space-between;
-  background-color: #2f354b;
+  background-color: #3d4562;
   border-radius: 10px;
 
   .bank-detail-title {

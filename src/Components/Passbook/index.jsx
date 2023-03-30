@@ -92,15 +92,15 @@ function Passbook() {
   const dateAfterYear = new Date();
   dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
   useEffect(() => {
-    dispatch(
-      getTransactions({
-        start_date: null,
-        end_date: null,
-        user_id: 3,
-        skip: 1,
-        take: 10,
-      })
-    );
+    if (userId) {
+      dispatch(
+        getTransactions({
+          start_date: null,
+          end_date: null,
+          user_id: userId,
+        })
+      );
+    }
   }, []);
 
   const filterData = (minDate, maxDate, Data) => {
@@ -127,6 +127,8 @@ function Passbook() {
       setfilteredData(temp);
     }
   }, [submitedInput]);
+
+  console.log(userId, "userID");
 
   return (
     <div className="passbook-main">
@@ -165,7 +167,7 @@ function Passbook() {
           ) : (
             <TableContainer
               component={Paper}
-              sx={{ backgroundColor: "#2f354b", border: "1px solid #fff" }}
+              sx={{ backgroundColor: "#3d4562", border: "1px solid #fff" }}
             >
               <Table sx={{ maxWidth: 20 }} aria-label="simple table">
                 <TableHead>
@@ -281,7 +283,7 @@ function Passbook() {
                   });
                 }}
               >
-                Close
+                CLOSE
               </button>
               <button
                 onClick={() => {
@@ -294,7 +296,7 @@ function Passbook() {
                   setFilterMode(true);
                 }}
               >
-                Apply
+                APPLY
               </button>
             </div>
           </div>

@@ -23,6 +23,7 @@ function UpiTransfer({ UpiFormOpen, setUpiFormOpen }) {
         notes: `${"UPI"},${values.name},${values.upiId}`,
         amount: amount,
         user_id: userId,
+        type_id: 5,
       };
       dispatch(WithDrawRequest(PayloadData));
       setUpiFormOpen(false);

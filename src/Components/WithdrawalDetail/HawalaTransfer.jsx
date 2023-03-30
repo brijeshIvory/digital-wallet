@@ -43,6 +43,7 @@ function CashDepositTransfer({
         },${values?.phoneNumber},${values?.city}`,
         amount: amount,
         user_id: userId,
+        type_id: 6,
       };
       dispatch(WithDrawRequest(PayloadData));
       setCashDepositiFormOpen(false);

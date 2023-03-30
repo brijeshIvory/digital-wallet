@@ -145,7 +145,7 @@ function Navbar({ open, setOpen }) {
           <div className="navbar_logout">
             <Divider />
             <Button
-              sx={{ color: "#aca6a6" }}
+              sx={{ color: "#FFFDFA" }}
               className="list"
               onClick={() => {
                 localStorage.clear();

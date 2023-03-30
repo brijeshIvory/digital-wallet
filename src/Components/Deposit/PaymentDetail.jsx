@@ -18,7 +18,7 @@ import DepositCashDeposit from "./CashDeposit";
 import ReferalCodeDialog from "../ReferralPopup/ReferralPopup";
 
 import { useNavigate } from "react-router";
-const PaymentDetail = ({ isBackground, paymentInfo }) => {
+const PaymentDetail = ({ isBackground, paymentInfo, paymenyTypeID }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
@@ -93,6 +93,8 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
     formData.append("user_id", userId);
     formData.append("refer_code", ReferralCode);
     formData.append("image", imageToBeSent);
+    formData.append("type_id", paymenyTypeID);
+
     dispatch(RequestDeposite(formData));
     setPreviewUrl(null);
   };
@@ -490,7 +492,10 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
         </div>
       ) : null}
       {isBackground === "CashDeposit" && (
-        <DepositCashDeposit ReferralCode={ReferralCode} />
+        <DepositCashDeposit
+          ReferralCode={ReferralCode}
+          paymenyTypeID={paymenyTypeID}
+        />
       )}
       <ReferalCodeDialog
         openPopUp={openPopUp}

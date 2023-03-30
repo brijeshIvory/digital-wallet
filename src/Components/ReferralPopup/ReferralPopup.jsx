@@ -24,6 +24,7 @@ function ReferalCodeDialog({ openPopUp, setOpenPopUp, setReferralCode }) {
             setOpenPopUp(false);
             setReferralCode(inputValue);
           }}
+          disabled={inputValue === "" && true}
         >
           Submit
         </button>

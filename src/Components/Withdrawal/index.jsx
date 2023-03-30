@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import './index.scss'
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
-import CoinIcon from '../../assets/img/coins-icon.png'
-import { Link, useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik'
-import { withdraweAmountValidationSchema } from '../../utills/ValidationSchema'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import "./index.scss";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import CoinIcon from "../../assets/img/coins-icon.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { withdraweAmountValidationSchema } from "../../utills/ValidationSchema";
+import { useSelector } from "react-redux";
 function Withdrawal() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const WalletBalance = useSelector(
-    (state) => state?.wallet?.wallet_bal?.balance,
-  )
+    (state) => state?.wallet?.wallet_bal?.balance
+  );
   const formik = useFormik({
     initialValues: {
       withdraw_amount: "",
@@ -66,14 +66,15 @@ function Withdrawal() {
               {" "}
               *Minimum withdraw amount is 10 coins{" "}
             </div>
-
-            <button
-              className="withdraw-transfer-button"
-              type="submit"
-              disabled={!formik.isValid}
-            >
-              withdraw Conis
-            </button>
+            <div className="withdraw-transfer-button-div">
+              <button
+                className="withdraw-transfer-button"
+                type="submit"
+                disabled={!formik.isValid}
+              >
+                Withdraw Coins
+              </button>
+            </div>
           </form>
         </div>
       </div>

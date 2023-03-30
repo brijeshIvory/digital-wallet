@@ -20,7 +20,7 @@ import { InputLabel } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useNavigate } from "react-router";
 import { Grid } from "@mui/material";
-const DepositCashDeposit = ({ ReferralCode }) => {
+const DepositCashDeposit = ({ ReferralCode, paymenyTypeID }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -80,6 +80,8 @@ const DepositCashDeposit = ({ ReferralCode }) => {
       formData.append("user_id", userId);
       formData.append("refer_code", ReferralCode);
       formData.append("image", imageToBeSent);
+      formData.append("type_id", paymenyTypeID);
+
       dispatch(RequestDeposite(formData));
 
       formik.resetForm();

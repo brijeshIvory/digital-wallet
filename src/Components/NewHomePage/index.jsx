@@ -22,6 +22,9 @@ import { BsWhatsapp } from "react-icons/bs";
 import Whatsapp from "../Whatsapp";
 import { getAdvertisment } from "../../App/Redux/Actions/AdvertismentAction";
 import { getContactDetails } from "../../App/Redux/Actions/ContactActions";
+import withdrawIcon from "../../assets/img/withdraw (1).png";
+import depositIcon from "../../assets/img/deposit (1).png";
+import thirdparty from "../../assets/img/third-party.png";
 
 function NewHomePage() {
   const dispatch = useDispatch();
@@ -149,7 +152,8 @@ function NewHomePage() {
           <div className="new-home-page-button-main">
             <Link to={"withdrawal"}>
               <div className="new-home-page-button">
-                <BiMoneyWithdraw />
+                {/* <BiMoneyWithdraw /> */}
+                <img src={withdrawIcon} alt="withdraw" />
               </div>
             </Link>
             <div className="new-home-page-button-title">WITHDRAW</div>
@@ -157,7 +161,8 @@ function NewHomePage() {
           <div className="new-home-page-button-main">
             <Link to={"deposit"}>
               <div className="new-home-page-button">
-                <RiLuggageDepositLine />
+                {/* <RiLuggageDepositLine /> */}
+                <img src={depositIcon} alt="withdraw" />
               </div>
             </Link>
             <div className="new-home-page-button-title">DEPOSIT</div>
@@ -165,14 +170,15 @@ function NewHomePage() {
           <div className="new-home-page-button-main">
             <Link to={"third-party"}>
               <div className="new-home-page-button">
-                <AiOutlineTransaction />
+                {/* <AiOutlineTransaction /> */}
+                <img src={thirdparty} alt="withdraw" />
               </div>
             </Link>
             <div className="new-home-page-button-title">THIRD PARTY</div>
           </div>
         </div>
       </div>
-      <div className="new-home-page-buttom">
+      <div className="new-home-page-bottom">
         {isAuthenticated && (
           <div className="new-home-page-whatsapp-buttons">
             <a
@@ -181,7 +187,7 @@ function NewHomePage() {
               }`}
             >
               <div className="new-home-page-button-main">
-                <div className="new-home-page-whatsapp">ID WITHDRAW</div>
+                <div class="button-83">ID WITHDRAW</div>
               </div>
             </a>
             <a
@@ -190,7 +196,7 @@ function NewHomePage() {
               }`}
             >
               <div className="new-home-page-button-main">
-                <div className="new-home-page-whatsapp">ID DEPOSIT</div>
+                <div class="button-83">ID DEPOSIT</div>
               </div>
             </a>
           </div>
@@ -204,15 +210,15 @@ function NewHomePage() {
                 <div className="new-home-page-advertisment-line">PASSWORD:</div>
               </div>
               <div>
-                <div className="new-home-page-advertisment-line">
+                <div className="new-home-page-advertisment-line-value">
                   {advertisement?.data?.username}
                 </div>
-                <div className="new-home-page-advertisment-line">
+                <div className="new-home-page-advertisment-line-value">
                   <a href={"https://" + advertisement?.data?.url}>
                     {advertisement?.data?.url}
                   </a>
                 </div>
-                <div className="new-home-page-advertisment-line">
+                <div className="new-home-page-advertisment-line-value">
                   {advertisement?.data?.pass}
                 </div>
               </div>

@@ -24,6 +24,7 @@ function PaytmTransfer({ PaytmFormOpen, setPaytmFormOpen }) {
         amount: amount,
         // image: previewUrl,
         user_id: userId,
+        type_id: 2,
       };
       dispatch(WithDrawRequest(PayloadData));
       setPaytmFormOpen(false);

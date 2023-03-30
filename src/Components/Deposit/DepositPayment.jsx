@@ -24,6 +24,7 @@ const DepositPayment = () => {
   const [isBackground, setIsBackground] = useState("");
   const amount = window.location.pathname.split("/")[2];
   const [paymentInfo, setPaymentInfo] = useState("");
+  const [paymenyTypeID, setPaymenyTypeID] = useState();
 
   const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail);
 
@@ -57,9 +58,10 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Banktransfer" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "Banktransfer" ? "#01b0ff" : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(1);
                       setIsBackground("Banktransfer");
                       setPaymentInfo(
                         `${"Banktransfer"},${depositDetail?.bank_name},${
@@ -80,9 +82,11 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Paytm" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "Paytm" ? "#01b0ff" : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(2);
+
                       setIsBackground("Paytm");
                       setPaymentInfo(
                         `${"Paytm"}, ${depositDetail?.paytm_name},${
@@ -102,9 +106,11 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "GooglePay" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "GooglePay" ? "#01b0ff" : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(3);
+
                       setIsBackground("GooglePay");
                       setPaymentInfo(
                         `${"GooglePay"},${depositDetail?.gpay_name},${
@@ -123,9 +129,11 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "phone_pe" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "phone_pe" ? "#01b0ff" : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(4);
+
                       setIsBackground("phone_pe");
                       setPaymentInfo(
                         `${"phone_pe"},${depositDetail?.phonepay_name},${
@@ -144,9 +152,11 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "UPI" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "UPI" ? "#01b0ff" : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(5);
+
                       setIsBackground("UPI");
                       setPaymentInfo(
                         `${"UPI"},${depositDetail?.bhim_name},${
@@ -165,9 +175,11 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "CashDeposit" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "CashDeposit" ? "#01b0ff" : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(6);
+
                       setIsBackground("CashDeposit");
                     }}
                   >
@@ -182,9 +194,11 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Other" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "Other" ? "#01b0ff" : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(7);
+
                       setIsBackground("Other");
                       setPaymentInfo(
                         `${"Other"},${depositDetail?.other_name},${
@@ -209,6 +223,7 @@ const DepositPayment = () => {
           <PaymentDetail
             isBackground={isBackground}
             paymentInfo={paymentInfo}
+            paymenyTypeID={paymenyTypeID}
           />
         </div>
       </div>
