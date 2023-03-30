@@ -58,7 +58,9 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Banktransfer" ? "#01b0ff" : "#110011",
+                        isBackground === "Banktransfer"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
                       setPaymenyTypeID(1);
@@ -82,7 +84,9 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Paytm" ? "#01b0ff" : "#110011",
+                        isBackground === "Paytm"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
                       setPaymenyTypeID(2);
@@ -106,7 +110,9 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "GooglePay" ? "#01b0ff" : "#110011",
+                        isBackground === "GooglePay"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
                       setPaymenyTypeID(3);
@@ -129,7 +135,9 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "phone_pe" ? "#01b0ff" : "#110011",
+                        isBackground === "phone_pe"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
                       setPaymenyTypeID(4);
@@ -152,7 +160,9 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "UPI" ? "#01b0ff" : "#110011",
+                        isBackground === "UPI"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
                       setPaymenyTypeID(5);
@@ -175,7 +185,9 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "CashDeposit" ? "#01b0ff" : "#110011",
+                        isBackground === "CashDeposit"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
                       setPaymenyTypeID(6);
@@ -194,7 +206,9 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Other" ? "#01b0ff" : "#110011",
+                        isBackground === "Other"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
                       setPaymenyTypeID(7);

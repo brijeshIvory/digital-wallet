@@ -25,6 +25,8 @@ import { getContactDetails } from "../../App/Redux/Actions/ContactActions";
 import withdrawIcon from "../../assets/img/withdraw (1).png";
 import depositIcon from "../../assets/img/deposit (1).png";
 import thirdparty from "../../assets/img/third-party.png";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import NorthWestIcon from "@mui/icons-material/NorthWest";
 
 function NewHomePage() {
   const dispatch = useDispatch();
@@ -96,6 +98,9 @@ function NewHomePage() {
     dispatch(getContactDetails());
   }, []);
 
+  const handleRefresh = () => {
+    dispatch(GetWalletBalance({ user_id: userId }));
+  };
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -130,6 +135,12 @@ function NewHomePage() {
               <div className="new-home-page-balance-money">
                 {WalletBalance ? WalletBalance : 0}
               </div>
+
+              <RefreshIcon onClick={handleRefresh} className="refreshIcon" />
+              {/* <div className="notationIcon">
+                <NorthWestIcon />
+                <div>Click here</div>
+              </div> */}
             </>
           ) : (
             <>
@@ -187,7 +198,7 @@ function NewHomePage() {
               }`}
             >
               <div className="new-home-page-button-main">
-                <div class="button-83">ID WITHDRAW</div>
+                <div className="button-83">ID WITHDRAW</div>
               </div>
             </a>
             <a
@@ -196,7 +207,7 @@ function NewHomePage() {
               }`}
             >
               <div className="new-home-page-button-main">
-                <div class="button-83">ID DEPOSIT</div>
+                <div className="button-83">ID DEPOSIT</div>
               </div>
             </a>
           </div>

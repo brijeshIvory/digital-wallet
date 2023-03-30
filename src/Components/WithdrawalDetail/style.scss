@@ -6,7 +6,8 @@
 }
 .withdraw_head_2 {
   // flex: 0.1;
-  background-color: #01b0ff;
+  background-image: linear-gradient(to top, rgb(24, 113, 172), #5dbdee);
+
   padding-bottom: 2rem;
 }
 
@@ -92,6 +93,7 @@
   display: flex;
   padding: 20px;
   margin-bottom: 1rem;
+  align-items: center;
   justify-content: space-between;
   background-color: #3d4562;
   border-radius: 10px;
@@ -118,14 +120,47 @@
     border-radius: 50%;
   }
 
+  // .bank-detail-sum {
+  //   color: #2b2929;
+  //   background: #01b0ff;
+  //   // height: 4vh;
+  // }
+  // .bank-detail-sum:hover {
+  //   color: #2b2929;
+  //   background: #01b0ff;
+  // }
+
   .bank-detail-sum {
-    color: #2b2929;
-    background: #01b0ff;
-    // height: 4vh;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    appearance: button;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, rgb(212, 238, 244), #5dbdee);
+    box-shadow: rgb(75, 138, 201) 0px 3px 10px;
+    border: 0 solid #88a8e8;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    color: #031e3c;
+    column-gap: 1rem;
+    cursor: pointer;
+    display: flex;
+    font-weight: 700;
+    line-height: 24px;
+
+    outline: 2px solid transparent;
+
+    text-align: center;
+    text-transform: none;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
   }
-  .bank-detail-sum:hover {
-    color: #2b2929;
-    background: #01b0ff;
+
+  .bank-detail-sum:active {
+    transform: translateY(0.125rem);
   }
 }
 .withdrawal_form {
@@ -144,7 +179,7 @@
   content: "";
   width: 60px;
   height: 3px;
-  background: #01b0ff;
+  background: rgb(24, 113, 172);
   left: 0;
   top: 86%;
   position: absolute;
@@ -177,15 +212,51 @@
   display: flex;
   align-items: center;
   margin-top: 1rem;
+  // justify-content: center;
 }
+// .withdrawal_button {
+//   background: #01b0ff;
+//   min-height: 30px;
+//   border-width: 0;
+//   border-radius: 5px;
+//   outline: none;
+//   padding: 10px 80px;
+//   margin: auto;
+// }
+
 .withdrawal_button {
-  background: #01b0ff;
-  min-height: 30px;
-  border-width: 0;
-  border-radius: 5px;
-  outline: none;
-  padding: 10px 80px;
+  width: 11rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgb(212, 238, 244), #5dbdee);
+  box-shadow: rgb(75, 138, 201) 0px 3px 10px;
+  border: 0 solid #88a8e8;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #031e3c;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
   margin: auto;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+  outline: 2px solid transparent;
+
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.withdrawal_button:active {
+  transform: translateY(0.125rem);
 }
 
 .withdrawal_select {

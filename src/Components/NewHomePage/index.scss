@@ -31,6 +31,18 @@
   justify-content: center;
   flex-direction: column;
   box-shadow: rgba(58, 154, 250, 0.712) 0px 7px 20px;
+
+  .notationIcon {
+    color: red;
+    position: absolute;
+    right: 10%;
+    top: 23%;
+  }
+  .refreshIcon {
+    color: rgb(198, 198, 198);
+    position: absolute;
+    right: 27%;
+  }
 }
 .new-home-page-balance-title {
   font-size: 15px;
@@ -185,7 +197,7 @@
   font-size: 10px;
 }
 .yellow_strip {
-  background-color: #01b0ff;
+  background-color: rgb(24, 113, 172);
   height: 10px;
 }
 .joinNowFrom {
@@ -202,7 +214,7 @@
   height: 45px;
   width: 40px;
   border-radius: 0 0 30px 30px;
-  background-color: #01b0ff;
+  background-color: rgb(24, 113, 172);
   margin-left: 85%;
   color: #fff;
   display: flex;

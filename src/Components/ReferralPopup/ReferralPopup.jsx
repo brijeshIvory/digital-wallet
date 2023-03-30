@@ -20,6 +20,13 @@ function ReferalCodeDialog({ openPopUp, setOpenPopUp, setReferralCode }) {
         <button
           type="submit"
           className="code_button"
+          onClick={() => setOpenPopUp(false)}
+        >
+          Skip
+        </button>
+        <button
+          type="submit"
+          className="code_button"
           onClick={() => {
             setOpenPopUp(false);
             setReferralCode(inputValue);
@@ -27,13 +34,6 @@ function ReferalCodeDialog({ openPopUp, setOpenPopUp, setReferralCode }) {
           disabled={inputValue === "" && true}
         >
           Submit
-        </button>
-        <button
-          type="submit"
-          className="code_button"
-          onClick={() => setOpenPopUp(false)}
-        >
-          Skip
         </button>
       </div>
     </Dialog>

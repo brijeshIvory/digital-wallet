@@ -22,6 +22,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopySharpIcon from "@mui/icons-material/ContentCopySharp";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 function Navbar({ open, setOpen }) {
   const dispatch = useDispatch();
@@ -37,9 +38,9 @@ function Navbar({ open, setOpen }) {
       icon: <PersonOutlineIcon />,
     },
     {
-      name: "PassBook",
+      name: "Passbook",
       link: "tabs/reports",
-      icon: <PersonAddAlt1Icon />,
+      icon: <MenuBookIcon />,
     },
   ];
 
