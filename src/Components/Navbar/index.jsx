@@ -27,6 +27,7 @@ import Logo from "../../assets/img/newlogo.png";
 
 function Navbar({ open, setOpen }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userData = useSelector((state) => state.user?.userDetail);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [clear, setClear] = useState(false);
@@ -58,7 +59,9 @@ function Navbar({ open, setOpen }) {
 
   useEffect(() => {
     if (clear === true) {
-      window.location.reload();
+      // window.location.reload();
+      navigate("/logout");
+
       setOpen(false);
     }
   }, [clear]);

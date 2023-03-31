@@ -14,10 +14,13 @@ import { useEffect } from "react";
 import ThirdPartyTransaction from "./../Components/3rdPartyTransaction/index";
 import Whatsapp from "../Components/Whatsapp";
 import ContactUS from "../Components/ContactUs";
+import Logout from "../Components/Logout";
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<NewHomePage />} />
+      <Route path="/logout" element={<Logout />} />
+
       <Route
         path="tabs/offers"
         exact
