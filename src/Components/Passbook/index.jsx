@@ -15,6 +15,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TransactionDetails from "../TransactionDetails";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import TablePagination from "@mui/material/TablePagination";
 
 const Data = [
   {
@@ -75,6 +76,8 @@ function Passbook() {
     startDate: new Date(),
     endDate: new Date(),
   });
+  const [page, setPage] = useState(0);
+
   const [submitedInput, setSubmitedInput] = useState({});
   const [currentSelectedTransaction, setCurrentSelectedTransaction] =
     useState();
@@ -91,6 +94,7 @@ function Passbook() {
 
   const dateAfterYear = new Date();
   dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
+
   useEffect(() => {
     if (userId) {
       dispatch(
@@ -101,7 +105,12 @@ function Passbook() {
         })
       );
     }
-  }, []);
+  }, [userId]);
+
+  const handleChangePage = (e, newPage) => {
+    e.preventDefault();
+    setPage(newPage);
+  };
 
   const filterData = (minDate, maxDate, Data) => {
     const arr = minDate.split("-");
@@ -128,7 +137,9 @@ function Passbook() {
     }
   }, [submitedInput]);
 
-  console.log(userId, "userID");
+  const length = filterMode
+    ? filteredData?.length
+    : TransactionList?.length !== undefined && TransactionList?.length;
 
   return (
     <div className="passbook-main">
@@ -165,93 +176,119 @@ function Passbook() {
               {"No data available between these dates"}
             </div>
           ) : (
-            <TableContainer
-              component={Paper}
-              sx={{ backgroundColor: "#3d4562", border: "1px solid #fff" }}
-            >
-              <Table sx={{ maxWidth: 20 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow className="tableRow">
-                    <TableCell>Date</TableCell>
-                    <TableCell>Deposit</TableCell>
-                    <TableCell>Withdraw</TableCell>
-                    <TableCell>Balance</TableCell>
-                    <TableCell>-</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {filteredData && filteredData?.length !== 0
-                    ? filteredData?.map((transaction, idx) => (
-                        <TableRow
-                          key={idx}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                          className="tableRow"
-                        >
-                          <TableCell component="th" scope="row">
-                            {transaction.Date}
-                          </TableCell>
-
-                          <TableCell align="right">
-                            {transaction.Deposit}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Withdraw}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Balance}
-                          </TableCell>
-                          <TableCell align="right">
-                            <button
-                              className="detail-button"
-                              onClick={() => {
-                                setCurrentSelectedTransaction(transaction);
-                                setOpenTransactionDetail(true);
+            <>
+              <TableContainer
+                component={Paper}
+                sx={{ backgroundColor: "#3d4562", border: "1px solid #fff" }}
+              >
+                <Table sx={{ maxWidth: 20 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow className="tableRow">
+                      <TableCell>Date</TableCell>
+                      <TableCell>Deposit</TableCell>
+                      <TableCell>Withdraw</TableCell>
+                      <TableCell>Balance</TableCell>
+                      <TableCell>-</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {filteredData && filteredData?.length !== 0
+                      ? filteredData
+                          ?.slice(page * 5, page * 5 + 5)
+                          ?.map((transaction, idx) => (
+                            <TableRow
+                              key={idx}
+                              sx={{
+                                "&:last-child td, &:last-child th": {
+                                  border: 0,
+                                },
                               }}
+                              className="tableRow"
                             >
-                              Details
-                            </button>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    : TransactionList?.map((transaction, idx) => (
-                        <TableRow
-                          key={idx}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                          className="tableRow"
-                        >
-                          <TableCell component="th" scope="row">
-                            {transaction.Date}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Deposit}
-                          </TableCell>
+                              <TableCell component="th" scope="row">
+                                {transaction.Date}
+                              </TableCell>
 
-                          <TableCell align="right">
-                            {transaction.Withdraw}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Balance}
-                          </TableCell>
-                          <TableCell align="right">
-                            <button
-                              className="detail-button"
-                              onClick={() => {
-                                setCurrentSelectedTransaction(transaction);
-                                setOpenTransactionDetail(true);
+                              <TableCell align="right">
+                                {transaction.Deposit}
+                              </TableCell>
+                              <TableCell align="right">
+                                {transaction.Withdraw}
+                              </TableCell>
+                              <TableCell align="right">
+                                {transaction.Balance}
+                              </TableCell>
+                              <TableCell align="right">
+                                <button
+                                  className="detail-button"
+                                  onClick={() => {
+                                    setCurrentSelectedTransaction(transaction);
+                                    setOpenTransactionDetail(true);
+                                  }}
+                                >
+                                  Details
+                                </button>
+                              </TableCell>
+                            </TableRow>
+                          ))
+                      : TransactionList?.slice(page * 5, page * 5 + 5)?.map(
+                          (transaction, idx) => (
+                            <TableRow
+                              key={idx}
+                              sx={{
+                                "&:last-child td, &:last-child th": {
+                                  border: 0,
+                                },
                               }}
+                              className="tableRow"
                             >
-                              Details
-                            </button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                              <TableCell component="th" scope="row">
+                                {transaction.Date}
+                              </TableCell>
+                              <TableCell align="right">
+                                {transaction.Deposit}
+                              </TableCell>
+
+                              <TableCell align="right">
+                                {transaction.Withdraw}
+                              </TableCell>
+                              <TableCell align="right">
+                                {transaction.Balance}
+                              </TableCell>
+                              <TableCell align="right">
+                                <button
+                                  className="detail-button"
+                                  onClick={() => {
+                                    setCurrentSelectedTransaction(transaction);
+                                    setOpenTransactionDetail(true);
+                                  }}
+                                >
+                                  Details
+                                </button>
+                              </TableCell>
+                            </TableRow>
+                          )
+                        )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                component="div"
+                count={length}
+                rowsPerPage={5}
+                page={page}
+                onPageChange={handleChangePage}
+                labelRowsPerPage={false}
+                rowsPerPageOptions={[]}
+                sx={{
+                  backgroundColor: "#3d4562",
+                  color: "#cecaca",
+                  border: "1px solid #fff",
+                  borderTop: "none",
+                  borderRadius: "0 0 10px 10px",
+                }}
+              />
+            </>
           )}
         </div>
         {isFilterClicked && (
