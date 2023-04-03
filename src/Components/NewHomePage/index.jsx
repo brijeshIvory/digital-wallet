@@ -28,6 +28,8 @@ import thirdparty from "../../assets/img/third-party.png";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import NorthWestIcon from "@mui/icons-material/NorthWest";
 import { toast } from "react-toastify";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 function NewHomePage() {
   const dispatch = useDispatch();
@@ -167,6 +169,7 @@ function NewHomePage() {
             </div>
           )}
         </div>
+
         <div className="new-home-page-buttons">
           <div className="new-home-page-button-main">
             <Link to={"withdrawal"}>
@@ -197,6 +200,7 @@ function NewHomePage() {
           </div>
         </div>
       </div>
+
       <div className="new-home-page-bottom">
         {isAuthenticated && (
           <div className="new-home-page-whatsapp-buttons">
@@ -220,32 +224,80 @@ function NewHomePage() {
             </div>
           </div>
         )}
-        <div className="new-home-page-advertisment">
-          {!loading ? (
-            <div className="new-home-page-advertisment-content">
-              <div className="new-home-page-advertisment-title-main">
-                <div className="new-home-page-advertisment-line">USERNAME:</div>
-                <div className="new-home-page-advertisment-line">LINK:</div>
-                <div className="new-home-page-advertisment-line">PASSWORD:</div>
-              </div>
-              <div>
-                <div className="new-home-page-advertisment-line-value">
-                  {advertisement?.data?.username}
-                </div>
-                <div className="new-home-page-advertisment-line-value">
-                  <a href={"https://" + advertisement?.data?.url}>
-                    {advertisement?.data?.url}
-                  </a>
-                </div>
-                <div className="new-home-page-advertisment-line-value">
-                  {advertisement?.data?.pass}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <>Loading...</>
-          )}
-        </div>
+        {/* <div className="new-home-page-advertisment"> */}
+        {!loading ? (
+          <Carousel showThumbs={false} autoPlay={true} showStatus={false}>
+            {advertisement &&
+              advertisement?.data.map((adv) => {
+                return (
+                  <div className="new-home-page-advertisment">
+                    {adv.id === 1 ? (
+                      <div className="new-home-page-advertisment-content">
+                        <div className="new-home-page-advertisment-title-main">
+                          <div className="new-home-page-advertisment-line">
+                            USERNAME:
+                          </div>
+                          <div className="new-home-page-advertisment-line">
+                            LINK:
+                          </div>
+                          <div className="new-home-page-advertisment-line">
+                            PASSWORD:
+                          </div>
+                        </div>
+                        <div>
+                          <div className="new-home-page-advertisment-line-value">
+                            {adv?.username}
+                          </div>
+                          <div className="new-home-page-advertisment-line-value">
+                            <a href={"https://" + adv?.url}>{adv?.url}</a>
+                          </div>
+                          <div className="new-home-page-advertisment-line-value">
+                            {adv?.pass}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className="new-home-page-advertisment-contentx"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: 15,
+                          backgroundSize: "cover",
+                          backgroundImage: `url(${
+                            process.env.REACT_APP_UPLOAD_URL_AWS + adv.image
+                          })`,
+                        }}
+                      >
+                        {/* <div
+                          style={{
+                            backgroundColor: "red",
+                            display: "flex",
+                            flex: 1,
+                          }}
+                        >
+                          <img
+                            src={
+                              process.env.REACT_APP_UPLOAD_URL_AWS + adv.image
+                            }
+                            style={{
+                              objectFit: "fill",
+
+                              maxWidth: "80%",
+                            }}
+                            alt="poster"
+                          />
+                        </div> */}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+          </Carousel>
+        ) : (
+          <>Loading...</>
+        )}
+        {/* </div> */}
       </div>
       <Whatsapp details={details} />
     </div>
