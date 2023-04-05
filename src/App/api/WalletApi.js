@@ -28,9 +28,6 @@ export function* GetDepositDetailApi() {
 }
 // request Deposit
 export function* RequestDepositApi(formData) {
-  console.log(formData.get("notes"), "formData");
-  console.log(formData.get("code"), "formData");
-
   const ReqDeposit = yield axios
     .post(`${base_url}/depositrequest`, formData)
     .then(function (response) {

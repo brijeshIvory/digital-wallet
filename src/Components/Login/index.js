@@ -8,6 +8,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import Drawer from "@mui/material/Drawer";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import ForgotPassword from "../Forgotpassword";
+import EmailVerification from "../EmailVerification";
 import MenuItem from "@mui/material/MenuItem";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +24,8 @@ function Login({ open, setOpenLogin }) {
     country_code: 91,
   });
   const [indication, setIndication] = useState(false);
-  const [openForgotPassPopup, setOpenForgotPassPopup] = useState(false);
+  // const [openForgotPassPopup, setOpenForgotPassPopup] = useState(false);
+  const [verifyEmailPopup, setOpenVerifyEmailPopup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const countries = useSelector((state) => state?.country?.countries?.data);
@@ -175,7 +177,7 @@ function Login({ open, setOpenLogin }) {
             ) : null}
 
             <div className="forgot_password">
-              <p onClick={() => setOpenForgotPassPopup(true)}>
+              <p onClick={() => setOpenVerifyEmailPopup(true)}>
                 {" "}
                 ForgotPassword?
               </p>
@@ -192,9 +194,9 @@ function Login({ open, setOpenLogin }) {
           </form>
         </div>
       </div>
-      <ForgotPassword
-        openForgotPassPopup={openForgotPassPopup}
-        setOpenForgotPassPopup={setOpenForgotPassPopup}
+      <EmailVerification
+        verifyEmailPopup={verifyEmailPopup}
+        setOpenVerifyEmailPopup={setOpenVerifyEmailPopup}
       />
     </Drawer>
   );

@@ -83,14 +83,14 @@ export const withdraweAmountValidationSchema = yup.object({
 });
 
 export const ForgotPasswordValidationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Invalid Email")
-    .matches(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Invalid email address"
-    )
-    .required("Email is required !"),
+  // email: yup
+  //   .string()
+  //   .email("Invalid Email")
+  //   .matches(
+  //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  //     "Invalid email address"
+  //   )
+  //   .required("Email is required !"),
 
   password: yup
     .string()
@@ -113,4 +113,15 @@ export const ThridPartyValidation = yup.object({
 export const ChangePasswordValidationSchema = yup.object({
   password: yup.string().required("please Enter password!"),
   confirm_password: yup.string().required("please Enter confrim password"),
+});
+
+export const EmailVerificationValidationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Invalid Email")
+    .matches(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Invalid email address"
+    )
+    .required("Email is required !"),
 });

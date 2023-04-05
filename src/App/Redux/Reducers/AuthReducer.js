@@ -4,9 +4,11 @@ const initialState = {
   error: null,
   isLoading: false,
   userDetail: null,
+  sendOtp: null,
   otpVerification: null,
   loginData: null,
-  isLogin:false
+  isLogin: false,
+  forgotPassRespState: null,
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -67,7 +69,7 @@ const AuthReducer = (state = initialState, action) => {
     case actionType.VERIFY_OTP_SUCCESS:
       return {
         ...state,
-        loginData: action?.otpResp,
+        otpVerification: action?.otpResp,
         isLoading: false,
         error: null,
       };
@@ -97,12 +99,53 @@ const AuthReducer = (state = initialState, action) => {
         error: action?.loginErrData,
         isLoading: false,
       };
-      case actionType.USER_LOGIN_STATUS:
-        return {
-          ...state,
-        isLogin:action.loginStatus
-        };
-      
+    case actionType.USER_LOGIN_STATUS:
+      return {
+        ...state,
+        isLogin: action.loginStatus,
+      };
+
+    case actionType.SEND_OTP:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case actionType.SEND_OTP_SUCCESS:
+      return {
+        ...state,
+        sendOtp: action?.otpData?.data,
+        isLoading: false,
+        error: null,
+      };
+    case actionType.SEND_OTP_FAIL:
+      return {
+        ...state,
+        error: action?.sendOtpRespErr,
+        isLoading: false,
+      };
+
+    case actionType.FORGET_PASSWORD:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case actionType.FORGET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+
+        forgotPassRespState: action?.ForgotPassResp,
+        isLoading: false,
+        error: null,
+      };
+    case actionType.FORGET_PASSWORD_FAIL:
+      return {
+        ...state,
+        error: action?.ForgotPassRespErr,
+        isLoading: false,
+      };
+
     default:
       return state;
   }

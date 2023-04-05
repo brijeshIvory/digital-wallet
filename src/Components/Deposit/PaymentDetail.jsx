@@ -106,7 +106,6 @@ const PaymentDetail = ({ isBackground, paymentInfo, paymenyTypeID }) => {
     }
   }, [depositRequest]);
 
-  console.log(ReferralCode, "ReferralCode");
   return (
     <>
       {isBackground === "Banktransfer" ||

@@ -110,7 +110,6 @@ function NewHomePage() {
     toast("Balance updated...");
   };
 
-  // console.log(notation, "notation");
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -226,7 +225,13 @@ function NewHomePage() {
         )}
         {/* <div className="new-home-page-advertisment"> */}
         {!loading ? (
-          <Carousel showThumbs={false} autoPlay={true} showStatus={false}>
+          <Carousel
+            showThumbs={false}
+            autoPlay={true}
+            showStatus={false}
+            infiniteLoop={true}
+            showArrows={false}
+          >
             {advertisement &&
               advertisement?.data.map((adv) => {
                 return (
