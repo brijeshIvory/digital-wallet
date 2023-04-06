@@ -38,9 +38,9 @@ function Otp({ setOpenJoinNow }) {
 
   return (
     <Dialog open={open} className="otp-input">
-      <div className="close-icon-div">
+      {/* <div className="close-icon-div">
         <HighlightOffIcon onClick={() => setOpen(false)} />
-      </div>
+      </div> */}
       <div className="otp-input-title">
         Enter the OTP sent to your email id..
       </div>
