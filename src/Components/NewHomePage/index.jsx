@@ -42,6 +42,7 @@ function NewHomePage() {
   );
   const details = useSelector((state) => state?.contactDetails?.details?.data);
   const loading = useSelector((state) => state?.advertisment?.isLoading);
+
   const UserToken = localStorage.getItem("UserToken");
   const isAuthenticated =
     UserToken !== "undefined" && UserToken !== null ? true : false;
@@ -50,28 +51,6 @@ function NewHomePage() {
       ? JSON.parse(UserToken).user_id
       : undefined;
 
-  const data = [
-    {
-      to: "Party1",
-      amount: "+78",
-      Date: "02/03/2023",
-    },
-    {
-      to: "Party2",
-      amount: "+89",
-      Date: "15/02/2023",
-    },
-    {
-      to: "Party3",
-      amount: "+97",
-      Date: "25/02/2023",
-    },
-    {
-      to: "Party4",
-      amount: "+63",
-      Date: "28/01/2023",
-    },
-  ];
   const [openJoinNow, setOpenJoinNow] = useState({ bottom: false });
   const [openLogin, setOpenLogin] = useState({
     bottom: false,
@@ -300,7 +279,7 @@ function NewHomePage() {
               })}
           </Carousel>
         ) : (
-          <>Loading...</>
+          <div className="homepage-carousel-loading">Loading...</div>
         )}
         {/* </div> */}
       </div>

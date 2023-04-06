@@ -192,83 +192,87 @@ function Passbook() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {filteredData && filteredData?.length !== 0
-                      ? filteredData
-                          ?.slice(page * 5, page * 5 + 5)
-                          ?.map((transaction, idx) => (
-                            <TableRow
-                              key={idx}
-                              sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                },
-                              }}
-                              className="tableRow"
-                            >
-                              <TableCell component="th" scope="row">
-                                {transaction.Date}
-                              </TableCell>
+                    {filteredData && filteredData?.length !== 0 ? (
+                      filteredData
+                        ?.slice(page * 5, page * 5 + 5)
+                        ?.map((transaction, idx) => (
+                          <TableRow
+                            key={idx}
+                            sx={{
+                              "&:last-child td, &:last-child th": {
+                                border: 0,
+                              },
+                            }}
+                            className="tableRow"
+                          >
+                            <TableCell component="th" scope="row">
+                              {transaction.Date}
+                            </TableCell>
 
-                              <TableCell align="right">
-                                {transaction.Deposit}
-                              </TableCell>
-                              <TableCell align="right">
-                                {transaction.Withdraw}
-                              </TableCell>
-                              <TableCell align="right">
-                                {transaction.Balance}
-                              </TableCell>
-                              <TableCell align="right">
-                                <button
-                                  className="detail-button"
-                                  onClick={() => {
-                                    setCurrentSelectedTransaction(transaction);
-                                    setOpenTransactionDetail(true);
-                                  }}
-                                >
-                                  Details
-                                </button>
-                              </TableCell>
-                            </TableRow>
-                          ))
-                      : TransactionList?.slice(page * 5, page * 5 + 5)?.map(
-                          (transaction, idx) => (
-                            <TableRow
-                              key={idx}
-                              sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                },
-                              }}
-                              className="tableRow"
-                            >
-                              <TableCell component="th" scope="row">
-                                {transaction.Date}
-                              </TableCell>
-                              <TableCell align="right">
-                                {transaction.Deposit}
-                              </TableCell>
+                            <TableCell align="right">
+                              {transaction.Deposit}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Withdraw}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Balance}
+                            </TableCell>
+                            <TableCell align="right">
+                              <button
+                                className="detail-button"
+                                onClick={() => {
+                                  setCurrentSelectedTransaction(transaction);
+                                  setOpenTransactionDetail(true);
+                                }}
+                              >
+                                Details
+                              </button>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                    ) : TransactionList?.length !== 0 ? (
+                      TransactionList?.slice(page * 5, page * 5 + 5)?.map(
+                        (transaction, idx) => (
+                          <TableRow
+                            key={idx}
+                            sx={{
+                              "&:last-child td, &:last-child th": {
+                                border: 0,
+                              },
+                            }}
+                            className="tableRow"
+                          >
+                            <TableCell component="th" scope="row">
+                              {transaction.Date}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Deposit}
+                            </TableCell>
 
-                              <TableCell align="right">
-                                {transaction.Withdraw}
-                              </TableCell>
-                              <TableCell align="right">
-                                {transaction.Balance}
-                              </TableCell>
-                              <TableCell align="right">
-                                <button
-                                  className="detail-button"
-                                  onClick={() => {
-                                    setCurrentSelectedTransaction(transaction);
-                                    setOpenTransactionDetail(true);
-                                  }}
-                                >
-                                  Details
-                                </button>
-                              </TableCell>
-                            </TableRow>
-                          )
-                        )}
+                            <TableCell align="right">
+                              {transaction.Withdraw}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Balance}
+                            </TableCell>
+                            <TableCell align="right">
+                              <button
+                                className="detail-button"
+                                onClick={() => {
+                                  setCurrentSelectedTransaction(transaction);
+                                  setOpenTransactionDetail(true);
+                                }}
+                              >
+                                Details
+                              </button>
+                            </TableCell>
+                          </TableRow>
+                        )
+                      )
+                    ) : (
+                      <div className="no-record-found">No Records Found</div>
+                    )}
                   </TableBody>
                 </Table>
               </TableContainer>
