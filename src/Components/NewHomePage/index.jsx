@@ -33,7 +33,7 @@ import { Carousel } from "react-responsive-carousel";
 
 function NewHomePage() {
   const dispatch = useDispatch();
-  const [notation, setNotation] = useState(false);
+  // const [notation, setNotation] = useState(false);
   const WalletBalance = useSelector(
     (state) => state?.wallet?.wallet_bal?.balance
   );
@@ -212,9 +212,9 @@ function NewHomePage() {
             showArrows={false}
           >
             {advertisement &&
-              advertisement?.data.map((adv) => {
+              advertisement?.data.map((adv, idx) => {
                 return (
-                  <div className="new-home-page-advertisment">
+                  <div className="new-home-page-advertisment" key={idx}>
                     {adv.id === 1 ? (
                       <div className="new-home-page-advertisment-content">
                         <div className="new-home-page-advertisment-title-main">
