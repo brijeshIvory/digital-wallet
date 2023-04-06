@@ -42,7 +42,7 @@ function EmailVerification({ setOpenVerifyEmailPopup, verifyEmailPopup }) {
         />
       </div>
       <div className="forgot-password-title">
-        Enter your registrated email id
+        Enter your registered email id
       </div>
       <form
         className="forgot-password-form"

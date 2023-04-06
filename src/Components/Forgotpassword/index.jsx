@@ -49,14 +49,14 @@ function ForgotPassword({
   }, [forgotPasswordResponce]);
   return (
     <Dialog open={openForgotPassPopup} className="forgot-password">
-      <div className="close-icon-div">
+      {/* <div className="close-icon-div">
         <HighlightOffIcon
           onClick={() => {
             setOpenForgotPassPopup(false);
             formik.resetForm();
           }}
         />
-      </div>
+      </div> */}
       <div className="forgot-password-title">
         Enter details and generate new password...
       </div>

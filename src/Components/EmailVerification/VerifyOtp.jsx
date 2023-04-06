@@ -36,9 +36,9 @@ function VerifyOtp({
 
   return (
     <Dialog open={openVerifyOtpPopup} className="otp-input">
-      <div className="close-icon-div">
+      {/* <div className="close-icon-div">
         <HighlightOffIcon onClick={() => setOpenVerifyOtpPopup(false)} />
-      </div>
+      </div> */}
       <div className="otp-input-title">
         Enter the OTP sent to your email id..
       </div>
