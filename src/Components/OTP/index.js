@@ -44,28 +44,31 @@ function Otp({ setOpenJoinNow }) {
       <div className="otp-input-title">
         Enter the OTP sent to your email id..
       </div>
+      <div>
+        <OtpInput
+          className="otp-input-field"
+          value={otp}
+          onChange={handleChange}
+          numInputs={6}
+        />
+      </div>
+      <div className="otp-submit-button">
+        <button
+          onClick={() => {
+            dispatch(
+              verifyOtp({
+                id: user[0]?.id,
+                otp: Number(otp),
+              })
+            );
 
-      <OtpInput
-        className="otp-input-field"
-        value={otp}
-        onChange={handleChange}
-        numInputs={6}
-      />
-      <button
-        onClick={() => {
-          dispatch(
-            verifyOtp({
-              id: user[0]?.id,
-              otp: Number(otp),
-            })
-          );
-
-          dispatch(emptyUser());
-          setOpenJoinNow("bottom", false);
-        }}
-      >
-        Confirm OTP
-      </button>
+            dispatch(emptyUser());
+            setOpenJoinNow("bottom", false);
+          }}
+        >
+          Confirm OTP
+        </button>
+      </div>
     </Dialog>
   );
 }

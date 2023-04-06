@@ -19,11 +19,13 @@ function BeingPartner({ openPopUp, setOpenPopUp }) {
       open={openPopUp}
       className="referral-popup"
     >
-      <div className="close-icon-div">
+      {/* <div className="close-icon-div">
         <HighlightOffIcon onClick={() => setOpenPopUp(false)} />
-      </div>
+      </div> */}
       <div className="close-icon-div"></div>
-      <div className="close-icon-div-text">Are You Interested to be Dealer</div>
+      <div className="close-icon-div-text">
+        Are you interested to be a dealer?
+      </div>
 
       <div className="code_button_div">
         <button

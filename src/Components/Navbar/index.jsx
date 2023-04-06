@@ -106,7 +106,7 @@ function Navbar({ open, setOpen }) {
                   <div>
                     <GppGoodIcon />
                   </div>
-                  <p>Are You Interested to be dealer?</p>
+                  <p>Are you interested to be a dealer?</p>
                 </div>
               </Link>
             ) : (
@@ -141,7 +141,7 @@ function Navbar({ open, setOpen }) {
                 <div>
                   <ContactSupportIcon />
                 </div>
-                <p>Term & Conditions</p>
+                <p>Terms & Conditions</p>
               </div>
             </Link>
           </div>

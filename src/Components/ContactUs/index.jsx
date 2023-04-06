@@ -34,10 +34,10 @@ function ContactUS() {
           </a>
         </div>
         <div className="contactus_text">
-          If you have any query, click on above mail ID to mail us.
+          If you have any query, click on above mail id to mail us.
         </div>
         <Divider sx={{ backgroundColor: "#fff", margin: "2.5rem" }} />
-        <div className="term_title">Term & Condition</div>
+        <div className="term_title">Terms & Conditions</div>
         <div className="contactus_text">
           {details !== undefined && details["Term & Condition"]}
         </div>
