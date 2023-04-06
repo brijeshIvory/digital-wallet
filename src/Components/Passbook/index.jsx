@@ -166,7 +166,12 @@ function Passbook() {
               <>Filter </> <CloseOutlinedIcon />
             </button>
           ) : (
-            <button onClick={() => setIsFilterClicked(true)}>Filter</button>
+            <button
+              disabled={TransactionList?.length !== 0 ? false : true}
+              onClick={() => setIsFilterClicked(true)}
+            >
+              Filter
+            </button>
           )}
         </div>
 
