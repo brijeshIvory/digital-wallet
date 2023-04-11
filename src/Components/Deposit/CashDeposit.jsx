@@ -3,14 +3,14 @@ import "./style.scss";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useFormik } from "formik";
 import TextField from "@mui/material/TextField";
-import { HawalaTransferValidationSchema } from "../../utills/ValidationSchema";
+import { CashDepositTransferValidationSchema } from "../../utills/ValidationSchema";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { useSelector } from "react-redux";
 import {
-  GetHawalaList,
+  GetCashDepositList,
   RequestDeposite,
   EmptyStateRequestDeposite,
 } from "../../App/Redux/Actions/WalletActions";
@@ -19,14 +19,17 @@ import { toast } from "react-toastify";
 import { InputLabel } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useNavigate } from "react-router";
-const DepositHawala = () => {
+import { Grid } from "@mui/material";
+const DepositCashDeposit = ({ ReferralCode, paymenyTypeID }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageToBeSent, setImageToBeSent] = useState();
-  const hawalaList = useSelector((state) => state?.hawala?.hawalalist_data);
+  const CashDepositList = useSelector(
+    (state) => state?.CashDeposit?.CashDepositlist_data
+  );
   const userId = useSelector((state) => state?.user?.userDetail?.id);
   const loading = useSelector((state) => state?.deposit?.reqLoading);
   const depositRequest = useSelector(
@@ -35,7 +38,7 @@ const DepositHawala = () => {
 
   const amount = window.location.pathname.split("/")[2];
   useEffect(() => {
-    dispatch(GetHawalaList());
+    dispatch(GetCashDepositList());
   }, []);
 
   function handleImageUpload(event) {
@@ -64,20 +67,21 @@ const DepositHawala = () => {
 
   const formik = useFormik({
     initialValues: {
-      hawala_value: "",
-      AccountNumber: "",
+      CashDeposit_value: "",
     },
-    validationSchema: HawalaTransferValidationSchema,
+    validationSchema: CashDepositTransferValidationSchema,
     onSubmit: (values) => {
       const formData = new FormData();
       formData.append(
         "notes",
-        `${"HawalaTransfer"},${values.hawala_value},${values.AccountNumber}`
+        `${"CashDepositTransfer"},${values.CashDeposit_value}`
       );
       formData.append("amount", amount);
       formData.append("user_id", userId);
-      formData.append("refer_code", "");
+      formData.append("refer_code", ReferralCode);
       formData.append("image", imageToBeSent);
+      formData.append("type_id", paymenyTypeID);
+
       dispatch(RequestDeposite(formData));
 
       formik.resetForm();
@@ -99,48 +103,47 @@ const DepositHawala = () => {
           Make your payment on the details below
         </div>
         <div className="deposit_form_container">
-          <InputLabel style={{ fontSize: "12px" }}>Select Hawala</InputLabel>
+          <InputLabel style={{ fontSize: "12px" }}>
+            Select CashDeposit
+          </InputLabel>
           <TextField
             className="deposit_select"
             select
             variant="standard"
-            id="hawala_value"
-            name="hawala_value"
-            value={formik.values.hawala_value}
+            id="CashDeposit_value"
+            name="CashDeposit_value"
+            value={formik.values.CashDeposit_value}
             onChange={formik.handleChange}
             onBlur={() => {
-              formik.handleBlur({ target: { name: "hawala_value" } });
+              formik.handleBlur({ target: { name: "CashDeposit_value" } });
             }}
             SelectProps={{
               IconComponent: () => <KeyboardArrowDownIcon />,
             }}
           >
-            {hawalaList !== null &&
-              hawalaList.map((item, index) => (
+            {CashDepositList !== null &&
+              CashDepositList.map((item, index) => (
                 <MenuItem value={item.name} key={index}>
-                  {item.name}
+                  <Grid container sx={{ fontSize: "15px" }}>
+                    <Grid item xs={12}>
+                      Name: {item.name}
+                    </Grid>
+                    <Grid item xs={12}>
+                      Area: {item.area}
+                    </Grid>
+                    <Grid item xs={12}>
+                      Book Name: {item.book_name}
+                    </Grid>
+                    <Grid item xs={12}>
+                      Mobile: {item.mobile}
+                    </Grid>
+                  </Grid>
                 </MenuItem>
               ))}
           </TextField>
 
-          {formik.errors.hawala_value ? (
-            <div className="error_text">{formik.errors.hawala_value}</div>
-          ) : null}
-
-          <TextField
-            type="name"
-            name="AccountNumber"
-            id="standard-required"
-            label="Account Number"
-            variant="standard"
-            value={formik.values.AccountNumber}
-            onChange={formik.handleChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          {formik.errors.AccountNumber ? (
-            <div className="error_text">{formik.errors.AccountNumber}</div>
+          {formik.errors.CashDeposit_value ? (
+            <div className="error_text">{formik.errors.CashDeposit_value}</div>
           ) : null}
         </div>
 
@@ -203,4 +206,4 @@ const DepositHawala = () => {
   );
 };
 
-export default DepositHawala;
+export default DepositCashDeposit;

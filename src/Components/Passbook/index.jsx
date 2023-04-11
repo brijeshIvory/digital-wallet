@@ -15,8 +15,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TransactionDetails from "../TransactionDetails";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import TablePagination from "@mui/material/TablePagination";
 
-const dummyData = [
+const Data = [
   {
     Balance: "60",
     Date: "2023-03-18",
@@ -75,6 +76,8 @@ function Passbook() {
     startDate: new Date(),
     endDate: new Date(),
   });
+  const [page, setPage] = useState(0);
+
   const [submitedInput, setSubmitedInput] = useState({});
   const [currentSelectedTransaction, setCurrentSelectedTransaction] =
     useState();
@@ -82,7 +85,7 @@ function Passbook() {
 
   const [isFilterClicked, setIsFilterClicked] = useState(false);
   const [filterMode, setFilterMode] = useState(false);
-  const [dummyfilteredData, setDummyfilteredData] = useState([]);
+  const [filteredData, setfilteredData] = useState([]);
 
   const TransactionList = useSelector(
     (state) => state?.transactionData?.transactions?.data
@@ -91,17 +94,23 @@ function Passbook() {
 
   const dateAfterYear = new Date();
   dateAfterYear.setFullYear(inputValue.startDate.getFullYear() + 1);
+
   useEffect(() => {
-    dispatch(
-      getTransactions({
-        start_date: null,
-        end_date: null,
-        user_id: 3,
-        skip: 1,
-        take: 10,
-      })
-    );
-  }, []);
+    if (userId) {
+      dispatch(
+        getTransactions({
+          start_date: null,
+          end_date: null,
+          user_id: userId,
+        })
+      );
+    }
+  }, [userId]);
+
+  const handleChangePage = (e, newPage) => {
+    e.preventDefault();
+    setPage(newPage);
+  };
 
   const filterData = (minDate, maxDate, Data) => {
     const arr = minDate.split("-");
@@ -121,12 +130,16 @@ function Passbook() {
       const temp = filterData(
         formatDate(submitedInput.startDate),
         formatDate(submitedInput.endDate),
-        dummyData
+        TransactionList
       );
 
-      setDummyfilteredData(temp);
+      setfilteredData(temp);
     }
   }, [submitedInput]);
+
+  const length = filterMode
+    ? filteredData?.length
+    : TransactionList?.length !== undefined && TransactionList?.length;
 
   return (
     <div className="passbook-main">
@@ -147,109 +160,144 @@ function Passbook() {
               onClick={() => {
                 setFilterMode(false);
                 setIsFilterClicked(false);
-                setDummyfilteredData([]);
+                setfilteredData([]);
               }}
             >
               <>Filter </> <CloseOutlinedIcon />
             </button>
           ) : (
-            <button onClick={() => setIsFilterClicked(true)}>Filter</button>
+            <button
+              disabled={TransactionList?.length !== 0 ? false : true}
+              onClick={() => setIsFilterClicked(true)}
+            >
+              Filter
+            </button>
           )}
         </div>
 
         <div className="transaction-data">
-          {dummyfilteredData?.length === 0 && filterMode ? (
+          {filteredData?.length === 0 && filterMode ? (
             <div className="transaction-no-data-available">
               {"No data available between these dates"}
             </div>
           ) : (
-            <TableContainer
-              component={Paper}
-              sx={{ backgroundColor: "#2f354b", border: "1px solid #fff" }}
-            >
-              <Table sx={{ maxWidth: 20 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow className="tableRow">
-                    <TableCell>Date</TableCell>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Deposit</TableCell>
-                    <TableCell>Withdraw</TableCell>
-                    <TableCell>-</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {dummyfilteredData && dummyfilteredData?.length !== 0
-                    ? dummyfilteredData?.map((transaction, idx) => (
-                        <TableRow
-                          key={idx}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                          className="tableRow"
-                        >
-                          <TableCell component="th" scope="row">
-                            {transaction.Date}
-                          </TableCell>
+            <>
+              <TableContainer
+                component={Paper}
+                sx={{ backgroundColor: "#3d4562", border: "1px solid #fff" }}
+              >
+                <Table sx={{ maxWidth: 20 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow className="tableRow">
+                      <TableCell>Date</TableCell>
+                      <TableCell>Deposit</TableCell>
+                      <TableCell>Withdraw</TableCell>
+                      <TableCell>Balance</TableCell>
+                      <TableCell>-</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {filteredData && filteredData?.length !== 0 ? (
+                      filteredData
+                        ?.slice(page * 5, page * 5 + 5)
+                        ?.map((transaction, idx) => (
+                          <TableRow
+                            key={idx}
+                            sx={{
+                              "&:last-child td, &:last-child th": {
+                                border: 0,
+                              },
+                            }}
+                            className="tableRow"
+                          >
+                            <TableCell component="th" scope="row">
+                              {transaction.Date}
+                            </TableCell>
 
-                          <TableCell align="right">
-                            {transaction.Balance}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Deposit}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Withdraw}
-                          </TableCell>
-                          <TableCell align="right">
-                            <button
-                              className="detail-button"
-                              onClick={() => {
-                                setCurrentSelectedTransaction(transaction);
-                                setOpenTransactionDetail(true);
-                              }}
-                            >
-                              Details
-                            </button>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    : dummyData?.map((transaction, idx) => (
-                        <TableRow
-                          key={idx}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                          className="tableRow"
-                        >
-                          <TableCell component="th" scope="row">
-                            {transaction.Date}
-                          </TableCell>
+                            <TableCell align="right">
+                              {transaction.Deposit}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Withdraw}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Balance}
+                            </TableCell>
+                            <TableCell align="right">
+                              <button
+                                className="detail-button"
+                                onClick={() => {
+                                  setCurrentSelectedTransaction(transaction);
+                                  setOpenTransactionDetail(true);
+                                }}
+                              >
+                                Details
+                              </button>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                    ) : TransactionList?.length !== 0 ? (
+                      TransactionList?.slice(page * 5, page * 5 + 5)?.map(
+                        (transaction, idx) => (
+                          <TableRow
+                            key={idx}
+                            sx={{
+                              "&:last-child td, &:last-child th": {
+                                border: 0,
+                              },
+                            }}
+                            className="tableRow"
+                          >
+                            <TableCell component="th" scope="row">
+                              {transaction.Date}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Deposit}
+                            </TableCell>
 
-                          <TableCell align="right">
-                            {transaction.Balance}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Deposit}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.Withdraw}
-                          </TableCell>
-                          <TableCell align="right">
-                            <button
-                              className="detail-button"
-                              onClick={() => {
-                                setCurrentSelectedTransaction(transaction);
-                                setOpenTransactionDetail(true);
-                              }}
-                            >
-                              Details
-                            </button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                            <TableCell align="right">
+                              {transaction.Withdraw}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.Balance}
+                            </TableCell>
+                            <TableCell align="right">
+                              <button
+                                className="detail-button"
+                                onClick={() => {
+                                  setCurrentSelectedTransaction(transaction);
+                                  setOpenTransactionDetail(true);
+                                }}
+                              >
+                                Details
+                              </button>
+                            </TableCell>
+                          </TableRow>
+                        )
+                      )
+                    ) : (
+                      <div className="no-record-found">No Records Found</div>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                component="div"
+                count={length}
+                rowsPerPage={5}
+                page={page}
+                onPageChange={handleChangePage}
+                labelRowsPerPage={false}
+                rowsPerPageOptions={[]}
+                sx={{
+                  backgroundColor: "#3d4562",
+                  color: "#cecaca",
+                  border: "1px solid #fff",
+                  borderTop: "none",
+                  borderRadius: "0 0 10px 10px",
+                }}
+              />
+            </>
           )}
         </div>
         {isFilterClicked && (
@@ -260,7 +308,6 @@ function Passbook() {
                 label="from"
                 selected={inputValue.startDate}
                 onChange={(e) => {
-                  console.log(e, "e");
                   setInputValue({ ...inputValue, startDate: e });
                 }}
               />
@@ -282,7 +329,7 @@ function Passbook() {
                   });
                 }}
               >
-                Close
+                CLOSE
               </button>
               <button
                 onClick={() => {
@@ -295,7 +342,7 @@ function Passbook() {
                   setFilterMode(true);
                 }}
               >
-                Apply
+                APPLY
               </button>
             </div>
           </div>

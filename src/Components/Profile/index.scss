@@ -1,9 +1,11 @@
 .profile_main {
   height: 100vh;
-  background-color: #1b1d27;
+  background-color: #110011;
 }
 .profile_head {
-  background: #01b0ff;
+  // background: #01b0ff;
+  background-image: linear-gradient(to top, rgb(24, 113, 172), #5dbdee);
+
   padding-bottom: 2rem;
 }
 .profile_title {
@@ -24,7 +26,7 @@
   text-align: center;
 }
 .profile_body {
-  background-color: #1b1d27;
+  background-color: #110011;
   border-radius: 15px 15px 0 0;
 }
 .profile_details {
@@ -70,7 +72,7 @@
   align-items: center;
   border-radius: 20px 20px 0 0;
   flex: 0.88;
-  background-color: #1b1d27;
+  background-color: #110011;
   .MuiDivider-root {
     background-color: #d7d6d1;
   }
@@ -84,15 +86,15 @@
   display: flex;
   align-items: center;
 }
-.changePassword {
-  background: #01b0ff;
+// .changePassword {
+//   background: #01b0ff;
 
-  min-height: 30px;
-  border-width: 0;
-  border-radius: 30px;
-  outline: none;
-  padding: 10px 20px;
-}
+//   min-height: 30px;
+//   border-width: 0;
+//   border-radius: 30px;
+//   outline: none;
+//   padding: 10px 20px;
+// }
 
 .logout {
   border-width: 0;
@@ -132,4 +134,40 @@
 }
 .coin {
   text-align: center;
+}
+
+.changePassword {
+  width: 11rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgb(212, 238, 244), #5dbdee);
+  box-shadow: rgb(75, 138, 201) 0px 3px 10px;
+  border: 0 solid #88a8e8;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #031e3c;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0;
+  outline: 2px solid transparent;
+
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.changePassword:active {
+  transform: translateY(0.125rem);
 }

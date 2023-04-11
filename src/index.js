@@ -11,7 +11,7 @@ import * as serviceWorker from "./serviceWorker";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="wallet/">
       <App />
       <ToastContainer
         autoClose={2000}
@@ -30,7 +30,7 @@ root.render(
           borderRadius: "12px",
           boxShadow: "0 2px 20px 0 rgba(0, 0, 0, 0.08)",
           fontFamily: "Roboto",
-          color: "#1b1d27",
+          color: "#110011",
           background: "#01b0ff",
           letterSpacing: "normal",
           lineHeight: "1.75",

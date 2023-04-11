@@ -5,35 +5,58 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { ForgotPasswordValidationSchema } from "../../utills/ValidationSchema";
-import { useDispatch } from "react-redux";
-import {Forgetpassword} from '../../App/Redux/Actions/AuthActions'
+import { useDispatch, useSelector } from "react-redux";
+import { Forgetpassword } from "../../App/Redux/Actions/AuthActions";
+import { useEffect } from "react";
 
-function ForgotPassword({ setOpenForgotPassPopup, openForgotPassPopup }) {
+function ForgotPassword({
+  setOpenForgotPassPopup,
+  openForgotPassPopup,
+  setOpenVerifyEmailPopup,
+  setOpenVerifyOtpPopup,
+}) {
   const dispatch = useDispatch();
   const [indication, setIndication] = useState(false);
+  const sendOtpstate = useSelector((state) => state?.user?.sendOtp);
+  const forgotPasswordResponce = useSelector(
+    (state) => state?.user?.forgotPassRespState?.data
+  );
 
   const formik = useFormik({
     initialValues: {
-      email: "",
       password: "",
       confirm_password: "",
     },
     onSubmit: (values, { resetForm }) => {
-      dispatch(Forgetpassword(values));
+      dispatch(
+        Forgetpassword({
+          email: sendOtpstate?.data?.email,
+          password: values?.password,
+          confirm_password: values?.confirm_password,
+        })
+      );
       resetForm({ values: null });
     },
     validationSchema: ForgotPasswordValidationSchema,
   });
+
+  useEffect(() => {
+    if (forgotPasswordResponce?.ok === true) {
+      setOpenForgotPassPopup(false);
+      setOpenVerifyOtpPopup(false);
+      setOpenVerifyEmailPopup(false);
+    }
+  }, [forgotPasswordResponce]);
   return (
     <Dialog open={openForgotPassPopup} className="forgot-password">
-      <div className="close-icon-div">
+      {/* <div className="close-icon-div">
         <HighlightOffIcon
           onClick={() => {
             setOpenForgotPassPopup(false);
             formik.resetForm();
           }}
         />
-      </div>
+      </div> */}
       <div className="forgot-password-title">
         Enter details and generate new password...
       </div>
@@ -42,7 +65,7 @@ function ForgotPassword({ setOpenForgotPassPopup, openForgotPassPopup }) {
         onSubmit={formik.handleSubmit}
         autoComplete="off"
       >
-        <TextField
+        {/* <TextField
           type="email"
           id="standard-required"
           label="Email Id"
@@ -57,7 +80,7 @@ function ForgotPassword({ setOpenForgotPassPopup, openForgotPassPopup }) {
         />
         {indication && formik.errors.email ? (
           <div className="error_text">{formik.errors.email}</div>
-        ) : null}
+        ) : null} */}
 
         <TextField
           type="text"

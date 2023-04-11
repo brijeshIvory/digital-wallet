@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
-  GetHawalaList,
+  GetCashDepositList,
   GetDepositDetail,
   RequestDeposite,
   EmptyStateRequestDeposite,
@@ -14,10 +14,11 @@ import { useDispatch } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopySharpIcon from "@mui/icons-material/ContentCopySharp";
 import { toast } from "react-toastify";
-import DepositHawala from "./DepositHawala";
+import DepositCashDeposit from "./CashDeposit";
 import ReferalCodeDialog from "../ReferralPopup/ReferralPopup";
+
 import { useNavigate } from "react-router";
-const PaymentDetail = ({ isBackground, paymentInfo }) => {
+const PaymentDetail = ({ isBackground, paymentInfo, paymenyTypeID }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [FrontSidefile, setFrontSidefile] = useState(null);
@@ -25,14 +26,14 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const [imageToBeSent, setImageToBeSent] = useState();
 
   const [openPopUp, setOpenPopUp] = useState(true);
-  const [ReferralCode, setReferralCode] = useState("");
+  const [ReferralCode, setReferralCode] = useState();
   const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail);
   const loading = useSelector((state) => state?.deposit?.reqLoading);
 
   const depositRequest = useSelector(
     (state) => state?.deposit?.requestDeposite
   );
-
+  const cashDeposit = useSelector((state) => state?.cash?.requestDeposite);
   const UserToken = localStorage.getItem("UserToken");
   const userId =
     UserToken !== "undefined" && UserToken !== null
@@ -41,29 +42,9 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
   const amount = window.location.pathname.split("/")[2];
   useEffect(() => {
     dispatch(GetDepositDetail());
-    dispatch(GetHawalaList());
+    dispatch(GetCashDepositList());
   }, []);
 
-  // const onFileUploadChange = async (e) => {
-  //   const fileInput = e.target;
-  //   if (!fileInput.files) {
-  //     await alert("No file was chosen", "error");
-  //     return;
-  //   }
-  //   if (!fileInput.files || fileInput.files.length === 0) {
-  //     await alert("Files list is empty", "error");
-  //     return;
-  //   }
-  //   const file = fileInput.files[0];
-  //   if (!file.type.startsWith("image")) {
-  //     await alert("Please select a valide image", "error");
-  //     return;
-  //   }
-  //   setFrontSidefile(file);
-  //   setPreviewUrl(URL.createObjectURL(file));
-  //   e.currentTarget.type = "text";
-  //   e.currentTarget.type = "file";
-  // };
   function handleImageUpload(event) {
     const fileInput = event.target;
     if (!fileInput.files) {
@@ -112,11 +93,11 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
     formData.append("user_id", userId);
     formData.append("refer_code", ReferralCode);
     formData.append("image", imageToBeSent);
+    formData.append("type_id", paymenyTypeID);
+
     dispatch(RequestDeposite(formData));
     setPreviewUrl(null);
   };
-
-  console.log(depositRequest?.ok, "depositRequest", loading, "loading");
 
   useEffect(() => {
     if (depositRequest?.ok) {
@@ -124,6 +105,7 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
       dispatch(EmptyStateRequestDeposite());
     }
   }, [depositRequest]);
+
   return (
     <>
       {isBackground === "Banktransfer" ||
@@ -445,7 +427,11 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
           )}
           <div className="file_main">
             <div className=" border rounded-lg mt-3">
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 {previewUrl ? (
                   <>
                     <div className="deposit_close_icon">
@@ -467,7 +453,6 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
                     <div className="upload_button_div">
                       <button
                         type="submit"
-                        // disabled={!formik.isValid}
                         className="deposit_button"
                         onClick={() => SubmitDepositReq()}
                       >
@@ -505,11 +490,15 @@ const PaymentDetail = ({ isBackground, paymentInfo }) => {
           </div>
         </div>
       ) : null}
-      {isBackground === "Hawala" && <DepositHawala />}
+      {isBackground === "CashDeposit" && (
+        <DepositCashDeposit
+          ReferralCode={ReferralCode}
+          paymenyTypeID={paymenyTypeID}
+        />
+      )}
       <ReferalCodeDialog
         openPopUp={openPopUp}
         setOpenPopUp={setOpenPopUp}
-        ReferralCode={ReferralCode}
         setReferralCode={setReferralCode}
       />
     </>

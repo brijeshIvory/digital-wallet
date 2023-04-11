@@ -1,5 +1,5 @@
 import {
-  GetHawalaListApi,
+  GetCashDepositListApi,
   GetClientListApi,
   GetCountryApi,
   GetWallwtBalanceApi,
@@ -27,18 +27,18 @@ function* getCountries() {
   }
 }
 
-function* GetHawalaListsaga() {
-  const hawalaList = yield call(GetHawalaListApi);
+function* GetCashDepositListsaga() {
+  const CashDepositList = yield call(GetCashDepositListApi);
 
-  const data = hawalaList?.data.data;
-  if (hawalaList?.status === 200) {
+  const data = CashDepositList?.data.data;
+  if (CashDepositList?.status === 200) {
     yield put({
-      type: actionType.GET_HAWALA_LIST_SUCCESS,
+      type: actionType.GET_CASH_DEPOSIT_LIST_SUCCESS,
       data,
     });
   } else {
     yield put({
-      type: actionType.GET_HAWALA_LIST_FAIL,
+      type: actionType.GET_CASH_DEPOSIT_LIST_FAIL,
       ErrData: data,
     });
   }
@@ -124,7 +124,7 @@ function* DealerSaga(payload) {
 
 function* WalletSaga() {
   yield all([takeEvery(actionType.GET_COUNTRY, getCountries)]);
-  yield all([takeEvery(actionType.HAWALA_LIST, GetHawalaListsaga)]);
+  yield all([takeEvery(actionType.CASH_DEPOSIT_LIST, GetCashDepositListsaga)]);
   yield all([takeEvery(actionType.CLIENT_LIST, GetClientListsaga)]);
   yield all([takeEvery(actionType.GET_WALLET_BALANCE, GetWalletBalanceSaga)]);
   yield all([takeEvery(actionType.WITHDRAW_REQUEST, WithDrawRequestSaga)]);

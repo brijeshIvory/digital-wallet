@@ -23,6 +23,7 @@ function GooglePayTransfer({ GooglePayFormOpen, setGooglePayFormOpen }) {
         notes: `${"GooglePay"},${values?.name},${values?.googlepaynumber}`,
         amount: amount,
         user_id: userId,
+        type_id: 3,
       };
       dispatch(WithDrawRequest(PayloadData));
       setGooglePayFormOpen(false);

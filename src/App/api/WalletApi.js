@@ -31,20 +31,17 @@ export function* RequestDepositApi(formData) {
   const ReqDeposit = yield axios
     .post(`${base_url}/depositrequest`, formData)
     .then(function (response) {
-      console.log(response, "upload done");
       return response;
     })
     .catch(function (error) {
-      console.log(error, "upload error");
-
       return error.response;
     });
   return ReqDeposit;
 }
 
-// GET HAWALA LIST
-export function* GetHawalaListApi() {
-  const hawalaList = yield axios
+// GET CashDeposit LIST
+export function* GetCashDepositListApi() {
+  const CashDepositList = yield axios
     .post(`${base_url}/hawalalist`)
     .then(function (response) {
       return response;
@@ -53,7 +50,7 @@ export function* GetHawalaListApi() {
       return error.response;
     });
 
-  return hawalaList;
+  return CashDepositList;
 }
 // GET CLIENT DETAILS
 export function* GetClientListApi() {

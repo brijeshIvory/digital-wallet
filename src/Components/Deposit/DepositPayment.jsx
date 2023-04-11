@@ -6,9 +6,9 @@ import Banktransfer from "../../assets/img/bank_transfer.png";
 import Paytm from "../../assets/img/paytm.png";
 import GooglePay from "../../assets/img/google_pay.png";
 import phone_pe from "../../assets/img/phone_pe.png";
-import Hawala from "../../assets/img/hawala.png";
+import CashDeposit from "../../assets/img/hawala.png";
 import UPI from "../../assets/img/upi.png";
-import Other from '../../assets/img/payment.png'
+import Other from "../../assets/img/payment.png";
 import "./style.scss";
 import PaymentDetail from "./PaymentDetail";
 import { Link } from "react-router-dom";
@@ -24,6 +24,7 @@ const DepositPayment = () => {
   const [isBackground, setIsBackground] = useState("");
   const amount = window.location.pathname.split("/")[2];
   const [paymentInfo, setPaymentInfo] = useState("");
+  const [paymenyTypeID, setPaymenyTypeID] = useState();
 
   const depositDetail = useSelector((state) => state?.deposit?.Deposit_detail);
 
@@ -57,9 +58,12 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Banktransfer" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "Banktransfer"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(1);
                       setIsBackground("Banktransfer");
                       setPaymentInfo(
                         `${"Banktransfer"},${depositDetail?.bank_name},${
@@ -80,9 +84,13 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Paytm" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "Paytm"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(2);
+
                       setIsBackground("Paytm");
                       setPaymentInfo(
                         `${"Paytm"}, ${depositDetail?.paytm_name},${
@@ -102,9 +110,13 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "GooglePay" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "GooglePay"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(3);
+
                       setIsBackground("GooglePay");
                       setPaymentInfo(
                         `${"GooglePay"},${depositDetail?.gpay_name},${
@@ -123,9 +135,13 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "phone_pe" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "phone_pe"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(4);
+
                       setIsBackground("phone_pe");
                       setPaymentInfo(
                         `${"phone_pe"},${depositDetail?.phonepay_name},${
@@ -144,9 +160,13 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "UPI" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "UPI"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(5);
+
                       setIsBackground("UPI");
                       setPaymentInfo(
                         `${"UPI"},${depositDetail?.bhim_name},${
@@ -165,16 +185,20 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Hawala" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "CashDeposit"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
-                      setIsBackground("Hawala");
+                      setPaymenyTypeID(6);
+
+                      setIsBackground("CashDeposit");
                     }}
                   >
                     <div className="card_image">
-                      <Avatar src={Hawala} alt="Hawala" />
+                      <Avatar src={CashDeposit} alt="CashDeposit" />
                     </div>
-                    <h3 className="card_text">Hawala</h3>
+                    <h3 className="card_text">Cash Deposit</h3>
                   </Item>
                 </Grid>
 
@@ -182,17 +206,27 @@ const DepositPayment = () => {
                   <Item
                     style={{
                       backgroundColor:
-                        isBackground === "Other" ? "#01b0ff" : "#1b1d27",
+                        isBackground === "Other"
+                          ? "rgb(24, 113, 172)"
+                          : "#110011",
                     }}
                     onClick={() => {
+                      setPaymenyTypeID(7);
+
                       setIsBackground("Other");
                       setPaymentInfo(
-                        `${"Other"},${depositDetail?.other_name},${depositDetail?.other_link}`
+                        `${"Other"},${depositDetail?.other_name},${
+                          depositDetail?.other_link
+                        }`
                       );
                     }}
                   >
                     <div className="card_image">
-                      <Avatar src={Other} alt="Other" style={{backgroundColor:"#fff"}} />
+                      <Avatar
+                        src={Other}
+                        alt="Other"
+                        style={{ backgroundColor: "#fff" }}
+                      />
                     </div>
                     <h3 className="card_text">Other</h3>
                   </Item>
@@ -203,6 +237,7 @@ const DepositPayment = () => {
           <PaymentDetail
             isBackground={isBackground}
             paymentInfo={paymentInfo}
+            paymenyTypeID={paymenyTypeID}
           />
         </div>
       </div>

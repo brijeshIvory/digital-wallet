@@ -1,5 +1,5 @@
 import axios from "axios";
-export const base_url = process.env.REACT_APP_API_URL
+export const base_url = process.env.REACT_APP_API_URL;
 
 export function* UserRegistrationApi(registratedData) {
   const registration = yield axios
@@ -68,22 +68,22 @@ export function* ForgetPasswordApi(ForgetPasswordDetails) {
   const forgetpassword = yield axios
     .post(`${base_url}/forgetpassword`, ForgetPasswordDetails)
     .then(function (response) {
-      return response
+      return response;
     })
     .catch(function (error) {
-      return error.response
-    })
-  return forgetpassword
+      return error.response;
+    });
+  return forgetpassword;
 }
 
 export function* ChangePasswordApi(changepassDetails) {
   const changePassword = yield axios
     .post(`${base_url}/changepassword`, changepassDetails)
     .then(function (response) {
-      return response
+      return response;
     })
     .catch(function (error) {
-      return error.response
-    })
-  return changePassword
+      return error.response;
+    });
+  return changePassword;
 }

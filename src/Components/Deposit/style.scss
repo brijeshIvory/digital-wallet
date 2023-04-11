@@ -2,22 +2,23 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #01b0ff;
+  background-color: rgb(24, 113, 172);
 }
 .deposit_head {
   flex: 0.1;
-  background-color: #01b0ff;
+  background-image: linear-gradient(to top, rgb(24, 113, 172), #5dbdee);
+
   margin-bottom: 2rem;
 }
 .deposit_body {
   flex: 0.9;
-  background-color: #1b1d27;
+  background-color: #110011;
   border-radius: 15px 15px 0 0;
 }
 .wallet-balance {
   width: 82%;
   height: 8rem;
-  background-color: #2f354b;
+  background-color: #3d4562;
   border-radius: 15px;
   margin-left: 9%;
   margin-top: -2rem;
@@ -125,7 +126,7 @@
   border-width: 0;
   outline: none;
   border-radius: 8px;
-  background-color: #2f354b;
+  background-color: #3d4562;
   padding: 1rem;
   color: #fff;
   font-size: 20px;
@@ -136,16 +137,17 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #1b1d27;
+  background-color: #110011;
 }
 .Payment_method_head {
   // flex: 0.11;
-  background: #01b0ff;
+  background-image: linear-gradient(to top, rgb(24, 113, 172), #5dbdee);
+
   padding-bottom: 2rem;
 }
 .Payment_method_body {
   // flex: 0.89;
-  background-color: #1b1d27;
+  background-color: #110011;
   padding: 1rem;
   // border-radius: 15px 15px 0 0;
 }
@@ -198,7 +200,7 @@
 .image_box {
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #2f354b;
+  background-color: #3d4562;
   border-radius: 12px;
 }
 .subtitle {
@@ -244,7 +246,7 @@
   display: block;
   width: 80px;
   height: 3px;
-  background: #01b0ff;
+  background: rgb(24, 113, 172);
   left: 0;
   top: 86%;
   position: absolute;
@@ -258,7 +260,7 @@
   margin-top: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #2f354b;
+  background-color: #3d4562;
   border-radius: 15px;
   margin-bottom: 1rem;
 }
@@ -291,7 +293,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #1b1d27;
+  background-color: #110011;
   border-radius: 13px;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -362,7 +364,7 @@
     margin-bottom: 1rem;
   }
   .MuiInputLabel-root {
-    color: #fff;
+    color: #01b0ff;
   }
   .MuiInputLabel-root.Mui-focused {
     color: #fff;
@@ -383,14 +385,39 @@
   align-items: center;
   margin-top: 1rem;
 }
+
 .deposit_button {
-  background: #01b0ff;
-  min-height: 30px;
-  border-width: 0;
-  border-radius: 5px;
-  outline: none;
-  padding: 10px 80px;
+  width: 11rem;
+  padding: 0.5rem;
+  display: flex;
   margin: auto;
+  align-items: center;
+  justify-content: center;
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgb(212, 238, 244), #5dbdee);
+  box-shadow: rgb(75, 138, 201) 0px 3px 10px;
+  border: 0 solid #88a8e8;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #031e3c;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 24px;
+  outline: 2px solid transparent;
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.deposit_button:active {
+  transform: translateY(0.125rem);
 }
 
 .deposit_select {
@@ -412,15 +439,15 @@
   margin-bottom: 2rem;
   margin-top: 1rem;
 }
-.deposit-transfer-button {
-  width: 76%;
-  margin-left: 12%;
-  height: 3rem;
-  font-size: 18px;
-  border-radius: 5px;
-  border-width: 0;
-  background: #01b0ff;
-}
+// .deposit-transfer-button {
+//   width: 76%;
+//   margin-left: 12%;
+//   height: 3rem;
+//   font-size: 18px;
+//   border-radius: 5px;
+//   border-width: 0;
+//   background: #01b0ff;
+// }
 .deposit_close_icon {
   display: flex;
   justify-content: end;
@@ -429,4 +456,38 @@
 }
 .loader {
   margin-top: 1rem;
+}
+
+.deposit-transfer-button {
+  margin: auto;
+  width: 11rem;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgb(212, 238, 244), #5dbdee);
+  box-shadow: rgb(75, 138, 201) 0px 3px 10px;
+  border: 0 solid #88a8e8;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #031e3c;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 24px;
+  outline: 2px solid transparent;
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.deposit-transfer-button:active {
+  transform: translateY(0.125rem);
 }

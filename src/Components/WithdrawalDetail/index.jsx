@@ -14,13 +14,13 @@ import PaytmTransfer from "./PaytmTransfer";
 import GooglePayTransfer from "./GooglePayTransfer";
 import PhonePayTransfer from "./PhonePayTransfer";
 import UpiTransfer from "./UpiTransfer";
-import Hawala from "../../assets/img/hawala.png";
-import HawalaTransfer from "./HawalaTransfer";
+import CashDeposit from "../../assets/img/hawala.png";
+import CashDepositTransfer from "./HawalaTransfer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
 import Others from "./Others";
-import Other from '../../assets/img/payment.png'
+import Other from "../../assets/img/payment.png";
 
 const WithdrawalDetail = () => {
   const [bankFormOpen, setBankFormOpen] = useState(false);
@@ -28,7 +28,7 @@ const WithdrawalDetail = () => {
   const [GooglePayFormOpen, setGooglePayFormOpen] = useState(false);
   const [PhonePeFormOpen, setPhonePeFormOpen] = useState(false);
   const [UpiFormOpen, setUpiFormOpen] = useState(false);
-  const [HawalaiFormOpen, setHawalaiFormOpen] = useState(false);
+  const [CashDepositiFormOpen, setCashDepositiFormOpen] = useState(false);
   const [OthersFormOpen, setOthersFormOpen] = useState(false);
 
   const Userdeatil = useSelector((state) => state?.user?.userDetail);
@@ -120,18 +120,22 @@ const WithdrawalDetail = () => {
             </Button>
           </div>
           <div className="bank-detail">
-            <Avatar alt="Hawala" src={Hawala} />
-            <p className="bank-detail-title">Hawala</p>
+            <Avatar alt="CashDeposit" src={CashDeposit} />
+            <p className="bank-detail-title">CashDeposit</p>
             <Button
               type="submit"
               className="bank-detail-sum"
-              onClick={() => setHawalaiFormOpen(true)}
+              onClick={() => setCashDepositiFormOpen(true)}
             >
               Add New
             </Button>
           </div>
           <div className="bank-detail">
-            <Avatar alt="Others" src={Other} style={{backgroundColor:"#fff"}}/>
+            <Avatar
+              alt="Others"
+              src={Other}
+              style={{ backgroundColor: "#fff" }}
+            />
             <p className="bank-detail-title">Others</p>
             <Button
               type="submit"
@@ -160,9 +164,9 @@ const WithdrawalDetail = () => {
         PhonePeFormOpen={PhonePeFormOpen}
         setPhonePeFormOpen={setPhonePeFormOpen}
       />
-      <HawalaTransfer
-        HawalaiFormOpen={HawalaiFormOpen}
-        setHawalaiFormOpen={setHawalaiFormOpen}
+      <CashDepositTransfer
+        CashDepositiFormOpen={CashDepositiFormOpen}
+        setCashDepositiFormOpen={setCashDepositiFormOpen}
       />
       <UpiTransfer UpiFormOpen={UpiFormOpen} setUpiFormOpen={setUpiFormOpen} />
 

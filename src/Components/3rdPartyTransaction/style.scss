@@ -5,8 +5,8 @@
   background-color: #191718;
 }
 .third_party_transaction_head {
-  // flex: 0.11;
-  background: #01b0ff;
+  background-image: linear-gradient(to top, rgb(24, 113, 172), #5dbdee);
+
   padding-bottom: 2rem;
 }
 
@@ -62,12 +62,37 @@
   align-items: center;
   margin-top: 1rem;
 }
+
 .third_party_transaction_button {
-  background: #01b0ff;
-  min-height: 30px;
-  border-width: 0;
-  border-radius: 5px;
-  outline: none;
-  padding: 10px 80px;
   margin: auto;
+  width: 11rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgb(212, 238, 244), #5dbdee);
+  box-shadow: rgb(75, 138, 201) 0px 3px 10px;
+  border: 0 solid #88a8e8;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #031e3c;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 24px;
+  outline: 2px solid transparent;
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.third_party_transaction_button:active {
+  transform: translateY(0.125rem);
 }

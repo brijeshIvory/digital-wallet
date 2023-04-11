@@ -1,49 +1,50 @@
-import React, { useState } from 'react'
-import './style.scss'
-import TextField from '@mui/material/TextField'
-import Drawer from '@mui/material/Drawer'
-import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
-import { useFormik } from 'formik'
-import { BankTransferValidationSchema } from '../../utills/ValidationSchema'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import { WithDrawRequest } from '../../App/Redux/Actions/WalletActions'
+import React, { useState } from "react";
+import "./style.scss";
+import TextField from "@mui/material/TextField";
+import Drawer from "@mui/material/Drawer";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+import { useFormik } from "formik";
+import { BankTransferValidationSchema } from "../../utills/ValidationSchema";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { WithDrawRequest } from "../../App/Redux/Actions/WalletActions";
 function BankTransfer({ bankFormOpen, setBankFormOpen }) {
-  const userId = useSelector((state) => state?.user?.userDetail?.id)
-  const amount = window.location.pathname.split('/')[2]
-  const [indication, setIndication] = useState(false)
-  const dispatch = useDispatch()
+  const userId = useSelector((state) => state?.user?.userDetail?.id);
+  const amount = window.location.pathname.split("/")[2];
+  const [indication, setIndication] = useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      bankname: '',
-      accountnumber: '',
-      ifsccode: '',
-      accountholdername: '',
+      bankname: "",
+      accountnumber: "",
+      ifsccode: "",
+      accountholdername: "",
     },
     validationSchema: BankTransferValidationSchema,
-    onSubmit: (values,{ resetForm }) => {
+    onSubmit: (values, { resetForm }) => {
       const PayloadData = {
-        notes: `${'BankTransfer'},${values.bankname},${values.accountnumber},${
+        notes: `${"BankTransfer"},${values.bankname},${values.accountnumber},${
           values.ifsccode
         },${values.accountholdername}`,
         amount: amount,
         user_id: userId,
-      }
-      dispatch(WithDrawRequest(PayloadData))
-      setBankFormOpen(false)
+        type_id: 1,
+      };
+      dispatch(WithDrawRequest(PayloadData));
+      setBankFormOpen(false);
       setIndication(false);
-      resetForm({ values: null })
+      resetForm({ values: null });
     },
-  })
+  });
   return (
-    <Drawer anchor={'bottom'} open={bankFormOpen} className="joinNowFrom">
+    <Drawer anchor={"bottom"} open={bankFormOpen} className="joinNowFrom">
       <div className="yellow_strip"></div>
       <div className="closing">
         <div
           className="closing_button"
           onClick={() => {
-            setBankFormOpen(false)
-            setIndication(false)
+            setBankFormOpen(false);
+            setIndication(false);
           }}
         >
           <HighlightOffSharpIcon />
@@ -136,7 +137,7 @@ function BankTransfer({ bankFormOpen, setBankFormOpen }) {
         </div>
       </div>
     </Drawer>
-  )
+  );
 }
 
-export default BankTransfer
+export default BankTransfer;

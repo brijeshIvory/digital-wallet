@@ -1,22 +1,27 @@
 .navbar {
   .MuiDrawer-paper {
     min-width: 14rem;
+    background-color: #110011;
   }
 }
 
 .navbar_logo {
   display: flex;
   justify-content: space-between;
+
+  img {
+    margin-left: 1rem;
+    width: 100px;
+    border-radius: 50%;
+  }
 }
 .navbar_header {
-  max-width: 20rem;
-  max-height: 13rem;
   padding: 20px;
-  background-color: #2f354b;
   color: #fff;
 
   .MuiDivider-root {
-    background-color: #aca6a6;
+    margin-top: 2rem;
+    background-color: #fffdfa;
   }
 }
 .walletBalancetitle {
@@ -42,8 +47,8 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 10px 20px;
-  background-color: #1b1d27;
-  color: #aca6a6;
+  background-color: #110011;
+  color: #fffdfa;
 }
 .list {
   display: flex;
@@ -56,10 +61,16 @@
 .navbar_logout {
   margin-bottom: 1rem;
   .MuiDivider-root {
-    background-color: #aca6a6;
+    background-color: #fffdfa;
     margin-bottom: 0.5rem;
   }
   .MuiSvgIcon-root {
     margin-right: 0.5rem;
   }
+}
+
+.refercode {
+  padding: 0.5rem 2.5rem;
+  display: flex;
+  align-items: center;
 }

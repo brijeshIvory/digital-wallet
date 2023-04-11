@@ -26,16 +26,18 @@ export const PhonePayTransferValidationSchema = yup.object({
 
 export const OthersTransferValidationSchema = yup.object({
   name: yup.string().required("Name is required"),
-  phonepenumber: yup.string().required("Phone Pe Number is required"),
+  number: yup.string().required("Phone Pe Number is required"),
 });
 
 export const UpiTransferValidationSchema = yup.object({
   name: yup.string().required("Name is required"),
   upiId: yup.string().required("UPI ID is required"),
 });
-export const HawalaTransferValidationSchema = yup.object({
-  hawala_value: yup.string().required("Hawala Selection is required."),
-  AccountNumber: yup.string().required("AccountNumber is required."),
+export const CashDepositTransferValidationSchema = yup.object({
+  CashDeposit_value: yup
+    .string()
+    .required("CashDeposit Selection is required."),
+  // AccountNumber: yup.string().required("AccountNumber is required."),
 
   // fullName: yup.string().required("Full name is required."),
   // city: yup.string().required("City name is required."),
@@ -81,14 +83,14 @@ export const withdraweAmountValidationSchema = yup.object({
 });
 
 export const ForgotPasswordValidationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Invalid Email")
-    .matches(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Invalid email address"
-    )
-    .required("Email is required !"),
+  // email: yup
+  //   .string()
+  //   .email("Invalid Email")
+  //   .matches(
+  //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  //     "Invalid email address"
+  //   )
+  //   .required("Email is required !"),
 
   password: yup
     .string()
@@ -111,4 +113,15 @@ export const ThridPartyValidation = yup.object({
 export const ChangePasswordValidationSchema = yup.object({
   password: yup.string().required("please Enter password!"),
   confirm_password: yup.string().required("please Enter confrim password"),
+});
+
+export const EmailVerificationValidationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Invalid Email")
+    .matches(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Invalid email address"
+    )
+    .required("Email is required !"),
 });

@@ -49,9 +49,23 @@ function* userLogin(payload) {
 function* sendOtp(payload) {
   const { otp } = payload;
   const otpData = yield call(SendOtpApi, otp);
-  if (otpData.data.ok === true) {
+  // if (otpData.data.ok === true) {
+  //   toast("Otp Send Successfully");
+  // } else {
+  //   toast(otpData.data.message);
+  // }
+
+  if (otpData?.data.ok === true) {
+    yield put({
+      type: actionType.SEND_OTP_SUCCESS,
+      otpData,
+    });
     toast("Otp Send Successfully");
   } else {
+    yield put({
+      type: actionType.SEND_OTP_FAIL,
+      sendOtpRespErr: otpData,
+    });
     toast(otpData.data.message);
   }
 }
@@ -91,17 +105,31 @@ function* GetUserDetailsSaga(payload) {
 }
 
 function* forgetPassword(payload) {
-  const { changepassDetails } = payload;
-  const ForgotPassDetail = yield call(ForgetPasswordApi, changepassDetails);
+  const { ForgetPasswordDetails } = payload;
+  const ForgotPassResp = yield call(ForgetPasswordApi, ForgetPasswordDetails);
+  if (ForgotPassResp.data.ok === true) {
+    yield put({
+      type: actionType.FORGET_PASSWORD_SUCCESS,
+      ForgotPassResp,
+    });
+    toast("Your password changed Successfully!");
+  } else {
+    yield put({
+      type: actionType.FORGET_PASSWORD_SUCCESS,
+      ForgotPassRespErr: ForgotPassResp,
+    });
+    toast("Something wrong!");
+  }
 }
+
 function* chnagePasswordSaga(payload) {
   const { changepassDetails } = payload;
   const changepassRes = yield call(ChangePasswordApi, changepassDetails);
-  if (changepassRes.data.ok == true) {
+  if (changepassRes.data.ok === true) {
     yield put({
       type: actionType.CHANGE_PASSWORD_SUCCESS,
     });
-    toast("Your password Change Succesfully!");
+    toast("Your password changed Successfully!");
   }
 }
 

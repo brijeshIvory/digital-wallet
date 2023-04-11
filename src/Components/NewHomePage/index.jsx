@@ -17,15 +17,32 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { GetUserDetails } from "../../App/Redux/Actions/AuthActions";
-import logo from "../../assets/img/insite-vision-logo-svg-vector.svg";
+import logo from "../../assets/img/newlogo.png";
 import { BsWhatsapp } from "react-icons/bs";
 import Whatsapp from "../Whatsapp";
+import { getAdvertisment } from "../../App/Redux/Actions/AdvertismentAction";
+import { getContactDetails } from "../../App/Redux/Actions/ContactActions";
+import withdrawIcon from "../../assets/img/withdraw (1).png";
+import depositIcon from "../../assets/img/deposit (1).png";
+import thirdparty from "../../assets/img/third-party.png";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import NorthWestIcon from "@mui/icons-material/NorthWest";
+import { toast } from "react-toastify";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 function NewHomePage() {
   const dispatch = useDispatch();
+  // const [notation, setNotation] = useState(false);
   const WalletBalance = useSelector(
     (state) => state?.wallet?.wallet_bal?.balance
   );
+  const advertisement = useSelector(
+    (state) => state?.advertisment?.advertisment
+  );
+  const details = useSelector((state) => state?.contactDetails?.details?.data);
+  const loading = useSelector((state) => state?.advertisment?.isLoading);
+
   const UserToken = localStorage.getItem("UserToken");
   const isAuthenticated =
     UserToken !== "undefined" && UserToken !== null ? true : false;
@@ -34,28 +51,6 @@ function NewHomePage() {
       ? JSON.parse(UserToken).user_id
       : undefined;
 
-  const data = [
-    {
-      to: "Party1",
-      amount: "+78",
-      Date: "02/03/2023",
-    },
-    {
-      to: "Party2",
-      amount: "+89",
-      Date: "15/02/2023",
-    },
-    {
-      to: "Party3",
-      amount: "+97",
-      Date: "25/02/2023",
-    },
-    {
-      to: "Party4",
-      amount: "+63",
-      Date: "28/01/2023",
-    },
-  ];
   const [openJoinNow, setOpenJoinNow] = useState({ bottom: false });
   const [openLogin, setOpenLogin] = useState({
     bottom: false,
@@ -82,7 +77,18 @@ function NewHomePage() {
   };
   useEffect(() => {
     dispatch(getCountriesData());
+    dispatch(getAdvertisment());
+    dispatch(getContactDetails());
+    // setTimeout(() => {
+    //   setNotation(true);
+    // }, 3000);
   }, []);
+
+  const handleRefresh = () => {
+    dispatch(GetWalletBalance({ user_id: userId }));
+    toast("Balance updated...");
+  };
+
   return (
     <div className="new-home-page">
       <div className="new-home-page-topdiv">
@@ -104,17 +110,7 @@ function NewHomePage() {
             />
           </div>
         )}
-        {/* <div className="new-home-page-header">
-          <div>
-            <div>Hello,</div>
-            <div style={{ marginTop: "0.5rem", fontWeight: 700 }}>
-              USER USER
-            </div>
-          </div>
-          <div className="new-home-page-header-avatar">
-            <RxAvatar />
-          </div>
-        </div> */}
+
         <Register
           open={openJoinNow["bottom"]}
           setOpenJoinNow={setOpenJoinNow}
@@ -127,30 +123,37 @@ function NewHomePage() {
               <div className="new-home-page-balance-money">
                 {WalletBalance ? WalletBalance : 0}
               </div>
+
+              <RefreshIcon onClick={handleRefresh} className="refreshIcon" />
+              {/* {notation && (
+                <div className="notationIcon">
+                  <NorthWestIcon />
+                  <div>Click here</div>
+                </div>
+              )} */}
             </>
           ) : (
-            <>
-              {/* <div className="new-home-page-balance-title">Total Balance</div> */}
-              <div className="new-home-page-balance-money">
-                <img
-                  src={logo}
-                  alt="logo"
-                  style={{
-                    width: "150px",
-                    height: "90px",
-                    borderRadius: "20px",
-                    backgroundColor: "#01b0ff",
-                  }}
-                />
-              </div>
-            </>
+            <div className="new-home-page-balance-money">
+              <img
+                src={logo}
+                alt="logo"
+                style={{
+                  width: "100px",
+
+                  borderRadius: "20px",
+                  backgroundColor: "#01b0ff",
+                }}
+              />
+            </div>
           )}
         </div>
+
         <div className="new-home-page-buttons">
           <div className="new-home-page-button-main">
             <Link to={"withdrawal"}>
               <div className="new-home-page-button">
-                <BiMoneyWithdraw />
+                {/* <BiMoneyWithdraw /> */}
+                <img src={withdrawIcon} alt="withdraw" />
               </div>
             </Link>
             <div className="new-home-page-button-title">WITHDRAW</div>
@@ -158,7 +161,8 @@ function NewHomePage() {
           <div className="new-home-page-button-main">
             <Link to={"deposit"}>
               <div className="new-home-page-button">
-                <RiLuggageDepositLine />
+                {/* <RiLuggageDepositLine /> */}
+                <img src={depositIcon} alt="withdraw" />
               </div>
             </Link>
             <div className="new-home-page-button-title">DEPOSIT</div>
@@ -166,52 +170,120 @@ function NewHomePage() {
           <div className="new-home-page-button-main">
             <Link to={"third-party"}>
               <div className="new-home-page-button">
-                <AiOutlineTransaction />
+                {/* <AiOutlineTransaction /> */}
+                <img src={thirdparty} alt="withdraw" />
               </div>
             </Link>
             <div className="new-home-page-button-title">THIRD PARTY</div>
           </div>
         </div>
       </div>
-      {isAuthenticated && (
-        <div className="new-home-page-buttom">
+
+      <div className="new-home-page-bottom">
+        {isAuthenticated && (
           <div className="new-home-page-whatsapp-buttons">
-            <a href="https://api.whatsapp.com/send?phone=12244546410">
-              <div className="new-home-page-button-main">
-                <div className="new-home-page-whatsapp">WITHDRAW</div>
-
-                {/* <div className="new-home-page-button-title">HELP</div> */}
-              </div>
-            </a>
-            <a href="https://api.whatsapp.com/send?phone=12244546410">
-              <div className="new-home-page-button-main">
-                <div className="new-home-page-whatsapp">DEPOSIT</div>
-
-                {/* <div className="new-home-page-button-title">HELP</div> */}
-              </div>
-            </a>
+            <div style={{ flex: 1 }}>
+              <a
+                href={`https://api.whatsapp.com/send?phone=${
+                  details !== undefined && details["Withdrawal Number"]
+                }`}
+              >
+                <div className="button-83">ID WITHDRAW</div>
+              </a>
+            </div>
+            <div style={{ flex: 1 }}>
+              <a
+                href={`https://api.whatsapp.com/send?phone=${
+                  details !== undefined && details["Deposit Number"]
+                }`}
+              >
+                <div className="button-83">ID DEPOSIT</div>
+              </a>
+            </div>
           </div>
-          {/* <div className="latest-transaction-title">
-            <div>Latest Transactions</div>
+        )}
+        {/* <div className="new-home-page-advertisment"> */}
+        {!loading ? (
+          <Carousel
+            showThumbs={false}
+            autoPlay={true}
+            showStatus={false}
+            infiniteLoop={true}
+            showArrows={false}
+          >
+            {advertisement &&
+              advertisement?.data.map((adv, idx) => {
+                return (
+                  <div className="new-home-page-advertisment" key={idx}>
+                    {adv.id === 1 ? (
+                      <div className="new-home-page-advertisment-content">
+                        <div className="new-home-page-advertisment-title-main">
+                          <div className="new-home-page-advertisment-line">
+                            USERNAME:
+                          </div>
+                          <div className="new-home-page-advertisment-line">
+                            LINK:
+                          </div>
+                          <div className="new-home-page-advertisment-line">
+                            PASSWORD:
+                          </div>
+                        </div>
+                        <div>
+                          <div className="new-home-page-advertisment-line-value">
+                            {adv?.username}
+                          </div>
+                          <div className="new-home-page-advertisment-line-value">
+                            <a href={"https://" + adv?.url}>{adv?.url}</a>
+                          </div>
+                          <div className="new-home-page-advertisment-line-value">
+                            {adv?.pass}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className="new-home-page-advertisment-contentx"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: 15,
+                          backgroundSize: "cover",
+                          backgroundImage: `url(${
+                            process.env.REACT_APP_UPLOAD_URL_AWS + adv.image
+                          })`,
+                        }}
+                      >
+                        {/* <div
+                          style={{
+                            backgroundColor: "red",
+                            display: "flex",
+                            flex: 1,
+                          }}
+                        >
+                          <img
+                            src={
+                              process.env.REACT_APP_UPLOAD_URL_AWS + adv.image
+                            }
+                            style={{
+                              objectFit: "fill",
 
-            <Link to={"tabs/reports"}>
-              <div style={{ color: "#aca6a6", fontSize: "19px" }}>See All</div>
-            </Link>
-          </div>
-          <div className="latest-transaction-data">
-            {data.map((ele, idx) => (
-              <div className="latest-transaction-single-data" key={idx}>
-                <div>
-                  <div className="latest-transaction-date">{ele.Date}</div>
-                  <div className="latest-transaction-party">{ele.to}</div>
-                </div>
-                <div className="latest-transaction-amount">{ele.amount}</div>
-              </div>
-            ))}
-          </div> */}
-        </div>
-      )}
-      <Whatsapp />
+                              maxWidth: "80%",
+                            }}
+                            alt="poster"
+                          />
+                        </div> */}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+          </Carousel>
+        ) : (
+          <div className="homepage-carousel-loading">Loading...</div>
+        )}
+        {/* </div> */}
+      </div>
+      <Whatsapp details={details} />
     </div>
   );
 }

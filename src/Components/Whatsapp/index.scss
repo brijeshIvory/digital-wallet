@@ -1,13 +1,10 @@
 .contact__option {
-  background-color: #2f354b;
   color: #01b0ff;
-  padding: 10px;
-  border-radius: 50% 5px;
-  bottom: 1.5rem;
+  bottom: 1.4rem;
   position: fixed;
-  left: 80%;
-  border: 4px solid #1b1d27;
-  .contact__option-icon {
-    font-size: 20px;
+  left: 82%;
+
+  img {
+    width: 45px;
   }
 }

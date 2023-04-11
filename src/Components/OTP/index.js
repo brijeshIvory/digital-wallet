@@ -38,34 +38,37 @@ function Otp({ setOpenJoinNow }) {
 
   return (
     <Dialog open={open} className="otp-input">
-      <div className="close-icon-div">
+      {/* <div className="close-icon-div">
         <HighlightOffIcon onClick={() => setOpen(false)} />
-      </div>
+      </div> */}
       <div className="otp-input-title">
         Enter the OTP sent to your email id..
       </div>
+      <div>
+        <OtpInput
+          className="otp-input-field"
+          value={otp}
+          onChange={handleChange}
+          numInputs={6}
+        />
+      </div>
+      <div className="otp-submit-button">
+        <button
+          onClick={() => {
+            dispatch(
+              verifyOtp({
+                id: user[0]?.id,
+                otp: Number(otp),
+              })
+            );
 
-      <OtpInput
-        className="otp-input-field"
-        value={otp}
-        onChange={handleChange}
-        numInputs={6}
-      />
-      <button
-        onClick={() => {
-          dispatch(
-            verifyOtp({
-              id: user[0]?.id,
-              otp: Number(otp),
-            })
-          );
-
-          dispatch(emptyUser());
-          setOpenJoinNow("bottom", false);
-        }}
-      >
-        Confirm OTP
-      </button>
+            dispatch(emptyUser());
+            setOpenJoinNow("bottom", false);
+          }}
+        >
+          Confirm OTP
+        </button>
+      </div>
     </Dialog>
   );
 }

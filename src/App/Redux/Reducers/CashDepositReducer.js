@@ -1,52 +1,52 @@
-import * as actionType from '../Actions/actionsType'
+import * as actionType from "../Actions/actionsType";
 const initialState = {
-  hawalalist_data: null,
+  CashDepositlist_data: null,
   client_list: null,
   isLoading: false,
   error: null,
-}
+};
 
-const HawalaReducer = (state = initialState, action) => {
+const CashDepositReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.HAWALA_LIST:
+    case actionType.CASH_DEPOSIT_LIST:
       return {
         ...state,
         isLoading: true,
-        error: '',
-      }
-    case actionType.GET_HAWALA_LIST_SUCCESS:
+        error: "",
+      };
+    case actionType.GET_CASH_DEPOSIT_LIST_SUCCESS:
       return {
         ...state,
-        hawalalist_data: action.data,
+        CashDepositlist_data: action.data,
         isLoading: false,
-      }
-    case actionType.GET_HAWALA_LIST_FAIL:
+      };
+    case actionType.GET_CASH_DEPOSIT_LIST_FAIL:
       return {
         ...state,
         isLoading: false,
         error: action.error,
-      }
+      };
     case actionType.CLIENT_LIST:
       return {
         ...state,
         isLoading: true,
-        error: '',
-      }
+        error: "",
+      };
     case actionType.GET_CLIENT_LIST_SUCCESS:
       return {
         ...state,
         client_list: action.data,
         isLoading: false,
-      }
+      };
     case actionType.GET_CLIENT_LIST_FAIL:
       return {
         ...state,
         isLoading: false,
         error: action.error,
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
-export default HawalaReducer
+};
+export default CashDepositReducer;
