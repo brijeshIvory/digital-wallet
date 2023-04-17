@@ -82,8 +82,6 @@
   font-size: 12px;
 }
 
-
-
 .dealer-popup {
   background-color: #fac00098;
   .MuiDialog-paper {
@@ -112,7 +110,7 @@
     justify-content: space-between;
     margin-top: 1rem;
   }
-  .code_button{
+  .code_button {
     background: linear-gradient(180deg, #fac000 0%, rgb(225, 133, 21) 100%);
     min-height: 30px;
     border-width: 0;
@@ -121,7 +119,6 @@
     padding: 0 1rem;
     // margin: auto;
   }
-  
 }
 .close-icon-div {
   display: flex;
@@ -129,4 +126,10 @@
 }
 .close-icon-div-text {
   margin: 1rem 0 1rem 0;
+}
+.joinNowFrom {
+  .MuiDrawer-paper {
+    max-width: 500px;
+    margin: auto;
+  }
 }

@@ -3,7 +3,7 @@ export const base_url = process.env.REACT_APP_API_URL;
 
 export function* UserRegistrationApi(registratedData) {
   const registration = yield axios
-    .post(`${base_url}/register`, registratedData)
+    .post(`${base_url}/registration`, registratedData)
     .then(function (response) {
       return response;
     })
