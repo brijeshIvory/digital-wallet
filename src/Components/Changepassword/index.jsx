@@ -1,68 +1,69 @@
-import React, { useState } from 'react'
-import Dialog from '@mui/material/Dialog'
-import './style.scss'
-import { InputAdornment, Select } from '@mui/material'
-import { IconButton } from '@mui/material'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import { TextField } from '@mui/material'
-import { useFormik } from 'formik'
-import { ChangePasswordValidationSchema } from '../../utills/ValidationSchema'
-import { useDispatch, useSelector } from 'react-redux'
-import { ChangePassword } from '../../App/Redux/Actions/AuthActions'
+import React, { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import "./style.scss";
+import { InputAdornment, Select } from "@mui/material";
+import { IconButton } from "@mui/material";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { TextField } from "@mui/material";
+import { useFormik } from "formik";
+import { ChangePasswordValidationSchema } from "../../utills/ValidationSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { ChangePassword } from "../../App/Redux/Actions/AuthActions";
 
 function Confrimpassword({ setOpen, open }) {
-  const dispatch = useDispatch()
-  const [indication, setIndication] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [passwordType, setPasswordType] = useState('password');
+  const dispatch = useDispatch();
+  const [indication, setIndication] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [ConfirmPasswordType, setConfirmPasswordType] = useState('password');
-  const user_id = useSelector((state) => state?.user?.userDetail?.id)
+  const [ConfirmPasswordType, setConfirmPasswordType] = useState("password");
+  const user_id = useSelector((state) => state?.user?.userDetail?.id);
 
   const formik = useFormik({
     initialValues: {
-      password: '',
-      confirm_password: '',
+      password: "",
+      confirm_password: "",
     },
     onSubmit: (values, { resetForm }) => {
+      console.log("values", values);
       const payload = {
         id: user_id,
         password: values.password,
         confirm_password: values.confirm_password,
-      }
-      dispatch(ChangePassword(payload))
-      resetForm({ values: null })
-      setOpen(false)
+      };
+      // dispatch(ChangePassword(payload))
+      resetForm({ values: null });
+      setOpen(false);
     },
     validationSchema: ChangePasswordValidationSchema,
-  })
+  });
   const togglePassword = () => {
-    if (passwordType === 'password') {
-      setPasswordType('text')
-      setShowPassword(!showPassword)
-      return
+    if (passwordType === "password") {
+      setPasswordType("text");
+      setShowPassword(!showPassword);
+      return;
     }
-    setPasswordType('password')
-    setShowPassword(!showPassword)
-  }
+    setPasswordType("password");
+    setShowPassword(!showPassword);
+  };
   const toggleConfrimPassword = () => {
-    if (ConfirmPasswordType === 'password') {
-      setConfirmPasswordType('text')
-      setShowConfirmPassword(!showConfirmPassword)
-      return
+    if (ConfirmPasswordType === "password") {
+      setConfirmPasswordType("text");
+      setShowConfirmPassword(!showConfirmPassword);
+      return;
     }
-    setConfirmPasswordType('password')
-    setShowConfirmPassword(!showConfirmPassword)
-  }
+    setConfirmPasswordType("password");
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   return (
     <Dialog open={open} className="forgot-password">
       <div className="close-icon-div">
         <HighlightOffIcon
           onClick={() => {
-            setOpen(false)
-            formik.resetForm()
+            setOpen(false);
+            formik.resetForm();
           }}
         />
       </div>
@@ -91,9 +92,9 @@ function Confrimpassword({ setOpen, open }) {
                   onClick={togglePassword}
                 >
                   {showPassword ? (
-                    <VisibilityIcon sx={{ color: 'white' }} />
+                    <VisibilityIcon sx={{ color: "white" }} />
                   ) : (
-                    <VisibilityOffIcon sx={{ color: 'white' }} />
+                    <VisibilityOffIcon sx={{ color: "white" }} />
                   )}
                 </IconButton>
               </InputAdornment>
@@ -106,7 +107,7 @@ function Confrimpassword({ setOpen, open }) {
         {indication && formik.errors.password ? (
           <div className="error_text">{formik.errors.password}</div>
         ) : null}
- <TextField
+        <TextField
           type={ConfirmPasswordType}
           name="confirm_password"
           id="standard-required"
@@ -123,9 +124,9 @@ function Confrimpassword({ setOpen, open }) {
                   onClick={toggleConfrimPassword}
                 >
                   {showConfirmPassword ? (
-                    <VisibilityIcon sx={{ color: 'white' }} />
+                    <VisibilityIcon sx={{ color: "white" }} />
                   ) : (
-                    <VisibilityOffIcon sx={{ color: 'white' }} />
+                    <VisibilityOffIcon sx={{ color: "white" }} />
                   )}
                 </IconButton>
               </InputAdornment>
@@ -135,8 +136,8 @@ function Confrimpassword({ setOpen, open }) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {indication && formik.errors.password ? (
-          <div className="error_text">{formik.errors.password}</div>
+        {indication && formik.errors.confirm_password ? (
+          <div className="error_text">{formik.errors.confirm_password}</div>
         ) : null}
         <div className="forgot-password-form-button-div">
           <button type="submit" onClick={() => setIndication(true)}>
@@ -145,7 +146,7 @@ function Confrimpassword({ setOpen, open }) {
         </div>
       </form>
     </Dialog>
-  )
+  );
 }
 
-export default Confrimpassword
+export default Confrimpassword;

@@ -2,9 +2,7 @@ import React from "react";
 import "./index.scss";
 import loginButton from "../../assets/img/loginButton.png";
 import JoinNow from "../../assets/img/joinnow.png";
-import { BiMoneyWithdraw } from "react-icons/bi";
-import { RiLuggageDepositLine } from "react-icons/ri";
-import { AiOutlineTransaction } from "react-icons/ai";
+
 import Header from "../Header/index";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -26,7 +24,7 @@ import withdrawIcon from "../../assets/img/withdraw (1).png";
 import depositIcon from "../../assets/img/deposit (1).png";
 import thirdparty from "../../assets/img/third-party.png";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import NorthWestIcon from "@mui/icons-material/NorthWest";
+
 import { toast } from "react-toastify";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
@@ -215,7 +213,7 @@ function NewHomePage() {
               advertisement?.data.map((adv, idx) => {
                 return (
                   <div className="new-home-page-advertisment" key={idx}>
-                    {adv.id === 1 ? (
+                    {adv.type === "1" ? (
                       <div className="new-home-page-advertisment-content">
                         <div className="new-home-page-advertisment-title-main">
                           <div className="new-home-page-advertisment-line">
@@ -249,11 +247,12 @@ function NewHomePage() {
                           borderRadius: 15,
                           backgroundSize: "cover",
                           backgroundImage: `url(${
-                            process.env.REACT_APP_UPLOAD_URL_AWS + adv.image
+                            "https://anjanibooks.live/dashboard/public/advertising/" +
+                            adv.image
                           })`,
                         }}
                       >
-                        {/* <div
+                        <div
                           style={{
                             backgroundColor: "red",
                             display: "flex",
@@ -262,16 +261,17 @@ function NewHomePage() {
                         >
                           <img
                             src={
-                              process.env.REACT_APP_UPLOAD_URL_AWS + adv.image
+                              "https://anjanibooks.live/dashboard/public/advertising/" +
+                              adv.image
                             }
                             style={{
                               objectFit: "fill",
 
-                              maxWidth: "80%",
+                              maxWidth: "100%",
                             }}
                             alt="poster"
                           />
-                        </div> */}
+                        </div>
                       </div>
                     )}
                   </div>

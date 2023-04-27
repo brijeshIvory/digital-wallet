@@ -97,7 +97,10 @@ export const ForgotPasswordValidationSchema = yup.object({
     .min(8, "Password must be 8 character")
     .required("Password is Required"),
 
-  confirm_password: yup.string().required("please add confrim password"),
+  // confirm_password: yup.string().required("please add confrim password"),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords not match"),
 });
 
 export const ThridPartyValidation = yup.object({
@@ -112,7 +115,10 @@ export const ThridPartyValidation = yup.object({
 });
 export const ChangePasswordValidationSchema = yup.object({
   password: yup.string().required("please Enter password!"),
-  confirm_password: yup.string().required("please Enter confrim password"),
+  // confirm_password: yup.string().required("please Enter confrim password"),
+  confirm_password: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords not match"),
 });
 
 export const EmailVerificationValidationSchema = yup.object({

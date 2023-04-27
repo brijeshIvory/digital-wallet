@@ -1,11 +1,11 @@
 <IfModule mod_rewrite.c>
 
     RewriteEngine On
-    RewriteBase /devwallet
+    RewriteBase /wallet
     RewriteRule ^index\.html$ - [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-l
-    RewriteRule ./devwallet/index.html [L]
+    RewriteRule ./wallet/index.html [L]
   
   </IfModule>

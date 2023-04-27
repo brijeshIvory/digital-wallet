@@ -11,7 +11,7 @@ import * as serviceWorker from "./serviceWorker";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter basename="devwallet/">
+    <BrowserRouter basename="wallet/">
       <App />
       <ToastContainer
         autoClose={2000}
